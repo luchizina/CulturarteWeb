@@ -24,7 +24,7 @@
                                       
 				</ul>
                             <ul class="nav navbar-nav navbar-right">
-					<li><a href="registrar.jsp"><span class="glyphicon "></span>
+					<li><a href="vistas/registrar.jsp"><span class="glyphicon "></span>
 							Registrarse</a></li>
                                       
 				</ul>

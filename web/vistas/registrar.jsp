@@ -30,7 +30,7 @@
     <body>
         <h1>Registrarse</h1>
 
-        <form class="form-horizontal" action=Registrarse method="POST" enctype="multipart/form-data">
+        <form class="form-horizontal" action=../Registrarse method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="control-label col-sm-2" for="nick">Nickname:</label>
                 <div class="col-sm-4">
