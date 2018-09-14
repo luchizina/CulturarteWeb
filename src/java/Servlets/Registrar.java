@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import Utilidades.Utils;
+import java.nio.file.Path;
 import javax.servlet.annotation.MultipartConfig;
 
 /**
@@ -151,8 +152,8 @@ public class Registrar extends HttpServlet {
                                     } // while
                                     byte[] bytes = baos.toByteArray();
                                     DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
-                                    subirImagenCol(nick, pass, imagen, correo, nombre, apellido, fecha);
-                                    usuario.altaColaborador(nick, correo, nombre, apellido, fecha, nombreArchivo, "Colaborador", pass);
+                                    String path=subirImagenCol(nick, pass, imagen, correo, nombre, apellido, fecha);
+                                    usuario.altaColaborador(nick, correo, nombre, apellido, fecha, path, "Colaborador", pass);
                                     respuesta.setAttribute("sesionAct", nick);
                                     out.println("<script type=\"text/javascript\">");
                                     out.println("alert('Colaborador registrado!');");
@@ -161,7 +162,6 @@ public class Registrar extends HttpServlet {
                                 } else {
                                     usuario.altaColaborador(nick, correo, nombre, apellido, fecha, "", "Colaborador", pass);
                                     respuesta.setAttribute("sesionAct", nick);
-                                   //  request.getRequestDispatcher("index.html").forward(request, response);
                                     out.println("<script type=\"text/javascript\">");
                                     out.println("alert('Colaborador registrado!');");
                                     out.println("location='index.html';");
@@ -186,8 +186,8 @@ public class Registrar extends HttpServlet {
                                         } // while
                                         byte[] bytes = baos.toByteArray();
                                         DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
-                                        subirImagenProp(nick, pass, imagen);
-                                        usuario.altaProponente(nick, correo, nombre, apellido, fecha, nombreArchivo, dir, bio, web, "Proponente", pass);
+                                        String pathP=subirImagenProp(nick, pass, imagen);
+                                        usuario.altaProponente(nick, correo, nombre, apellido, fecha, pathP, dir, bio, web, "Proponente", pass);
                                         respuesta.setAttribute("sesionAct", nick);
                                         out.println("<script type=\"text/javascript\">");
                                         out.println("alert('Proponente registrado!');");
@@ -256,14 +256,17 @@ public class Registrar extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    protected void subirImagenCol(String nick,String pass,DataImagen imagen,String correo,String nombre,String apellido,Date fecha) {
+    protected String subirImagenCol(String nick,String pass,DataImagen imagen,String correo,String nombre,String apellido,Date fecha) {
         final DtColaborador col = new DtColaborador(nick, correo, pass, nombre, fecha, apellido, imagen);
-        this.usuario.agregarImagen(col);
+        Path path=this.usuario.agregarImagen(col);
+        
+        return path.toString();
     }
 
-    protected void subirImagenProp(String nick, String pwd, DataImagen img) {
+    protected String subirImagenProp(String nick, String pwd, DataImagen img) {
         final DtProponente prop = new DtProponente(nick, img, pwd);
-        this.usuario.agregarImagen(prop);
+        Path path=this.usuario.agregarImagen(prop);
+        return path.toString();
     }
 
 }
