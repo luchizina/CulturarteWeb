@@ -68,7 +68,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                             
                              <ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><span class="glyphicon "></span>
-							<%out.print(nuevaFin);%></a></li>
+							¡Bienvenido <%out.print(nuevaFin);%>!</a></li>
                                       
 				</ul>
                             <%}%>
