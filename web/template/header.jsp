@@ -1,5 +1,10 @@
+<%@page import="Logica.DtUsuario"%>
+<%@page import="Servlets.inicSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%  
+String sesionAct=(String) session.getAttribute("sesionAct");
 
+%>
 <div id="header">
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
@@ -17,17 +22,54 @@
                                         <li><a href="#">Visitar perfiles</a></li>   
 					<li><a href="#">Propuestas</a></li>
 				</ul>
-				
+			   <% if(sesionAct==null) {
+                                
+                            
+                                
+                            
+                            
+                            %>	
+                            
+                            
+                            
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="inicSesion.jsp"><span class="glyphicon "></span>
 							Iniciar sesión</a></li>
                                       
 				</ul>
+                         
                             <ul class="nav navbar-nav navbar-right">
 					<li><a href="vistas/registrar.jsp"><span class="glyphicon "></span>
 							Registrarse</a></li>
                                       
 				</ul>
+                            <%
+                            
+                             }else{
+
+                               DtUsuario user=inicSesion.getUsuarioLogueado(request);
+
+
+                            %>
+                            <ul class="nav navbar-nav navbar-right">
+					<li><a href="cerrarSesion"><span class="glyphicon "></span>
+							Cerrar sesión</a></li>
+                                      
+				</ul>
+                            
+                       
+                            
+                             <ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon "></span>
+							<%out.print(user.getNick());%></a></li>
+                                      
+				</ul>
+                            <%}%>
+                            
+                            
+                            
+                            
+                            
                             <form class="navbar-form navbar-right" role="search">
 					<div class="form-group input-group">
 						<input type="text" class="form-control" placeholder="Search..">
