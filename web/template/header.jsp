@@ -20,7 +20,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Mi perfil</a></li>
                                         <li><a href="#">Visitar perfiles</a></li>   
-					<li><a href="#">Propuestas</a></li>
+					<li><a href="Consulta_de_propuesta_Servlet">Propuestas</a></li>
 				</ul>
 			   <% if(sesionAct==null) {
                                 
