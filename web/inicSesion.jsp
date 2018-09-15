@@ -23,6 +23,7 @@
         
         
         <link href="css/inicSes.css" rel="stylesheet" media="screen">
+        <br><br><br><br><br><br><br>
         <form id="msform" action="iniciarS" method="post">
             
   <!-- fieldsets -->
