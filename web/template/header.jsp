@@ -48,20 +48,27 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                              }else{
 
                                DtUsuario user=inicSesion.getUsuarioLogueado(request);
-
+                               String nick=user.getNick();
+                               String nombre=user.getNombre();
+                               String ape= user.getApellido();
+                               String aux1=" ", aux2=" (", aux3=")";
+                               String nueva1=nombre.concat(aux1);
+                               String nueva2=nueva1.concat(ape);
+                               String nueva3=nueva2.concat(aux2);
+                               String nueva4=nueva3.concat(nick);
+                               String nuevaFin=nueva4.concat(aux3);
 
                             %>
                             <ul class="nav navbar-nav navbar-right">
 					<li><a href="cerrarSesion"><span class="glyphicon "></span>
 							Cerrar sesión</a></li>
-                                      
 				</ul>
                             
                        
                             
                              <ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><span class="glyphicon "></span>
-							<%out.print(user.getNick());%></a></li>
+							<%out.print(nuevaFin);%></a></li>
                                       
 				</ul>
                             <%}%>
