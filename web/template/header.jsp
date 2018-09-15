@@ -33,7 +33,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                             
                             
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="inicSesion.jsp"><span class="glyphicon "></span>
+					<li><a href="vistas/inicSesion.jsp"><span class="glyphicon "></span>
 							Iniciar sesión</a></li>
                                       
 				</ul>
