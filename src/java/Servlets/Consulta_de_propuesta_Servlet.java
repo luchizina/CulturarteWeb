@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import Logica.*;
 import static java.lang.System.out;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -42,8 +43,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
         this.Cargar_Propuestas();
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            // LISTAR PROPUESTAS 
-           
+                 
             if(request.getMethod().equals("GET")){
                 this.doGet(request, response);   
             }}
@@ -64,13 +64,20 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
         Cargar_Propuestas();
         try (PrintWriter out = response.getWriter()) {
                 // LISTAR PROPUESTAS 
+                
+                
             if (request.getParameter("T") == null) {
-                List<DtPropuesta> x = IP.listarPropuestas();
+                List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
                 request.setAttribute("propuestas", x);
-                this.getServletContext().getRequestDispatcher("/Consulta_de_Propuesta.jsp").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
             } else {
                 // CONSULTA A UNA PROPUESTA 
                 String t = request.getParameter("T");
+                //String nick = (String) request.getSession().getAttribute("sesionAct");
+                //String tipo = (String) request.getSession().getAttribute("tipo");
+                //request.setAttribute("sesionAct", nick);
+                //request.setAttribute("tipo", tipo);
+                
                 String titulo = t.replace("-"," ");
                 DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
                 List<String> colaborador = IP.ColaborantesDePro();
@@ -78,7 +85,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
                 if(!colaborador.isEmpty()){
                 request.setAttribute("col", colaborador);
                 }
-                this.getServletContext().getRequestDispatcher("/Consulta_Info_Propuesta.jsp").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/vistas/Consulta_Info_Propuesta.jsp").forward(request, response);
             }
         }
     }
@@ -96,7 +103,6 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        out.println("hola");
     }
 
     /**
@@ -112,7 +118,8 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     public void Cargar_Propuestas(){
     IU.cargarUsuarios2();    
     IP.cargarPropuestas();
-    IP.cargarEstados();
     IP.cargarColaboraciones();
+    IP.EstadosPropuestas();
+    IP.actualizarMontos();
     };
 }

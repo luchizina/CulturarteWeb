@@ -7,6 +7,7 @@
 <%@page import="java.util.Collection"%>
 <%@page import="Logica.DtPropuesta"%>
 <%@page import="java.util.List"%>
+<%@page session="true" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,7 +23,7 @@
                 for (DtPropuesta cx : x) {
                     String Titu = cx.getTitulo().replace(" ", "-");
             %>
-            <tr><td><a href=Consulta_de_propuesta_Servlet?T=<%=Titu%> method=POST><%= cx.getTitulo()%></a></td>
+            <tr><td><a href=Consulta_de_propuesta_Servlet?T=<%=Titu%>><%= cx.getTitulo()%></a></td>
             <%}%>
                     </table>
                     </center>

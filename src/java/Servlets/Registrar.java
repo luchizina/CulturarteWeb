@@ -130,9 +130,8 @@ public class Registrar extends HttpServlet {
             String correo = request.getParameter(EMAIL);
             String pass = request.getParameter(PWD);
             SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
-            Date fecha;
             try {
-                fecha = formatoDeFecha.parse(request.getParameter(FECHA));
+                Date fecha = formatoDeFecha.parse(request.getParameter(FECHA));
                 String conf = request.getParameter(PWD2);
                 String[] args = request.getParameterValues("usuario");
                 if (pass.equals(conf)) {
