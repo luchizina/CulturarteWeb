@@ -17,6 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <title>Iniciar sesión</title>
     </head>
     <body>
@@ -30,7 +31,9 @@
     <h2 class="fs-title">Inicia sesión</h2>
     <h3 class="fs-subtitle">Ingresa tu correo o nickname y contraseña</h3>
     <input type="text" name="nick" placeholder="Email o nickname" required="required"/>
+   
     <input type="password" name="pass" placeholder="Contraseña" required="required" />
+     <script type="text/javascript" src="/js/login.js"></script>
     <input type="submit" class="next action-button" value="Ingresar" />
   </fieldset>
 </form>      
