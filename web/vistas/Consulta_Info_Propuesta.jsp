@@ -33,13 +33,9 @@
     <%      if (propu.getColabs().containsKey(Nombre_Usuario)) {                %>
     <%    Colaboro_a_propu = true;                                              %>
     <%    }else {                                                               %>
-    <%                                                                          %>
     <%   Puede_colaborar_a_propu = true;                                        %>
     <%   }                                                                      %>
     <%   }                                                                      %> 
-
-    
-    
     <head>
         <title>Consultar Propuesta: <%propu.getTitulo();%> </title>
     </head>
@@ -91,13 +87,13 @@
         </tr>
         </table>  
         
-        <% if(Puede_colaborar_a_propu ) {                                    %>
+        <% if(Puede_colaborar_a_propu) {                                       %>
         <form 	action="#" method="get">
 	<input type="submit" value="Colaborar">
         </form>
         <% } %>
         
-        <% if(Colaboro_a_propu){                                                %>
+        <% if(Colaboro_a_propu){                                               %>
         <form 	action="#" method="get">
 	<input type="submit" value="Comentar">
         </form>
