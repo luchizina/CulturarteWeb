@@ -3,8 +3,9 @@
     Created on : 13/09/2018, 11:11:21 PM
     Author     : nambr
 --%>
-<%@page import="import Logica.DtUsuario"%>
-<%@page import="import java.util.List"%>
+<%@page import="java.util.Collection"%>
+<%@page import="Logica.DtUsuario"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,18 +14,21 @@
         <title>Seguir usuario</title>
     </head>
     <body>
-        
+         <select>
         <%
-        List<DtUsuario> usuarios= (List<DtUsuario>) request.getAttribute("usuarios");
+            if(request.getAttribute("usuarios")!=null){
+                
+           
+        Collection<DtUsuario> usuarios= (Collection<DtUsuario>) request.getAttribute("usuarios");
         for(DtUsuario user: usuarios){
+            int i=1;
             
        
         
         
         %>
-        <h1>Hello World!<% user.getNick();  %></h1><br>
-        
-        
-        <%  } %>
+        <option value="<%out.print(i);%>">  <% out.print(user.getNick()); %></option>
+        <%  i++;} } %>
+         </select>
     </body>
 </html>
