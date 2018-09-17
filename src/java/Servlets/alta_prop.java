@@ -61,19 +61,14 @@ public class alta_prop extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-         }
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-                
-        this.iC.cargarCategorias();
+          this.iC.cargarCategorias();
         List<DtCategoria> categoList= this.iC.listarCategorias();
        request.setAttribute("categorias", categoList);
         
         String titulo=request.getParameter(TIT);
+        
         if(titulo!=null){
+            if(!ip.existeTitulo(titulo)){
             String desc=request.getParameter(DESC);
            // if(request.getParameter("entrA").equals("") && !(request.getParameter("porceE").equals("")))
         String catego = request.getParameter(CAtego);
@@ -113,24 +108,22 @@ public class alta_prop extends HttpServlet {
         Estado estA = new Estado(Testado.Ingresada);
          boolean ok = ip.AgregarPropuesta(titulo, desc,fechaa, Integer.parseInt(precioE), 0, fecha, "yokc", Integer.parseInt(montoT),catego, estA, "", nick, hora,lugar );
                         if (ok) {
-             try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet alta_prop</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>OK " + request.getParameter("titulo") + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+                   request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response); 
                         }
-           
         }
+            else 
+            {
+             request.getRequestDispatcher("/vistas/AltaPropu2_1.jsp").forward(request, response); 
+            }
+            }
         else{
            request.getRequestDispatcher("/vistas/Alta_propu.jsp").forward(request, response); 
         }
+         }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);        
                
        }
 
