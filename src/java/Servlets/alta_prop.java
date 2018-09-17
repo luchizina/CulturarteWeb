@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -55,27 +56,45 @@ public class alta_prop extends HttpServlet {
     public static final String IMg = "img";
     public static final String LUGAR = "lugar";
     public static final String FEcha2 = "fecha";
-    
+      List<DtCategoria> categoList= new ArrayList<>();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+          
          }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-                
-        this.iC.cargarCategorias();
-        List<DtCategoria> categoList= this.iC.listarCategorias();
-       request.setAttribute("categorias", categoList);
-        
-        String titulo=request.getParameter(TIT);
-        if(titulo!=null){
-            String desc=request.getParameter(DESC);
-           // if(request.getParameter("entrA").equals("") && !(request.getParameter("porceE").equals("")))
-        String catego=request.getParameter(CAtego);
+       }
+
+static public DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException{
+    String nick=(String) request.getSession().getAttribute("sesionAct");
+    DtUsuario usr= Fabrica.getInstance().getICtrlUsuario().traerDtUsuario(nick);
+    return usr;
+}
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+            this.iC.cargarCategorias();
+        categoList= this.iC.listarCategorias();
+       request.setAttribute("categorias", categoList); 
+           String titulo=request.getParameter(TIT);
+          if(titulo!=null){
+        String desc=request.getParameter(DESC);
+       //int ca = Integer.parseInt(request.getParameter(CAtego));
+       // String catego=categoList.get(ca).getNombre();
+         String catego = request.getParameter(CAtego);
         String precioE = request.getParameter(PRecioE);
         String montoT = request.getParameter(MOntoT);
         String img = request.getParameter("");
@@ -130,27 +149,6 @@ public class alta_prop extends HttpServlet {
         else{
            request.getRequestDispatcher("/vistas/Alta_propu.jsp").forward(request, response); 
         }
-               
-       }
-
-static public DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException{
-    String nick=(String) request.getSession().getAttribute("sesionAct");
-    DtUsuario usr= Fabrica.getInstance().getICtrlUsuario().traerDtUsuario(nick);
-    return usr;
-}
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-         
     }
 
     /**

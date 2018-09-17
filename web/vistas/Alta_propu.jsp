@@ -15,6 +15,7 @@
    
     <meta charset="UTF-8">
   <title>Alta propuesta</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"> 
 </head>
 <body>
@@ -65,7 +66,7 @@ if(request.getAttribute("categorias")!=null){
     <input type="radio" name="img" value="img"> Sí
     <input type="radio" name="img" value="img"> No <br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="submit"  value="Enviar" class="submit" />
+     <button type="submit" class="btn action-button" id="botoncito">aceptar</button>
   </fieldset>
   
 </form>
