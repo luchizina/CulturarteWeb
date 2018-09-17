@@ -8,7 +8,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="default_style" content=URL=/CulturarteWeb/vistas/inicSesErr.jsp">
         <title>JSP Page</title>
     </head>
     <body>
@@ -20,6 +21,8 @@
   <fieldset>
     <h2 class="fs-title">Error al iniciar sesión</h2>
     <h3 class="fs-subtitle">Las credenciales ingresadas son incorrectas, vuelva a chequear la información y trate de iniciar sesión nuevamente</h3>
+<input type="button" onclick="history.back()" name="volver atrás" class="next action-button" value="Entendido">
+  
   </fieldset>
 </form>    
     </body>

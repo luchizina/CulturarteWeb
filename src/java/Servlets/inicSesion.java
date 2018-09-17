@@ -92,7 +92,7 @@ public class inicSesion extends HttpServlet {
  }
  else if(!resultado.getEstLogin()){
      respuesta.setAttribute("error", resultado.getMensaje());
-        this.getServletContext().getRequestDispatcher("/vistas/inicSesErr.jsp").forward(request, response);
+    response.sendRedirect("/CulturarteWeb/vistas/inicSesErr.jsp");
  }
   }
     /**
