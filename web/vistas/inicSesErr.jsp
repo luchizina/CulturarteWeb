@@ -20,7 +20,7 @@
              
   <!-- fieldsets -->
   <fieldset>
-      <legend> Upss</legend>
+      <legend>¡Upss! Esto es incómodo</legend>
     <h2 class="fs-title">Error al iniciar sesión</h2>
     <h3 class="fs-subtitle">Las credenciales ingresadas son incorrectas, vuelva a chequear la información y trate de iniciar sesión nuevamente</h3>
 <input type="button" onclick="history.back()" name="volver atrás" class="next action-button" value="Entendido">
