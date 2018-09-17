@@ -134,9 +134,6 @@ public class Registrar extends HttpServlet {
                 Date fecha = formatoDeFecha.parse(request.getParameter(FECHA));
                 String conf = request.getParameter(PWD2);
                 String[] args = request.getParameterValues("usuario");
-                if (pass.equals(conf)) {
-                    if (usuario.existeCorreo(correo)) {
-                        if (usuario.existeNick(nick)) {
                             if (args[0].equals("colaborador")) {
                                 if (partImagen.getSize() != 0) {
                                     InputStream data = partImagen.getInputStream();
@@ -155,24 +152,17 @@ public class Registrar extends HttpServlet {
                                     usuario.altaColaborador(nick, correo, nombre, apellido, fecha, path, "Colaborador", pass);
                                     respuesta.setAttribute("sesionAct", nick);
                                     respuesta.setAttribute("tipo", "colaborador");
-                                    out.println("<script type=\"text/javascript\">");
-                                    out.println("alert('Colaborador registrado!');");
-                                    out.println("location='index.html';");
-                                    out.println("</script>");
+                                    request.getRequestDispatcher("../vistas/subIndex.jsp").forward(request, response);
                                 } else {
                                     usuario.altaColaborador(nick, correo, nombre, apellido, fecha, "", "Colaborador", pass);
                                     respuesta.setAttribute("sesionAct", nick);
                                     respuesta.setAttribute("tipo", "colaborador");
-                                    out.println("<script type=\"text/javascript\">");
-                                    out.println("alert('Colaborador registrado!');");
-                                    out.println("location='index.html';");
-                                    out.println("</script>");
+                                    request.getRequestDispatcher("../vistas/subIndex.jsp").forward(request, response);
                                 }
                             }
                             String dir = request.getParameter(DIRECCION);
                             String bio = request.getParameter(BIOGRAFIA);
                             String web = request.getParameter(LINK);
-                            if (usuario.validaWeb(web)) {
                                 if (args[0].equals("proponente")) {
                                     if (partImagen.getSize() != 0) {
                                         InputStream data = partImagen.getInputStream();
@@ -191,36 +181,15 @@ public class Registrar extends HttpServlet {
                                         usuario.altaProponente(nick, correo, nombre, apellido, fecha, pathP, dir, bio, web, "Proponente", pass);
                                         respuesta.setAttribute("sesionAct", nick);
                                         respuesta.setAttribute("tipo", "proponente");
-                                        out.println("<script type=\"text/javascript\">");
-                                        out.println("alert('Proponente registrado!');");
-                                        out.println("location='index.html';");
-                                        out.println("</script>");
+                                        request.getRequestDispatcher("../vistas/subIndex.jsp").forward(request, response);
                                     } else {
                                         usuario.altaProponente(nick, correo, nombre, apellido, fecha, "", dir, bio, web, "Proponente", pass);
                                         respuesta.setAttribute("sesionAct", nick);
                                         respuesta.setAttribute("tipo", "proponente");
-                                        out.println("<script type=\"text/javascript\">");
-                                        out.println("alert('Proponente registrado!');");
-                                        out.println("location='index.html';");
-                                        out.println("</script>");
+                                        request.getRequestDispatcher("../vistas/subIndex.jsp").forward(request, response);
                                     }
                                 }
-                            } else {
-                                request.setAttribute("link", "El formato de la pagina web es incorrecto");
-                                request.getRequestDispatcher("../vistas/registrar.jsp").forward(request, response);
-                            }
-                        } else {
-                            request.setAttribute("mens", "Ya existe un usuario con ese nick");
-                            request.getRequestDispatcher("../vistas/registrar.jsp").forward(request, response);
-                        }
-                    } else {
-                        request.setAttribute("correo", "Ya existe un usuario con ese correo");
-                        request.getRequestDispatcher("../vistas/registrar.jsp").forward(request, response);
-                    }
-                } else {
-                    request.setAttribute("pass", "Las contrasenias no coinciden");
-                    request.getRequestDispatcher("../vistas/registrar.jsp").forward(request, response);
-                }
+                            
             } catch (ParseException ex) {
                 Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
             }

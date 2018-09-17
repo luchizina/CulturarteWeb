@@ -123,7 +123,7 @@
                     <div class="form-group">
 
                         <div class="col-sm-4">
-                            <input type="url" name="web" placeholder="Link web" id="web">
+                            <input type="url" name="web" placeholder="http://www.example.com" id="web">
                             <% if (request.getAttribute("link") != null) {%>
                             <label for="link"><%= request.getAttribute("link")%></label>
                             <% }%>
@@ -137,6 +137,8 @@
                     </div>
                 </div>
             </fieldset>
+            <script  src="../js/prototype.js"></script>
+            <script  src="../js/validar.js"></script>
             <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
             <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
             
