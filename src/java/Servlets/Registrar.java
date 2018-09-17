@@ -154,6 +154,7 @@ public class Registrar extends HttpServlet {
                                     String path=subirImagenCol(nick, pass, imagen, correo, nombre, apellido, fecha);
                                     usuario.altaColaborador(nick, correo, nombre, apellido, fecha, path, "Colaborador", pass);
                                     respuesta.setAttribute("sesionAct", nick);
+                                    respuesta.setAttribute("tipo", "colaborador");
                                     out.println("<script type=\"text/javascript\">");
                                     out.println("alert('Colaborador registrado!');");
                                     out.println("location='index.html';");
@@ -161,6 +162,7 @@ public class Registrar extends HttpServlet {
                                 } else {
                                     usuario.altaColaborador(nick, correo, nombre, apellido, fecha, "", "Colaborador", pass);
                                     respuesta.setAttribute("sesionAct", nick);
+                                    respuesta.setAttribute("tipo", "colaborador");
                                     out.println("<script type=\"text/javascript\">");
                                     out.println("alert('Colaborador registrado!');");
                                     out.println("location='index.html';");
@@ -188,6 +190,7 @@ public class Registrar extends HttpServlet {
                                         String pathP=subirImagenProp(nick, pass, imagen);
                                         usuario.altaProponente(nick, correo, nombre, apellido, fecha, pathP, dir, bio, web, "Proponente", pass);
                                         respuesta.setAttribute("sesionAct", nick);
+                                        respuesta.setAttribute("tipo", "proponente");
                                         out.println("<script type=\"text/javascript\">");
                                         out.println("alert('Proponente registrado!');");
                                         out.println("location='index.html';");
@@ -195,6 +198,7 @@ public class Registrar extends HttpServlet {
                                     } else {
                                         usuario.altaProponente(nick, correo, nombre, apellido, fecha, "", dir, bio, web, "Proponente", pass);
                                         respuesta.setAttribute("sesionAct", nick);
+                                        respuesta.setAttribute("tipo", "proponente");
                                         out.println("<script type=\"text/javascript\">");
                                         out.println("alert('Proponente registrado!');");
                                         out.println("location='index.html';");
@@ -203,38 +207,19 @@ public class Registrar extends HttpServlet {
                                 }
                             } else {
                                 request.setAttribute("link", "El formato de la pagina web es incorrecto");
-                                request.getRequestDispatcher("registrar.jsp").forward(request, response);
-//                                    out.println("<script type=\"text/javascript\">");
-//                                    out.println("alert('El formato de la pagina web no es correcto');");
-//                                    out.println("location='registrar.jsp';");
-//                                    out.println("</script>");
+                                request.getRequestDispatcher("../vistas/registrar.jsp").forward(request, response);
                             }
-                            // request.getRequestDispatcher("registrar.jsp").forward(request, response);
                         } else {
-//                    respuesta.setAttribute("error", "Ya existe un usuario registrado con ese nick");
                             request.setAttribute("mens", "Ya existe un usuario con ese nick");
-                            request.getRequestDispatcher("registrar.jsp").forward(request, response);
-//                                out.println("<script type=\"text/javascript\">");
-//                                out.println("alert('Ya existe usuario con ese nick');");
-//                                out.println("location='registrar.jsp';");
-//                                out.println("</script>");
+                            request.getRequestDispatcher("../vistas/registrar.jsp").forward(request, response);
                         }
                     } else {
-                        //respuesta.setAttribute("error", "Ya existe un usuario registrado con ese correo");
-//                            out.println("<script type=\"text/javascript\">");
-//                            out.println("alert('Ya existe usuario con ese correo');");
-//                            out.println("location='registrar.jsp';");
-//                            out.println("</script>");
                         request.setAttribute("correo", "Ya existe un usuario con ese correo");
-                        request.getRequestDispatcher("registrar.jsp").forward(request, response);
+                        request.getRequestDispatcher("../vistas/registrar.jsp").forward(request, response);
                     }
                 } else {
-//                    out.println("<script type=\"text/javascript\">");
-//                    out.println("alert('Las contraseñas no coinciden');");
-//                    out.println("location='registrar.jsp';");
-//                    out.println("</script>");
                     request.setAttribute("pass", "Las contrasenias no coinciden");
-                    request.getRequestDispatcher("registrar.jsp").forward(request, response);
+                    request.getRequestDispatcher("../vistas/registrar.jsp").forward(request, response);
                 }
             } catch (ParseException ex) {
                 Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);

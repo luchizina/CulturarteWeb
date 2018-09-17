@@ -7,10 +7,9 @@ package Servlets;
 
 import Logica.Fabrica;
 import Logica.IUsuario;
-import static Servlets.Registrar.NICK;
+import static Servlets.usuario.CORREO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,12 +20,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nuevo
  */
-@WebServlet(name = "usuario", urlPatterns = {"/usuario"})
-public class usuario extends HttpServlet {
+@WebServlet(name = "correo", urlPatterns = {"/correo"})
+public class correo extends HttpServlet {
 
     private final Fabrica fabrica = Fabrica.getInstance();
     private final IUsuario usuario = fabrica.getICtrlUsuario();
-    public static final String NICK = "nick";
     public static final String CORREO = "email";
 
     /**
@@ -42,12 +40,13 @@ public class usuario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         usuario.cargarUsuarios2();
+        String correo = request.getParameter(CORREO);
         try (PrintWriter out = response.getWriter()) {
-            String nick = request.getParameter(NICK);
-            if (usuario.existeNick(nick)) {
-                out.print("Nick disponible");
+            /* TODO output your page here. You may use following sample code. */
+            if (usuario.existeCorreo(correo)) {
+                out.print("Email disponible");
             } else {
-                out.print("El nick ya se encuentra en uso");
+                out.print("El mail ya se encuentra en uso");
             }
         }
     }
@@ -65,12 +64,15 @@ public class usuario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        PrintWriter writer = response.getWriter();
-        String nick = request.getParameter(NICK);
-        if (usuario.existeNick(nick)) {
-            writer.print("Nick disponible");
-        } else {
-            writer.print("El nick ya se encuentra en uso");
+        usuario.cargarUsuarios2();
+        String correo = request.getParameter(CORREO);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            if (usuario.existeCorreo(correo)) {
+                out.print("Email disponible");
+            } else {
+                out.print("El mail ya se encuentra en uso");
+            }
         }
     }
 
@@ -86,13 +88,6 @@ public class usuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        PrintWriter writer = response.getWriter();
-        String nick = request.getParameter(NICK);
-        if (usuario.existeNick(nick)) {
-            writer.print("Nick disponible");
-        } else {
-            writer.print("El nick ya se encuentra en uso");
-        }
     }
 
     /**
