@@ -18,23 +18,24 @@
     <%  if (x != null) {                                                        %>
     <%      colaboradores = true;                                               %>
     <%               }                                                          %>
-    <% //out.println(request.getSession().getAttribute("sesionAct")+"usuario"); %>
-    <%  String Nombre_Usuario = (String) request.getSession().getAttribute("sesionAct");     %>
-    <%  String tipo = (String) session.getAttribute("tipo");                    %>
-    <% //out.println(Nombre_Usuario);                                           %>
-    <% //out.println(tipo);                                                     %>
     <%  boolean Propuso_a_propu = false;                                        %>
     <%  boolean Colaboro_a_propu = false;                                       %>
     <%  boolean Puede_colaborar_a_propu = false;                                %>
+    <%  String Nombre_Usuario = "";                                             %>
+    <%  String tipo = "";                                                       %>
+    <% if(request.getSession().getAttribute("sesionAct") != null ) {            %>
+    <% Nombre_Usuario = (String) request.getSession().getAttribute("sesionAct");%>
+    <% tipo = (String) session.getAttribute("tipo");                            %>
     <% if (Nombre_Usuario.equals(propu.getPropo())) {                           %>
     <%    Propuso_a_propu = true;                                               %>
-    <%                                             }                            %>
+    <% }                                                                        %>
     <% if (tipo.equals("colaborador")) {                                        %>
     <%      if (propu.getColabs().containsKey(Nombre_Usuario)) {                %>
     <%    Colaboro_a_propu = true;                                              %>
     <%    }else {                                                               %>
     <%   Puede_colaborar_a_propu = true;                                        %>
     <%   }                                                                      %>
+    <%   }                                                                      %> 
     <%   }                                                                      %> 
     <head>
         <title>Consultar Propuesta: <%propu.getTitulo();%> </title>
@@ -87,19 +88,19 @@
         </tr>
         </table>  
         
-        <% if(Puede_colaborar_a_propu) {                                       %>
+        <% if(Puede_colaborar_a_propu && !Nombre_Usuario.equals("")) {          %>
         <form 	action="#" method="get">
 	<input type="submit" value="Colaborar">
         </form>
         <% } %>
         
-        <% if(Colaboro_a_propu){                                               %>
+        <% if(Colaboro_a_propu && !Nombre_Usuario.equals("")) {                 %>
         <form 	action="#" method="get">
 	<input type="submit" value="Comentar">
         </form>
         <%}%>
         
-        <% if(Propuso_a_propu){                                                %>
+        <% if(Propuso_a_propu && !Nombre_Usuario.equals("")) {                  %>
         <form 	action="#" method="get">
 	<input type="submit" value="Extender Tiempo">
         </form>

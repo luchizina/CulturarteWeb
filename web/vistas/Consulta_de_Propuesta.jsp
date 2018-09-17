@@ -15,17 +15,46 @@
         <title>Consultar Propuesta</title>
     </head>
     <body>
-        <center>
+        <style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+    </style>
+    <center>
         <h1>Consulta Propuesta</h1>
-        <table border=10><tr> <td> <b> Titulo </b> </td> </tr>
+        <table>
+            <tr> 
+                <th>
+                    Titulo
+                </th> 
+            </tr>
             <%
                 Collection<DtPropuesta> x = (Collection<DtPropuesta>) request.getAttribute("propuestas");
                 for (DtPropuesta cx : x) {
-                    String Titu = cx.getTitulo().replace(" ", "-");
+                String Titu = cx.getTitulo().replace(" ", "-");
             %>
-            <tr><td><a href=Consulta_de_propuesta_Servlet?T=<%=Titu%>><%= cx.getTitulo()%></a></td>
+            <tr>
+                <td>
+                    <a href=Consulta_de_propuesta_Servlet?T=<%=Titu%>>
+                        <%= cx.getTitulo()%> 
+                    </a>
+                </td>
+            </tr>
             <%}%>
-                    </table>
-                    </center>
-                    </body>
-                    </html>
+        </table>
+    </center>
+</body>
+</html>
