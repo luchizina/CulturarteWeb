@@ -21,6 +21,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
 					<li class="active"><a href="#">Mi perfil</a></li>
                                         <li><a href="#">Visitar perfiles</a></li>   
 					<li><a href="Consulta_de_propuesta_Servlet">Propuestas</a></li>
+                                        <li><a href="alta_prop">Propuestas</a></li>
 				</ul>
 			   <% if(sesionAct==null) {
                                 

@@ -4,7 +4,7 @@
 /*basic reset*/
 * {margin: 0; padding: 0;}
 
-html {
+html{
 	height: 100%;
 	/*Image only BG fallback*/
 	
@@ -19,7 +19,7 @@ body {
 /*form styles*/
 #msform {
 	width: 400px;
-	margin: 50px auto;
+	margin: 50px auto !important;
 	text-align: center;
 	position: relative;
 }
@@ -42,6 +42,18 @@ body {
 }
 /*inputs*/
 #msform input, #msform textarea {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+/*combobox*/
+#msform select, #msform textarea {
 	padding: 15px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
