@@ -15,9 +15,9 @@
    
     <meta charset="UTF-8">
   <title>Alta propuesta</title>
-   <jsp:include page="/template/head.jsp" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
-          <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" id="style" type="text/css" >
+   
+      <link rel="stylesheet" href="/css/probar.css">
+  
 </head>
 <body>
   <!-- multistep form -->
@@ -68,7 +68,7 @@ if(request.getAttribute("categorias")!=null){
     <input type="radio" name="img" value="img"> Sí
     <input type="radio" name="img" value="img"> No <br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="submit"  value="Enviar" />
+    <input type="submit"  value="Enviar" class="submit action-button" />
   </fieldset>
   
 </form>

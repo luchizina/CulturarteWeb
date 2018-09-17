@@ -17,18 +17,17 @@ import Logica.*;
 import static java.lang.System.out;
 import java.util.List;
 import javax.servlet.http.HttpSession;
-
 /**
  *
  * @author matheo
  */
-@WebServlet(name = "Consulta_de_propuesta_Servlet", urlPatterns = {"/Consulta_de_propuesta_Servlet"})
-public class Consulta_de_propuesta_Servlet extends HttpServlet {
 
-      
-      private Fabrica fabrica = Fabrica.getInstance();
-      private IPropuesta IP=fabrica.getICtrlPropuesta();
-      private IUsuario IU = fabrica.getICtrlUsuario();
+@WebServlet(name = "Consulta_de_Propuesta_por_Categoria", urlPatterns = {"/Consulta_de_Propuesta_por_Categoria"})
+public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
+    private Fabrica fabrica = Fabrica.getInstance();
+    private IPropuesta IP=fabrica.getICtrlPropuesta();
+    private IUsuario IU = fabrica.getICtrlUsuario();
+    private ICategoria IC = fabrica.getICtrlCategoria();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,13 +39,15 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.Cargar_Propuestas();
+        this.Cargar_Memoria();
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-                 
+            /* TODO output your page here. You may use following sample code. */
             if(request.getMethod().equals("GET")){
                 this.doGet(request, response);   
-            }}
+            }
+           
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,34 +62,25 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cargar_Propuestas();
+        Cargar_Memoria();
+  
         try (PrintWriter out = response.getWriter()) {
-                // LISTAR PROPUESTAS 
-                
-                
-            if (request.getParameter("T") == null) {
-                List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
+                // LISTAR CATEGORIA 
+            if (request.getParameter("C") == null) {
+                List<DtCategoria> x = IC.listarCategorias();
+                request.setAttribute("categorias", x);
+                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
+            } else {
+                // LISTAR PROPUESTAS DE "X" CATEGORIA
+                String C = request.getParameter("C");
+                String Cposta = C.replace("-"," ");
+                List<DtPropuesta> x = IP.WEB_listarPropuestas_X_Categoria(Cposta);
                 request.setAttribute("propuestas", x);
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
-                //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
-            } else {
-                // CONSULTA A UNA PROPUESTA 
-                String t = request.getParameter("T");
-                //String nick = (String) request.getSession().getAttribute("sesionAct");
-                //String tipo = (String) request.getSession().getAttribute("tipo");
-                //request.setAttribute("sesionAct", nick);
-                //request.setAttribute("tipo", tipo);
-                
-                String titulo = t.replace("-"," ");
-                DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
-                List<String> colaborador = IP.ColaborantesDePro();
-                request.setAttribute("propu", p_consulta);
-                if(!colaborador.isEmpty()){
-                request.setAttribute("col", colaborador);
-                }
-                this.getServletContext().getRequestDispatcher("/vistas/Consulta_Info_Propuesta.jsp").forward(request, response);
             }
         }
+        //processRequest(request, response);
+        
     }
 
     /**
@@ -103,7 +95,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+       
     }
 
     /**
@@ -116,11 +108,14 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public void Cargar_Propuestas(){
+    
+    public void Cargar_Memoria(){
     IU.cargarUsuarios2();    
     IP.cargarPropuestas();
+    IC.cargarCategorias();
     IP.cargarColaboraciones();
     IP.EstadosPropuestas();
     IP.actualizarMontos();
+    
     };
 }

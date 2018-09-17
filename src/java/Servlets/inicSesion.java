@@ -92,8 +92,8 @@ public class inicSesion extends HttpServlet {
  }
  else if(!resultado.getEstLogin()){
      respuesta.setAttribute("error", resultado.getMensaje());
-   
-        this.getServletContext().getRequestDispatcher("/inicSesion.jsp").forward(request, response);
+     this.getServletContext().getRequestDispatcher("/vistas/inicSesErr.jsp").forward(request, response);
+    
  }
   }
     /**

@@ -18,44 +18,42 @@
     <%  if (x != null) {                                                        %>
     <%      colaboradores = true;                                               %>
     <%               }                                                          %>
-    <% //out.println(request.getSession().getAttribute("sesionAct")+"usuario"); %>
-    <%  String Nombre_Usuario = (String) request.getSession().getAttribute("sesionAct");     %>
-    <%  String tipo = (String) session.getAttribute("tipo");                    %>
-    <% //out.println(Nombre_Usuario);                                           %>
-    <% //out.println(tipo);                                                     %>
     <%  boolean Propuso_a_propu = false;                                        %>
     <%  boolean Colaboro_a_propu = false;                                       %>
     <%  boolean Puede_colaborar_a_propu = false;                                %>
+    <%  String Nombre_Usuario = "";                                             %>
+    <%  String tipo = "";                                                       %>
+    <% if(request.getSession().getAttribute("sesionAct") != null ) {            %>
+    <% Nombre_Usuario = (String) request.getSession().getAttribute("sesionAct");%>
+    <% tipo = (String) session.getAttribute("tipo");                            %>
     <% if (Nombre_Usuario.equals(propu.getPropo())) {                           %>
     <%    Propuso_a_propu = true;                                               %>
-    <%                                             }                            %>
+    <% }                                                                        %>
     <% if (tipo.equals("colaborador")) {                                        %>
     <%      if (propu.getColabs().containsKey(Nombre_Usuario)) {                %>
     <%    Colaboro_a_propu = true;                                              %>
     <%    }else {                                                               %>
-    <%                                                                          %>
     <%   Puede_colaborar_a_propu = true;                                        %>
     <%   }                                                                      %>
     <%   }                                                                      %> 
-
-    
-    
+    <%   }                                                                      %> 
     <head>
         <title>Consultar Propuesta: <%propu.getTitulo();%> </title>
+        <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css">
     </head>
     <body>
         <table border=10 >
             <tr>
-                <td><b> Titulo </b></td>
-                <td><b> Lugar </b></td>
-                <td><b> Monto </b></td>
-                <td><b> Monto Recaudado </b></td>
-                <td><b> Fecha </b></td>
-                <td><b> Estado </b></td>
-                <td><b> Propuesto por </b></td>
-                <td><b> Precio </b></td>
-                <td><b> Categoria </b></td>
-                <td><b> Retorno </b></td>
+                <th><b> Titulo </b></th>
+                <th><b> Lugar </b></th>
+                <th><b> Monto </b></th>
+                <th><b> Monto Recaudado </b></th>
+                <th><b> Fecha </b></th>
+                <th><b> Estado </b></th>
+                <th><b> Propuesto por </b></th>
+                <th><b> Precio </b></th>
+                <th><b> Categoria </b></th>
+                <th><b> Retorno </b></th>
             </tr>
             <tr>
                 <td><b>  <%= propu.getTitulo()%> </b></td>
@@ -74,7 +72,7 @@
         <br>
         <table border=10>
             <tr>
-                <td><b> Descripcion </b></td>
+                <th><b> Descripcion </b></th>
             </tr>
             <tr>
                 <td><b><%= propu.getDescripcion()%></b></td>
@@ -82,7 +80,7 @@
         </table>
         <br>
         <br>
-        <table border=10><tr><td><b> Colaboradores </b></td></tr>
+        <table border=10><tr><th><b> Colaboradores </b></th></tr>
             <% if(colaboradores){                                               %>
             <% for (String cx : x) {                                            %>
             <tr><td><%= cx%></td></tr>
@@ -91,19 +89,19 @@
         </tr>
         </table>  
         
-        <% if(Puede_colaborar_a_propu ) {                                    %>
+        <% if(Puede_colaborar_a_propu && !Nombre_Usuario.equals("")) {          %>
         <form 	action="#" method="get">
 	<input type="submit" value="Colaborar">
         </form>
         <% } %>
         
-        <% if(Colaboro_a_propu){                                                %>
+        <% if(Colaboro_a_propu && !Nombre_Usuario.equals("")) {                 %>
         <form 	action="#" method="get">
-	<input type="submit" value="Comentar">
+	<input type="submit"  value="Comentar">
         </form>
         <%}%>
         
-        <% if(Propuso_a_propu){                                                %>
+        <% if(Propuso_a_propu && !Nombre_Usuario.equals("")) {                  %>
         <form 	action="#" method="get">
 	<input type="submit" value="Extender Tiempo">
         </form>
