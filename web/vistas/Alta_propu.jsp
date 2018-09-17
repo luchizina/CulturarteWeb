@@ -20,7 +20,7 @@
 </head>
 <body>
   <!-- multistep form -->
-<form action="<%=request.getContextPath()%>/alta_prop" method="get" id="msform" >
+<form action="<%=request.getContextPath()%>/alta_prop" method="post" id="msform" >
       <!-- progressbar -->
   <ul id="progressbar">
       
