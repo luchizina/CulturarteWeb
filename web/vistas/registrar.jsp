@@ -28,32 +28,32 @@
         </script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
         <link rel="stylesheet" href="../css/style.css">
+        <script src="../scripts/jquery.min.js" type="text/javascript"></script>
     </head>
     <body>
         <h1>Registrarse</h1>
 
-        <form action=../Registrarse method="POST" enctype="multipart/form-data" id="msform">
+        <form action=../Registrarse method="POST" enctype="multipart/form-data" id="msform" onsubmit="return validar()">
             <ul id="progressbar">
 
-                <li class="active">Registrar Usuario</li>
-                <li>Datos de Cuenta</li>
+                <li class="active">Datos de cuenta</li>
                 <li>Datos Personales</li>
+                <li>Otros datos</li>
             </ul>
+            <script src="jquery.js" type="text/javascript"></script>
             <fieldset>
                 <h2 class="fs-title">Complete los siguientes campos</h2>
                 <h3 class="fs-subtitle"> Datos de la cuenta </h3> 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="nick">Nickname:</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" id="nick" name="nick" placeholder="Nickname">
+                        <input type="text" class="form-control" id="nick" name="nick" placeholder="Nickname" /><div id="status"></div>
                         <% if (request.getAttribute("mens") != null) {%>
                         <label for="mens"><%= request.getAttribute("mens")%></label>
                         <% } %>
+                        
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="email">Email:</label>
                     <div class="col-sm-4">
                         <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
                         <% if (request.getAttribute("correo") != null) {%>
@@ -63,13 +63,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="pwd">Password:</label>
                     <div class="col-sm-4">
                         <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Enter password">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="pwd2">Confirmar Password:</label>
                     <div class="col-sm-4">
                         <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="Confirmar">
                         <% if (request.getAttribute("pass") != null) {%>
@@ -78,7 +76,9 @@
                     </div>
                 </div>
                 <input type="button" name="next" class="next action-button" value="Siguiente" />
+                <script src="../js/Validacion.js" type="text/javascript"></script>
             </fieldset>
+                    
             <fieldset>
                 <h2 class="fs-title">Datos personales</h2>
                 <div class="form-group">
@@ -102,6 +102,7 @@
                 </div>
                 <input type="button" name="previous" class="previous action-button" value="Anterior" />
                 <input type="button" name="next" class="next action-button" value="Siguiente" />
+                
             </fieldset>
             <fieldset>
                 <h2 class="fs-title">Datos sobre el usuario</h2>
@@ -155,5 +156,6 @@
             <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
             <script  src="js/index.js"></script>
         </form> 
+        <script type="text/javascript" src="../js/Validacion.js"></script>
     </body>
 </html>
