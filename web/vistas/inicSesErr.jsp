@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-          <link href="../css/style.css" rel="stylesheet" media="screen">
+         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
         <br><br><br><br><br><br><br>
         <form id="msform" action="../iniciarS" method="post">
             

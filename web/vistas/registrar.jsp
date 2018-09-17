@@ -9,7 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registro de Usuarios</title>
- 
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
         <link rel="stylesheet" href="../css/style.css">
     </head>
@@ -135,8 +135,8 @@
             </fieldset>
             <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
             <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
-            <script  src="../js/index.js"></script>
-             <script type="text/javascript" src="../js/prototype.js"></script>
+            <script  src="../js/disenio.js"></script>
+            <script type="text/javascript" src="../js/prototype.js"></script>
             <script type="text/javascript" src="../js/validar.js"></script>
         </form> 
     </body>
