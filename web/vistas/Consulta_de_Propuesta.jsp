@@ -13,18 +13,22 @@
 <html>
     <head>
         <title>Consultar Propuesta</title>
+         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/probar.css" type="text/css">
     </head>
     <body>
         <center>
         <h1>Consulta Propuesta</h1>
-        <table border=10><tr> <td> <b> Titulo </b> </td> </tr>
+        <table id="customers"><tr> <td> <b> Titulo </b> </td> </tr>
             <%
-                Collection<DtPropuesta> x = (Collection<DtPropuesta>) request.getAttribute("propuestas");
+               
+                    
+              
+                List<DtPropuesta> x = (List<DtPropuesta>) request.getAttribute("propuestas");
                 for (DtPropuesta cx : x) {
                     String Titu = cx.getTitulo().replace(" ", "-");
             %>
             <tr><td><a href=Consulta_de_propuesta_Servlet?T=<%=Titu%>><%= cx.getTitulo()%></a></td>
-            <%}%>
+            <%}  %>
                     </table>
                     </center>
                     </body>

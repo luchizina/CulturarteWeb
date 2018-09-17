@@ -13,8 +13,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Alta propuesta</title>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
-      <link rel="stylesheet" href="../css/style.css">
+   
+      <link rel="stylesheet" href="../css/probar.css">
+  
 </head>
 
 <body>
@@ -60,12 +61,17 @@
     <input type="radio" name="img" value="img"> Sí
     <input type="radio" name="img" value="img"> No <br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="submit"  value="Enviar" />
+    <input type="submit"  value="Enviar" class="submit action-button" />
   </fieldset>
   
 </form>
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  
+  
+   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
-<script  src="js/index.js"></script>
+
+  
+
+    <script  src="../js/disenio.js"></script>
 </body>
 </html>

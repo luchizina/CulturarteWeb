@@ -69,7 +69,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
             if (request.getParameter("T") == null) {
                 List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
                 request.setAttribute("propuestas", x);
-                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
+              this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
             } else {
                 // CONSULTA A UNA PROPUESTA 
                 String t = request.getParameter("T");
