@@ -20,10 +20,11 @@
         
         <title>Iniciar sesión</title>
          <script type="text/javascript" src="../js/limpiar.js"></script>
+         <link href="../css/style.css" rel="stylesheet" media="screen">
     </head>
     <body>
         
-        <link href="../css/style.css" rel="stylesheet" media="screen">
+        
         <br><br><br><br><br><br><br>
         <form id="msform" action="../iniciarS" method="post">
             
