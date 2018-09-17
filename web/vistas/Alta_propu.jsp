@@ -18,21 +18,7 @@
   
 </head>
 
-<body>
-  <!-- multistep form -->
-<form action="alta_prop" method="get" id="msform" >
-    
-      <!-- progressbar -->
-  <ul id="progressbar">
-      
-    <li class="active">Alta propuesta</li>
-    <li>Datos generales</li>
-    <li>Datos opcionales</li>
-  </ul>
-  <!-- fieldsets -->
-  <fieldset>
-    <h2 class="fs-title">Complete los siguientes campos</h2>
-    <h3 class="fs-subtitle">Paso 1</h3> 
+        <link rel="stylesheet" href="../css/probar.css">
 
     <input type="text" name="categoria" placeholder="Categoria" />
     <input type="text" name="titulo" placeholder="Título" />
