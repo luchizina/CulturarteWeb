@@ -39,7 +39,7 @@ if(request.getAttribute("categorias")!=null){
     for(DtCategoria cat: categorias){   
     int i=1;
     %>
-      <option value="<%out.print(i);%>"> <%out.print(cat.getNombre());%>  </option>
+      <option value="<%out.print(cat.getNombre());%>"> <%out.print(cat.getNombre());%>  </option>
   <%i++; }}%>
      </select>
     <input type="text" name="titulo" placeholder="Título"  />
@@ -70,7 +70,8 @@ if(request.getAttribute("categorias")!=null){
   </fieldset>
   
 </form>
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
+      
+     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
 <script  src="<%=request.getContextPath()%>/js/index.js"></script>
 </body>
