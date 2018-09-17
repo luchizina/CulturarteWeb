@@ -25,7 +25,7 @@
                 </th> 
             </tr>
             <%
-                Collection<DtPropuesta> x = (Collection<DtPropuesta>) request.getAttribute("propuestas");
+                List<DtPropuesta> x = (List<DtPropuesta>) request.getAttribute("propuestas");
                 for (DtPropuesta cx : x) {
                 String Titu = cx.getTitulo().replace(" ", "-");
             %>
