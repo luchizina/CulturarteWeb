@@ -1,11 +1,12 @@
 <%-- 
-    Document   : Consulta_de_Propuesta
-    Created on : 13/09/2018, 02:22:46
+    Document   : Consulta_de_Propuesta_por_Categoria
+    Created on : 16/09/2018, 23:55:26
     Author     : matheo
 --%>
 
 <%@page import="java.util.Collection"%>
-<%@page import="Logica.DtPropuesta"%>
+<%@page import="Logica.DtCategoria"%>
+
 <%@page import="java.util.List"%>
 <%@page session="true" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,14 +26,14 @@
                 </th> 
             </tr>
             <%
-                Collection<DtPropuesta> x = (Collection<DtPropuesta>) request.getAttribute("propuestas");
-                for (DtPropuesta cx : x) {
-                String Titu = cx.getTitulo().replace(" ", "-");
+                Collection<DtCategoria> x = (Collection<DtCategoria>) request.getAttribute("categorias");
+                for (DtCategoria cx : x) {
+                String Titu = cx.getNombre().replace(" ","-");
             %>
             <tr>
                 <td>
-                    <a href=Consulta_de_propuesta_Servlet?T=<%=Titu%>>
-                        <%= cx.getTitulo()%> 
+                    <a href=Consulta_de_Propuesta_por_Categoria?C=<%=Titu%>>
+                        <%= cx.getNombre()%> 
                     </a>
                 </td>
             </tr>

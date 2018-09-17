@@ -39,20 +39,21 @@
     <%   }                                                                      %> 
     <head>
         <title>Consultar Propuesta: <%propu.getTitulo();%> </title>
+        <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css">
     </head>
     <body>
         <table border=10 >
             <tr>
-                <td><b> Titulo </b></td>
-                <td><b> Lugar </b></td>
-                <td><b> Monto </b></td>
-                <td><b> Monto Recaudado </b></td>
-                <td><b> Fecha </b></td>
-                <td><b> Estado </b></td>
-                <td><b> Propuesto por </b></td>
-                <td><b> Precio </b></td>
-                <td><b> Categoria </b></td>
-                <td><b> Retorno </b></td>
+                <th><b> Titulo </b></th>
+                <th><b> Lugar </b></th>
+                <th><b> Monto </b></th>
+                <th><b> Monto Recaudado </b></th>
+                <th><b> Fecha </b></th>
+                <th><b> Estado </b></th>
+                <th><b> Propuesto por </b></th>
+                <th><b> Precio </b></th>
+                <th><b> Categoria </b></th>
+                <th><b> Retorno </b></th>
             </tr>
             <tr>
                 <td><b>  <%= propu.getTitulo()%> </b></td>
@@ -71,7 +72,7 @@
         <br>
         <table border=10>
             <tr>
-                <td><b> Descripcion </b></td>
+                <th><b> Descripcion </b></th>
             </tr>
             <tr>
                 <td><b><%= propu.getDescripcion()%></b></td>
@@ -79,7 +80,7 @@
         </table>
         <br>
         <br>
-        <table border=10><tr><td><b> Colaboradores </b></td></tr>
+        <table border=10><tr><th><b> Colaboradores </b></th></tr>
             <% if(colaboradores){                                               %>
             <% for (String cx : x) {                                            %>
             <tr><td><%= cx%></td></tr>
@@ -96,7 +97,7 @@
         
         <% if(Colaboro_a_propu && !Nombre_Usuario.equals("")) {                 %>
         <form 	action="#" method="get">
-	<input type="submit" value="Comentar">
+	<input type="submit"  value="Comentar">
         </form>
         <%}%>
         
