@@ -17,6 +17,9 @@
     <body>  
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
         <h1>Hello World!</h1>
+    <center>
+        
+   
            <table>
             <tr> 
                 <th>
@@ -24,18 +27,19 @@
                 </th> 
             </tr>
             <%
-                List<DtUsuario> x = (List<DtUsuario>) request.getAttribute("propuestas");
-                for (DtUsuario cx : x) {
-                String Titu = cx.getNick().replace(" ", "-");
+                List<DtUsuario> usuarios = (List<DtUsuario>) request.getAttribute("usuarios");
+                for (DtUsuario user : usuarios) {
+                String Titu = user.getNick().replace(" ", "-");
             %>
             <tr>
                 <td>
                     <a href=Consulta_de_propuesta_Servlet?T=<%=Titu%>>
-                        <%= cx.getNick()%> 
+                        <%= user.getNick()%> 
                     </a>
                 </td>
             </tr>
             <%}%>
         </table>
+         </center>
     </body>
 </html>
