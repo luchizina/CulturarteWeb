@@ -15,13 +15,11 @@
    
     <meta charset="UTF-8">
   <title>Alta propuesta</title>
-   
-      <link rel="stylesheet" href="/css/probar.css">
-  
+   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"> 
 </head>
 <body>
   <!-- multistep form -->
-<form action="../alta_prop" method="get" id="msform" >
+<form action="<%=request.getContextPath()%>/alta_prop" method="get" id="msform" >
       <!-- progressbar -->
   <ul id="progressbar">
       
@@ -33,7 +31,7 @@
   <fieldset>
     <h2 class="fs-title">Complete los siguientes campos</h2>
     <h3 class="fs-subtitle">Paso 1</h3> 
-    <select name="cate" required="required">
+    <select name="cate">
     <%
 if(request.getAttribute("categorias")!=null){
     Collection<DtCategoria> categorias=(Collection<DtCategoria>) request.getAttribute("categorias");
@@ -43,23 +41,22 @@ if(request.getAttribute("categorias")!=null){
       <option value="<%out.print(i);%>"> <%out.print(cat.getNombre());%>  </option>
   <%i++; }}%>
      </select>
-    <input type="text" name="titulo" placeholder="Título" required="required" />
-    <input type="date" name="fecha" placeholder="fecha" required="required"/>
+    <input type="text" name="titulo" placeholder="Título"  />
+    <input type="date" name="fecha" placeholder="fecha" />
     <input type="button" name="next" class="next action-button" value="Siguiente" />
   </fieldset>
   <fieldset>
     <h2 class="fs-title">Datos generales</h2>
     <h3 class="fs-subtitle">Por favor no deje ningun espacio en blanco</h3>
-    <input type="text" name="lugar" placeholder="Lugar" required="required"/>
-     <input type="number" name="entrada" placeholder="Precio entrada" required="required"/>
-      <input type="number" name="monto_tot" placeholder="monto total" required="required" />
+    <input type="text" name="lugar" placeholder="Lugar" />
+     <input type="number" name="entrada" placeholder="Precio entrada" />
+      <input type="number" name="monto_tot" placeholder="monto total" />
     <h3 class="fs-subtitle">Tipo de retorno:</h3>
     <input type="radio" name="entrA" value="EntradasG"> Entradas gratis
     <input type="radio" name="porceE" value="Porcentaje"> Porcentaje entradas
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
     <input type="button" name="next" class="next action-button" value="Siguiente" />
   </fieldset>
-  
   <fieldset>
     <h2 class="fs-title">Datos opcionales</h2>
     <h3 class="fs-subtitle">Si desea complete la siguiente información:</h3>
@@ -68,13 +65,12 @@ if(request.getAttribute("categorias")!=null){
     <input type="radio" name="img" value="img"> Sí
     <input type="radio" name="img" value="img"> No <br>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
-    <input type="submit"  value="Enviar" class="submit action-button" />
+    <input type="submit"  value="Enviar" class="submit" />
   </fieldset>
   
 </form>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
-<script  src="../js/index.js"></script>
-	
+<script  src="<%=request.getContextPath()%>/js/index.js"></script>
 </body>
 </html>
