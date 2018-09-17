@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Logica.DtCategoria;
 import Logica.DtUsuario;
 import Logica.Estado;
 import Logica.Fabrica;
@@ -15,7 +16,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -48,12 +51,12 @@ public class alta_prop extends HttpServlet {
     public static final String MOntoT = "monto_tot";
     public static String RET1 = "entrA";
  public static String RET2 = "porceE";
-    public static final String CAtego = "categoria";
+    public static final String CAtego = "cate";
     public static final String PRecioE = "entrada";
     public static final String IMg = "img";
     public static final String LUGAR = "lugar";
     public static final String FEcha2 = "fecha";
-    
+    List<DtCategoria> categoList = new ArrayList<>();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -64,47 +67,51 @@ public class alta_prop extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-       final String tit = request.getParameter(TIT);
-       final String desc = request.getParameter(DESC);
-        //if(request.getParameter("entrA").equals("") && !(request.getParameter("porceE").equals("")))
-        final String catego = request.getParameter(CAtego);
-        final String precioE = request.getParameter(PRecioE);
-        final String montoT = request.getParameter(MOntoT);
-        final String img = request.getParameter("");
-        final String lugar = request.getParameter(LUGAR);
+                
+        this.iC.cargarCategorias();
+        List<DtCategoria> categoList= this.iC.listarCategorias();
+       request.setAttribute("categorias", categoList);
+        
+        String titulo=request.getParameter(TIT);
+        if(titulo!=null){
+            String desc=request.getParameter(DESC);
+           // if(request.getParameter("entrA").equals("") && !(request.getParameter("porceE").equals("")))
+        String catego = request.getParameter(CAtego);
+        String precioE = request.getParameter(PRecioE);
+        String montoT = request.getParameter(MOntoT);
+        String img = request.getParameter("");
+        String lugar = request.getParameter(LUGAR);
         SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaa = null;
-         try {
-             fechaa = formatoDeFecha.parse(request.getParameter(FEcha2));
-         } catch (ParseException ex) {
-             Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
-         }
-            Date fecha = new Date();
-        Date ahora = new Date();
-        SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
-       final  String hora = formateador.format(ahora);
-//        String retorno = "caca";
-//        if(RET1.equals("") && !(RET2.equals("")) )
-//        {
-//        retorno = request.getParameter(RET2);
-//        }
-//        else if (RET2.equals("") && !(RET1.equals("")))
-//        {
-//              retorno = request.getParameter(RET1);
-//        }
-//        else
-//        {
-//        retorno = request.getParameter(RET1) + ", " + request.getParameter(RET2);
-//        }
-//        
-        
-        ip.cargarEstados();
+           try{
+               fechaa = formatoDeFecha.parse(request.getParameter(FEcha2));
+               
+           }catch (ParseException ex){
+               Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           Date fecha = new Date();
+           Date ahora = new Date();
+           SimpleDateFormat formateador =new SimpleDateFormat("hh:mm:ss");
+          String hora= formateador.format(ahora);
+//          String retorno="caca";
+//           if(RET1.equals("") && !(RET2.equals(""))){
+//               retorno = request.getParameter(RET2);
+//           }
+//           else if(RET2.equals("") && !(RET1.equals(""))){
+//               retorno = request.getParameter(RET1);
+//           }
+//           else
+//           {
+//               retorno = request.getParameter(RET1) + ", " + request.getParameter(RET2);
+//           }
+           
+            ip.cargarEstados();
         ip.cargarPropuestas();
         ip.cargarProp();
         
         String nick = getUsuarioLogueado(request).getNick();
         Estado estA = new Estado(Testado.Ingresada);
-         boolean ok = ip.AgregarPropuesta(tit, desc,fechaa, Integer.parseInt(precioE), 0, fecha, "yokc", Integer.parseInt(montoT),catego, estA, "", nick, hora,lugar );
+         boolean ok = ip.AgregarPropuesta(titulo, desc,fechaa, Integer.parseInt(precioE), 0, fecha, "yokc", Integer.parseInt(montoT),catego, estA, "", nick, hora,lugar );
                         if (ok) {
              try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -119,8 +126,13 @@ public class alta_prop extends HttpServlet {
             out.println("</html>");
         }
                         }
-        
-    }
+           
+        }
+        else{
+           request.getRequestDispatcher("/vistas/Alta_propu.jsp").forward(request, response); 
+        }
+               
+       }
 
 static public DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException{
     String nick=(String) request.getSession().getAttribute("sesionAct");
