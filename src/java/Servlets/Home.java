@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nuevo
  */
-@WebServlet(name = "Home", urlPatterns = {"/Home"})
+@WebServlet(name = "home", urlPatterns = {"/home"})
 public class Home extends HttpServlet {
 
     /**
@@ -45,7 +45,7 @@ public class Home extends HttpServlet {
                 IP.cargarColaboraciones();
                 IP.actualizarMontos();
                 IP.EstadosPropuestas();
-        request.getRequestDispatcher("index.html").forward(request, response);
+        request.getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
