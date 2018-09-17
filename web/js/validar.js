@@ -31,15 +31,18 @@ function vacios() {
         alert("Ha dejado campos vacios que debe llenar");
         return false;
     }
-    if (nick.value !== "" || nombre.value !== "" || apellido.value !== "" || fecha.value !== "" || mail.value !== "" || pass.value !== "" || pass2.value !== "") {
-        if (pass.value === pass2.value) {
-            alert("Las contraseñas no coinciden");
-            return false;
-        }
-        if(aviso.value !== "Nick disponible" || avisa.value !== "Email disponible"){
-            alert("Hay campos invalidos");
-            return false;
-        }
+    if (nick.value !== "" || nombre.value !== "" || apellido.value !== "" || fecha.value !== "" || mail.value !== "" || pass.value !== "" || pass2.value !== "" && pass.value === pass2.value && aviso.innerHTML === "Nick disponible" && avisa.innerHTML === "Email disponible") {
+
+        alert("El usuario " + nick.value + " ha sido registrado");
+    }
+    if (pass.value !== pass2.value) {
+        alert("Las contraseñas no coinciden");
+        return false;
+    }
+
+    if (aviso.innerHTML !== "Nick disponible" || avisa.innerHTML !== "Email disponible") {
+        alert("Hay campos invalidos");
+        return false;
     }
 }
 

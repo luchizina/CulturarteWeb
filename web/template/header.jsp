@@ -53,11 +53,8 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                                String nombre=user.getNombre();
                                String ape= user.getApellido();
                                String aux1=" ", aux2=" (", aux3=")";
-                               String nueva1=nombre.concat(aux1);
-                               String nueva2=nueva1.concat(ape);
-                               String nueva3=nueva2.concat(aux2);
-                               String nueva4=nueva3.concat(nick);
-                               String nuevaFin=nueva4.concat(aux3);
+                               String nueva1=nombre+aux1+ape+aux2+nick+aux3;
+                               
 
                             %>
                             <ul class="nav navbar-nav navbar-right">
@@ -69,7 +66,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                             
                              <ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><span class="glyphicon "></span>
-							¡Bienvenido <%out.print(nuevaFin);%>!</a></li>
+							¡Bienvenido <%out.print(nueva1);%>!</a></li>
                                       
 				</ul>
                             <%}%>
