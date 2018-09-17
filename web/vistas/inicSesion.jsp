@@ -17,7 +17,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
         <title>Iniciar sesión</title>
          <script type="text/javascript" src="../js/limpiar.js"></script>
          <link href="../css/style.css" rel="stylesheet" media="screen">
