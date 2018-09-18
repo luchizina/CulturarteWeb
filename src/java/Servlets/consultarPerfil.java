@@ -41,7 +41,7 @@ public class consultarPerfil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       this.IU.cargarUsuarios2();
+     //  this.IU.cargarUsuarios2();
         if (request.getParameter("T") == null) {
                 List<DtUsuario> usuarios = IU.listarUsuarios();
                 request.setAttribute("usuarios", usuarios);
@@ -49,7 +49,7 @@ public class consultarPerfil extends HttpServlet {
                 //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
             } else {
               
-                this.getServletContext().getRequestDispatcher("/vistas/Consulta_Info_Propuesta.jsp").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/vistas/consultarInfoPerfil.jsp").forward(request, response);
             }
     }
 

@@ -16,15 +16,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:include page="/template/head.jsp" />
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <title>Iniciar sesión</title>
          <script type="text/javascript" src="../js/limpiar.js"></script>
-        
+         <link href="../css/style.css" rel="stylesheet" media="screen">
     </head>
     <body>
-        <jsp:include page="/template/header.jsp" />
+       
       
 
         
@@ -42,6 +42,6 @@
     <input type="submit" class="next action-button" value="Ingresar" />
   </fieldset>
 </form>     
-        	<jsp:include page="/template/footer.jsp" />
+        	
     </body>
 </html>

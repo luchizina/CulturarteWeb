@@ -23,7 +23,7 @@
            <table>
             <tr> 
                 <th>
-                    Titulo
+                    Nickname
                 </th> 
             </tr>
             <%
@@ -33,7 +33,7 @@
             %>
             <tr>
                 <td>
-                    <a href=Consulta_de_propuesta_Servlet?T=<%=Titu%>>
+                    <a href=consultarPerfil?T=<%=Titu%>>
                         <%= user.getNick()%> 
                     </a>
                 </td>

@@ -5,12 +5,12 @@
 * {margin: 0; padding: 0;}
 
 html{
-	height: 100% !important;
+	height: 100%;
 	/*Image only BG fallback*/
 	
 	/*background = gradient + image pattern combo*/
 	background: 
-		linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6)) !important;
+		linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
 }
 
 body {
@@ -18,9 +18,9 @@ body {
 }
 /*form styles*/
 #msform {
-	width: 400px !important;
+	width: 400px;
 	margin: 50px auto !important;
-	text-align: center !important;
+	text-align: center;
 	position: relative;
 }
 #msformCat {
