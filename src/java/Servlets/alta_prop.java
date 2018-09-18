@@ -128,10 +128,6 @@ public class alta_prop extends HttpServlet {
 //               retorno = request.getParameter(RET1) + ", " + request.getParameter(RET2);
 //           }
            
-            ip.cargarEstados();
-        ip.cargarPropuestas();
-        ip.cargarProp();
-        
         String nick = getUsuarioLogueado(request).getNick();
         Estado estA = new Estado(Testado.Ingresada);
          boolean ok = ip.AgregarPropuesta(titulo, desc,fechaa, Integer.parseInt(precioE), 0, fecha, "yokc", Integer.parseInt(montoT),catego, estA, "", nick, hora,lugar );
