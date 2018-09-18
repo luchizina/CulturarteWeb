@@ -19,9 +19,9 @@
             
   <!-- fieldsets -->
   <fieldset>
-    <h2 class="fs-title">¡Propuesta dada de alta!</h2>
-    <h3 class="fs-subtitle">La propuesta ha sido ingresada correctamente, ¿Qué desea hacer?</h3>
-<input type="button" href="../vistas/subIndex.jsp" name="volver atrás" class="next action-button" value="Nada">
+      <legend>¡UPSS! Esto es incómodo.. :(</legend>      
+    <h3 class="fs-subtitle">Los datos que ha ingresado son incorrectos, o bien, ese título ya está en uso... Por favor revise.</h3>
+<input type="button" onclick="history.back()"  name="volver atrás" class="next action-button" value="Nada">
   
   </fieldset>
 </form>    
