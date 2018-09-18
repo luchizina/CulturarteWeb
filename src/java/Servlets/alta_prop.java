@@ -123,9 +123,7 @@ public class alta_prop extends HttpServlet {
                     break;
             }
 
-            ip.cargarEstados();
-            ip.cargarPropuestas();
-            ip.cargarProp();
+
 
             String nick = getUsuarioLogueado(request).getNick();
             Estado estA = new Estado(Testado.Ingresada);
