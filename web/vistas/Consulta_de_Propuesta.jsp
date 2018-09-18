@@ -17,7 +17,7 @@
     </head>
     <body>
     <center>
-        <h1>Consulta Propuesta</h1>
+        <h1>Consulta Propuesta</h1>     
         <table>
             <tr> 
                 <th>
