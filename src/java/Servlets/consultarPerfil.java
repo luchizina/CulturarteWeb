@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Logica.DtColaborador;
 import Logica.DtProponente;
 import Logica.DtPropuesta;
 import Logica.DtUsuario;
@@ -53,7 +54,11 @@ public class consultarPerfil extends HttpServlet {
               DtUsuario user= IU.traerDtUsuario(nickUser);
               if(user instanceof DtProponente){
                   DtProponente prop= (DtProponente) user;
-                  String algo= prop.getNick();
+                request.setAttribute("usuario", prop);
+              }
+              else{
+                  DtColaborador colab=(DtColaborador) user;
+                  request.setAttribute("usuario", colab);
               }
               
                 this.getServletContext().getRequestDispatcher("/vistas/consultarInfoPerfil.jsp").forward(request, response);
