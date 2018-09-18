@@ -20,7 +20,7 @@
 </head>
 <body>
   <!-- multistep form -->
-<form action="<%=request.getContextPath()%>/alta_prop" method="post" id="msform" >
+<form action="<%=request.getContextPath()%>/alta_prop" method="post" id="msform" enctype="multipart/form-data">
       <!-- progressbar -->
   <ul id="progressbar">
       
@@ -62,9 +62,7 @@ if(request.getAttribute("categorias")!=null){
     <h2 class="fs-title">Datos opcionales</h2>
     <h3 class="fs-subtitle">Si desea complete la siguiente información:</h3>
     <textarea name="descripcion" placeholder="Escriba una descripcion..."></textarea>
-     <h3 class="fs-subtitle">¿Desea subir una imagen?</h3>
-    <input type="radio" name="img" value="img"> Sí
-    <input type="radio" name="img" value="img"> No <br>
+    <input type="file" class="btn btn-default" accept="image/*" id="imagen" name="imagen">
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
      <button type="submit" class="btn action-button" id="botoncito">aceptar</button>
   </fieldset>
