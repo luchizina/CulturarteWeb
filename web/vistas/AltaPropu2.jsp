@@ -10,20 +10,18 @@
     <head>
         
         <meta http-equiv="default_style" content=URL=/CulturarteWeb/vistas/inicSesErr.jsp">
-        <title>Algo salió mal...</title>
+        <title>Alta propuesta</title>
     </head>
     <body>
          <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
         <br><br><br><br><br><br><br>
-   
         <form id="msform" action="../iniciarS" method="post">
-             
+            
   <!-- fieldsets -->
   <fieldset>
-      <legend>¡Upss! Esto es incómodo</legend>
-    <h2 class="fs-title">Error al iniciar sesión</h2>
-    <h3 class="fs-subtitle">Las credenciales ingresadas son incorrectas, vuelva a chequear la información y trate de iniciar sesión nuevamente</h3>
-<input type="button" onclick="history.back()" name="volver atrás" class="next action-button" value="Entendido">
+    <h2 class="fs-title">¡Propuesta dada de alta!</h2>
+    <h3 class="fs-subtitle">La propuesta ha sido ingresada correctamente, ¿Qué desea hacer?</h3>
+<input type="button" href="../vistas/subIndex.jsp" name="volver atrás" class="next action-button" value="Nada">
   
   </fieldset>
 </form>    

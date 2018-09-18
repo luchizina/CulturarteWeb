@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 package Servlets;
+
+import Logica.DtPropuesta;
+import Logica.DtUsuario;
 import Logica.Fabrica;
-import Logica.IUsuario;
 import Logica.IPropuesta;
-import Logica.ICategoria;
+import Logica.IUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,10 +21,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Nuevo
+ * @author nambr
  */
-@WebServlet(name = "home", urlPatterns = {"/home"})
-public class Home extends HttpServlet {
+@WebServlet(name = "consultarPerfil", urlPatterns = {"/consultarPerfil"})
+public class consultarPerfil extends HttpServlet {
+    private Fabrica fabrica = Fabrica.getInstance();
+      private IPropuesta IP=fabrica.getICtrlPropuesta();
+      private IUsuario IU = fabrica.getICtrlUsuario();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,18 +40,17 @@ public class Home extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Fabrica fabrica = Fabrica.getInstance();
-
-        ICategoria icat =fabrica.getICtrlCategoria();
-        IPropuesta IP=fabrica.getICtrlPropuesta();
-        IUsuario iUsu=fabrica.getICtrlUsuario();
-                iUsu.cargarUsuarios2();
-                icat.cargarCategorias();
-                IP.cargarPropuestas();
-                IP.cargarColaboraciones();
-                IP.actualizarMontos();
-                IP.EstadosPropuestas();
-        request.getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+       this.IU.cargarUsuarios2();
+        if (request.getParameter("T") == null) {
+                List<DtUsuario> usuarios = IU.listarUsuarios();
+                request.setAttribute("usuarios", usuarios);
+                this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
+                //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
+            } else {
+              
+                this.getServletContext().getRequestDispatcher("/vistas/Consulta_Info_Propuesta.jsp").forward(request, response);
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
