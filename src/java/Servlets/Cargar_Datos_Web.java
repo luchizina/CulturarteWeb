@@ -5,6 +5,10 @@
  */
 package Servlets;
 
+import Logica.Fabrica;
+import Logica.ICategoria;
+import Logica.IPropuesta;
+import Logica.IUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,7 +23,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Cargar_Datos_Web", urlPatterns = {"/Cargar_Datos_Web"})
 public class Cargar_Datos_Web extends HttpServlet {
-
+    private Fabrica fabrica = Fabrica.getInstance();
+    private IPropuesta IP=fabrica.getICtrlPropuesta();
+    private IUsuario IU = fabrica.getICtrlUsuario();
+    private ICategoria IC = fabrica.getICtrlCategoria();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,7 +41,10 @@ public class Cargar_Datos_Web extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
+            IU.limpiarUsuarios();
+            IU.cargarPropPrueba();
+            IC.cargar();
+            IP.cargarProp();
         }
     }
 
