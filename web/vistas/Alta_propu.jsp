@@ -57,9 +57,8 @@ if(request.getAttribute("categorias")!=null){
      <select name="retorno" required ="required">
          <option value="1" >Entradas </option>
          <option value="2" >porcentaje </option>
-         <option value="3" >ambas</option>
-          
-         </select>
+         <option value="3" >ambas</option>  
+     </select>
     <input type="button" name="previous" class="previous action-button" value="Anterior" />
     <input type="button" name="next" class="next action-button" value="Siguiente" />
   </fieldset>

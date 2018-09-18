@@ -60,7 +60,7 @@ public class alta_prop extends HttpServlet {
     public static final String TIT = "titulo";
     public static final String DESC = "descripcion";
     public static final String MOntoT = "monto_tot";
-    public static String RET1 = "retorno";
+    public static  final String RET1 = "retorno";
     public static final String CAtego = "cate";
     public static final String PRecioE = "entrada";
     public static final String LUGAR = "lugar";
@@ -69,8 +69,6 @@ public class alta_prop extends HttpServlet {
     public static final String IMG_FOLDER = "img";
      public String imgPath ;
     private static Logger LOG;
-    List<DtCategoria> categoList = new ArrayList<>();
-
     public alta_prop() {
         LOG = Logger.getLogger(this.getClass().getPackage().getName());
     }
@@ -85,54 +83,53 @@ public class alta_prop extends HttpServlet {
         }
         ip.configurarParametros(imgPath);
     }
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
           this.iC.cargarCategorias();
         List<DtCategoria> categoList= this.iC.listarCategorias();
        request.setAttribute("categorias", categoList);
-        String titulo=request.getParameter(TIT);
-        if(titulo!=null){
-            if(!ip.existeTitulo(titulo)){
-            String desc=request.getParameter(DESC);
-           // if(request.getParameter("entrA").equals("") && !(request.getParameter("porceE").equals("")))
-        String catego = request.getParameter(CAtego);
-        String precioE = request.getParameter(PRecioE);
-        String montoT = request.getParameter(MOntoT);
-        String lugar = request.getParameter(LUGAR);
-        Part partImagen = request.getPart(IMAGEN);
-        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
-        Date fechaa = null;
-           try{
-               fechaa = formatoDeFecha.parse(request.getParameter(FEcha2));
-               
-           }catch (ParseException ex){
-               Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
-           }
-           Date fecha = new Date();
-           Date ahora = new Date();
-           SimpleDateFormat formateador =new SimpleDateFormat("hh:mm:ss");
-          String hora= formateador.format(ahora);
-          String retorno="";
-           if(RET1.equals("1")){
-               retorno = "entradas";
-           }
-           else if(RET1.equals("2")){
-               retorno = "Porcentaje";
-           }
-           else
-           {
-               retorno =  "entradas, porcentaje";
-           }
-           
+          String titulo = request.getParameter(TIT);
+        if (titulo != null) {
+            String desc = request.getParameter(DESC);
+            String catego = request.getParameter(CAtego);
+            String precioE = request.getParameter(PRecioE);
+            String montoT = request.getParameter(MOntoT);
+            String lugar = request.getParameter(LUGAR);
+            Part partImagen = request.getPart(IMAGEN);
+            SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaa = null;
+            try {
+                fechaa = formatoDeFecha.parse(request.getParameter(FEcha2));
+
+            } catch (ParseException ex) {
+                Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Date fecha = new Date();
+            Date ahora = new Date();
+            SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
+            String hora = formateador.format(ahora);
+          String retor= request.getParameter(RET1);
+          String retorn;
+            switch (retor) {
+                case "1":
+                    retorn = "entrada";
+                    break;
+                case "2":
+                    retorn = "porcentaje";
+                    break;
+                default:
+                    retorn = "entrada, porcentaje" ;
+                    break;
+            }
+
             ip.cargarEstados();
-        ip.cargarPropuestas();
-        ip.cargarProp();
-        
-        String nick = getUsuarioLogueado(request).getNick();
-        Estado estA = new Estado(Testado.Ingresada);
-        if (partImagen.getSize() != 0) {
+            ip.cargarPropuestas();
+            ip.cargarProp();
+
+            String nick = getUsuarioLogueado(request).getNick();
+            Estado estA = new Estado(Testado.Ingresada);
+            if (partImagen.getSize() != 0) {
                 InputStream data = partImagen.getInputStream();
                 final String fileName = Utils.getFileName(partImagen);
                 String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
@@ -146,57 +143,47 @@ public class alta_prop extends HttpServlet {
                 byte[] bytes = baos.toByteArray();
                 DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
                 String path = subirImagenCol(titulo, imagen);
-                boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, "yokc", Integer.parseInt(montoT), catego, estA, path, nick, hora, lugar);
+                boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, retorn, Integer.parseInt(montoT), catego, estA, path, nick, hora, lugar);
 
                 if (ok) {
-                    request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response); 
-//               
+                  request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response); 
                 } else {
-                     request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response);
+                    request.getRequestDispatcher("/vistas/AltaPropu2_1.jsp").forward(request, response);
                 }
             } else {
-                boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, "yokc", Integer.parseInt(montoT), catego, estA, "", nick, hora, lugar);
+                boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, retorn, Integer.parseInt(montoT), catego, estA, "", nick, hora, lugar);
 
                 if (ok) {
                     request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response); 
                 } else {
-                    request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response);
+                    request.getRequestDispatcher("/vistas/AltaPropu2_1.jsp").forward(request, response);
                 }
 
             }
         }
+        else 
+        {
+          request.getRequestDispatcher("/vistas/Alta_propu.jsp").forward(request, response); 
         }
+
     }
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);        
                
        }
-
-    
-
     static public DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException {
         String nick = (String) request.getSession().getAttribute("sesionAct");
         DtUsuario usr = Fabrica.getInstance().getICtrlUsuario().traerDtUsuario(nick);
         return usr;
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-   
+
+      
     }
 
     /**
