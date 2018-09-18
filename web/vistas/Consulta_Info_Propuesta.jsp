@@ -12,31 +12,31 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <%  DtPropuesta propu = (DtPropuesta) request.getAttribute("propu");        %>
-    <%  boolean colaboradores = false;                                          %>
-    <%  List<String> x = (List<String>) request.getAttribute("col");            %>
-    <%  if (x != null) {                                                        %>
-    <%      colaboradores = true;                                               %>
-    <%               }                                                          %>
-    <%  boolean Propuso_a_propu = false;                                        %>
-    <%  boolean Colaboro_a_propu = false;                                       %>
-    <%  boolean Puede_colaborar_a_propu = false;                                %>
-    <%  String Nombre_Usuario = "";                                             %>
-    <%  String tipo = "";                                                       %>
-    <% if(request.getSession().getAttribute("sesionAct") != null ) {            %>
-    <% Nombre_Usuario = (String) request.getSession().getAttribute("sesionAct");%>
-    <% tipo = (String) session.getAttribute("tipo");                            %>
-    <% if (Nombre_Usuario.equals(propu.getPropo())) {                           %>
-    <%    Propuso_a_propu = true;                                               %>
-    <% }                                                                        %>
-    <% if (tipo.equals("colaborador")) {                                        %>
-    <%      if (propu.getColabs().containsKey(Nombre_Usuario)) {                %>
-    <%    Colaboro_a_propu = true;                                              %>
-    <%    }else {                                                               %>
-    <%   Puede_colaborar_a_propu = true;                                        %>
-    <%   }                                                                      %>
-    <%   }                                                                      %> 
-    <%   }                                                                      %> 
+    <% DtPropuesta propu = (DtPropuesta) request.getAttribute("propu");
+        boolean colaboradores = false;
+        List<String> x = (List<String>) request.getAttribute("col");
+        if (x != null) {
+            colaboradores = true;
+        }
+        boolean Propuso_a_propu = false;
+        boolean Colaboro_a_propu = false;
+        boolean Puede_colaborar_a_propu = false;
+        String Nombre_Usuario = "";
+        String tipo = "";
+        if (request.getSession().getAttribute("sesionAct") != null) {
+            Nombre_Usuario = (String) request.getSession().getAttribute("sesionAct");
+            tipo = (String) session.getAttribute("tipo");
+            if (Nombre_Usuario.equals(propu.getPropo())) {
+                Propuso_a_propu = true;
+            }
+            if (tipo.equals("colaborador")) {
+                if (propu.getColabs().containsKey(Nombre_Usuario)) {
+                    Colaboro_a_propu = true;
+                } else {
+                    Puede_colaborar_a_propu = true;
+                }
+            }
+        }                                                                        %> 
     <head>
         <title>Consultar Propuesta: <%propu.getTitulo();%> </title>
         <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css">
@@ -109,8 +109,7 @@
         <form 	action="#" method="get">
 	<input type="submit" value="Cancela Propuesta">
         </form>
-        <%}%>
-        
+        <%}%>   
 </body>
 </html>
 

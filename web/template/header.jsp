@@ -5,6 +5,7 @@
 String sesionAct=(String) session.getAttribute("sesionAct");
 
 %>
+ <script type="text/javascript" src="../js/Datos.js"></script>
 <div id="header">
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
@@ -20,8 +21,10 @@ String sesionAct=(String) session.getAttribute("sesionAct");
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Mi perfil</a></li>
                                         <li><a href="#">Visitar perfiles</a></li>   
-					<li><a href="Consulta_de_Propuesta_por_Categoria">Propuestas</li>
-                                        <li><a href="alta_prop">Propuestas</a></li>
+                                        <li><a href="Consulta_de_propuesta_Servlet">Propuestas</a></li>
+                                        <li><a href="alta_prop">Propuestas</a></li>  
+                                        <li><a href="vistas/Datos_prueba.jsp">Cargar Datos</a></li>
+                                       
 				</ul>
 			   <% if(sesionAct==null) {
                                 

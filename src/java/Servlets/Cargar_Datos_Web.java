@@ -41,11 +41,17 @@ public class Cargar_Datos_Web extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            IU.limpiarUsuarios();
-            IU.cargarPropPrueba();
-            IC.cargar();
-            IP.cargarProp();
+            
+            if (request.getParameter("T") == null) {
+                this.getServletContext().getRequestDispatcher("/vistas/Datos_prueba.jsp").forward(request, response); 
+            } else {
+            //IU.limpiarUsuarios();
+            //IU.cargarPropPrueba();
+            //IC.cargar();
+            //IP.cargarProp();
+            this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
         }
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
