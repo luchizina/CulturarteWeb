@@ -1,3 +1,4 @@
+<%@page import="Logica.DtProponente"%>
 <%@page import="Logica.DtUsuario"%>
 <%@page import="Servlets.inicSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -54,7 +55,8 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                                String ape= user.getApellido();
                                String aux1=" ", aux2=" (", aux3=")";
                                String nueva1=nombre+aux1+ape+aux2+nick+aux3;
-                               
+  
+
 
                             %>
                             <ul class="nav navbar-nav navbar-right">

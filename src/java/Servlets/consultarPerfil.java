@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Logica.DtProponente;
 import Logica.DtPropuesta;
 import Logica.DtUsuario;
 import Logica.Fabrica;
@@ -48,6 +49,12 @@ public class consultarPerfil extends HttpServlet {
                 this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
                 //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
             } else {
+              String nickUser= request.getParameter("T");
+              DtUsuario user= IU.traerDtUsuario(nickUser);
+              if(user instanceof DtProponente){
+                  DtProponente prop= (DtProponente) user;
+                  String algo= prop.getNick();
+              }
               
                 this.getServletContext().getRequestDispatcher("/vistas/consultarInfoPerfil.jsp").forward(request, response);
             }

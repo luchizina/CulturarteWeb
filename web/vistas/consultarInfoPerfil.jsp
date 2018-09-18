@@ -12,6 +12,8 @@
         <title>Información de usuario</title>
     </head>
     <body>
+        <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
         <h1>Hello World!</h1>
+        
     </body>
 </html>
