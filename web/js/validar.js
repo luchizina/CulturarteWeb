@@ -28,21 +28,39 @@ function vacios() {
     avisa = document.getElementById("avisaC");
     if (nick.value === "" || nombre.value === "" || apellido.value === "" || fecha.value === "" || mail.value === "" || pass.value === "" || pass2.value === "") {
 //                    document.getElementById("botoncito").disabled = true;
-        alert("Ha dejado campos vacios que debe llenar");
-        return false;
+//                    alert("Ha dejado campos vacios que debe llenar");
+//                    return false;
+        var mensaje = confirm("Ha dejado campos vacios que debe llenar ¿Desea completarlos?");
+        if (mensaje) {
+            return false;
+        } else {
+            location.href = "/CulturarteWeb/home";
+            return false;
+        }
     }
     if (nick.value !== "" || nombre.value !== "" || apellido.value !== "" || fecha.value !== "" || mail.value !== "" || pass.value !== "" || pass2.value !== "" && pass.value === pass2.value && aviso.innerHTML === "Nick disponible" && avisa.innerHTML === "Email disponible") {
 
         alert("El usuario " + nick.value + " ha sido registrado");
     }
     if (pass.value !== pass2.value) {
-        alert("Las contraseñas no coinciden");
-        return false;
+        var mensaje = confirm("Las contraseñas no coinciden ¿Desea corregirlo?");
+        if (mensaje) {
+            return false;
+        } else {
+            location.href = "/CulturarteWeb/home";
+            return false;
+        }
     }
 
+
     if (aviso.innerHTML !== "Nick disponible" || avisa.innerHTML !== "Email disponible") {
-        alert("Hay campos invalidos");
-        return false;
+        var mensaje = confirm("El nick o correo elegido se encuentra en uso ¿Desea corregirlo?");
+        if (mensaje) {
+            return false;
+        } else {
+            location.href = "/CulturarteWeb/home";
+            return false;
+        }
     }
 }
 

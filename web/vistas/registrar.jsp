@@ -12,10 +12,10 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
         <link rel="stylesheet" href="../css/style.css">
-        
-        
-            
-        
+
+
+
+
     </head>
     <body>
         <h1>Registrarse</h1>
@@ -34,19 +34,13 @@
                 <div class="form-group">
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="nick" name="nick" placeholder="Nickname" onblur="validarusu(this);"/>
-                        <% if (request.getAttribute("mens") != null) {%>
-                        <label for="mens"><%= request.getAttribute("mens")%></label>
-                        <% } %>
                         <span id="avisa"></span> 
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" onblur="validarcorreo(this);">
-                        <% if (request.getAttribute("correo") != null) {%>
-                        <label for="correo"><%= request.getAttribute("correo")%></label>
-                        <% } %>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" onblur="validarcorreo(this);" />
                         <span id="avisaC"></span> 
                     </div>
                 </div>
@@ -59,9 +53,6 @@
                 <div class="form-group">
                     <div class="col-sm-4">
                         <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="Confirmar">
-                        <% if (request.getAttribute("pass") != null) {%>
-                        <label for="pass"><%= request.getAttribute("pass")%></label>
-                        <% } %>
                     </div>
                 </div>
                 <input type="button" name="next" class="next action-button" value="Siguiente" />
@@ -117,35 +108,24 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-4">
-                            <textarea name="biografia" rows="10" cols="40" id="biografia" placeholder="Biografia"></textarea>
+                            <textarea name="biografia" id="biografia" placeholder="Biografia"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
 
                         <div class="col-sm-4">
-                            <input type="url" name="web" placeholder="http://www.example.com" id="web">
-                            <% if (request.getAttribute("link") != null) {%>
-                            <label for="link"><%= request.getAttribute("link")%></label>
-                            <% }%>
+                            <input type="url" name="web" placeholder="http://www.ejemplo.com" id="web">
                         </div>
                     </div>
                 </div> 
                 <input type="button" name="previous" class="previous action-button" value="Anterior" />
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default" id="botoncito">Registrarse</button>
-                    </div>
-                </div>
+                <button type="submit" class="btn action-button" id="botoncito">Registrarse</button>
             </fieldset>
             <script  src="../js/prototype.js"></script>
             <script  src="../js/validar.js"></script>
             <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
             <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
-            
-          
+            <script src="../js/index.js"></script>
         </form> 
-           <script src="../js/index.js"></script>
-             <script type="text/javascript" src="../js/prototype.js" ></script>
-            <script type="text/javascript" src="../js/validar.js"></script>
     </body>
 </html>
