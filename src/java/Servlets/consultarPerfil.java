@@ -54,6 +54,8 @@ public class consultarPerfil extends HttpServlet {
               DtUsuario user= IU.traerDtUsuario(nickUser);
               if(user instanceof DtProponente){
                   DtProponente prop= (DtProponente) user;
+                 
+                  
                 request.setAttribute("usuario", prop);
               }
               else{

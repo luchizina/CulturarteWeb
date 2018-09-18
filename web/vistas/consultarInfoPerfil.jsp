@@ -12,9 +12,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <script  src="../js/progress.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         
         <title>Información de usuario</title>
-        
+    
         <% 
         DtUsuario user=(DtUsuario) request.getAttribute("usuario");
         DtColaborador colab=null;
@@ -31,16 +33,11 @@
     </head>
     <body>
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
-      <!--  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/probando.css" type="text/css">-->
-        
-        <form id="msformPerfil">
-            <ul id="progressbar">
+
       
-    <li class="active">Alta propuesta</li>
-    <li>Datos generales</li>
-    <li>Datos opcionales</li>
-  </ul>
+        <form id="msformPerfil" style="float: left">
             
+
 
         <div id="perfil" class ="main">
             <div id="divLeg">
@@ -49,13 +46,13 @@
 		<div id="perfil_izquierda">
                     
                    
-			<img id="imagenot" src="media/images/defecto.gif" alt="imagen"/>
+			<img src="img/user-4.png" alt="imagen" width="150" height="150" class="center">
 		</div>
 
 		<div id="perfil_derecha">
                     
 			<div class="contenedor">
-				<h2>Información básica</h2>
+				<h2 class="fs-title">Información básica</h2>
 				<label class="rotulo">Nombre:</label>
 				<label class="valor"><%= colab.getNombre() %></label>
 				<br/>
@@ -63,6 +60,8 @@
                                 <label class="valor"><%= colab.getApellido() %> </label><br/>
                                  <label class="rotulo"> Nickname:</label>
                                 <label class="valor"><%= colab.getNick() %> </label><br/>
+                                <label class="rotulo"> Tipo:</label>
+                                <label class="valor">Colaborador</label><br/>
 				<label class="rotulo">Fecha de nacimiento:</label>
 				<label class="valor">
                                   
@@ -73,7 +72,6 @@
 			</div>
 
 			<div class="contenedor">
-				<h2>Información de contacto</h2>
 				<label class="rotulo">Correo electrónico:</label>
 				<label class="valor">
 					<a href="mailto:<%= colab.getCorreo() %>">
@@ -83,7 +81,18 @@
 			</div>
 		</div>
 	</div>
-        
         </form>
+ 
+             <form id="msform" style="float: left">
+            <div id="divLeg">
+              <legend id="legendPerf">Información del usuario</legend><br>
+              </div>
+                 
+                   <form id="msform" style="clear: both">
+            <div id="divLeg">
+              <legend id="legendPerf">Información del usuario</legend><br>
+              </div>
+        </form>        
+        
     </body>
 </html>
