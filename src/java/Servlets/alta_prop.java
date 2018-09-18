@@ -60,14 +60,14 @@ public class alta_prop extends HttpServlet {
     public static final String TIT = "titulo";
     public static final String DESC = "descripcion";
     public static final String MOntoT = "monto_tot";
-    public static String RET1 = "entrA";
-    public static String RET2 = "porceE";
+    public static String RET1 = "retorno";
     public static final String CAtego = "cate";
     public static final String PRecioE = "entrada";
     public static final String LUGAR = "lugar";
     public static final String FEcha2 = "fecha";
     public static final String IMAGEN = "imagen";
     public static final String IMG_FOLDER = "img";
+     public String imgPath ;
     private static Logger LOG;
     List<DtCategoria> categoList = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public class alta_prop extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        String imgPath = getServletContext().getRealPath("/") + IMG_FOLDER;
+       imgPath = getServletContext().getRealPath("/") + IMG_FOLDER;
         File imgFile = new File(imgPath);
         if (!imgFile.isDirectory()) {
             imgFile.mkdirs();
@@ -92,9 +92,7 @@ public class alta_prop extends HttpServlet {
           this.iC.cargarCategorias();
         List<DtCategoria> categoList= this.iC.listarCategorias();
        request.setAttribute("categorias", categoList);
-        
         String titulo=request.getParameter(TIT);
-        
         if(titulo!=null){
             if(!ip.existeTitulo(titulo)){
             String desc=request.getParameter(DESC);
@@ -102,8 +100,8 @@ public class alta_prop extends HttpServlet {
         String catego = request.getParameter(CAtego);
         String precioE = request.getParameter(PRecioE);
         String montoT = request.getParameter(MOntoT);
-        String img = request.getParameter("");
         String lugar = request.getParameter(LUGAR);
+        Part partImagen = request.getPart(IMAGEN);
         SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaa = null;
            try{
@@ -116,17 +114,17 @@ public class alta_prop extends HttpServlet {
            Date ahora = new Date();
            SimpleDateFormat formateador =new SimpleDateFormat("hh:mm:ss");
           String hora= formateador.format(ahora);
-//          String retorno="caca";
-//           if(RET1.equals("") && !(RET2.equals(""))){
-//               retorno = request.getParameter(RET2);
-//           }
-//           else if(RET2.equals("") && !(RET1.equals(""))){
-//               retorno = request.getParameter(RET1);
-//           }
-//           else
-//           {
-//               retorno = request.getParameter(RET1) + ", " + request.getParameter(RET2);
-//           }
+          String retorno="";
+           if(RET1.equals("1")){
+               retorno = "entradas";
+           }
+           else if(RET1.equals("2")){
+               retorno = "Porcentaje";
+           }
+           else
+           {
+               retorno =  "entradas, porcentaje";
+           }
            
             ip.cargarEstados();
         ip.cargarPropuestas();
@@ -134,20 +132,41 @@ public class alta_prop extends HttpServlet {
         
         String nick = getUsuarioLogueado(request).getNick();
         Estado estA = new Estado(Testado.Ingresada);
-         boolean ok = ip.AgregarPropuesta(titulo, desc,fechaa, Integer.parseInt(precioE), 0, fecha, "yokc", Integer.parseInt(montoT),catego, estA, "", nick, hora,lugar );
-                        if (ok) {
-                   request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response); 
-                        }
-        }
-            else 
-            {
-             request.getRequestDispatcher("/vistas/AltaPropu2_1.jsp").forward(request, response); 
+        if (partImagen.getSize() != 0) {
+                InputStream data = partImagen.getInputStream();
+                final String fileName = Utils.getFileName(partImagen);
+                String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
+                String extensionArchivo = Utils.extensionArchivo(fileName);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                int reads = data.read();
+                while (reads != -1) {
+                    baos.write(reads);
+                    reads = data.read();
+                } // while
+                byte[] bytes = baos.toByteArray();
+                DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+                String path = subirImagenCol(titulo, imagen);
+                boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, "yokc", Integer.parseInt(montoT), catego, estA, path, nick, hora, lugar);
+
+                if (ok) {
+                    request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response); 
+//               
+                } else {
+                     request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response);
+                }
+            } else {
+                boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, "yokc", Integer.parseInt(montoT), catego, estA, "", nick, hora, lugar);
+
+                if (ok) {
+                    request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response); 
+                } else {
+                    request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response);
+                }
+
             }
-            }
-        else{
-           request.getRequestDispatcher("/vistas/Alta_propu.jsp").forward(request, response); 
         }
-         }
+        }
+    }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -177,105 +196,7 @@ public class alta_prop extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-        this.iC.cargarCategorias();
-        List<DtCategoria> categoList = this.iC.listarCategorias();
-        request.setAttribute("categorias", categoList);
-
-        String titulo = request.getParameter(TIT);
-        if (titulo != null) {
-            String desc = request.getParameter(DESC);
-            // if(request.getParameter("entrA").equals("") && !(request.getParameter("porceE").equals("")))
-            String catego = request.getParameter(CAtego);
-            String precioE = request.getParameter(PRecioE);
-            String montoT = request.getParameter(MOntoT);
-            //String img = request.getParameter("");
-            String lugar = request.getParameter(LUGAR);
-            Part partImagen = request.getPart(IMAGEN);
-            SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
-            Date fechaa = null;
-            try {
-                fechaa = formatoDeFecha.parse(request.getParameter(FEcha2));
-
-            } catch (ParseException ex) {
-                Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Date fecha = new Date();
-            Date ahora = new Date();
-            SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
-            String hora = formateador.format(ahora);
-//          String retorno="caca";
-//           if(RET1.equals("") && !(RET2.equals(""))){
-//               retorno = request.getParameter(RET2);
-//           }
-//           else if(RET2.equals("") && !(RET1.equals(""))){
-//               retorno = request.getParameter(RET1);
-//           }
-//           else
-//           {
-//               retorno = request.getParameter(RET1) + ", " + request.getParameter(RET2);
-//           }
-
-            ip.cargarEstados();
-            ip.cargarPropuestas();
-            ip.cargarProp();
-
-            String nick = getUsuarioLogueado(request).getNick();
-            Estado estA = new Estado(Testado.Ingresada);
-            if (partImagen.getSize() != 0) {
-                InputStream data = partImagen.getInputStream();
-                final String fileName = Utils.getFileName(partImagen);
-                String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
-                String extensionArchivo = Utils.extensionArchivo(fileName);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                int reads = data.read();
-                while (reads != -1) {
-                    baos.write(reads);
-                    reads = data.read();
-                } // while
-                byte[] bytes = baos.toByteArray();
-                DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
-                String path = subirImagenCol(titulo, imagen);
-                boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, "yokc", Integer.parseInt(montoT), catego, estA, path, nick, hora, lugar);
-
-                if (ok) {
-                    try (PrintWriter out = response.getWriter()) {
-                        /* TODO output your page here. You may use following sample code. */
-                        out.println("<!DOCTYPE html>");
-                        out.println("<html>");
-                        out.println("<head>");
-                        out.println("<title>Servlet alta_prop</title>");
-                        out.println("</head>");
-                        out.println("<body>");
-                        out.println("<h1>OK " + request.getParameter("titulo") + "</h1>");
-                        out.println("</body>");
-                        out.println("</html>");
-                    }
-                } else {
-                    request.getRequestDispatcher("/vistas/Alta_propu.jsp").forward(request, response);
-                }
-            } else {
-                boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, "yokc", Integer.parseInt(montoT), catego, estA, "", nick, hora, lugar);
-
-                if (ok) {
-                    try (PrintWriter out = response.getWriter()) {
-                        /* TODO output your page here. You may use following sample code. */
-                        out.println("<!DOCTYPE html>");
-                        out.println("<html>");
-                        out.println("<head>");
-                        out.println("<title>Servlet alta_prop</title>");
-                        out.println("</head>");
-                        out.println("<body>");
-                        out.println("<h1>OK " + request.getParameter("titulo") + "</h1>");
-                        out.println("</body>");
-                        out.println("</html>");
-                    }
-                } else {
-                    request.getRequestDispatcher("/vistas/Alta_propu.jsp").forward(request, response);
-                }
-
-            }
-        }
-
+   
     }
 
     /**
