@@ -39,7 +39,7 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.Cargar_Memoria();
+        //this.Cargar_Memoria();
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -62,7 +62,7 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cargar_Memoria();
+        //Cargar_Memoria();
   
         try (PrintWriter out = response.getWriter()) {
                 // LISTAR CATEGORIA 

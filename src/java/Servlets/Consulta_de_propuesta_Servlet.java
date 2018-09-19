@@ -40,7 +40,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.Cargar_Propuestas();
+        //this.Cargar_Propuestas();
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
                  
@@ -61,7 +61,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cargar_Propuestas();
+        //Cargar_Propuestas();
         try (PrintWriter out = response.getWriter()) {
                 // LISTAR PROPUESTAS 
                 
