@@ -30,24 +30,24 @@
     <li>Datos opcionales</li>
   </ul>
   <!-- fieldsets -->
-  <fieldset>
+   <fieldset>
     <h2 class="fs-title">Complete los siguientes campos</h2>
     <h3 class="fs-subtitle">Paso 1</h3> 
     <select name="cate" required ="required">
     <%
-if(request.getAttribute("categorias")!=null){
+    if(request.getAttribute("categorias")!=null){
     Collection<DtCategoria> categorias=(Collection<DtCategoria>) request.getAttribute("categorias");
     for(DtCategoria cat: categorias){   
     int i=1;
     %>
-      <option value="<%out.print(cat.getNombre());%>"> <%out.print(cat.getNombre());%>  </option>
+    <option value="<%out.print(cat.getNombre());%>"> <%out.print(cat.getNombre());%>  </option>
   <%i++; }}%>
      </select>
     <input type="text" name="titulo" placeholder="Título" required ="required" />
     <input type="date" name="fecha" placeholder="fecha" required ="required" />
     <input type="button" name="next" class="next action-button" value="Siguiente" />
-  </fieldset>
-  <fieldset>
+   </fieldset>
+   <fieldset>
     <h2 class="fs-title">Datos generales</h2>
     <h3 class="fs-subtitle">Por favor no deje ningun espacio en blanco</h3>
     <input type="text" name="lugar" placeholder="Lugar" required ="required" />
