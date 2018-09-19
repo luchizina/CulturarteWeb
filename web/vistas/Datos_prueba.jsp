@@ -26,12 +26,12 @@
         <button type="submit">Aceptar</button>
     </form>
     <br>
-    <form action="index.html">
-        <button type="submit">Cancelar...</button>
-    </form>
     <%} else {%>
     <h1>Debe de cerrar la sesión para continuar</h1>
     <%}%>
+    <form action="index.html">
+        <button type="submit">Cancelar</button>
+    </form>
     </center>
     </body>
 </html>
