@@ -44,8 +44,10 @@
               <legend id="legendPerf">Información del usuario</legend><br>
               </div>
 		<div id="perfil_izquierda">
-                    <p>${mensaje_exito}</p>
-                      <img src="/CulturarteWeb/retornarimagen?T=chino" />                      
+                     <p>${mensaje_exito}</p>
+                   
+			<img src="img/user-4.png" alt="imagen" width="150" height="150" class="center">
+                        <img src="/CulturarteWeb/retornarimagen?T=${T}" />
 		</div>
 
 		<div id="perfil_derecha">
