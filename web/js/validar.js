@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var x = document.getElementById("msform");
+x.addEventListener("blur", validarcorreo);
+x.addEventListener("blur", validarusu);
 
 function validarusu(nick) {
-    var url = '../usuario';
+    var url = 'usuario';
     var parametros = 'nick=' + nick.value;
     var ajax = new Ajax.Updater('avisa', url, {method: 'get', parameters: parametros});
 }
 
 function validarcorreo(mail) {
-    var url = '../correo';
+    var url = 'correo';
     var parametros = 'email=' + mail.value;
     var ajax = new Ajax.Updater('avisaC', url, {method: 'get', parameters: parametros});
 }

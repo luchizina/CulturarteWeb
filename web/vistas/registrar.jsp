@@ -11,7 +11,7 @@
         <title>Registro de Usuarios</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
-        <link rel="stylesheet" href="../css/style.css">
+        <link href="<%= request.getContextPath()%>/css/style.css" rel="stylesheet" media="screen">
 
 
 
@@ -121,11 +121,11 @@
                 <input type="button" name="previous" class="previous action-button" value="Anterior" />
                 <button type="submit" class="btn action-button" id="botoncito">Registrarse</button>
             </fieldset>
-            <script  src="../js/prototype.js"></script>
-            <script  src="../js/validar.js"></script>
+            <script  src="<%= request.getContextPath()%>/js/prototype.js"></script>
+            <script  src="<%= request.getContextPath()%>/js/validar.js"></script>
             <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
             <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
-            <script src="../js/index.js"></script>
+            <script src="<%= request.getContextPath()%>/js/index.js"></script>
         </form> 
     </body>
 </html>
