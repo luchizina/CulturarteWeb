@@ -54,12 +54,15 @@ public class consultarPerfil extends HttpServlet {
               DtUsuario user= IU.traerDtUsuario(nickUser);
               if(user instanceof DtProponente){
                   DtProponente prop= (DtProponente) user;
-                 
-                  
+                 List<DtUsuario> usuSeguidos=IU.traerSeguidos(prop.getNick());
+                  List<DtUsuario> usuSeguidores=IU.traerSeguidores(prop.getNick());
                 request.setAttribute("usuario", prop);
               }
               else{
                   DtColaborador colab=(DtColaborador) user;
+                  List<DtUsuario> usuSeguidos=IU.traerSeguidos(colab.getNick());
+                  List<DtUsuario> usuSeguidores=IU.traerSeguidores(colab.getNick());
+                  List<DtPropuesta> propuFav= IU.traerPropFav(colab.getNick());
                   request.setAttribute("usuario", colab);
               }
               
