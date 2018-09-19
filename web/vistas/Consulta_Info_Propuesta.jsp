@@ -12,6 +12,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    
     <%  DtPropuesta propu = (DtPropuesta) request.getAttribute("propu");        %>
     <%  boolean colaboradores = false;                                          %>
     <%  List<String> x = (List<String>) request.getAttribute("col");            %>

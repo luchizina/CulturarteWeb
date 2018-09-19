@@ -1,0 +1,252 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18/09/2018, 11:18:24 AM
+    Author     : nambr
+*/
+
+html, body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	
+  font-family: 'Arimo', sans-serif;
+}
+
+.title{
+  text-align: center;
+  color: #2c3e50;
+}
+
+/* CONTAINERS */ 
+
+.container {max-width: 940px; width: 100%; margin: 0 auto; } 
+.twelve { width: 100%; } 
+.eleven { width: 91.53%; } 
+.ten { width: 83.06%; } 
+.nine { width: 74.6%; } 
+.eight { width: 66.13%; } 
+.seven { width: 57.66%; } 
+.six { width: 49.2%; } 
+.five { width: 40.73%; } 
+.four { width: 32.26%;} 
+.three { width: 23.8%; } 
+.two { width: 15.33%; } 
+.one{ width: 6.866%;}
+
+ /* COLUMNS */ 
+
+.col { 
+	display: block; 
+	float:left;
+	margin: 1% 0 1% 1.6%; 
+} 
+
+.col:first-of-type { margin-left: 0; }
+
+ /* CLEARFIX */ 
+
+ .cf:before, .cf:after { 
+ 	content: " "; 
+ 	display: table; 
+ } 
+ 
+ .cf:after {
+	clear: both; 
+} 
+ 
+ .cf { 
+ 	*zoom: 1; 
+ }
+
+/* PROFILES */
+
+.card{
+	max-width: 100%;
+	height: 400px;
+	background-color: #fff;
+	font-family: 'Arimo', sans-serif;
+	font-size: 14px;
+}
+
+/* CARD ! */
+
+#card1{
+	text-align: center;
+	color: #2c3e50;
+	padding: 15px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#card1 .image-wrapper{
+	width: 100px;
+	height: 100px;
+	margin: 20px auto;
+	border-radius: 100%;
+	background-image: url("https://static.pexels.com/photos/7096/people-woman-coffee-meeting.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#card1 .info .four{
+	text-align: center;
+	border-right: 1px solid #2c3e50;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#card1 .info .four:last-of-type{
+	border-right: none;
+}
+
+#card1 .info .four .number{
+	display: block;
+	font-size: 20px;
+	padding: 3px 0;
+	font-weight: 700;
+}
+
+#card1 .options{
+	margin-top: 30px;
+	text-align: left;
+}
+
+#card1 .options ul{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#card1 .options ul .icon{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-color: #3498db;
+	border-radius: 100%;
+	margin-right: 8px;
+	vertical-align: middle;
+	color: #fff;
+	line-height: 30px;
+	text-align: center;
+}
+
+#card1 .options ul li{
+	margin: 12px 0;
+}
+
+/* CARD 2 */
+
+#card2{
+	overflow: hidden;
+	color: #2c3e50;
+}
+
+#card2 a{
+	color: #2c3e50;
+}
+
+#card2 .wrapper{
+	padding: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#card2 .header{
+	width: 100%;
+	height: 100px;
+	position: relative;
+	background-color: #3498db;
+}
+
+#card2 .header:after{
+	content: '';
+    background: inherit;
+    bottom: 0;
+    display: block;
+    height: inherit;
+    position: absolute;
+    left: 0;
+    right: 0;
+    transform: skewY(-8deg);
+    -webkit-transform: skewY(-8deg);
+    transform-origin: 100%;
+}
+
+#card2 .image-wrapper{
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	background-image: url("https://static.pexels.com/photos/7097/people-coffee-tea-meeting.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: absolute;
+    z-index: 5;
+    top: 130px;
+    left: 50%;
+    margin-left: -50px;
+}
+
+#card2 .name{
+	margin-top: 70px;
+	text-align: center;
+}
+
+#card2 .social .four{
+	text-align: center;
+}
+
+#card2 .info{
+	margin: 30px 0;
+	text-align: center;
+}
+
+/* CARD 3 */
+
+#card3{
+	color: #2c3e50;
+}
+
+#card3 .header{
+	width: 100%;
+	height: 180px;
+	background-image: url("https://static.pexels.com/photos/9692/pexels-photo.jpeg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#card3 .wrapper{
+	padding: 0px 15px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#card3 .name{
+	font-weight: 400;
+}
+
+#card3 .info{
+	margin: 20px 0;
+	text-align: center;
+}
+
+#card3 .info .number{
+	background-color: #3498db;
+	color: #fff;
+	border-radius: 100%;
+	width: 70px;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 20px;
+}
+
