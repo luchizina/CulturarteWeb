@@ -30,7 +30,7 @@ public class consultarPerfil extends HttpServlet {
     private Fabrica fabrica = Fabrica.getInstance();
       private IPropuesta IP=fabrica.getICtrlPropuesta();
       private IUsuario IU = fabrica.getICtrlUsuario();
-
+public static final String MENSAJE_EXITO = "mensaje_exito";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,6 +52,9 @@ public class consultarPerfil extends HttpServlet {
             } else {
               String nickUser= request.getParameter("T");
               DtUsuario user= IU.traerDtUsuario(nickUser);
+               String mensajeExito="Imagen subida correctamente";
+               request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
+                request.getSession().setAttribute("T", nickUser);
               if(user instanceof DtProponente){
                   DtProponente prop= (DtProponente) user;
                  
