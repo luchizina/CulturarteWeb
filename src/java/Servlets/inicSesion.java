@@ -37,7 +37,36 @@ public class inicSesion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+ PrintWriter out = response.getWriter();
+        this.usuario.cargarUsuarios2();
+      HttpSession respuesta = request.getSession(true);
+      String nick = request.getParameter("nick");
+      if(nick!=null){
+           
+      
+          
+   
+      
+      String pass = request.getParameter("pass");
+     
+ DtInfo resultado= this.usuario.resolverLogin(nick, pass);
+ 
+ if(resultado.getEstLogin()){
+      respuesta.setAttribute("sesionAct", resultado.getNick());
+      respuesta.setAttribute("tipo", resultado.getTipoUser());
+      respuesta.setAttribute("mensaje", resultado.getMensaje());
+      
+       this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+ }
+ else if(!resultado.getEstLogin()){
+     respuesta.setAttribute("error", resultado.getMensaje());
+     this.getServletContext().getRequestDispatcher("/vistas/inicSesErr.jsp").forward(request, response);
+    
+ }
+    }
+      else{
+           this.getServletContext().getRequestDispatcher("/vistas/inicSesion.jsp").forward(request, response);
+      }
     }
     
     static public DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException{
@@ -61,7 +90,7 @@ public class inicSesion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.sendRedirect("index.html");
+       processRequest(request, response);
     }
 
     /**
@@ -75,26 +104,7 @@ public class inicSesion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         PrintWriter out = response.getWriter();
-        this.usuario.cargarUsuarios2();
-      HttpSession respuesta = request.getSession(true);
-      String nick = request.getParameter("nick");
-      String pass = request.getParameter("pass");
-     
- DtInfo resultado= this.usuario.resolverLogin(nick, pass);
- 
- if(resultado.getEstLogin()){
-      respuesta.setAttribute("sesionAct", resultado.getNick());
-      respuesta.setAttribute("tipo", resultado.getTipoUser());
-      respuesta.setAttribute("mensaje", resultado.getMensaje());
-      
-       this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
- }
- else if(!resultado.getEstLogin()){
-     respuesta.setAttribute("error", resultado.getMensaje());
-     this.getServletContext().getRequestDispatcher("/vistas/inicSesErr.jsp").forward(request, response);
-    
- }
+        processRequest(request, response);
   }
     /**
      * Returns a short description of the servlet.

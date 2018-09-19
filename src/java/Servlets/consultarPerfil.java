@@ -57,12 +57,15 @@ public static final String MENSAJE_EXITO = "mensaje_exito";
                 request.getSession().setAttribute("T", nickUser);
               if(user instanceof DtProponente){
                   DtProponente prop= (DtProponente) user;
-                 
-                  
+                 List<DtUsuario> usuSeguidos=IU.traerSeguidos(prop.getNick());
+                  List<DtUsuario> usuSeguidores=IU.traerSeguidores(prop.getNick());
                 request.setAttribute("usuario", prop);
               }
               else{
                   DtColaborador colab=(DtColaborador) user;
+                  List<DtUsuario> usuSeguidos=IU.traerSeguidos(colab.getNick());
+                  List<DtUsuario> usuSeguidores=IU.traerSeguidores(colab.getNick());
+                  List<DtPropuesta> propuFav= IU.traerPropFav(colab.getNick());
                   request.setAttribute("usuario", colab);
               }
               
