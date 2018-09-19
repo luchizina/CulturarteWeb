@@ -92,7 +92,7 @@
         </form>
  
              <form style="float: left">
-            <div id="divLeg" class="datagrid">
+            <div id="divTablas" class="datagrid">
               <legend id="legendPerf">Usuarios seguidos</legend><br>
                         <right>
            <table class="datagrid">
@@ -123,7 +123,7 @@
          </right>
               </div>
  <form id="msform" style="clear: both">
-            <div id="divLeg" class="datagrid">
+            <div id="divTablas" class="datagrid">
               <legend id="legendPerf">Seguidores</legend><br>
                <right>
            <table class="datagrid">
@@ -153,8 +153,8 @@
          </right>
               </div>
         <form style="float: both">
-            <div id="divLeg" class="datagrid">
-              <legend id="legendPerf">Usuarios seguidos</legend><br>
+            <div id="divTablas" class="datagrid">
+              <legend id="legendPerf">Propuestas</legend><br>
                         <right>
            <table class="datagrid">
             <tr> 
