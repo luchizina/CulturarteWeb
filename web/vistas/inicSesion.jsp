@@ -19,8 +19,8 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Iniciar sesión</title>
-         <script type="text/javascript" src="../js/limpiar.js"></script>
-         <link href="../css/style.css" rel="stylesheet" media="screen">
+         <script type="text/javascript" src="<%= request.getContextPath()%>/js/limpiar.js"></script>
+         <link href="<%= request.getContextPath()%>/css/style.css" rel="stylesheet" media="screen">
     </head>
     <body>
        
@@ -28,7 +28,7 @@
 
         
         <br><br><br><br><br><br><br>
-        <form id="msform" action="../iniciarS" method="post">
+        <form id="msform" action="iniciarS" method="post">
             
   <!-- fieldsets -->
   <fieldset>
