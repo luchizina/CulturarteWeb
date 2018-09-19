@@ -5,6 +5,10 @@
  */
 package Servlets;
 
+import Logica.Fabrica;
+import Logica.ICategoria;
+import Logica.IPropuesta;
+import Logica.IUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,17 +17,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Logica.*;
-import static java.lang.System.out;
-import java.util.List;
-import javax.servlet.http.HttpSession;
 /**
  *
  * @author matheo
  */
-
-@WebServlet(name = "Consulta_de_Propuesta_por_Categoria", urlPatterns = {"/Consulta_de_Propuesta_por_Categoria"})
-public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
+@WebServlet(name = "Cargar_Datos_Web", urlPatterns = {"/Cargar_Datos_Web"})
+public class Cargar_Datos_Web extends HttpServlet {
     private Fabrica fabrica = Fabrica.getInstance();
     private IPropuesta IP=fabrica.getICtrlPropuesta();
     private IUsuario IU = fabrica.getICtrlUsuario();
@@ -39,15 +38,12 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //this.Cargar_Memoria();
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            if(request.getMethod().equals("GET")){
-                this.doGet(request, response);   
-            }
-           
-        }
+            
+            
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,25 +58,16 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Cargar_Memoria();
-  
-        try (PrintWriter out = response.getWriter()) {
-                // LISTAR CATEGORIA 
-            if (request.getParameter("C") == null) {
-                List<DtCategoria> x = IC.listarCategorias();
-                request.setAttribute("categorias", x);
-                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
-            } else {
-                // LISTAR PROPUESTAS DE "X" CATEGORIA
-                String C = request.getParameter("C");
-                String Cposta = C.replace("-"," ");
-                List<DtPropuesta> x = IP.WEB_listarPropuestas_X_Categoria(Cposta);
-                request.setAttribute("propuestas", x);
-                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
-            }
-        }
         //processRequest(request, response);
-        
+        if (request.getParameter("T") == null) {
+                this.getServletContext().getRequestDispatcher("/vistas/Datos_prueba.jsp").forward(request, response); 
+            } else {
+            //IU.limpiarUsuarios();
+            //IU.cargarPropPrueba();
+            //IC.cargar();
+            //IP.cargarProp();
+            this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+        }
     }
 
     /**
@@ -94,8 +81,12 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-       
+        //processRequest(request, response);
+        IU.limpiarUsuarios();
+        IU.cargarPropPrueba();
+        IC.cargar();
+        IP.cargarProp();
+         this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
     }
 
     /**
@@ -108,14 +99,4 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
-    public void Cargar_Memoria(){
-    IU.cargarUsuarios2();    
-    IP.cargarPropuestas();
-    IC.cargarCategorias();
-    IP.cargarColaboraciones();
-    IP.EstadosPropuestas();
-    IP.actualizarMontos();
-    
-    };
 }

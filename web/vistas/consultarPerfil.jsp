@@ -16,7 +16,7 @@
     </head>
     <body>  
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
-        <h1>Hello World!</h1>
+        <h1>Perfil de usuarios</h1>
     <center>
         
    
