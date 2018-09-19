@@ -60,13 +60,24 @@ public static final String MENSAJE_EXITO = "mensaje_exito";
                  List<DtUsuario> usuSeguidos=IU.traerSeguidos(prop.getNick());
                   List<DtUsuario> usuSeguidores=IU.traerSeguidores(prop.getNick());
                 request.setAttribute("usuario", prop);
+                
               }
               else{
-                  DtColaborador colab=(DtColaborador) user;
+                DtUsuario use= IU.traerDtUsuario(nickUser);
+               String mensajeExitoE="Imagen subida correctamente";
+               request.getSession().setAttribute(MENSAJE_EXITO, mensajeExitoE);
+                request.getSession().setAttribute("T", nickUser);
+                  DtColaborador colab=(DtColaborador) use;
                   List<DtUsuario> usuSeguidos=IU.traerSeguidos(colab.getNick());
                   List<DtUsuario> usuSeguidores=IU.traerSeguidores(colab.getNick());
-                  List<DtPropuesta> propuFav= IU.traerPropFav(colab.getNick());
+                  List<DtPropuesta> propuFav= IU.traerPropFav(colab.getNick());   
+                  List<DtPropuesta> propuColaboradas= IU.traerPropuestasColaboradas(colab.getNick());   
+                request.setAttribute("seguido", usuSeguidos);
+                 request.setAttribute("seguidore", usuSeguidores);
+                 request.setAttribute("propuFav", propuFav);
+                 request.setAttribute("propuCol", propuColaboradas);
                   request.setAttribute("usuario", colab);
+                  
               }
               
                 this.getServletContext().getRequestDispatcher("/vistas/consultarInfoPerfil.jsp").forward(request, response);

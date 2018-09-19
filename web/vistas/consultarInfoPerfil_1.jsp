@@ -9,14 +9,14 @@
 <%@page import="Logica.DtColaborador"%>
 <%@page import="Logica.DtProponente"%>
 <%@page import="Logica.DtUsuario"%>
-<%@page import="Logica.DtPropuesta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
          <script  src="../js/progress.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
+   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"> 
         <title>Información de usuario</title>
     
         <% 
@@ -42,19 +42,8 @@
               <legend id="legendPerf">Información del usuario</legend><br>
               </div>
 		<div id="perfil_izquierda">
-                    
-                    <% if(colab.getImg()!=null){
-                        
-                   
-                        %>
-                  
-                      <img id="imagenot" src="/CulturarteWeb/retornarimagen?T=${T}" width="250" height="250">  
-                      
-                      <%   }else{%>
-                              
-                      <img id="imagenot" src="/CulturarteWeb/img/user-4.png" width="250" height="250">
-                             
-                          <%    } %>
+                    <p>${mensaje_exito}</p>
+                      <img src="/CulturarteWeb/retornarimagen?T=${T}" />                      
 		</div>
                 
 		<div id="perfil_derecha">
@@ -91,40 +80,19 @@
 	</div>
         </form>
  
-             <form style="float: left">
-            <div id="divTablas" class="datagrid">
-              <legend id="legendPerf">Usuarios seguidos</legend><br>
-                        <right>
-           <table class="datagrid">
-            <tr> 
-                <th>
-                    Nickname
-                </th> 
-            </tr>
-            <%
-                
-                List<DtUsuario> seguidos= (List<DtUsuario>) request.getAttribute("seguido");
-                 String Titu ="";
-                
-                if(seguidos.size()>0){
-                for ( DtUsuario usea : seguidos) {
-                 Titu = usea.getNick().replace(" ", "-");
-                
-            %>
-            <tr>
-                <td>
-                    <a href=consultarPerfil?T=<%=Titu%>>
-                        <%= usea.getNick()%> 
-                    </a>
-                </td>
-            </tr>
-            <%}}%>
-        </table>
-         </right>
-              </div>
- <form id="msform" style="clear: both">
-            <div id="divTablas" class="datagrid">
-              <legend id="legendPerf">Seguidores</legend><br>
+             <form id="msform" style="float: left">
+           <ul id="progressbar">
+      
+    <li class="active">Alta propuesta</li>
+    <li>Datos generales</li>
+    <li>Datos opcionales</li>
+  </ul>
+  <!-- fieldsets -->
+   <fieldset>
+    <h2 class="fs-title">Complete los siguientes campos</h2>
+    <h3 class="fs-subtitle">Paso 1</h3> 
+     <div id="divLeg">
+              <legend id="legendPerf">Información del usuario</legend><br>
                <right>
            <table class="datagrid">
             <tr> 
@@ -152,44 +120,28 @@
         </table>
          </right>
               </div>
-        <form style="float: both">
-            <div id="divTablas" class="datagrid">
-              <legend id="legendPerf">Propuestas</legend><br>
-                        <right>
-           <table class="datagrid">
-            <tr> 
-                <th>
-                    Propuestas
-                </th> 
-            </tr>
-            
-              <%
-                List<DtPropuesta> props= (List<DtPropuesta>) request.getAttribute("propuCol");
-                 String Tup ="";
-                
-                if(props.size()>0){
-                for ( DtPropuesta propa : props) {
-                 Tup = propa.getTitulo().replace(" ", "-");
-            %>
-            <tr>
-                <td>
-                    <a href=Consulta_de_propuesta_Servlet?T=<%=Tup%>>
-                        <%= propa.getTitulo()%> 
-                    </a>
-                    </td>
-            </tr>
-            <%} }  %>
-           
-        </table>
-         </right>
-              </div>
-        </form>  
-        
-        
-        
+    <input type="button" name="next" class="next action-button" value="Siguiente" />
+   </fieldset>
+   <fieldset>
+    <h2 class="fs-title">Datos generales</h2>
+    <input type="button" name="previous" class="previous action-button" value="Anterior" />
+    <input type="button" name="next" class="next action-button" value="Siguiente" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Datos opcionales</h2>
+    <h3 class="fs-subtitle">Si desea complete la siguiente información:</h3>
+
+    <input type="button" name="previous" class="previous action-button" value="Anterior" />
+     <button type="submit" class="btn action-button" id="botoncito">Aceptar</button>
+  </fieldset>
+               </form>    
+                  
         <% } else {%>
          <legend id="legendPerf">Información del usuario</legend><br>
              
         <% } %>
+         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+<script  src="<%=request.getContextPath()%>/js/index.js"></script>
     </body>
 </html>
