@@ -42,15 +42,7 @@ public class Cargar_Datos_Web extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            if (request.getParameter("T") == null) {
-                this.getServletContext().getRequestDispatcher("/vistas/Datos_prueba.jsp").forward(request, response); 
-            } else {
-            //IU.limpiarUsuarios();
-            //IU.cargarPropPrueba();
-            //IC.cargar();
-            //IP.cargarProp();
-            this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
-        }
+            
     }
     }
 
@@ -66,7 +58,16 @@ public class Cargar_Datos_Web extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        if (request.getParameter("T") == null) {
+                this.getServletContext().getRequestDispatcher("/vistas/Datos_prueba.jsp").forward(request, response); 
+            } else {
+            //IU.limpiarUsuarios();
+            //IU.cargarPropPrueba();
+            //IC.cargar();
+            //IP.cargarProp();
+            this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+        }
     }
 
     /**
@@ -80,7 +81,12 @@ public class Cargar_Datos_Web extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        IU.limpiarUsuarios();
+        IU.cargarPropPrueba();
+        IC.cargar();
+        IP.cargarProp();
+         this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
     }
 
     /**

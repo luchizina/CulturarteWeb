@@ -22,12 +22,12 @@
     <% if(Usuario_Logeado == false) {%>
     <h1>quiere cargar los datos de prueba?</h1>
     <br>
-    <form action="/Cargar_Datos_Web" >
+    <form action="Cargar_Datos_Web" method="POST">
         <button type="submit">Aceptar</button>
     </form>
     <br>
-    <form action="../index.html">
-        <button type="submit">Cancelar</button>
+    <form action="index.html">
+        <button type="submit">Cancelar...</button>
     </form>
     <%} else {%>
     <h1>Debe de cerrar la sesión para continuar</h1>

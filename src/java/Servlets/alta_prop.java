@@ -87,7 +87,7 @@ public class alta_prop extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
           this.iC.cargarCategorias();
-        List<DtCategoria> categoList= this.iC.listarCategorias();
+             List<DtCategoria> categoList= this.iC.listarCategorias();
        request.setAttribute("categorias", categoList);
           String titulo = request.getParameter(TIT);
         if (titulo != null) {
@@ -123,9 +123,7 @@ public class alta_prop extends HttpServlet {
                     break;
             }
 
-            ip.cargarEstados();
-            ip.cargarPropuestas();
-            ip.cargarProp();
+
 
             String nick = getUsuarioLogueado(request).getNick();
             Estado estA = new Estado(Testado.Ingresada);

@@ -16,13 +16,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Iniciar sesión</title>
          <script type="text/javascript" src="../js/limpiar.js"></script>
          <link href="../css/style.css" rel="stylesheet" media="screen">
     </head>
     <body>
-        
+       
+      
+
         
         <br><br><br><br><br><br><br>
         <form id="msform" action="../iniciarS" method="post">
@@ -37,6 +40,7 @@
      <script type="text/javascript" src="/js/login.js"></script>
     <input type="submit" class="next action-button" value="Ingresar" />
   </fieldset>
-</form>      
+</form>     
+        	
     </body>
 </html>

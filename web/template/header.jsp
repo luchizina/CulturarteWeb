@@ -1,3 +1,4 @@
+<%@page import="Logica.DtProponente"%>
 <%@page import="Logica.DtUsuario"%>
 <%@page import="Servlets.inicSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,7 +24,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                                         <li><a href="#">Visitar perfiles</a></li>   
                                         <li><a href="Consulta_de_propuesta_Servlet">Propuestas</a></li>
                                         <li><a href="alta_prop">Propuestas</a></li>  
-                                        <li><a href="vistas/Datos_prueba.jsp">Cargar Datos</a></li>
+                                        <li><a href="Cargar_Datos_Web">Cargar Datos</a></li>
                                        
 				</ul>
 			   <% if(sesionAct==null) {
@@ -57,7 +58,8 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                                String ape= user.getApellido();
                                String aux1=" ", aux2=" (", aux3=")";
                                String nueva1=nombre+aux1+ape+aux2+nick+aux3;
-                               
+  
+
 
                             %>
                             <ul class="nav navbar-nav navbar-right">
