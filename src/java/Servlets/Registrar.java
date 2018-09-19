@@ -83,7 +83,6 @@ public class Registrar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
-        response.setContentType("text/html;charset=UTF-8");
         String nick = request.getParameter(NICK);
         if(nick == null){
            this.getServletContext().getRequestDispatcher("/vistas/registrar.jsp").forward(request, response);
@@ -105,7 +104,7 @@ public class Registrar extends HttpServlet {
             throws ServletException, IOException {
         String nick = request.getParameter(NICK);
         if(nick == null){
-            request.getRequestDispatcher("/vistas/registrar.jsp").forward(request, response); 
+            this.getServletContext().getRequestDispatcher("/vistas/registrar.jsp").forward(request, response);
         }
     }
 
