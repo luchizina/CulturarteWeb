@@ -21,19 +21,29 @@
         <table>
             <tr> 
                 <th>
-                    Titulo
+                    <b>
+                        Título 
+                    </b>
+                </th> 
+                <th>
+                    <b>
+                        Consultar 
+                    </b>
                 </th> 
             </tr>
             <%
                 List<DtPropuesta> x = (List<DtPropuesta>) request.getAttribute("propuestas");
                 for (DtPropuesta cx : x) {
-                String Titu = cx.getTitulo().replace(" ", "-");
             %>
             <tr>
                 <td>
-                    <a href=Consulta_de_propuesta_Servlet?T=<%=Titu%>>
-                        <%= cx.getTitulo()%> 
-                    </a>
+                    <%=cx.getTitulo()%>
+                </td>
+                <td>
+                    <form action="Consulta_de_propuesta_Servlet" method="get">
+                    <input type="hidden" name="T" value="<%=cx.getTitulo()%>">
+                    <input type="submit" value="Ver"> 
+                    </form>
                 </td>
             </tr>
             <%}%>

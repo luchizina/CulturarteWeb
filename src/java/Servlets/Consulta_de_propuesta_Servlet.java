@@ -40,7 +40,6 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //this.Cargar_Propuestas();
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
                  
@@ -61,11 +60,8 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Cargar_Propuestas();
         try (PrintWriter out = response.getWriter()) {
                 // LISTAR PROPUESTAS 
-                
-                
             if (request.getParameter("T") == null) {
                 List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
                 request.setAttribute("propuestas", x);
@@ -74,12 +70,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
             } else {
                 // CONSULTA A UNA PROPUESTA 
                 String t = request.getParameter("T");
-                //String nick = (String) request.getSession().getAttribute("sesionAct");
-                //String tipo = (String) request.getSession().getAttribute("tipo");
-                //request.setAttribute("sesionAct", nick);
-                //request.setAttribute("tipo", tipo);
-                
-                String titulo = t.replace("-"," ");
+                String titulo = t.replace("+"," ");
                 DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
                 List<String> colaborador = IP.ColaborantesDePro();
                 request.setAttribute("propu", p_consulta);
@@ -116,11 +107,4 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public void Cargar_Propuestas(){
-    IU.cargarUsuarios2();    
-    IP.cargarPropuestas();
-    IP.cargarColaboraciones();
-    IP.EstadosPropuestas();
-    IP.actualizarMontos();
-    };
 }

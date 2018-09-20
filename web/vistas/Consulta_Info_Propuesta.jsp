@@ -90,8 +90,9 @@
         </table>  
         
         <% if(Puede_colaborar_a_propu && !Nombre_Usuario.equals("")) {          %>
-        <form 	action="#" method="get">
-	<input type="submit" value="Colaborar">
+        <form action="vistas/Consulta_de_Propuesta.jsp" method="get">
+            <input type="hidden" name="F" value="<%=propu.getTitulo()%>">
+            <input type="submit" value="Colaborar">
         </form>
         <% } %>
         
