@@ -90,7 +90,7 @@
         </table>  
         
         <% if(Puede_colaborar_a_propu && !Nombre_Usuario.equals("")) {          %>
-        <form 	action="#" method="get">
+        <form method="" action="" method="get">
 	<input type="submit" value="Colaborar">
         </form>
         <% } %>

@@ -56,10 +56,21 @@ public static final String MENSAJE_EXITO = "mensaje_exito";
                request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
                 request.getSession().setAttribute("T", nickUser);
               if(user instanceof DtProponente){
-                  DtProponente prop= (DtProponente) user;
-                 List<DtUsuario> usuSeguidos=IU.traerSeguidos(prop.getNick());
+                   DtUsuario use= IU.traerDtUsuario(nickUser);
+               String mensajeExitoE="Imagen subida correctamente";
+               request.getSession().setAttribute(MENSAJE_EXITO, mensajeExitoE);
+                request.getSession().setAttribute("T", nickUser);
+                  DtProponente prop=(DtProponente) use;
+                  List<DtUsuario> usuSeguidos=IU.traerSeguidos(prop.getNick());
                   List<DtUsuario> usuSeguidores=IU.traerSeguidores(prop.getNick());
-                request.setAttribute("usuario", prop);
+                  List<DtPropuesta> propuFav= IU.traerPropFav(prop.getNick());   
+                 // List<DtPropuesta> propuColaboradas= IU.traerPropuestasColaboradas(prop.getNick());   
+                request.setAttribute("seguido", usuSeguidos);
+                 request.setAttribute("seguidore", usuSeguidores);
+                 request.setAttribute("propuFav", propuFav);
+                // request.setAttribute("propuCol", propuColaboradas);
+                  request.setAttribute("usuario", prop);
+                   this.getServletContext().getRequestDispatcher("/vistas/consultarInfoPerfilP.jsp").forward(request, response);
                 
               }
               else{
@@ -77,10 +88,11 @@ public static final String MENSAJE_EXITO = "mensaje_exito";
                  request.setAttribute("propuFav", propuFav);
                  request.setAttribute("propuCol", propuColaboradas);
                   request.setAttribute("usuario", colab);
+                   this.getServletContext().getRequestDispatcher("/vistas/consultarInfoPerfil.jsp").forward(request, response);
                   
               }
               
-                this.getServletContext().getRequestDispatcher("/vistas/consultarInfoPerfil.jsp").forward(request, response);
+               
             }
     }
 
