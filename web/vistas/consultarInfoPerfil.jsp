@@ -93,12 +93,12 @@
  
              <form style="float: left">
             <div id="divTablas" class="datagrid">
-              <legend id="legendPerf">Usuarios seguidos</legend><br>
+            <!--  <legend id="legendPerf">Usuarios seguidos</legend><br>-->
                         <right>
            <table class="datagrid">
             <tr> 
                 <th>
-                    Nickname
+                    Usuarios seguidos
                 </th> 
             </tr>
             <%
@@ -118,18 +118,20 @@
                     </a>
                 </td>
             </tr>
-            <%}}%>
+            <%}} else{ %>
+             <td> no tiene seguidos   </td>
+            <%} %>
         </table>
          </right>
               </div>
  <form id="msform" style="clear: both">
             <div id="divTablas" class="datagrid">
-              <legend id="legendPerf">Seguidores</legend><br>
+           <!--   <legend id="legendPerf">Seguidores</legend><br>-->
                <right>
            <table class="datagrid">
             <tr> 
                 <th>
-                    Nickname
+                   Seguidores
                 </th> 
             </tr>
             <%
@@ -148,18 +150,20 @@
                     </a>
                 </td>
             </tr>
-            <%}}%>
+            <%}} else{ %>
+             <td> no tiene seguidores   </td>
+            <%} %>
         </table>
          </right>
               </div>
         <form style="float: both">
             <div id="divTablas" class="datagrid">
-              <legend id="legendPerf">Propuestas</legend><br>
+              <!--<legend id="legendPerf">Propuestas</legend><br>-->
                         <right>
            <table class="datagrid">
             <tr> 
                 <th>
-                    Propuestas
+                    Propuestas favoritas
                 </th> 
             </tr>
             
@@ -178,8 +182,9 @@
                     </a>
                     </td>
             </tr>
-            <%} }  %>
-           
+            <%} } else{ %>
+             <td> no tiene colaboraciones    </td>
+            <%} %>
         </table>
          </right>
               </div>
