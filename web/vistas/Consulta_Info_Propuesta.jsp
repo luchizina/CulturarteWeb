@@ -186,7 +186,7 @@
                 <textarea name="comentario" id="comentario" placeholder="Comentario" rows="15" cols="40"></textarea> <br><br>
                 <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
                 <input type="hidden" name="colab" value="<%=(String)request.getSession().getAttribute("sesionAct")%>">
-                <button type="submit">Comentar</button>
+                <button type="submit" onClick="alert('Comentario agregado')">Comentar</button>
             </div>
 
         </form>

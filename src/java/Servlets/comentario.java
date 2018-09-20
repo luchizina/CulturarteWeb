@@ -44,7 +44,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
         String prop = request.getParameter(propuesta);
         String com = request.getParameter(comentario);
         ip.agregarComentario(usuario.traerColaborador(nick), ip.getPropPorNick(prop), com);
-        request.getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
+        request.getRequestDispatcher("../Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
