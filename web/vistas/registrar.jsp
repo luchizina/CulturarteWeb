@@ -9,7 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registro de Usuarios</title>
-
+<jsp:include page="/template/head.jsp" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
         <link href="<%= request.getContextPath()%>/css/style.css" rel="stylesheet" media="screen">
 
@@ -18,6 +18,7 @@
 
     </head>
     <body>
+        <jsp:include page="/template/header.jsp" />
         <h1>Registrarse</h1>
 
         <form action="/CulturarteWeb/Registrarse" method="POST" enctype="multipart/form-data" id="msform" onsubmit="return vacios()">

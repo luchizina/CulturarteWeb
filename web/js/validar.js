@@ -42,7 +42,6 @@ function vacios() {
         }
     }
     if ((nick.value !== "" || nombre.value !== "" || apellido.value !== "" || fecha.value !== "" || mail.value !== "" || pass.value !== "" || pass2.value !== "") && (pass.value === pass2.value) && (aviso.innerHTML === "Nick disponible") && (avisa.innerHTML === "Email disponible")) {
-
         alert("El usuario " + nick.value + " ha sido registrado");
         return true;
     }
