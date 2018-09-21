@@ -42,10 +42,12 @@ public class correo extends HttpServlet {
         String correo = request.getParameter(CORREO);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            if (usuario.existeCorreo(correo)) {
+            if (usuario.existeCorreo(correo) && usuario.escorreo(correo)) {
                 out.print("Email disponible");
-            } else {
-                out.print("El mail ya se encuentra en uso");
+            } else if(!usuario.existeCorreo(correo) && usuario.escorreo(correo)){
+                out.print("El email ya se encuentra en uso");
+            } else if(!usuario.escorreo(correo)){
+                out.print("Formato de email invalido");
             }
         }
     }

@@ -6,6 +6,7 @@
 package Servlets;
 
 import Logica.*;
+import Servlets.inicSesion;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -83,10 +84,6 @@ public class Registrar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
-        String nick = request.getParameter(NICK);
-        if(nick == null){
-           this.getServletContext().getRequestDispatcher("/vistas/registrar.jsp").forward(request, response);
-        }
 
     }
 
@@ -103,8 +100,13 @@ public class Registrar extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nick = request.getParameter(NICK);
-        if(nick == null){
-            this.getServletContext().getRequestDispatcher("/vistas/registrar.jsp").forward(request, response);
+        DtUsuario usu = inicSesion.getUsuarioLogueado(request);
+        if (usu != null) {
+            this.getServletContext().getRequestDispatcher("/home").forward(request, response);
+        } else {
+            if (nick == null) {
+                this.getServletContext().getRequestDispatcher("/vistas/registrar.jsp").forward(request, response);
+            }
         }
     }
 
@@ -127,84 +129,80 @@ public class Registrar extends HttpServlet {
             usuario.cargarUsuarios2();
             Part partImagen = request.getPart(IMAGEN);
             String nick = request.getParameter(NICK);
-            if(nick != null){
-                String nombre = request.getParameter(NOMBRE);
-                String apellido = request.getParameter(APELLIDO);
-                String correo = request.getParameter(EMAIL);
-                String pass = request.getParameter(PWD);
-                SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    Date fecha = formatoDeFecha.parse(request.getParameter(FECHA));
-                    String conf = request.getParameter(PWD2);
-                    String[] args = request.getParameterValues("usuario");
-                    if (args[0].equals("colaborador")) {
-                        if (partImagen.getSize() != 0) {
-                            InputStream data = partImagen.getInputStream();
-                            final String fileName = Utils.getFileName(partImagen);
-                            String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
-                            String extensionArchivo = Utils.extensionArchivo(fileName);
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            int reads = data.read();
-                            while (reads != -1) {
-                                baos.write(reads);
-                                reads = data.read();
-                            } // while
-                            byte[] bytes = baos.toByteArray();
-                            DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
-                            String path = subirImagenCol(nick, pass, imagen, correo, nombre, apellido, fecha);
-                            usuario.altaColaborador(nick, correo, nombre, apellido, fecha, path, "Colaborador", pass);
-                            respuesta.setAttribute("sesionAct", nick);
-                            respuesta.setAttribute("tipo", "colaborador");
-                            request.getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
-                        } else {
-                            usuario.altaColaborador(nick, correo, nombre, apellido, fecha, "", "Colaborador", pass);
-                            respuesta.setAttribute("sesionAct", nick);
-                            respuesta.setAttribute("tipo", "colaborador");
-                            request.getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
-                        }
+            String nombre = request.getParameter(NOMBRE);
+            String apellido = request.getParameter(APELLIDO);
+            String correo = request.getParameter(EMAIL);
+            String pass = request.getParameter(PWD);
+            SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date fecha = formatoDeFecha.parse(request.getParameter(FECHA));
+                String conf = request.getParameter(PWD2);
+                String[] args = request.getParameterValues("usuario");
+                if (args[0].equals("colaborador")) {
+                    if (partImagen.getSize() != 0) {
+                        InputStream data = partImagen.getInputStream();
+                        final String fileName = Utils.getFileName(partImagen);
+                        String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
+                        String extensionArchivo = Utils.extensionArchivo(fileName);
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        int reads = data.read();
+                        while (reads != -1) {
+                            baos.write(reads);
+                            reads = data.read();
+                        } // while
+                        byte[] bytes = baos.toByteArray();
+                        DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+                        String path = subirImagenCol(nick, pass, imagen, correo, nombre, apellido, fecha);
+                        usuario.altaColaborador(nick, correo, nombre, apellido, fecha, path, "Colaborador", pass);
+                        respuesta.setAttribute("sesionAct", nick);
+                        respuesta.setAttribute("tipo", "colaborador");
+                        request.getRequestDispatcher("/home").forward(request, response);
+                    } else {
+                        usuario.altaColaborador(nick, correo, nombre, apellido, fecha, "", "Colaborador", pass);
+                        respuesta.setAttribute("sesionAct", nick);
+                        respuesta.setAttribute("tipo", "colaborador");
+                        request.getRequestDispatcher("/home").forward(request, response);
                     }
-                    String dir = request.getParameter(DIRECCION);
-                    String bio = request.getParameter(BIOGRAFIA);
-                    String web = request.getParameter(LINK);
-                    if (args[0].equals("proponente")) {
-                        if (partImagen.getSize() != 0) {
-                            InputStream data = partImagen.getInputStream();
-                            final String fileName = Utils.getFileName(partImagen);
-                            String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
-                            String extensionArchivo = Utils.extensionArchivo(fileName);
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            int reads = data.read();
-                            while (reads != -1) {
-                                baos.write(reads);
-                                reads = data.read();
-                            } // while
-                            byte[] bytes = baos.toByteArray();
-                            DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
-                            String pathP = subirImagenProp(nick, pass, imagen);
-                            usuario.altaProponente(nick, correo, nombre, apellido, fecha, pathP, dir, bio, web, "Proponente", pass);
-                            respuesta.setAttribute("sesionAct", nick);
-                            respuesta.setAttribute("tipo", "proponente");
-                            request.getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
-                        } else {
-                            usuario.altaProponente(nick, correo, nombre, apellido, fecha, "", dir, bio, web, "Proponente", pass);
-                            respuesta.setAttribute("sesionAct", nick);
-                            respuesta.setAttribute("tipo", "proponente");
-                            request.getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
-                        }
-                    }
-
-                } catch (ParseException ex) {
-                    Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else{
-                        request.getRequestDispatcher("/vistas/registrar.jsp").forward(request, response); 
-                        }
+                String dir = request.getParameter(DIRECCION);
+                String bio = request.getParameter(BIOGRAFIA);
+                String web = request.getParameter(LINK);
+                if (args[0].equals("proponente")) {
+                    if (partImagen.getSize() != 0) {
+                        InputStream data = partImagen.getInputStream();
+                        final String fileName = Utils.getFileName(partImagen);
+                        String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
+                        String extensionArchivo = Utils.extensionArchivo(fileName);
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        int reads = data.read();
+                        while (reads != -1) {
+                            baos.write(reads);
+                            reads = data.read();
+                        } // while
+                        byte[] bytes = baos.toByteArray();
+                        DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+                        String pathP = subirImagenProp(nick, pass, imagen);
+                        usuario.altaProponente(nick, correo, nombre, apellido, fecha, pathP, dir, bio, web, "Proponente", pass);
+                        respuesta.setAttribute("sesionAct", nick);
+                        respuesta.setAttribute("tipo", "proponente");
+                        request.getRequestDispatcher("/home").forward(request, response);
+                    } else {
+                        usuario.altaProponente(nick, correo, nombre, apellido, fecha, "", dir, bio, web, "Proponente", pass);
+                        respuesta.setAttribute("sesionAct", nick);
+                        respuesta.setAttribute("tipo", "proponente");
+                        request.getRequestDispatcher("/home").forward(request, response);
+                    }
+                }
+
+            } catch (ParseException ex) {
+                Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (ParseException ex) {
             Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-
+    
     /**
      * Returns a short description of the servlet.
      *

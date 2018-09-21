@@ -95,7 +95,7 @@
     </form>
     <% } %>
 
-    <% if (Colaboro_a_propu && !Nombre_Usuario.equals("")) {                 %>
+    <% if (Colaboro_a_propu && !Nombre_Usuario.equals("")) {%>
     <style>
         *{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
 
@@ -185,7 +185,7 @@
             <div class="container" align='center'>
                 <textarea name="comentario" id="comentario" placeholder="Comentario" rows="15" cols="40"></textarea> <br><br>
                 <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
-                <input type="hidden" name="colab" value="<%=(String)request.getSession().getAttribute("sesionAct")%>">
+                <input type="hidden" name="colab" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
                 <button type="submit" onClick="alert('Comentario agregado')">Comentar</button>
             </div>
 
@@ -204,6 +204,13 @@
     </script>
     <%}%>
 
+    <% if (!Nombre_Usuario.equals("")) {%>
+    <form 	action="/CulturarteWeb/favorita" method="post">
+    <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
+    <input type="hidden" name="usu" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
+     <button type="submit" >Marcar como favorita</button>
+    </form>
+    <%}%>
     <% if (Propuso_a_propu && !Nombre_Usuario.equals("")) {                  %>
     <form 	action="#" method="get">
         <input type="submit" value="Extender Tiempo">
