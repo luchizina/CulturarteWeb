@@ -21,7 +21,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
   <% if(sesionAct==null) {
 
                             %>	
- <li style="float: right"><a href="Registrar">Registrar</a></li>
+ <li style="float: right"><a href="Registrarse">Registrar</a></li>
  <li style="float: right"><a href="iniciarS">iniciar sesión</a></li>
  <li style="float: right"><a href="#">Mi perfil</a></li>
     <% 
@@ -47,10 +47,10 @@ String sesionAct=(String) session.getAttribute("sesionAct");
 					<li  style="float: right"><a href="#"><span class="glyphicon "></span>
 							¡Bienvenido <%out.print(nueva1);%>!</a></li>
                             <%}%>
-                             <form style="float: right" role="search" class ="main">
+                             <form style="float: right" role="search" class ="msform">
 					
 						<input type="text"  placeholder="Search..">
-							<button class="btn btn-default" type="button"  >Buscar</button>
+							<button class="btn action-button" type="button"  >Buscar</button>
 					
                                         
 				</form>
@@ -58,5 +58,4 @@ String sesionAct=(String) session.getAttribute("sesionAct");
         
 </ul>
 </div>
-            
-                             <script type="text/css" src="../css/style.css"></script>
+         

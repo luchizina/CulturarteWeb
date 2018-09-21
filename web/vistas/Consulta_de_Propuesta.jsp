@@ -12,10 +12,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:include page="/template/head.jsp" />
         <title>Consultar Propuesta</title>
         <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css">
     </head>
     <body>
+        <jsp:include page="/template/header.jsp" />
     <center>
         <h1>Consulta Propuesta</h1>     
         <table>

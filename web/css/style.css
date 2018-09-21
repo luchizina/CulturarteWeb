@@ -32,10 +32,11 @@ body {
 }
 /*Perfil de usuario css */
 #msformPerfil {
-    width:450px;
+    width:500px;
     margin: 50px auto;
     text-align: left;
     position:relative;
+    
     
     
 }

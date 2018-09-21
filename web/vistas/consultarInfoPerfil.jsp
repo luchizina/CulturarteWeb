@@ -14,6 +14,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:include page="/template/head.jsp" />
          <script  src="../js/progress.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          
@@ -34,6 +35,7 @@
         %>
     </head>
     <body>
+        <jsp:include page="/template/header.jsp" />
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
         <% if(colab != null ) {%>
         <form id="msformPerfil" style="float: left">
