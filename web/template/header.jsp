@@ -2,55 +2,32 @@
 <%@page import="Logica.DtUsuario"%>
 <%@page import="Servlets.inicSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script type="text/javascript" src="../js/Datos.js"></script>
+ <div id='cssmenu'>
+<ul>
 <%  
 String sesionAct=(String) session.getAttribute("sesionAct");
+ if(sesionAct==null) {
 
+                           
 %>
- <script type="text/javascript" src="../js/Datos.js"></script>
-<div id="header">
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Culturarte</a>
-			</div>
-			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Mi perfil</a></li>
-                                        <li><a href="#">Visitar perfiles</a></li>   
-                                        <li><a href="Consulta_de_propuesta_Servlet">Propuestas</a></li>
-                                        <li><a href="alta_prop">Propuestas</a></li>  
-                                        <li><a href="Cargar_Datos_Web">Cargar Datos</a></li>
-                                       
-				</ul>
-			   <% if(sesionAct==null) {
-                                
-                            
-                                
-                            
-                            
-                            %>	
-                            
-                            
-                            
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="iniciarS"><span class="glyphicon "></span>
-							Iniciar sesión</a></li>
-                                      
-				</ul>
-                         
-                            <ul class="nav navbar-nav navbar-right">
-					<li><a href="Registrarse"><span class="glyphicon "></span>
-							Registrarse</a></li>
-                                      
-				</ul>
-                            <%
-                            
-                             }else{
+ 
+
+<li class="active"><a href="#">Culturarte</a></li>
+ <li><a href="consultarPerfil">Visitar perfiles</a></li>
+ <li><a href="#">Propuestas</a>
+  <ul>
+   <li><a href="Consulta_de_propuesta_Servlet">Consultar propuestas</a></li>
+   <li><a href="Consulta_de_Propuesta_por_Categoria">Consultar propuestas por categoria</a></li>
+  </ul>
+ </li>
+ <li><a href="Cargar_Datos_Web">Cargar Datos </a></li>  
+ 
+ <li style="float: right"><a href="Registrarse">Registrar</a></li>
+ <li style="float: right"><a href="iniciarS">Iniciar sesión</a></li>
+ 
+    <% 
+        }else{
 
                                DtUsuario user=inicSesion.getUsuarioLogueado(request);
                                String nick=user.getNick();
@@ -59,45 +36,40 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                                String aux1=" ", aux2=" (", aux3=")";
                                String nueva1=nombre+aux1+ape+aux2+nick+aux3;
   
-
+                    String tipoUsu= (String) session.getAttribute("tipo");
 
                             %>
-                            <ul class="nav navbar-nav navbar-right">
-					<li><a href="cerrarSesion"><span class="glyphicon "></span>
-							Cerrar sesión</a></li>
-				</ul>
+                           
                             
-                       
+                            <li class="active"><a href="#">Culturarte</a></li>
+ <li><a href="consultarPerfil">Visitar perfiles</a></li>
+ <li><a href="#">Propuestas</a>
+  <ul>
+   <li><a href="Consulta_de_propuesta_Servlet">Consultar propuestas</a></li>
+   <li><a href="Consulta_de_Propuesta_por_Categoria">Consultar propuestas por categoria</a></li>
+  </ul>
+ </li>
+ <li><a href="Cargar_Datos_Web">Cargar Datos </a></li>  
+					<li style="float: right"><a href="cerrarSesion"><span class="glyphicon "></span>
+							Cerrar sesión</a></li> 
+                                                      
+                            <li style="float: right"><a href="consultarPerfil?T=<%=user.getNick()%>">Mi perfil</a></li>
+                     
                             
-                             <ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon "></span>
+                             
+					<li  style="float: right"><a href="#"><span class="glyphicon "></span>
 							¡Bienvenido <%out.print(nueva1);%>!</a></li>
-                                      
-				</ul>
                             <%}%>
-                            
-                            
-                            
-                            
-                            
-                            <form class="navbar-form navbar-right" role="search">
-					<div class="form-group input-group">
-						<input type="text" class="form-control" placeholder="Search..">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</span>
-					</div>
+                             <form style="float: right" role="search" class ="main">
+					
+						<input type="text"  placeholder="Search..">
+							<button class="btn btn-default" type="button"  >Buscar</button>
+					
                                         
 				</form>
-                            <ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon-perfil"></span>
-							Mi perfil</a></li>
-                                      
-				</ul>
-			</div>
-		</div>
-	</nav>
+                            
+        
+</ul>
 </div>
-
+            
+                             <script type="text/css" src="../css/style.css"></script>

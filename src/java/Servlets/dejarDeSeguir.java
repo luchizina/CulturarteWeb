@@ -4,21 +4,23 @@
  * and open the template in the editor.
  */
 package Servlets;
-import Logica.*;
+
+import Logica.Fabrica;
+import Logica.IUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author nambr
  */
-@WebServlet(name = "seguirUsuario", urlPatterns = {"/seguirUsuario"})
-public class seguirUsuario extends HttpServlet {
+@WebServlet(name = "dejarDeSeguir", urlPatterns = {"/dejarDeSeguir"})
+public class dejarDeSeguir extends HttpServlet {
 private final Fabrica fabrica = Fabrica.getInstance();
     private final IUsuario usuario = fabrica.getICtrlUsuario();
     /**
@@ -33,14 +35,13 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-    String nickLogueado= request.getParameter("nickLogueado");
+      String nickLogueado= request.getParameter("nickLogueado");
     String nickASeguir= request.getParameter("nickASeguir");
 this.usuario.seleccionarUsuario(nickLogueado);
 this.usuario.seleccionarUsuSeg(nickASeguir);
-if(this.usuario.yaSigue()==false){
+if(this.usuario.yaSigue()==true){
     
-
-this.usuario.seguirUsuario();
+this.usuario.dejarDeSeguir();
 }
 this.getServletContext().getRequestDispatcher("/consultarPerfil").forward(request,response);
     }

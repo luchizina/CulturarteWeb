@@ -21,8 +21,13 @@
         boolean Propuso_a_propu = false;
         boolean Colaboro_a_propu = false;
         boolean Puede_colaborar_a_propu = false;
+        boolean Ya_comento = false;
         String Nombre_Usuario = "";
         String tipo = "";
+        String String_Ya_Comento = (String) request.getAttribute("comentario");
+        if(String_Ya_Comento.equals("true")){
+            Ya_comento = true;
+        }
         if (request.getSession().getAttribute("sesionAct") != null) {
             Nombre_Usuario = (String) request.getSession().getAttribute("sesionAct");
             tipo = (String) session.getAttribute("tipo");
@@ -81,8 +86,8 @@
         <br>
         <br>
         <table border=10><tr><th><b> Colaboradores </b></th></tr>
-                    <% if (colaboradores) {                                               %>
-                    <% for (String cx : x) {%>
+                    <% if (colaboradores){                                      %>
+                    <% for (String cx : x) {                                    %>
             <tr><td><%= cx%></td></tr>
             <%}%>
             <%}%>
@@ -95,7 +100,7 @@
     </form>
     <% } %>
 
-    <% if (Colaboro_a_propu && !Nombre_Usuario.equals("")) {%>
+    <% if (Colaboro_a_propu && !Nombre_Usuario.equals("") && !Ya_comento) {     %>
     <style>
         *{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
 
@@ -202,6 +207,9 @@
             }
         };
     </script>
+    <%}else if(Ya_comento){%>
+    <br>
+    <b> Usted ya a comentado en esta propuesta </b>
     <%}%>
 
     <% if (!Nombre_Usuario.equals("")) {%>

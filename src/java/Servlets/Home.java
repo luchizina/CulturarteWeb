@@ -42,6 +42,8 @@ public class Home extends HttpServlet {
                 iUsu.cargarUsuarios2();
                 icat.cargarCategorias();
                 IP.cargarPropuestas();
+                IP.Cargar_Favoritos_Memoria();
+                IP.Cargar_Comentarios_Memoria();
                 IP.cargarColaboraciones();
                 IP.actualizarMontos();
                 IP.EstadosPropuestas();
