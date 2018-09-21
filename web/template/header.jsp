@@ -22,12 +22,10 @@ String sesionAct=(String) session.getAttribute("sesionAct");
   </ul>
  </li>
  <li><a href="Cargar_Datos_Web">Cargar Datos </a></li>  
-  <% if(sesionAct==null) {
-
-                            %>	
+ 
  <li style="float: right"><a href="Registrarse">Registrar</a></li>
- <li style="float: right"><a href="iniciarS">iniciar sesión</a></li>
- <li style="float: right"><a href="#">Mi perfil</a></li>
+ <li style="float: right"><a href="iniciarS">Iniciar sesión</a></li>
+ 
     <% 
         }else{
 
