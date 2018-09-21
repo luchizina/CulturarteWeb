@@ -52,8 +52,9 @@ String sesionAct=(String) session.getAttribute("sesionAct");
  <li><a href="Cargar_Datos_Web">Cargar Datos </a></li>  
 					<li style="float: right"><a href="cerrarSesion"><span class="glyphicon "></span>
 							Cerrar sesión</a></li> 
-                            <li style="float: right"><a href="#">Mi perfil</a></li>
-                       
+                                                      
+                            <li style="float: right"><a href="consultarPerfil?T=<%=user.getNick()%>">Mi perfil</a></li>
+                     
                             
                              
 					<li  style="float: right"><a href="#"><span class="glyphicon "></span>
