@@ -110,7 +110,7 @@
                 
                 if(seguidos.size()>0){
                 for ( DtUsuario usea : seguidos) {
-                 Titu = usea.getNick().replace(" ", "-");
+                 Titu = usea.getNick();
                 
             %>
             <tr>
@@ -175,7 +175,7 @@
                 
                 if(props.size()>0){
                 for ( DtPropuesta propa : props) {
-                 Tup = propa.getTitulo().replace(" ", "-");
+                 Tup = propa.getTitulo().replace(" ", "+");
             %>
             <tr>
                 <td>
@@ -207,7 +207,7 @@
                 
                 if(props.size()>0){
                 for ( DtPropuesta propu1 : propFavo) {
-                 pa = propu1.getTitulo().replace(" ", "-");
+                 pa = propu1.getTitulo().replace(" ", "+");
             %>
             <tr>
                 <td>
