@@ -7,11 +7,9 @@ String sesionAct=(String) session.getAttribute("sesionAct");
 
 %>
  <script type="text/javascript" src="../js/Datos.js"></script>
- 
-    
-    
- <ul id="menu-bar">
- <li class="active"><a href="#">Culturarte</a></li>
+ <div id='cssmenu'>
+<ul>
+<li class="active"><a href="#">Culturarte</a></li>
  <li><a href="consultarPerfil">Visitar perfiles</a></li>
  <li><a href="#">Propuestas</a>
   <ul>
@@ -49,9 +47,9 @@ String sesionAct=(String) session.getAttribute("sesionAct");
 					<li  style="float: right"><a href="#"><span class="glyphicon "></span>
 							¡Bienvenido <%out.print(nueva1);%>!</a></li>
                             <%}%>
-                             <form style="float: right" role="search">
+                             <form style="float: right" role="search" class ="main">
 					
-						<input type="text" class="form-control" placeholder="Search..">
+						<input type="text"  placeholder="Search..">
 							<button class="btn btn-default" type="button"  >Buscar</button>
 					
                                         
@@ -59,5 +57,6 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                             
         
 </ul>
-                             
+</div>
+            
                              <script type="text/css" src="../css/style.css"></script>
