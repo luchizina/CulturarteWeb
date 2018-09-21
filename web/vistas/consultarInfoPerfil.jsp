@@ -123,7 +123,7 @@
             <%} %>
         </table>
          </right>
-              </div>
+              </div> 
  <form id="msform" style="clear: both">
             <div id="divTablas" class="datagrid">
            <!--   <legend id="legendPerf">Seguidores</legend><br>-->
@@ -163,7 +163,7 @@
            <table class="datagrid">
             <tr> 
                 <th>
-                    Propuestas favoritas
+                    Colaboraciones
                 </th> 
             </tr>
             
@@ -179,6 +179,38 @@
                 <td>
                     <a href=Consulta_de_propuesta_Servlet?T=<%=Tup%>>
                         <%= propa.getTitulo()%> 
+                    </a>
+                    </td>
+            </tr>
+            <%} } else{ %>
+             <td> no tiene colaboraciones    </td>
+            <%} %>
+        </table>
+         </right>
+              </div>
+          <form style="float: both">
+            <div id="divTablas23" class="datagrid">
+              <!--<legend id="legendPerf">Propuestas</legend><br>-->
+                        <right>
+           <table class="datagrid">
+            <tr> 
+                <th>
+                    Propuestas favoritas
+                </th> 
+            </tr>
+            
+              <%
+                List<DtPropuesta> propFavo= (List<DtPropuesta>) request.getAttribute("propuFav");
+                 String pa ="";
+                
+                if(props.size()>0){
+                for ( DtPropuesta propu1 : propFavo) {
+                 pa = propu1.getTitulo().replace(" ", "-");
+            %>
+            <tr>
+                <td>
+                    <a href=Consulta_de_propuesta_Servlet?T=<%=pa%>>
+                        <%= propu1.getTitulo()%> 
                     </a>
                     </td>
             </tr>
