@@ -40,6 +40,16 @@ String sesionAct=(String) session.getAttribute("sesionAct");
 
                             %>
                            
+                            
+                            <li class="active"><a href="#">Culturarte</a></li>
+ <li><a href="consultarPerfil">Visitar perfiles</a></li>
+ <li><a href="#">Propuestas</a>
+  <ul>
+   <li><a href="Consulta_de_propuesta_Servlet">Consultar propuestas</a></li>
+   <li><a href="Consulta_de_Propuesta_por_Categoria">Consultar propuestas por categoria</a></li>
+  </ul>
+ </li>
+ <li><a href="Cargar_Datos_Web">Cargar Datos </a></li>  
 					<li style="float: right"><a href="cerrarSesion"><span class="glyphicon "></span>
 							Cerrar sesión</a></li> 
                             <li style="float: right"><a href="#">Mi perfil</a></li>
