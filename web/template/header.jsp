@@ -2,13 +2,17 @@
 <%@page import="Logica.DtUsuario"%>
 <%@page import="Servlets.inicSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%  
-String sesionAct=(String) session.getAttribute("sesionAct");
-
-%>
- <script type="text/javascript" src="../js/Datos.js"></script>
+<script type="text/javascript" src="../js/Datos.js"></script>
  <div id='cssmenu'>
 <ul>
+<%  
+String sesionAct=(String) session.getAttribute("sesionAct");
+ if(sesionAct==null) {
+
+                           
+%>
+ 
+
 <li class="active"><a href="#">Culturarte</a></li>
  <li><a href="consultarPerfil">Visitar perfiles</a></li>
  <li><a href="#">Propuestas</a>
@@ -18,12 +22,10 @@ String sesionAct=(String) session.getAttribute("sesionAct");
   </ul>
  </li>
  <li><a href="Cargar_Datos_Web">Cargar Datos </a></li>  
-  <% if(sesionAct==null) {
-
-                            %>	
- <li style="float: right"><a href="Registrar">Registrar</a></li>
- <li style="float: right"><a href="iniciarS">iniciar sesión</a></li>
- <li style="float: right"><a href="#">Mi perfil</a></li>
+ 
+ <li style="float: right"><a href="Registrarse">Registrar</a></li>
+ <li style="float: right"><a href="iniciarS">Iniciar sesión</a></li>
+ 
     <% 
         }else{
 
@@ -34,23 +36,34 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                                String aux1=" ", aux2=" (", aux3=")";
                                String nueva1=nombre+aux1+ape+aux2+nick+aux3;
   
-
+                    String tipoUsu= (String) session.getAttribute("tipo");
 
                             %>
                            
+                            
+                            <li class="active"><a href="#">Culturarte</a></li>
+ <li><a href="consultarPerfil">Visitar perfiles</a></li>
+ <li><a href="#">Propuestas</a>
+  <ul>
+   <li><a href="Consulta_de_propuesta_Servlet">Consultar propuestas</a></li>
+   <li><a href="Consulta_de_Propuesta_por_Categoria">Consultar propuestas por categoria</a></li>
+  </ul>
+ </li>
+ <li><a href="Cargar_Datos_Web">Cargar Datos </a></li>  
 					<li style="float: right"><a href="cerrarSesion"><span class="glyphicon "></span>
 							Cerrar sesión</a></li> 
-                            
-                       
+                                                      
+                            <li style="float: right"><a href="consultarPerfil?T=<%=user.getNick()%>">Mi perfil</a></li>
+                     
                             
                              
 					<li  style="float: right"><a href="#"><span class="glyphicon "></span>
 							¡Bienvenido <%out.print(nueva1);%>!</a></li>
                             <%}%>
-                             <form style="float: right" role="search" class ="main">
+                             <form style="float: right" role="search" class ="msform">
 					
 						<input type="text"  placeholder="Search..">
-							<button class="btn btn-default" type="button"  >Buscar</button>
+							<button class="btn action-button" type="button"  >Buscar</button>
 					
                                         
 				</form>
@@ -58,5 +71,4 @@ String sesionAct=(String) session.getAttribute("sesionAct");
         
 </ul>
 </div>
-            
-                             <script type="text/css" src="../css/style.css"></script>
+         

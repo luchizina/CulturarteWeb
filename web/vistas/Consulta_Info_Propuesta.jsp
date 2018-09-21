@@ -43,10 +43,12 @@
             }
         }                                                                        %> 
     <head>
+        <jsp:include page="/template/head.jsp" />
         <title>Consultar Propuesta: <%propu.getTitulo();%> </title>
         <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css">
     </head>
     <body>
+        <jsp:include page="/template/header.jsp" />
         <table border=10 >
             <tr>
                 <th><b> Titulo </b></th>
@@ -195,8 +197,8 @@
             <div class="container" align='center'>
                 <textarea name="comentario" id="comentario" placeholder="Comentario" rows="15" cols="40"></textarea> <br><br>
                 <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
-                <input type="hidden" name="colab" value="<%=(String)request.getSession().getAttribute("sesionAct")%>">
-                <button type="submit">Comentar</button>
+                <input type="hidden" name="colab" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
+                <button type="submit" onClick="alert('Comentario agregado')">Comentar</button>
             </div>
 
         </form>
@@ -215,6 +217,14 @@
     <%}else if(Ya_comento){%>
     <br>
     <b> Usted ya a comentado en esta propuesta </b>
+    <%}%>
+
+    <% if (!Nombre_Usuario.equals("")) {%>
+    <form 	action="/CulturarteWeb/favorita" method="post">
+    <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
+    <input type="hidden" name="usu" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
+     <button type="submit" >Marcar como favorita</button>
+    </form>
     <%}%>
     <% if (Propuso_a_propu && !Nombre_Usuario.equals("")) {                  %>
     <form 	action="#" method="get">

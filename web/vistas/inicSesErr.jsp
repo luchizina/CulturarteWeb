@@ -8,11 +8,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <jsp:include page="/template/head.jsp" />
         <meta http-equiv="default_style" content=URL=/CulturarteWeb/vistas/inicSesErr.jsp">
         <title>Algo salió mal...</title>
     </head>
     <body>
+        <jsp:include page="/template/header.jsp" />
+      
          <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
         <br><br><br><br><br><br><br>
    

@@ -6,7 +6,6 @@
 package Servlets;
 
 import Logica.Fabrica;
-import Logica.IPropuesta;
 import Logica.IUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,16 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Nuevo
+ * @author nambr
  */
-@WebServlet(name = "comentario", urlPatterns = {"/comentario"})
-public class comentario extends HttpServlet {
+@WebServlet(name = "dejarDeSeguir", urlPatterns = {"/dejarDeSeguir"})
+public class dejarDeSeguir extends HttpServlet {
 private final Fabrica fabrica = Fabrica.getInstance();
-    private final IPropuesta ip = fabrica.getICtrlPropuesta();
     private final IUsuario usuario = fabrica.getICtrlUsuario();
-    String Colaborador = "colab";
-    String propuesta = "prop";
-    String comentario = "comentario";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,11 +35,15 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String nick = request.getParameter(Colaborador);
-        String prop = request.getParameter(propuesta);
-        String com = request.getParameter(comentario);
-        ip.agregarComentario(usuario.traerColaborador(nick), ip.getPropPorNick(prop), com);
-        request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
+      String nickLogueado= request.getParameter("nickLogueado");
+    String nickASeguir= request.getParameter("nickASeguir");
+this.usuario.seleccionarUsuario(nickLogueado);
+this.usuario.seleccionarUsuSeg(nickASeguir);
+if(this.usuario.yaSigue()==true){
+    
+this.usuario.dejarDeSeguir();
+}
+this.getServletContext().getRequestDispatcher("/consultarPerfil").forward(request,response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,22 +69,19 @@ private final Fabrica fabrica = Fabrica.getInstance();
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-}
+    }
 
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
-@Override
-        public String getServletInfo() {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

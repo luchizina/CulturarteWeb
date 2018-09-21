@@ -21,12 +21,10 @@
         <title>Iniciar sesión</title>
          <script type="text/javascript" src="<%= request.getContextPath()%>/js/limpiar.js"></script>
          <link href="<%= request.getContextPath()%>/css/style.css" rel="stylesheet" media="screen">
+         <jsp:include page="/template/head.jsp" />
     </head>
     <body>
-       
-      
-
-        
+<jsp:include page="/template/header.jsp" />
         <br><br><br><br><br><br><br>
         <form id="msform" action="iniciarS" method="post">
             
@@ -38,7 +36,7 @@
    
     <input type="password" name="pass" placeholder="Contraseña" required="required" />
      <script type="text/javascript" src="/js/login.js"></script>
-    <input type="submit" class="next action-button" value="Ingresar" />
+    <input type="submit" class="submit action-button" value="Ingresar" />
   </fieldset>
 </form>     
         	
