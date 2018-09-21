@@ -11,12 +11,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%
+    boolean Usuario_Logeado = false;
+    if (request.getSession().getAttribute("sesionAct") != null) {
+        Usuario_Logeado = true;
+    }
+    %>
     <head>
         <title>Consultar Propuesta</title>
         <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css">
     </head>
     <body>
     <center>
+        <% if(Usuario_Logeado) {%>
         <h1>Consulta Propuesta</h1>     
         <table>
             <tr> 
@@ -40,7 +47,7 @@
                     <%=cx.getTitulo()%>
                 </td>
                 <td>
-                    <form action="Consulta_de_propuesta_Servlet" method="get">
+                    <form action="Consulta_de_propuesta_Servlet" method="post">
                     <input type="hidden" name="T" value="<%=cx.getTitulo()%>">
                     <input type="submit" value="Ver"> 
                     </form>
@@ -48,6 +55,12 @@
             </tr>
             <%}%>
         </table>
+        <%}else {%>
+        <h1>Debe de iniciar sesión para continuar</h1>
+            <form action="index.html">
+            <button type="submit">Cancelar</button>
+            </form>
+        <%}%>
     </center>
 </body>
 </html>

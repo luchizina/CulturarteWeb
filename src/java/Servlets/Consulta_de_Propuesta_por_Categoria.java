@@ -40,7 +40,7 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //this.Cargar_Memoria();
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -63,7 +63,7 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Cargar_Memoria();
+        
   
         try (PrintWriter out = response.getWriter()) {
                 // LISTAR CATEGORIA 
@@ -95,7 +95,19 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        if (request.getParameter("C") == null) {
+                List<DtCategoria> x = IC.listarCategorias();
+                request.setAttribute("categorias", x);
+                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
+            } else {
+                // LISTAR PROPUESTAS DE "X" CATEGORIA
+                String C = request.getParameter("C");
+                String Cposta = C.replace("+"," ");
+                List<DtPropuesta> x = IP.WEB_listarPropuestas_X_Categoria(Cposta);
+                request.setAttribute("propuestas", x);
+                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
+            }
        
     }
 
@@ -110,13 +122,5 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     }// </editor-fold>
 
     
-    public void Cargar_Memoria(){
-    IU.cargarUsuarios2();    
-    IP.cargarPropuestas();
-    IC.cargarCategorias();
-    IP.cargarColaboraciones();
-    IP.EstadosPropuestas();
-    IP.actualizarMontos();
     
-    };
 }
