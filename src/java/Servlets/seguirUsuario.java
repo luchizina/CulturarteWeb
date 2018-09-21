@@ -32,13 +32,17 @@ private final Fabrica fabrica = Fabrica.getInstance();
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.usuario.cargarUsuarios2();
         response.setContentType("text/html;charset=UTF-8");
-        DtUsuario user;
-        user=inicSesion.getUsuarioLogueado(request);
-        List<DtUsuario> users=this.usuario.listarUsuarios();
-   request.setAttribute("usuarios", users);
-request.getRequestDispatcher("/vistas/seguirUsuario.jsp").forward(request, response);
+    String nickLogueado= request.getParameter("nickLogueado");
+    String nickASeguir= request.getParameter("nickASeguir");
+this.usuario.seleccionarUsuario(nickLogueado);
+this.usuario.seleccionarUsuSeg(nickASeguir);
+if(this.usuario.yaSigue()==false){
+    
+
+this.usuario.seguirUsuario();
+}
+this.getServletContext().getRequestDispatcher("/consultarPerfil").forward(request,response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

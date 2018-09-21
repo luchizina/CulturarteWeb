@@ -20,14 +20,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nuevo
  */
-@WebServlet(name = "comentario", urlPatterns = {"/comentario"})
-public class comentario extends HttpServlet {
+@WebServlet(name = "favorita", urlPatterns = {"/favorita"})
+public class favorita extends HttpServlet {
 private final Fabrica fabrica = Fabrica.getInstance();
     private final IPropuesta ip = fabrica.getICtrlPropuesta();
     private final IUsuario usuario = fabrica.getICtrlUsuario();
-    String Colaborador = "colab";
+    String usuarioF = "usu";
     String propuesta = "prop";
-    String comentario = "comentario";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,10 +39,9 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String nick = request.getParameter(Colaborador);
+        String nick = request.getParameter(usuarioF);
         String prop = request.getParameter(propuesta);
-        String com = request.getParameter(comentario);
-        ip.agregarComentario(usuario.traerColaborador(nick), ip.getPropPorNick(prop), com);
+        ip.agregarFavorito(usuario.traerUsuario(nick), ip.getPropPorNick(prop));
         request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
     }
 
@@ -70,22 +68,19 @@ private final Fabrica fabrica = Fabrica.getInstance();
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-}
+    }
 
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
-@Override
-        public String getServletInfo() {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

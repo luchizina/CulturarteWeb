@@ -21,7 +21,7 @@
         <jsp:include page="/template/header.jsp" />
         <h1>Registrarse</h1>
 
-        <form action=../Registrarse method="POST" enctype="multipart/form-data" id="msform" onsubmit="return vacios()">
+        <form action="/CulturarteWeb/Registrarse" method="POST" enctype="multipart/form-data" id="msform" onsubmit="return vacios()">
             <ul id="progressbar">
 
                 <li class="active">Datos de cuenta</li>
