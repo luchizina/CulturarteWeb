@@ -13,6 +13,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <head>
          <script  src="../js/progress.js"></script>
          <jsp:include page="/template/head.jsp" />
@@ -176,6 +179,49 @@
               </div>
        
        
+      <%  DtUsuario userLogueado= inicSesion.getUsuarioLogueado(request);  
+            List<DtUsuario> seguidoresPrueb= (List<DtUsuario>) request.getAttribute("seguidore");
+            if(userLogueado.getNick().equals(prop.getNick())==false){
+                boolean yaSigue=false;
+for(int i=0; i < seguidoresPrueb.size(); i++){
+    DtUsuario seguidor= seguidoresPrueb.get(i);
+    
+    if(seguidor.getNick().equals(userLogueado.getNick())){
+        yaSigue=true;
+    }
+    
+}
+       if(yaSigue==true){
+           
+      
+           
+            %>
+          <form method="post" action="dejarDeSeguir">
+            
+     
+             <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
+    <input type="hidden" name="nickASeguir" value="<%=prop.getNick()%>" />
+           <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Dejar de seguir" />
+        </form>
+       <% } else{%> 
+           
+           
+     
+
+            <form method="post" action="seguirUsuario">
+            
+     
+             <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
+    <input type="hidden" name="nickASeguir" value="<%=prop.getNick()%>" />
+           <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Seguir" />
+        </form>
+            
+           <%} }%>     
+        
+        
+        
+        
+        
         
         <% } else {%>
          <legend id="legendPerf">Información no disponibe</legend><br>
