@@ -102,9 +102,10 @@
     </table>  
 
     <% if (Puede_colaborar_a_propu && !Nombre_Usuario.equals("")) {          %>
-    <form 	action="#" method="get">
-        <input type="submit" value="Colaborar">
-    </form>
+    <form method="get" action="/Colaboracion">
+            <input type="hidden" name="F" value="<%=propu.getTitulo()%>">
+            <input type="submit" value="Colaborar">
+        </form>
     <% } %>
 
     <% if (Colaboro_a_propu && !Nombre_Usuario.equals("") && !Ya_comento) {     %>
