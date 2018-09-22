@@ -5,6 +5,8 @@
  */
 package Servlets;
 
+import Logica.DtPropuesta;
+import Logica.ctrlPropuesta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,17 +33,12 @@ public class Colaboracion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            if(request.getAttribute("Monto") == null)
-            {
-                String titulo = (String) request.getAttribute("Titulo");
-                request.setAttribute("Titulo", titulo);
-                request.getRequestDispatcher("vistas/Alta_Colaboracion.jsp").forward(request, response);
-            }
             
-            else
-            {
-                
-            }
+                String titulo = (String) request.getAttribute("Titulo");
+                DtPropuesta propuestita = ctrlPropuesta.getInstance().traerPropuesta(titulo);
+                request.setAttribute("tipoR", propuestita.getTRetornos());
+                request.setAttribute("Titulo", titulo);
+                this.getServletContext().getRequestDispatcher("/vistas/Alta_Colaboracion.jsp").forward(request, response);
             
         
     }
