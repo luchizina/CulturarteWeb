@@ -107,8 +107,8 @@
     </table>  
 
     <% if (Puede_colaborar_a_propu && !Nombre_Usuario.equals("")) {          %>
-    <form method="get" action="/Colaboracion">
-            <input type="hidden" name="F" value="<%=propu.getTitulo()%>">
+    <form method="post" action="Colaboracion">
+            <input type="hidden" name="T" value="<%=propu.getTitulo()%>">
             <input type="submit" value="Colaborar">
         </form>
     <% } %>

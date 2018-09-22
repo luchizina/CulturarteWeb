@@ -33,14 +33,26 @@ public class Colaboracion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            if(request.getParameter("monto") == null)
+            {
+                
             
-                String titulo = (String) request.getAttribute("Titulo");
+                String titulo = request.getParameter("T");
                 DtPropuesta propuestita = ctrlPropuesta.getInstance().traerPropuesta(titulo);
                 request.setAttribute("tipoR", propuestita.getTRetornos());
                 request.setAttribute("Titulo", titulo);
                 this.getServletContext().getRequestDispatcher("/vistas/Alta_Colaboracion.jsp").forward(request, response);
             
-        
+            }
+            else
+            {
+                String titulo = (String) request.getParameter("Titulo");
+                String monto = (String) request.getParameter("monto");
+                String tipoR = (String) request.getParameter("tipoRetorno");
+                String nick = (String) request.getSession().getAttribute("sesionAct");
+                ctrlPropuesta.getInstance().altaColaboracion(titulo, nick, monto, tipoR);
+                this.getServletContext().getRequestDispatcher("/home");
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
