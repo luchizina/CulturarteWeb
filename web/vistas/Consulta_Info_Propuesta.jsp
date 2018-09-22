@@ -22,11 +22,16 @@
         boolean Colaboro_a_propu = false;
         boolean Puede_colaborar_a_propu = false;
         boolean Ya_comento = false;
+        boolean yaFav = false;
         String Nombre_Usuario = "";
         String tipo = "";
+        String Favo = (String) request.getAttribute("fav");
         String String_Ya_Comento = (String) request.getAttribute("comentario");
         if(String_Ya_Comento.equals("true")){
             Ya_comento = true;
+        }
+        if(Favo.equals("true")){
+            yaFav = true;
         }
         if (request.getSession().getAttribute("sesionAct") != null) {
             Nombre_Usuario = (String) request.getSession().getAttribute("sesionAct");
@@ -219,12 +224,15 @@
     <b> Usted ya a comentado en esta propuesta </b>
     <%}%>
 
-    <% if (!Nombre_Usuario.equals("")) {%>
+    <% if (!Nombre_Usuario.equals("") && !yaFav) {%>
     <form 	action="/CulturarteWeb/favorita" method="post">
     <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
     <input type="hidden" name="usu" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
      <button type="submit" >Marcar como favorita</button>
     </form>
+    <%} else if (yaFav) { %>
+    <br>
+    <b> Tiene esta propuesta como favorita </b>
     <%}%>
     <% if (Propuso_a_propu && !Nombre_Usuario.equals("")) {                  %>
     <form 	action="#" method="get">

@@ -126,7 +126,7 @@
                 
                 if(seguidos.size()>0){
                 for ( DtUsuario usea : seguidos) {
-                 Titu = usea.getNick().replace(" ", "-");
+                 Titu = usea.getNick().replace(" ", "+");
                 
             %>
             <tr>
@@ -158,7 +158,7 @@
                 
                 if(seguidores.size()>0){
                 for ( DtUsuario usea : seguidores) {
-                 Tu = usea.getNick().replace(" ", "-");
+                 Tu = usea.getNick().replace(" ", "+");
                 
             %>
             <tr>

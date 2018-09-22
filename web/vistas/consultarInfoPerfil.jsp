@@ -110,7 +110,7 @@
                 
                 if(seguidos.size()>0){
                 for ( DtUsuario usea : seguidos) {
-                 Titu = usea.getNick().replace(" ", "-");
+                 Titu = usea.getNick();
                 
             %>
             <tr>

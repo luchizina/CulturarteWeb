@@ -12,7 +12,7 @@
 
 <html lang="en" >
 <head>
-   
+   <jsp:include page="/template/head.jsp" />
     <meta charset="UTF-8">
   <title>Alta propuesta</title>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
@@ -20,6 +20,8 @@
 
 </head>
 <body>
+     <jsp:include page="/template/header.jsp" />
+       
   <!-- multistep form -->
 <form action="<%=request.getContextPath()%>/alta_prop" method="post" id="msform" enctype="multipart/form-data">
       <!-- progressbar -->
