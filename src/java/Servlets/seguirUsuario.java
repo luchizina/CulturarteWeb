@@ -37,12 +37,23 @@ private final Fabrica fabrica = Fabrica.getInstance();
     String nickASeguir= request.getParameter("nickASeguir");
 this.usuario.seleccionarUsuario(nickLogueado);
 this.usuario.seleccionarUsuSeg(nickASeguir);
-if(this.usuario.yaSigue()==false){
-    
-
+DtUsuario usuarioAseguir= this.usuario.traerDtUsuario(nickASeguir);
+List<DtUsuario> seguidores= this.usuario.traerSeguidores(nickASeguir);
+if(usuarioAseguir instanceof DtColaborador){
+    if(this.usuario.yaSigue()==false){
 this.usuario.seguirUsuario();
-}
 this.getServletContext().getRequestDispatcher("/consultarPerfil").forward(request,response);
+}
+    
+}
+else if(usuarioAseguir instanceof DtProponente){
+      if(this.usuario.yaSigue()==false){
+this.usuario.seguirUsuario();
+this.getServletContext().getRequestDispatcher("/consultarPerfil").forward(request,response);
+} 
+}
+
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

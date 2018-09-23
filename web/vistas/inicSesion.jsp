@@ -35,7 +35,7 @@
     <input type="text" name="nick" placeholder="Email o nickname" required="required"/>
    
     <input type="password" name="pass" placeholder="Contraseña" required="required" />
-     <script type="text/javascript" src="/js/login.js"></script>
+     <script type="text/javascript" src="<%= request.getContextPath()%>/js/limpiar.js"></script>
     <input type="submit" class="submit action-button" value="Ingresar" />
   </fieldset>
 </form>     
