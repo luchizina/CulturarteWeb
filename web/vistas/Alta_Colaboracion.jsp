@@ -56,7 +56,7 @@
 </form>
         <% } %>
         
-        <%if( ((String) request.getAttribute("tipoR")).equalsIgnoreCase("porcentaje, entradas")) { %>
+<%if( ((String) request.getAttribute("tipoR")).equalsIgnoreCase("entrada, porcentaje")) { %>
         <form id="msform" action="Colaboracion" method="post">
             
   <!-- fieldsets -->
@@ -73,6 +73,6 @@
     <input type="submit" class="next action-button" value="Colaborar" />
   </fieldset>
 </form>
-        <% } %>
+<% } %>
     </body>
 </html>

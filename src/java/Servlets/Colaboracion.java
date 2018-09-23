@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Aeliner
  */
+
 @WebServlet(name = "Colaboracion", urlPatterns = {"/Colaboracion"})
 public class Colaboracion extends HttpServlet {
 
@@ -33,6 +34,7 @@ public class Colaboracion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
             if(request.getParameter("monto") == null)
             {
                 
@@ -51,7 +53,7 @@ public class Colaboracion extends HttpServlet {
                 String tipoR = (String) request.getParameter("tipoRetorno");
                 String nick = (String) request.getSession().getAttribute("sesionAct");
                 ctrlPropuesta.getInstance().altaColaboracion(titulo, nick, monto, tipoR);
-                this.getServletContext().getRequestDispatcher("/home");
+                this.getServletContext().getRequestDispatcher("/home").forward(request, response);
             }
     }
 
