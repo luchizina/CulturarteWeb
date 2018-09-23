@@ -64,7 +64,7 @@
                       
                       <%   }else{%>
                               
-                      <img id="imagenot" src="/CulturarteWeb/img/user-4.png" width="250" height="250">
+                      <img id="imagenot" src="<%= request.getContextPath() %>/img/user-4.png" width="250" height="250">
                              
                           <%    } %>
 		</div>

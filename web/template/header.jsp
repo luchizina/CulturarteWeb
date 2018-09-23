@@ -13,7 +13,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
 %>
  
 
-<li class="active"><a href="#">Culturarte</a></li>
+<li class="active" ><a href="<%= request.getContextPath() %>/home">CulturArte</a></li>
  <li><a href="consultarPerfil">Visitar perfiles</a></li>
  <li><a href="#">Propuestas</a>
   <ul>
