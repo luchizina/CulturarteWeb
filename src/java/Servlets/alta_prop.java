@@ -169,7 +169,7 @@ public class alta_prop extends HttpServlet {
         }
         } else 
             {
-             request.getRequestDispatcher("/vistas/AltaPropu2_1.jsp").forward(request, response);
+             request.getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
             }
 
     }

@@ -30,7 +30,16 @@
      <%
  DtUsuario userop=inicSesion.getUsuarioLogueado(request);
  String sesionAct=(String) session.getAttribute("sesionAct");
- if(sesionAct==null || userop instanceof DtColaborador) {
+ if(sesionAct==null || userop instanceof DtColaborador) { %>
+ <form id="msform" action="<%= request.getContextPath() %>/vistas/subIndex.jsp" method="post">      
+  <!-- fieldsets -->
+  <fieldset>
+    <legend id="legendErr">¡UPSS! Esto es incómodo.. :( </legend>      
+    <h3 class="fs-subtitle">Página no encontrada, o no tienes acceso a ella</h3>
+    <input type="submit" name="volver atrás" class="btn action-button" value="¡Lo entiendo!">
+  </fieldset>
+</form>   
+  <%
  
  }else{
  %>
