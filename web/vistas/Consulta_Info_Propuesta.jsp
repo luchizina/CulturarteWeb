@@ -91,6 +91,11 @@
             </tr>    
         </table>
         <br>
+        <% if(propu.getImg()!=null){                                             %>
+            <img src="/CulturarteWeb/Retornar_imag_propuesta_Servlet?T=${propu.getTitulo()}" width="250" height="250">  
+        <%}else{%>                              
+            <img id="imagenot" src="/CulturarteWeb/img/pro.jpeg" width="250" height="250">                
+        <%}%>
         <br>
         <table border=10><tr><th><b> Colaboradores </b></th></tr>
                     <% if (colaboradores){                                      %>
@@ -102,9 +107,10 @@
     </table>  
 
     <% if (Puede_colaborar_a_propu && !Nombre_Usuario.equals("")) {          %>
-    <form 	action="#" method="get">
-        <input type="submit" value="Colaborar">
-    </form>
+    <form method="post" action="Colaboracion">
+            <input type="hidden" name="T" value="<%=request.getAttribute("titulito")%>">
+            <input type="submit" value="Colaborar">
+        </form>
     <% } %>
 
     <% if (Colaboro_a_propu && !Nombre_Usuario.equals("") && !Ya_comento) {     %>

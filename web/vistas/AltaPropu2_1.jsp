@@ -20,9 +20,9 @@
             
   <!-- fieldsets -->
   <fieldset>
-      <legend>¡UPSS! Esto es incómodo.. :(</legend>      
+      <legend id="legendErr">¡UPSS! Esto es incómodo.. :( </legend>      
     <h3 class="fs-subtitle">Los datos que ha ingresado son incorrectos, o bien, ese título ya está en uso... Por favor revise.</h3>
-<input type="button" onclick="history.back()"  name="volver atrás" class="next action-button" value="Nada">
+<input type="button" onclick="history.back()"  name="volver atrás" class="next action-button" value="Ok,lo entiendo">
   
   </fieldset>
 </form>    
