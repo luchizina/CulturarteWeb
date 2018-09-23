@@ -8,6 +8,7 @@ package Servlets;
 import Logica.DataImagen;
 import Logica.DtCategoria;
 import Logica.DtColaborador;
+import Logica.DtProponente;
 import Logica.DtPropuesta;
 import Logica.DtUsuario;
 import Logica.Estado;
@@ -90,7 +91,10 @@ public class alta_prop extends HttpServlet {
              List<DtCategoria> categoList= this.iC.listarCategorias();
        request.setAttribute("categorias", categoList);
           String titulo = request.getParameter(TIT);
-        if (titulo != null) {
+            DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+            if(userop instanceof DtProponente) {
+
+        if (titulo != null) {            
             String desc = request.getParameter(DESC);
             String catego = request.getParameter(CAtego);
             String precioE = request.getParameter(PRecioE);
@@ -163,6 +167,10 @@ public class alta_prop extends HttpServlet {
         {
           request.getRequestDispatcher("/vistas/Alta_propu.jsp").forward(request, response); 
         }
+        } else 
+            {
+             request.getRequestDispatcher("/vistas/AltaPropu2_1.jsp").forward(request, response);
+            }
 
     }
     @Override

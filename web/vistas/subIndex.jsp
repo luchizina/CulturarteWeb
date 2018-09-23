@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +8,9 @@
 </head>
 <body>
 	<jsp:include page="/template/header.jsp" />
-      
-	<jsp:include page="/template/footer.jsp" />
+        <center>
+      <img src="<%=request.getContextPath()%>/img/logo.png" width="800px">
+       </center>
+	
 </body>
 </html>
