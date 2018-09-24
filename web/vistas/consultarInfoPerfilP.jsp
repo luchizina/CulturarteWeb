@@ -39,11 +39,31 @@
         DtUsuario userop=inicSesion.getUsuarioLogueado(request);
         String nicko=userop.getNick();
             if(nicko.equals(prop.getNick())){%>
-           
-            <form class = msform style="float: right" action="<%=request.getContextPath()%>/alta_prop" method="post">
-                <button type="submit" class="btn action-button" id="botoncito">Dar propuestas de alta</button>
+            <div style="float: right">                                
+            <form id="pa" class="msformProp" action="<%=request.getContextPath()%>/alta_prop" method="post">
+                <fieldset>
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                 <i class="material-icons">add</i>
+                </button>  
+                 <button type="submit" class="mdl-button mdl-js-button mdl-button--accent">
+                Alta de propuesta
+               </button>  
+                </fieldset>
             </form>
-          
+                
+                
+                 <form method="get" id="ls" class="msformProp" action="<%=request.getContextPath()%>/borrar_prop">
+                <fieldset>
+                  <img src="<%= request.getContextPath()%>/img/borrar.png" border="0" width="40" height="40" style="float: left">
+                 <input type="hidden" name="nickLogueado" value="<%=userop.getNick()%>"/>
+                  <button type="submit" class="mdl-button mdl-js-button mdl-button--accent" style="float: right">
+                Cancelar propuesta
+               </button>   
+                 
+                </fieldset>
+           
+            </form>
+    </div>
         <%}%>
        
        
