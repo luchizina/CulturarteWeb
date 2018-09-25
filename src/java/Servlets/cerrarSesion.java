@@ -42,7 +42,7 @@ public class cerrarSesion extends HttpServlet {
        
         
         //Redirecciono a index.jsp
-        this.getServletContext().getRequestDispatcher("/index.html").forward(request,response);
+        this.getServletContext().getRequestDispatcher("/home").forward(request,response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

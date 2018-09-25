@@ -51,17 +51,41 @@
                 </fieldset>
             </form>
                 
+             <form id="msform" style="clear: both">
+            <div id="divTablas" class="datagrid">
+           <!--   <legend id="legendPerf">Seguidores</legend><br>-->
+               <right>
+           <table class="datagrid">
+            <tr> 
+                <th>
+                  Mis Propuestas
+                </th> 
+            </tr>
+            <%
+                List<DtPropuesta> MisProps = (List<DtPropuesta>) request.getAttribute("propusMias");
+                 String Mu ="";
                 
-                 <form method="get" id="ls" class="msformProp" action="<%=request.getContextPath()%>/borrar_prop">
-                <fieldset>
-                  <img src="<%= request.getContextPath()%>/img/borrar.png" border="0" width="40" height="40" style="float: left">
-                 <input type="hidden" name="nickLogueado" value="<%=userop.getNick()%>"/>
-                  <button type="submit" class="mdl-button mdl-js-button mdl-button--accent" style="float: right">
-                Cancelar propuesta
-               </button>   
-                 
-                </fieldset>
-           
+                if(MisProps.size()>0){
+                for ( DtPropuesta MiP : MisProps) {
+                 Mu = MiP.getTitulo().replace(" ", "+");
+                
+            %>
+            <tr>
+                <td>
+                    <a href=consultarPerfil?T=<%=Mu%>>
+                        <%= MiP.getTitulo()%> (<%= MiP.getEstActual().getEstado().toString() %>)
+                    </a>
+                </td>
+                
+            </tr>
+            
+            <%}} else{ %>
+             <td> No tiene ninguna propuesta</td>
+            <%} %>
+        </table>
+         </right>
+              </div>
+       
             </form>
     </div>
         <%}%>
@@ -196,9 +220,75 @@
             <%} %>
         </table>
          </right>
+              </div>    
+           <form style="float: both">
+            <div id="divTablas" class="datagrid">
+              <legend id="legendPerf">Propuestas favoritas</legend><br>
+                        <right>
+           <table class="datagrid">
+            <tr> 
+                <th>
+                  Nombre:
+                </th> 
+            </tr>
+            
+              <%
+                List<DtPropuesta> propFavo= (List<DtPropuesta>) request.getAttribute("propuFav");
+                 String pa ="";
+                
+                if(propFavo.size()>0){
+                for ( DtPropuesta propu1 : propFavo) {
+                 pa = propu1.getTitulo().replace(" ", "+");
+            %>
+            <tr>
+                <td>
+                    <a href=Consulta_de_propuesta_Servlet?T=<%=pa%>>
+                        <%= propu1.getTitulo()%> 
+                    </a>
+                    </td>
+            </tr>
+            <%} } else{ %>
+             <td> no tiene colaboraciones    </td>
+            <%} %>
+        </table>
+         </right>
               </div>
-       
-       
+         <form id="msform" style="clear: both">
+            <div id="divTablas" class="datagrid">
+           <!--   <legend id="legendPerf">Seguidores</legend><br>-->
+               <right>
+           <table class="datagrid">
+            <tr> 
+                <th>
+                  Mis Propuestas
+                </th> 
+            </tr>
+            <%
+                List<DtPropuesta> MisProps = (List<DtPropuesta>) request.getAttribute("propus");
+                 String Mu ="";
+                
+                if(MisProps.size()>0){
+                for ( DtPropuesta MiP : MisProps) {
+                 Mu = MiP.getTitulo().replace(" ", "+");
+                
+            %>
+            <tr>
+                <td>
+                    <a href=consultarPerfil?T=<%=Mu%>>
+                        <%= MiP.getTitulo()%> (<%= MiP.getEstActual().getEstado().toString() %>)
+                    </a>
+                </td>
+                
+            </tr>
+            
+            <%}} else{ %>
+             <td> No tiene ninguna propuesta</td>
+            <%} %>
+        </table>
+         </right>
+              </div>
+           
+        </form>  
       <%  DtUsuario userLogueado= inicSesion.getUsuarioLogueado(request);  
             List<DtUsuario> seguidoresPrueb= (List<DtUsuario>) request.getAttribute("seguidore");
             if(userLogueado.getNick().equals(prop.getNick())==false){

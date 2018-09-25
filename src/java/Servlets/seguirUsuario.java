@@ -33,6 +33,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        this.usuario.cargarUsuarios2();
     String nickLogueado= request.getParameter("nickLogueado");
     String nickASeguir= request.getParameter("nickASeguir");
 this.usuario.seleccionarUsuario(nickLogueado);

@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Logica.DtColaboracion;
 import Logica.DtColaborador;
 import Logica.DtProponente;
 import Logica.DtPropuesta;
@@ -54,7 +55,7 @@ public static final String MENSAJE_EXITO = "mensaje_exito";
               DtUsuario user= IU.traerDtUsuario(nickUser);
                String mensajeExito="Imagen subida correctamente";
                request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
-                request.getSession().setAttribute("T", nickUser);
+                request.getSession().setAttribute("T", nickUser);                
               if(user instanceof DtProponente){
                    DtUsuario use= IU.traerDtUsuario(nickUser);
                String mensajeExitoE="Imagen subida correctamente";
@@ -63,11 +64,15 @@ public static final String MENSAJE_EXITO = "mensaje_exito";
                   DtProponente prop=(DtProponente) use;
                   List<DtUsuario> usuSeguidos=IU.traerSeguidos(prop.getNick());
                   List<DtUsuario> usuSeguidores=IU.traerSeguidores(prop.getNick());
-                  List<DtPropuesta> propuFav= IU.traerPropFav(prop.getNick());   
+                  List<DtPropuesta> propuFav= IU.traerPropFav(prop.getNick());  
+                  List<DtPropuesta> Mispropus = IU.TraerTodasPropuestasIng(nickUser);
+                   List<DtPropuesta> propus = IU.TraerTodasPropuestas(nickUser);
                  // List<DtPropuesta> propuColaboradas= IU.traerPropuestasColaboradas(prop.getNick());   
                 request.setAttribute("seguido", usuSeguidos);
                  request.setAttribute("seguidore", usuSeguidores);
                  request.setAttribute("propuFav", propuFav);
+                 request.setAttribute("propusMias", Mispropus);
+                 request.setAttribute("propus", propus);
                 // request.setAttribute("propuCol", propuColaboradas);
                   request.setAttribute("usuario", prop);
                    this.getServletContext().getRequestDispatcher("/vistas/consultarInfoPerfilP.jsp").forward(request, response);
@@ -82,7 +87,7 @@ public static final String MENSAJE_EXITO = "mensaje_exito";
                   List<DtUsuario> usuSeguidos=IU.traerSeguidos(colab.getNick());
                   List<DtUsuario> usuSeguidores=IU.traerSeguidores(colab.getNick());
                   List<DtPropuesta> propuFav= IU.traerPropFav(colab.getNick());   
-                  List<DtPropuesta> propuColaboradas= IU.traerPropuestasColaboradas(colab.getNick());   
+                  List<DtColaboracion> propuColaboradas= IU.traerPropuestasColaboradas(colab.getNick());   
                 request.setAttribute("seguido", usuSeguidos);
                  request.setAttribute("seguidore", usuSeguidores);
                  request.setAttribute("propuFav", propuFav);

@@ -50,10 +50,9 @@ String sesionAct=(String) session.getAttribute("sesionAct");
   </ul>
  </li>
  <li><a href="<%= request.getContextPath() %>/Cargar_Datos_Web">Cargar Datos </a></li>  
-					<li style="float: right"><a href="<%= request.getContextPath() %>/cerrarSesion"><span class="glyphicon "></span>
-							Cerrar sesión</a></li> 
+<li style="float: right"><a href="<%= request.getContextPath() %>/cerrarSesion">Cerrar sesión</a></li> 
                                                       
-                            <li style="float: right"><a href="<%= request.getContextPath() %>/consultarPerfil?T=<%=user.getNick()%>">Mi perfil</a></li>
+ <li style="float: right"><a href="<%= request.getContextPath() %>/consultarPerfil?T=<%=user.getNick()%>">Mi perfil</a></li>
                      
                             
                              

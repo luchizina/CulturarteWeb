@@ -240,9 +240,16 @@
         <input type="submit" value="Extender Tiempo">
     </form>
     <br>
-    <form 	action="#" method="get">
-        <input type="submit" value="Cancela Propuesta">
-    </form>
+    <form method="get" id="ls" class="msformProp" action="<%=request.getContextPath()%>/borrar_prop">
+                <fieldset>
+                      <img src="<%= request.getContextPath() %>/img/borrar.png" alt="Smiley face" height="42" width="42" style="float: left"> 
+                 
+                  <button type="submit" class="mdl-button mdl-js-button mdl-button--accent" style="float: right">
+                      Cancelar propuesta
+                  </button>
+                       
+                </fieldset>
+                  </form>
     <%}%>   
 </body>
 </html>

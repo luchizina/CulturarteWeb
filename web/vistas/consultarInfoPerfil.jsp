@@ -4,6 +4,7 @@
     Author     : nambr
 --%>
 
+<%@page import="Logica.DtColaboracion"%>
 <%@page import="Servlets.inicSesion"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -99,12 +100,12 @@
  
              <form style="float: left">
             <div id="divTablas" class="datagrid">
-            <!--  <legend id="legendPerf">Usuarios seguidos</legend><br>-->
+           <legend id="legendPerf">Usuarios seguidos</legend><br>
                         <right>
            <table class="datagrid">
             <tr> 
                 <th>
-                    Usuarios seguidos
+                  Nombre:
                 </th> 
             </tr>
             <%
@@ -125,19 +126,19 @@
                 </td>
             </tr>
             <%}} else{ %>
-             <td> no tiene seguidos   </td>
+             <td> no sigues a nadie  </td>
             <%} %>
         </table>
          </right>
               </div> 
  <form id="msform" style="clear: both">
             <div id="divTablas" class="datagrid">
-           <!--   <legend id="legendPerf">Seguidores</legend><br>-->
+          <legend id="legendPerf">Seguidores</legend><br>
                <right>
            <table class="datagrid">
             <tr> 
                 <th>
-                   Seguidores
+                   Nombre:
                 </th> 
             </tr>
             <%
@@ -164,44 +165,72 @@
               </div>
         <form style="float: both">
             <div id="divTablas" class="datagrid">
-              <!--<legend id="legendPerf">Propuestas</legend><br>-->
+            <legend id="legendPerf">Colaboraciones</legend><br>
                         <right>
            <table class="datagrid">
             <tr> 
                 <th>
-                    Colaboraciones
+                   Titulo:
                 </th> 
+                <%
+                   DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+        String nicko=userop.getNick();
+            if(nicko.equals(colab.getNick())){%>
+             <th>
+                    Monto:
+                </th> 
+                  <th>
+                    Fecha:
+                </th> 
+            <%
+                }
+            %>
             </tr>
             
               <%
-                List<DtPropuesta> props= (List<DtPropuesta>) request.getAttribute("propuCol");
+                List<DtColaboracion> props= (List<DtColaboracion>) request.getAttribute("propuCol");
                  String Tup ="";
                 
                 if(props.size()>0){
-                for ( DtPropuesta propa : props) {
-                 Tup = propa.getTitulo().replace(" ", "+");
+                for ( DtColaboracion propa : props) {
+                 Tup = propa.getPropuesta().getTitulo().replace(" ", "+");
             %>
             <tr>
                 <td>
                     <a href=Consulta_de_propuesta_Servlet?T=<%=Tup%>>
-                        <%= propa.getTitulo()%> 
+                        <%= propa.getPropuesta().getTitulo() %> 
                     </a>
                     </td>
+                      <%
+            if(nicko.equals(colab.getNick())){%>
+             <td>
+                   <a href=Consulta_de_propuesta_Servlet?T=<%=Tup%>>
+                        <%= propa.getMonto()   %> 
+                    </a>
+                </td> 
+                 <td>
+                   <a href=Consulta_de_propuesta_Servlet?T=<%=Tup%>>
+                        <%= propa.getFecha()%> 
+                    </a>
+                </td> 
+            <%
+                }
+            %>
             </tr>
             <%} } else{ %>
-             <td> no tiene colaboraciones    </td>
+             <td> no tiene colaboraciones</td>
             <%} %>
         </table>
          </right>
               </div>
           <form style="float: both">
-            <div id="divTablas23" class="datagrid">
-              <!--<legend id="legendPerf">Propuestas</legend><br>-->
+            <div id="divTablas" class="datagrid">
+              <legend id="legendPerf">Propuestas favoritas</legend><br>
                         <right>
            <table class="datagrid">
             <tr> 
                 <th>
-                    Propuestas favoritas
+                  Nombre:
                 </th> 
             </tr>
             
@@ -209,7 +238,7 @@
                 List<DtPropuesta> propFavo= (List<DtPropuesta>) request.getAttribute("propuFav");
                  String pa ="";
                 
-                if(props.size()>0){
+                if(propFavo.size()>0){
                 for ( DtPropuesta propu1 : propFavo) {
                  pa = propu1.getTitulo().replace(" ", "+");
             %>
