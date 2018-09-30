@@ -43,14 +43,16 @@ List<DtUsuario> seguidores= this.usuario.traerSeguidores(nickASeguir);
 if(usuarioAseguir instanceof DtColaborador){
     if(this.usuario.yaSigue()==false){
 this.usuario.seguirUsuario();
-this.getServletContext().getRequestDispatcher("/consultarPerfil").forward(request,response);
+String link= request.getParameter("link");
+this.getServletContext().getRequestDispatcher(link).forward(request,response);
 }
     
 }
 else if(usuarioAseguir instanceof DtProponente){
       if(this.usuario.yaSigue()==false){
 this.usuario.seguirUsuario();
-this.getServletContext().getRequestDispatcher("/consultarPerfil").forward(request,response);
+String link= (String) request.getParameter("link");
+this.getServletContext().getRequestDispatcher(link).forward(request,response);
 } 
 }
 

@@ -307,7 +307,10 @@ for(int i=0; i < seguidoresPrueb.size(); i++){
            
             %>
           <form method="post" action="dejarDeSeguir">
-            
+                 <%
+                    String link2= "/consultarPerfil?T="+prop.getNick();
+ %>
+            <input type="hidden" name="link" value="<%=link2%>"/>
      
              <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
     <input type="hidden" name="nickASeguir" value="<%=prop.getNick()%>" />
@@ -320,8 +323,11 @@ for(int i=0; i < seguidoresPrueb.size(); i++){
 
             <form method="post" action="seguirUsuario">
             
-     
-             <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
+                <%
+                    String link= "/consultarPerfil?T="+prop.getNick();
+ %>
+            <input type="hidden" name="link" value="<%=link%>"/>
+ <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
     <input type="hidden" name="nickASeguir" value="<%=prop.getNick()%>" />
            <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Seguir" />
         </form>
