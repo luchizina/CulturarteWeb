@@ -276,7 +276,10 @@ for(int i=0; i < seguidoresPrueb.size(); i++){
            
             %>
           <form method="post" action="dejarDeSeguir">
-            
+              <%
+                    String link2= "/consultarPerfil?T="+colab.getNick();
+ %>
+            <input type="hidden" name="link" value="<%=link2%>"/>
      
              <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
     <input type="hidden" name="nickASeguir" value="<%=colab.getNick()%>" />
@@ -289,6 +292,10 @@ for(int i=0; i < seguidoresPrueb.size(); i++){
 
             <form method="post" action="seguirUsuario">
             
+                <%
+                    String link= "/consultarPerfil?T="+colab.getNick();
+ %>
+            <input type="hidden" name="link" value="<%=link%>"/>
      
              <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
     <input type="hidden" name="nickASeguir" value="<%=colab.getNick()%>" />
