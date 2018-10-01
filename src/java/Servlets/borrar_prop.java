@@ -4,23 +4,31 @@
  * and open the template in the editor.
  */
 package Servlets;
-import Logica.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Logica.*;
+import static java.lang.System.out;
+import java.util.List;
+import javax.servlet.http.HttpSession;
+
 /**
  *
- * @author nambr
+ * @author matheo
  */
-@WebServlet(name = "seguirUsuario", urlPatterns = {"/seguirUsuario"})
-public class seguirUsuario extends HttpServlet {
-private final Fabrica fabrica = Fabrica.getInstance();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
+@WebServlet(name = "borrar_prop", urlPatterns = {"/borrar_prop"})
+public class borrar_prop extends HttpServlet {
+
+      
+      private Fabrica fabrica = Fabrica.getInstance();
+      private IPropuesta IP=fabrica.getICtrlPropuesta();
+      private IUsuario IU = fabrica.getICtrlUsuario();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,30 +41,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        this.usuario.cargarUsuarios2();
-    String nickLogueado= request.getParameter("nickLogueado");
-    String nickASeguir= request.getParameter("nickASeguir");
-this.usuario.seleccionarUsuario(nickLogueado);
-this.usuario.seleccionarUsuSeg(nickASeguir);
-DtUsuario usuarioAseguir= this.usuario.traerDtUsuario(nickASeguir);
-List<DtUsuario> seguidores= this.usuario.traerSeguidores(nickASeguir);
-if(usuarioAseguir instanceof DtColaborador){
-    if(this.usuario.yaSigue()==false){
-this.usuario.seguirUsuario();
-String link= request.getParameter("link");
-this.getServletContext().getRequestDispatcher(link).forward(request,response);
-}
-    
-}
-else if(usuarioAseguir instanceof DtProponente){
-      if(this.usuario.yaSigue()==false){
-this.usuario.seguirUsuario();
-String link= (String) request.getParameter("link");
-this.getServletContext().getRequestDispatcher(link).forward(request,response);
-} 
-}
-
-
+ 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,7 +56,22 @@ this.getServletContext().getRequestDispatcher(link).forward(request,response);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+               try (PrintWriter out = response.getWriter()) {
+
+                // LISTAR PROPUESTAS 
+            if (request.getParameter("T") == null) {
+                  String nick= request.getParameter("nickLogueado");
+                List<DtPropuesta> propF = IU.TraerMisPropuestasF(nick);
+                request.setAttribute("propuestas", propF);
+                this.getServletContext().getRequestDispatcher("/vistas/CancelarPropu.jsp").forward(request, response);
+            } else {
+                
+                 request.setAttribute("propuesta", request.getParameter("T"));
+         this.getServletContext().getRequestDispatcher("/vistas/CancelarPropu2.jsp").forward(request, response);
+                  
+    }
+        
+    }
     }
 
     /**
@@ -85,7 +85,14 @@ this.getServletContext().getRequestDispatcher(link).forward(request,response);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+    String   p = request.getParameter("T");
+        if( p == null)
+        {}
+        else{
+   IP.cambiarEstadito(p, "Cancelada");
+   this.getServletContext().getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
+        
+        }
     }
 
     /**

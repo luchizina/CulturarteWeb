@@ -4,23 +4,25 @@
  * and open the template in the editor.
  */
 package Servlets;
-import Logica.*;
+
+import Logica.DtPropuesta;
+import Logica.ctrlPropuesta;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  *
- * @author nambr
+ * @author Aeliner
  */
-@WebServlet(name = "seguirUsuario", urlPatterns = {"/seguirUsuario"})
-public class seguirUsuario extends HttpServlet {
-private final Fabrica fabrica = Fabrica.getInstance();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
+
+@WebServlet(name = "Colaboracion", urlPatterns = {"/Colaboracion"})
+public class Colaboracion extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,31 +34,27 @@ private final Fabrica fabrica = Fabrica.getInstance();
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        this.usuario.cargarUsuarios2();
-    String nickLogueado= request.getParameter("nickLogueado");
-    String nickASeguir= request.getParameter("nickASeguir");
-this.usuario.seleccionarUsuario(nickLogueado);
-this.usuario.seleccionarUsuSeg(nickASeguir);
-DtUsuario usuarioAseguir= this.usuario.traerDtUsuario(nickASeguir);
-List<DtUsuario> seguidores= this.usuario.traerSeguidores(nickASeguir);
-if(usuarioAseguir instanceof DtColaborador){
-    if(this.usuario.yaSigue()==false){
-this.usuario.seguirUsuario();
-String link= request.getParameter("link");
-this.getServletContext().getRequestDispatcher(link).forward(request,response);
-}
-    
-}
-else if(usuarioAseguir instanceof DtProponente){
-      if(this.usuario.yaSigue()==false){
-this.usuario.seguirUsuario();
-String link= (String) request.getParameter("link");
-this.getServletContext().getRequestDispatcher(link).forward(request,response);
-} 
-}
-
-
+        request.setCharacterEncoding("UTF-8");
+            if(request.getParameter("monto") == null)
+            {
+                
+            
+                String titulo = request.getParameter("T");
+                DtPropuesta propuestita = ctrlPropuesta.getInstance().traerPropuesta(titulo);
+                request.setAttribute("tipoR", propuestita.getTRetornos());
+                request.setAttribute("Titulo", titulo);
+                this.getServletContext().getRequestDispatcher("/vistas/Alta_Colaboracion.jsp").forward(request, response);
+            
+            }
+            else
+            {
+                String titulo = (String) request.getParameter("Titulo");
+                String monto = (String) request.getParameter("monto");
+                String tipoR = (String) request.getParameter("tipoRetorno");
+                String nick = (String) request.getSession().getAttribute("sesionAct");
+                ctrlPropuesta.getInstance().altaColaboracion(titulo, nick, monto, tipoR);
+                this.getServletContext().getRequestDispatcher("/home").forward(request, response);
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -123,6 +123,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
                 DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
                 List<String> colaborador = IP.ColaborantesDePro();
                 request.setAttribute("propu", p_consulta);
+                request.setAttribute("titulito", p_consulta.getTitulo());
                 String nick = (String) request.getSession().getAttribute("sesionAct");
                 boolean com = IP.Ya_Comento_Propuesta(nick, titulo);
                  boolean fav = IP.yaFavoriteo(IU.traerUsuario(nick), titulo);

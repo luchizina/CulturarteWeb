@@ -4,7 +4,10 @@
     Author     : Lucia
 --%>
 
+<%@page import="Logica.DtColaborador"%>
+<%@page import="Servlets.inicSesion"%>
 <%@page import="Logica.DtCategoria"%>
+<%@page import="Logica.DtUsuario"%>
 <%@page import="Servlets.alta_prop"%>
 <%@page import="java.util.Collection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,10 +23,27 @@
 
 </head>
 <body>
+    
      <jsp:include page="/template/header.jsp" />
        
   <!-- multistep form -->
-<form action="<%=request.getContextPath()%>/alta_prop" method="post" id="msform" enctype="multipart/form-data">
+     <%
+ DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+ String sesionAct=(String) session.getAttribute("sesionAct");
+ if(sesionAct==null || userop instanceof DtColaborador) { %>
+ <form id="msform" action="<%= request.getContextPath() %>/vistas/subIndex.jsp" method="post">      
+  <!-- fieldsets -->
+  <fieldset>
+    <legend id="legendErr">¡UPSS! Esto es incómodo.. :( </legend>      
+    <h3 class="fs-subtitle">Página no encontrada, o no tienes acceso a ella</h3>
+    <input type="submit" name="volver atrás" class="btn action-button" value="¡Lo entiendo!">
+  </fieldset>
+</form>   
+  <%
+ 
+ }else{
+ %>
+  <form action="<%=request.getContextPath()%>/alta_prop" method="post" id="msform" enctype="multipart/form-data">
       <!-- progressbar -->
   <ul id="progressbar">
       
@@ -74,7 +94,7 @@
   </fieldset>
   
 </form>
-      
+      <%}%>
      <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
 <script  src="<%=request.getContextPath()%>/js/index.js"></script>

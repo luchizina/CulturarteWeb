@@ -4,6 +4,7 @@
     Author     : nambr
 --%>
 
+<%@page import="Logica.DtPropuesta"%>
 <%@page import="Logica.DtUsuario"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,30 +23,20 @@
     <body>  
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
        <jsp:include page="/template/header.jsp" />
-        
-    
-    
-    <form id="msform">
-        
+  
+    <form id="msform">       
         <fieldset>
-     <legend id="legendErr">Perfil de usuarios</legend><br>
+     <legend id="legendErr">Perfil de propuesta</legend><br>
      <nav>
-     <ul class="demo-list-icon mdl-list">
-        <%  List<DtUsuario> usuariosU = (List<DtUsuario>) request.getAttribute("usuarios");
-                for (DtUsuario user : usuariosU) {
-                    
-                
-                String Titu = user.getNick().replace(" ", "-");
-                String completo= user.getNombre()+" "+user.getApellido()+" ("+user.getNick()+")";
-        
+ <ul class="demo-list-icon mdl-list">
+        <%  List<DtPropuesta> prop = (List<DtPropuesta>) request.getAttribute("propuestas");
+                for (DtPropuesta p : prop) {
+                String Titu = p.getTitulo().replace(" ", "+");
         %>
-        
   <li class="mdl-list__item">
     <span class="mdl-list__item-primary-content">
     <i class="material-icons mdl-list__item-icon">person</i>
-  <a href=consultarPerfil?T=<%=Titu%>>
-                        <%= completo%> 
-                    </a>
+  <a href=borrar_prop?T=<%=Titu%>> <%=Titu%>  </a>
 </span>
   </li>
   <% } %>

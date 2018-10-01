@@ -41,6 +41,15 @@ body {
     
 }
 
+.msformProp {
+    width: 350px;
+    margin: 50px auto;
+    text-align: center;
+    position: relative;
+    
+    
+}
+
 .rotulo
 {
     display: block;
@@ -110,7 +119,61 @@ body {
 
 
 
+.msformProp fieldset {
+	background: white;
+	border: 0 #2C3E50;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 80%;
+	margin: 0 10%;
+	/*stacking fieldsets above each other*/
+	position: relative;
+}
 
+.msformProp fieldset:not(:first-of-type) {
+	display: none;
+}
+/*inputs*/
+.msformProp input, #msform textarea {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+/*combobox*/
+.msformProp select, #msform textarea {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
+/*buttons*/
+.msformProp .action-button {
+	width: 100px;
+	background: #27AE60;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+.msformProp .action-button:hover, #msform .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
 
 #msformCat fieldset {
 	background: white;
@@ -248,7 +311,7 @@ body {
     color: #fff;
     padding: 3px 10px;
     font-size: 20px;
-   text-align: right;
+   text-align: center;
 }
 
 #legendErr{
@@ -419,3 +482,9 @@ div.dhtmlx_window_active, div.dhx_modal_cover_dv {
 
 /*nuevooooooooooooo*/
 
+.demo-list-icon {
+  width: 300px;
+}
+
+nav ul{height:400px; width:18%;}
+nav ul{overflow:hidden; overflow-y:scroll;}

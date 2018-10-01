@@ -43,10 +43,6 @@ public class inicSesion extends HttpServlet {
       String nick = request.getParameter("nick");
       if(nick!=null){
            
-      
-          
-   
-      
       String pass = request.getParameter("pass");
      
  DtInfo resultado= this.usuario.resolverLogin(nick, pass);

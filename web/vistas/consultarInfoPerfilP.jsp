@@ -13,6 +13,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <head>
          <script  src="../js/progress.js"></script>
          <jsp:include page="/template/head.jsp" />
@@ -36,11 +39,55 @@
         DtUsuario userop=inicSesion.getUsuarioLogueado(request);
         String nicko=userop.getNick();
             if(nicko.equals(prop.getNick())){%>
-           
-            <form class = msform style="float: right" action="<%=request.getContextPath()%>/alta_prop" method="post">
-                <button type="submit" class="btn action-button" id="botoncito">Dar propuestas de alta</button>
+            <div style="float: right">                                
+            <form id="pa" class="msformProp" action="<%=request.getContextPath()%>/alta_prop" method="post">
+                <fieldset>
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                 <i class="material-icons">add</i>
+                </button>  
+                 <button type="submit" class="mdl-button mdl-js-button mdl-button--accent">
+                Alta de propuesta
+               </button>  
+                </fieldset>
             </form>
-          
+                
+             <form id="msform" style="clear: both">
+            <div id="divTablas" class="datagrid">
+           <!--   <legend id="legendPerf">Seguidores</legend><br>-->
+               <right>
+           <table class="datagrid">
+            <tr> 
+                <th>
+                  Mis Propuestas
+                </th> 
+            </tr>
+            <%
+                List<DtPropuesta> MisProps = (List<DtPropuesta>) request.getAttribute("propusMias");
+                 String Mu ="";
+                
+                if(MisProps.size()>0){
+                for ( DtPropuesta MiP : MisProps) {
+                 Mu = MiP.getTitulo().replace(" ", "+");
+                
+            %>
+            <tr>
+                <td>
+                    <a href=consultarPerfil?T=<%=Mu%>>
+                        <%= MiP.getTitulo()%> (<%= MiP.getEstActual().getEstado().toString() %>)
+                    </a>
+                </td>
+                
+            </tr>
+            
+            <%}} else{ %>
+             <td> No tiene ninguna propuesta</td>
+            <%} %>
+        </table>
+         </right>
+              </div>
+       
+            </form>
+    </div>
         <%}%>
        
        
@@ -61,7 +108,7 @@
                       
                       <%   }else{%>
                               
-                      <img id="imagenot" src="/CulturarteWeb/img/user-4.png" width="250" height="250">
+                      <img id="imagenot" src="<%= request.getContextPath() %>/img/user-4.png" width="250" height="250">
                              
                           <%    } %>
 		</div>
@@ -173,9 +220,124 @@
             <%} %>
         </table>
          </right>
+              </div>    
+           <form style="float: both">
+            <div id="divTablas" class="datagrid">
+              <legend id="legendPerf">Propuestas favoritas</legend><br>
+                        <right>
+           <table class="datagrid">
+            <tr> 
+                <th>
+                  Nombre:
+                </th> 
+            </tr>
+            
+              <%
+                List<DtPropuesta> propFavo= (List<DtPropuesta>) request.getAttribute("propuFav");
+                 String pa ="";
+                
+                if(propFavo.size()>0){
+                for ( DtPropuesta propu1 : propFavo) {
+                 pa = propu1.getTitulo().replace(" ", "+");
+            %>
+            <tr>
+                <td>
+                    <a href=Consulta_de_propuesta_Servlet?T=<%=pa%>>
+                        <%= propu1.getTitulo()%> 
+                    </a>
+                    </td>
+            </tr>
+            <%} } else{ %>
+             <td> no tiene colaboraciones    </td>
+            <%} %>
+        </table>
+         </right>
               </div>
-       
-       
+         <form id="msform" style="clear: both">
+            <div id="divTablas" class="datagrid">
+           <!--   <legend id="legendPerf">Seguidores</legend><br>-->
+               <right>
+           <table class="datagrid">
+            <tr> 
+                <th>
+                  Mis Propuestas
+                </th> 
+            </tr>
+            <%
+                List<DtPropuesta> MisProps = (List<DtPropuesta>) request.getAttribute("propus");
+                 String Mu ="";
+                
+                if(MisProps.size()>0){
+                for ( DtPropuesta MiP : MisProps) {
+                 Mu = MiP.getTitulo().replace(" ", "+");
+                
+            %>
+            <tr>
+                <td>
+                    <a href=consultarPerfil?T=<%=Mu%>>
+                        <%= MiP.getTitulo()%> (<%= MiP.getEstActual().getEstado().toString() %>)
+                    </a>
+                </td>
+                
+            </tr>
+            
+            <%}} else{ %>
+             <td> No tiene ninguna propuesta</td>
+            <%} %>
+        </table>
+         </right>
+              </div>
+           
+        </form>  
+      <%  DtUsuario userLogueado= inicSesion.getUsuarioLogueado(request);  
+            List<DtUsuario> seguidoresPrueb= (List<DtUsuario>) request.getAttribute("seguidore");
+            if(userLogueado.getNick().equals(prop.getNick())==false){
+                boolean yaSigue=false;
+for(int i=0; i < seguidoresPrueb.size(); i++){
+    DtUsuario seguidor= seguidoresPrueb.get(i);
+    
+    if(seguidor.getNick().equals(userLogueado.getNick())){
+        yaSigue=true;
+    }
+    
+}
+       if(yaSigue==true){
+           
+      
+           
+            %>
+          <form method="post" action="dejarDeSeguir">
+                 <%
+                    String link2= "/consultarPerfil?T="+prop.getNick();
+ %>
+            <input type="hidden" name="link" value="<%=link2%>"/>
+     
+             <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
+    <input type="hidden" name="nickASeguir" value="<%=prop.getNick()%>" />
+           <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Dejar de seguir" />
+        </form>
+       <% } else{%> 
+           
+           
+     
+
+            <form method="post" action="seguirUsuario">
+            
+                <%
+                    String link= "/consultarPerfil?T="+prop.getNick();
+ %>
+            <input type="hidden" name="link" value="<%=link%>"/>
+ <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
+    <input type="hidden" name="nickASeguir" value="<%=prop.getNick()%>" />
+           <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Seguir" />
+        </form>
+            
+           <%} }%>     
+        
+        
+        
+        
+        
         
         <% } else {%>
          <legend id="legendPerf">Información no disponibe</legend><br>

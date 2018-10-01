@@ -5,6 +5,9 @@
  */
 package Servlets;
 
+import Logica.DtColaborador;
+import Logica.DtProponente;
+import Logica.DtUsuario;
 import Logica.Fabrica;
 import Logica.IUsuario;
 import java.io.IOException;
@@ -37,13 +40,25 @@ private final Fabrica fabrica = Fabrica.getInstance();
         response.setContentType("text/html;charset=UTF-8");
       String nickLogueado= request.getParameter("nickLogueado");
     String nickASeguir= request.getParameter("nickASeguir");
+    DtUsuario usuarioAseguir= this.usuario.traerDtUsuario(nickASeguir);
 this.usuario.seleccionarUsuario(nickLogueado);
 this.usuario.seleccionarUsuSeg(nickASeguir);
-if(this.usuario.yaSigue()==true){
-    
+
+if(usuarioAseguir instanceof DtColaborador){
+    if(this.usuario.yaSigue()==true){
 this.usuario.dejarDeSeguir();
+String link= request.getParameter("link");
+this.getServletContext().getRequestDispatcher(link).forward(request,response);
 }
-this.getServletContext().getRequestDispatcher("/consultarPerfil").forward(request,response);
+    
+}
+else if(usuarioAseguir instanceof DtProponente){
+      if(this.usuario.yaSigue()==true){
+this.usuario.dejarDeSeguir();
+String link= (String) request.getParameter("link");
+this.getServletContext().getRequestDispatcher(link).forward(request,response);
+} 
+}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

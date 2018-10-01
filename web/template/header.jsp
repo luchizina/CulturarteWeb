@@ -13,18 +13,18 @@ String sesionAct=(String) session.getAttribute("sesionAct");
 %>
  
 
-<li class="active"><a href="#">Culturarte</a></li>
+<li class="active" ><a href="<%= request.getContextPath() %>/index.html">CulturArte</a></li>
  <li><a href="consultarPerfil">Visitar perfiles</a></li>
  <li><a href="#">Propuestas</a>
   <ul>
-   <li><a href="Consulta_de_propuesta_Servlet">Consultar propuestas</a></li>
-   <li><a href="Consulta_de_Propuesta_por_Categoria">Consultar propuestas por categoria</a></li>
+   <li><a href="<%= request.getContextPath() %>/Consulta_de_propuesta_Servlet">Consultar propuestas</a></li>
+   <li><a href="<%= request.getContextPath() %>/Consulta_de_Propuesta_por_Categoria">Consultar propuestas por categoria</a></li>
   </ul>
  </li>
- <li><a href="Cargar_Datos_Web">Cargar Datos </a></li>  
+ <li><a href="<%= request.getContextPath() %>/Cargar_Datos_Web">Cargar Datos </a></li>  
  
- <li style="float: right"><a href="Registrarse">Registrar</a></li>
- <li style="float: right"><a href="iniciarS">Iniciar sesión</a></li>
+ <li style="float: right"><a href="<%= request.getContextPath() %>/Registrarse">Registrar</a></li>
+ <li style="float: right"><a href="<%= request.getContextPath() %>/iniciarS">Iniciar sesión</a></li>
  
     <% 
         }else{
@@ -42,31 +42,29 @@ String sesionAct=(String) session.getAttribute("sesionAct");
                            
                             
                             <li class="active"><a href="#">Culturarte</a></li>
- <li><a href="consultarPerfil">Visitar perfiles</a></li>
+ <li><a href="<%= request.getContextPath() %>/consultarPerfil">Visitar perfiles</a></li>
  <li><a href="#">Propuestas</a>
   <ul>
-   <li><a href="Consulta_de_propuesta_Servlet">Consultar propuestas</a></li>
-   <li><a href="Consulta_de_Propuesta_por_Categoria">Consultar propuestas por categoria</a></li>
+   <li><a href="<%= request.getContextPath() %>/Consulta_de_propuesta_Servlet">Consultar propuestas</a></li>
+   <li><a href="<%= request.getContextPath() %>/Consulta_de_Propuesta_por_Categoria">Consultar propuestas por categoria</a></li>
   </ul>
  </li>
- <li><a href="Cargar_Datos_Web">Cargar Datos </a></li>  
-					<li style="float: right"><a href="cerrarSesion"><span class="glyphicon "></span>
-							Cerrar sesión</a></li> 
+ <li><a href="<%= request.getContextPath() %>/Cargar_Datos_Web">Cargar Datos </a></li>  
+<li style="float: right"><a href="<%= request.getContextPath() %>/cerrarSesion">Cerrar sesión</a></li> 
                                                       
-                            <li style="float: right"><a href="consultarPerfil?T=<%=user.getNick()%>">Mi perfil</a></li>
+ <li style="float: right"><a href="<%= request.getContextPath() %>/consultarPerfil?T=<%=user.getNick()%>">Mi perfil</a></li>
                      
                             
                              
 					<li  style="float: right"><a href="#"><span class="glyphicon "></span>
 							¡Bienvenido <%out.print(nueva1);%>!</a></li>
                             <%}%>
-                             <form style="float: right" role="search" class ="msform">
-					
+                                         <form style="float: right" role="search" class ="msform">
 						<input type="text"  placeholder="Search..">
 							<button class="btn action-button" type="button"  >Buscar</button>
 					
                                         
-				</form>
+                                         </form>
                             
         
 </ul>
