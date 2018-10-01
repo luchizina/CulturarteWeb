@@ -109,7 +109,6 @@
                 </th> 
             </tr>
             <%
-                
                 List<DtUsuario> seguidos= (List<DtUsuario>) request.getAttribute("seguido");
                  String Titu ="";
                 
@@ -130,7 +129,7 @@
             <%} %>
         </table>
          </right>
-              </div> 
+              </div> <%-- Usuarios seguidos --%>
  <form id="msform" style="clear: both">
             <div id="divTablas" class="datagrid">
           <legend id="legendPerf">Seguidores</legend><br>
@@ -162,7 +161,7 @@
             <%} %>
         </table>
          </right>
-              </div>
+              </div>  <%-- Usuarios seguidos --%>
         <form style="float: both">
             <div id="divTablas" class="datagrid">
             <legend id="legendPerf">Colaboraciones</legend><br>
@@ -173,7 +172,8 @@
                    Titulo:
                 </th> 
                 <%
-                   DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+           DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+           if(userop != null){
         String nicko=userop.getNick();
             if(nicko.equals(colab.getNick())){%>
              <th>
@@ -214,10 +214,10 @@
                     </a>
                 </td> 
             <%
-                }
+                }}
             %>
             </tr>
-            <%} } else{ %>
+            <%}}  else{ %>
              <td> no tiene colaboraciones</td>
             <%} %>
         </table>
