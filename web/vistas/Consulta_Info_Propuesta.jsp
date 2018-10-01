@@ -274,7 +274,7 @@
     </div>
     <%}%>
     <% if (Propuso_a_propu && !Nombre_Usuario.equals("")) {%>
-    <div style="position:relative; top: 20px; right: 15px; float: right">
+    <div style="position:absolute; top: 250px; right: 100px">
     <form 	action="#" method="get">
        <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
                 <i class="material-icons">update</i>
@@ -287,7 +287,7 @@
     <br>
     <br>
     <br>
-    <div style="position:absolute; top: 70px; right: -45px; float: right">
+    <div style="position:absolute; top: 300px; right: 40px">
     <form method="get" id="ls" class="msformProp" action="<%=request.getContextPath()%>/borrar_prop">
         <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
                 <i class="material-icons">delete</i>
