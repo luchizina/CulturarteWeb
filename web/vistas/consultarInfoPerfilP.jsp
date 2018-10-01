@@ -37,6 +37,7 @@
             <jsp:include page="/template/header.jsp" />
                   <%
         DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+        if(userop != null){
         String nicko=userop.getNick();
             if(nicko.equals(prop.getNick())){%>
             <div style="float: right">                                
@@ -88,7 +89,7 @@
        
             </form>
     </div>
-        <%}%>
+        <%}}%>
        
        
         <% if(prop != null ) {%>
@@ -189,9 +190,10 @@
         </table>
          </right>
               </div>
- <form id="msform" style="clear: both">
+   
+     <form id="msform" style="clear: both">
             <div id="divTablas" class="datagrid">
-           <!--   <legend id="legendPerf">Seguidores</legend><br>-->
+             <legend id="legendPerf">Seguidores</legend><br>
                <right>
            <table class="datagrid">
             <tr> 
