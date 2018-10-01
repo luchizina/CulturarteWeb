@@ -50,7 +50,7 @@
               </div>
 		<div id="perfil_izquierda">
                     
-                    <% if(colab.getImg()!=null){
+                    <% if(colab.getImg()!=null && !colab.getImg().equals("")){
                         
                    
                         %>

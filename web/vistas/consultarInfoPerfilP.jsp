@@ -27,7 +27,8 @@
         DtUsuario user=(DtUsuario) request.getAttribute("usuario");
         DtProponente prop=null;
         if(user instanceof DtProponente){
-            prop= (DtProponente) user;           
+            prop= (DtProponente) user;    
+           
         }  
         %>
     </head>
@@ -100,7 +101,8 @@
               </div>
 		<div id="perfil_izquierda">
                     
-                    <% if(prop.getImg()!=null){
+                    <% if(prop.getImg()!=null && !prop.getImg().equals("")){
+                        
                         
                    
                         %>
