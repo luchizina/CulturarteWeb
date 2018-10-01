@@ -5,16 +5,27 @@
 --%>
 <%@page import="Servlets.inicSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% if(inicSesion.getUsuarioLogueado(request) != null) { 
-    request.getRequestDispatcher("/home").forward(request, response);
-}%>
+<% if (inicSesion.getUsuarioLogueado(request) != null) { %>
+       <form id="msform" action="<%= request.getContextPath() %>/home" method="post">      
+  <!-- fieldsets -->
+  <fieldset>
+    <legend id="legendErr">¡UPSS! Esto es incómodo.. :( </legend>      
+    <h3 class="fs-subtitle">Página no encontrada, o no tienes acceso a ella</h3>
+    <input type="submit" name="volver atrás" class="btn action-button" value="¡Lo entiendo!">
+  </fieldset>
+</form>   
+  <%
+ 
+ }else{
+ %>
+
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registro de Usuarios</title>
-<jsp:include page="/template/head.jsp" />
+        <jsp:include page="/template/head.jsp" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
         <link href="<%= request.getContextPath()%>/css/style.css" rel="stylesheet" media="screen">
     </head>
@@ -85,9 +96,9 @@
             <fieldset>
                 <h2 class="fs-title">Datos sobre el usuario</h2>
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
+                    <div class="col-sm-offset-2 col-sm-10" >
                         <input type="file" class="btn btn-default" accept="image/*"
-                               id="imagen" name="imagen">
+                               id="imagen" name="imagen" >
                     </div>
                 </div>
 
@@ -129,5 +140,8 @@
             <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
             <script src="<%= request.getContextPath()%>/js/index.js"></script>
         </form> 
+        <%
+ }
+ %>
     </body>
 </html>
