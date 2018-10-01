@@ -121,7 +121,7 @@
             </button>
         </form>
     </div>
-    <% } else if (!Puede_colaborar_a_propu) { %>
+            <% } else if (!Puede_colaborar_a_propu && session.getAttribute("tipo").equals("colaborador")) { %>
     <div style="position: absolute; top: 100px; right: 70px; color:green">
         <i class="material-icons">
             attach_money
