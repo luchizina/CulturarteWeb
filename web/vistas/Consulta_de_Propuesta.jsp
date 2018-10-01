@@ -43,6 +43,7 @@
             <%
                 List<DtPropuesta> x = (List<DtPropuesta>) request.getAttribute("propuestas");
                 for (DtPropuesta cx : x) {
+                    String sopa = cx.getTitulo();
             %>
             <tr>
                 <td>
@@ -52,6 +53,14 @@
                     <form action="Consulta_de_propuesta_Servlet" method="post">
                     <input type="hidden" name="T" value="<%=cx.getTitulo()%>">
                     <input type="submit" value="Ver"> 
+                    </form>
+                    <form action="Consulta_de_propuesta_Servlet" method="post">
+                    <input type="hidden" name="FG" value="<%=cx.getTitulo()%>">
+                    <input type="submit" value="Ver2"> 
+                    </form>
+                    <form action="Consulta_de_propuesta_Servlet" method="post">
+                    <input type="hidden" name="FGX" value="<%=sopa%>">
+                    <input type="submit" value="sopa"> 
                     </form>
                 </td>
             </tr>

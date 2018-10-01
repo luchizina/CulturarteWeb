@@ -61,6 +61,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
                 // LISTAR PROPUESTAS 
             if (request.getParameter("T") == null) {
                 List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
@@ -107,6 +108,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         //processRequest(request, response);
         // LISTAR PROPUESTAS 
             if (request.getParameter("T") == null) {

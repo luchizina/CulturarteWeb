@@ -63,7 +63,7 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        request.setCharacterEncoding("UTF-8");
   
         try (PrintWriter out = response.getWriter()) {
                 // LISTAR CATEGORIA 
@@ -95,6 +95,7 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         //processRequest(request, response);
         if (request.getParameter("C") == null) {
                 List<DtCategoria> x = IC.listarCategorias();
