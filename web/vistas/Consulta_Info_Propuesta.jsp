@@ -94,10 +94,10 @@
             </tr>    
         </table>
         <br>
-        <% if (propu.getImg() != null) {                                             %>
-        <img src="/CulturarteWeb/Retornar_imag_propuesta_Servlet?T=${propu.getTitulo()}" width="250" height="250">  
-        <%} else {%>                              
-        <img id="imagenot" src="/CulturarteWeb/img/pro.jpeg" width="250" height="250">                
+        <% if(propu.getImg()!=null && !propu.getImg().equals("")){              %>
+            <img src="/CulturarteWeb/Retornar_imag_propuesta_Servlet?T=${propu.getTitulo()}" width="250" height="250">  
+        <%}else{%>                              
+            <img id="imagenot" src="/CulturarteWeb/img/pro.jpeg" width="250" height="250">                
         <%}%>
         <br>
         <table border=10><tr><th><b> Colaboradores </b></th></tr>
