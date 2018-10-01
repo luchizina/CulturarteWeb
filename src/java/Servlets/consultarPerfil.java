@@ -45,7 +45,7 @@ public static final String MENSAJE_EXITO = "mensaje_exito";
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
        this.IU.cargarUsuarios2();
-   
+
         if (request.getParameter("T") == null) {
                 List<DtUsuario> usuarios = IU.listarUsuarios();
                 request.setAttribute("usuarios", usuarios);
