@@ -5,9 +5,20 @@
 --%>
 <%@page import="Servlets.inicSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% if (inicSesion.getUsuarioLogueado(request) != null) {
-        request.getRequestDispatcher("/home").forward(request, response);
-    }%>
+<% if (inicSesion.getUsuarioLogueado(request) != null) { %>
+       <form id="msform" action="<%= request.getContextPath() %>/home" method="post">      
+  <!-- fieldsets -->
+  <fieldset>
+    <legend id="legendErr">¡UPSS! Esto es incómodo.. :( </legend>      
+    <h3 class="fs-subtitle">Página no encontrada, o no tienes acceso a ella</h3>
+    <input type="submit" name="volver atrás" class="btn action-button" value="¡Lo entiendo!">
+  </fieldset>
+</form>   
+  <%
+ 
+ }else{
+ %>
+
 
 <!DOCTYPE html>
 <html>
@@ -129,5 +140,8 @@
             <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
             <script src="<%= request.getContextPath()%>/js/index.js"></script>
         </form> 
+        <%
+ }
+ %>
     </body>
 </html>
