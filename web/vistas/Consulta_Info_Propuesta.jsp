@@ -12,6 +12,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <% DtPropuesta propu = (DtPropuesta) request.getAttribute("propu");
         boolean colaboradores = false;
         List<String> x = (List<String>) request.getAttribute("col");
@@ -27,10 +30,10 @@
         String tipo = "";
         String Favo = (String) request.getAttribute("fav");
         String String_Ya_Comento = (String) request.getAttribute("comentario");
-        if(String_Ya_Comento.equals("true")){
+        if (String_Ya_Comento.equals("true")) {
             Ya_comento = true;
         }
-        if(Favo.equals("true")){
+        if (Favo.equals("true")) {
             yaFav = true;
         }
         if (request.getSession().getAttribute("sesionAct") != null) {
@@ -91,34 +94,44 @@
             </tr>    
         </table>
         <br>
-        <% if(propu.getImg()!=null){                                             %>
-            <img src="/CulturarteWeb/Retornar_imag_propuesta_Servlet?T=${propu.getTitulo()}" width="250" height="250">  
-        <%}else{%>                              
-            <img id="imagenot" src="/CulturarteWeb/img/pro.jpeg" width="250" height="250">                
+        <% if (propu.getImg() != null) {                                             %>
+        <img src="/CulturarteWeb/Retornar_imag_propuesta_Servlet?T=${propu.getTitulo()}" width="250" height="250">  
+        <%} else {%>                              
+        <img id="imagenot" src="/CulturarteWeb/img/pro.jpeg" width="250" height="250">                
         <%}%>
         <br>
         <table border=10><tr><th><b> Colaboradores </b></th></tr>
-                    <% if (colaboradores){                                      %>
-                    <% for (String cx : x) {                                    %>
+                    <% if (colaboradores) {                                      %>
+                    <% for (String cx : x) {%>
             <tr><td><%= cx%></td></tr>
             <%}%>
             <%}%>
         </tr>
     </table>  
 
-    <% if (Puede_colaborar_a_propu && !Nombre_Usuario.equals("")) {          %>
-    <form method="post" action="Colaboracion">
+    <% if (Puede_colaborar_a_propu && !Nombre_Usuario.equals("")) {%>
+    <div style="position: absolute; top: 60px; right: 100px">
+        <form method="post" action="Colaboracion">
             <input type="hidden" name="T" value="<%=request.getAttribute("titulito")%>">
-            <input type="submit" value="Colaborar">
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">monetization_on</i>
+            </button>
+            <button  class="mdl-button mdl-js-button mdl-button--accent">
+                Colaborar
+            </button>
         </form>
-    <% } %>
-
-    <% if (Colaboro_a_propu && !Nombre_Usuario.equals("") && !Ya_comento) {     %>
+    </div>
+    <% } else if (!Puede_colaborar_a_propu) { %>
+    <div style="position: absolute; top: 100px; right: 70px; color:green">
+        <i class="material-icons">
+            attach_money
+        </i>
+        <b> Usted ya ha colaborado en esta propuesta </b>
+    </div>
+    <% }%>
+    <% if (Colaboro_a_propu && !Nombre_Usuario.equals("") && !Ya_comento) {%>
     <style>
-        *{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
-
-        /* Set a style for all buttons */
-        button {
+        .comentario {
             background-color: #4CAF50;
             color: white;
             padding: 10px 15px;
@@ -128,7 +141,7 @@
             width: 250px;
             font-size:10px;
         }
-        button:hover {
+        .comentario:hover {
             opacity: 0.8;
         }
 
@@ -189,67 +202,101 @@
             to {transform: scale(1)}
         }
     </style>
-    <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" style="width:200px; margin-top:200px; margin-left:160px;">
-        Agregar comentario</button>
+    <div style="position: absolute; top: 150px; right: 100px">
+        <fieldset>
+            <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">add</i>
+            </button>  
+            <button  class="mdl-button mdl-js-button mdl-button--accent">
+                Agregar comentario
+            </button>  
+        </fieldset>
 
-    <div id="modal-wrapper" class="modal">
+        <div id="modal-wrapper" class="modal">
 
-        <form class="modal-content animate" action="/CulturarteWeb/comentario" method="post">
+            <form class="modal-content animate" action="/CulturarteWeb/comentario" method="post">
 
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('modal-wrapper').style.display = 'none'" class="close" title="Close PopUp">&times;</span>
-            </div>
+                <div class="imgcontainer">
+                    <span onclick="document.getElementById('modal-wrapper').style.display = 'none'" class="close" title="Cerrar">&times;</span>
+                </div>
 
-            <div class="container" align='center'>
-                <textarea name="comentario" id="comentario" placeholder="Comentario" rows="15" cols="40"></textarea> <br><br>
-                <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
-                <input type="hidden" name="colab" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
-                <button type="submit" onClick="alert('Comentario agregado')">Comentar</button>
-            </div>
+                <div class="container" align='center'>
+                    <textarea name="comentario" id="comentario" placeholder="Comentario" rows="15" cols="40"></textarea> <br><br>
+                    <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
+                    <input type="hidden" name="colab" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
+                    <button type="submit" class="comentario" onClick="alert('Comentario agregado')">Comentar</button>
+                </div>
 
-        </form>
+            </form>
 
+        </div>
+        <script>
+            // If user clicks anywhere outside of the modal, Modal will close
+
+            var modal = document.getElementById('modal-wrapper');
+            window.onclick = function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            };
+        </script>
     </div>
-    <script>
-// If user clicks anywhere outside of the modal, Modal will close
-
-        var modal = document.getElementById('modal-wrapper');
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        };
-    </script>
-    <%}else if(Ya_comento){%>
+    <%} else if (Ya_comento) {%>
     <br>
-    <b> Usted ya a comentado en esta propuesta </b>
-    <%}%>
+    <div style="position: absolute; top: 150px; right: 70px; color:green">
+        <i class="material-icons">
+            comment
+        </i>
+        <b> Usted ya ha comentado en esta propuesta </b>
+    </div>
+    <% } %>
 
     <% if (!Nombre_Usuario.equals("") && !yaFav) {%>
-    <form 	action="/CulturarteWeb/favorita" method="post">
-    <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
-    <input type="hidden" name="usu" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
-     <button type="submit" >Marcar como favorita</button>
-    </form>
-    <%} else if (yaFav) { %>
-    <br>
-    <b> Tiene esta propuesta como favorita </b>
+    <div style="position: absolute; top: 200px; right: 100px">
+        <form 	action="/CulturarteWeb/favorita" method="post">
+            <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
+            <input type="hidden" name="usu" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">grade</i>
+            </button>
+            <button  class="mdl-button mdl-js-button mdl-button--accent">
+                Marcar como Favorita
+            </button>
+        </form>
+        <%} else if (yaFav) { %>
+        <br>
+        <div style="position: absolute; top: 200px; right: 70px; color:green" >
+            <i class="material-icons">
+                star
+            </i>
+            <b> Tiene esta propuesta como favorita </b>
+        </div>
+    </div>
     <%}%>
-    <% if (Propuso_a_propu && !Nombre_Usuario.equals("")) {                  %>
+    <% if (Propuso_a_propu && !Nombre_Usuario.equals("")) {%>
+    <div style="position:absolute; top: 250px; right: 100px">
     <form 	action="#" method="get">
-        <input type="submit" value="Extender Tiempo">
+       <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">update</i>
+            </button>
+            <button  class="mdl-button mdl-js-button mdl-button--accent">
+                Extender propuesta
+            </button>
     </form>
+        </div>
     <br>
+    <br>
+    <br>
+    <div style="position:absolute; top: 300px; right: 40px">
     <form method="get" id="ls" class="msformProp" action="<%=request.getContextPath()%>/borrar_prop">
-                <fieldset>
-                      <img src="<%= request.getContextPath() %>/img/borrar.png" alt="Smiley face" height="42" width="42" style="float: left"> 
-                 
-                  <button type="submit" class="mdl-button mdl-js-button mdl-button--accent" style="float: right">
-                      Cancelar propuesta
-                  </button>
-                       
-                </fieldset>
-                  </form>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">delete</i>
+            </button>
+            <button  class="mdl-button mdl-js-button mdl-button--accent">
+                Cancelar propuesta
+            </button>
+    </form>
+        </div>
     <%}%>   
 </body>
 </html>
