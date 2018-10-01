@@ -12,7 +12,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <% DtPropuesta propu = (DtPropuesta) request.getAttribute("propu");
+    <%  DtPropuesta propu = (DtPropuesta) request.getAttribute("propu");
         boolean colaboradores = false;
         List<String> x = (List<String>) request.getAttribute("col");
         if (x != null) {
@@ -91,7 +91,7 @@
             </tr>    
         </table>
         <br>
-        <% if(propu.getImg()!=null){                                             %>
+        <% if(propu.getImg()!=null && !propu.getImg().equals("")){              %>
             <img src="/CulturarteWeb/Retornar_imag_propuesta_Servlet?T=${propu.getTitulo()}" width="250" height="250">  
         <%}else{%>                              
             <img id="imagenot" src="/CulturarteWeb/img/pro.jpeg" width="250" height="250">                
