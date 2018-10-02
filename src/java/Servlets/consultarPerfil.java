@@ -44,15 +44,17 @@ public static final String MENSAJE_EXITO = "mensaje_exito";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//       this.IU.cargarUsuarios2();
-//       this.IP.cargarPropuestas();
-//this.IP.cargarColaboraciones();
+     this.IU.cargarUsuarios2();
+       this.IP.cargarPropuestas();
+this.IP.cargarColaboraciones();
+IP.EstadosPropuestas();
         if (request.getParameter("T") == null) {
                 List<DtUsuario> usuarios = IU.listarUsuarios();
                 request.setAttribute("usuarios", usuarios);
                 this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
                 //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
             } else {
+         
               String nickUser= request.getParameter("T");
               DtUsuario user= IU.traerDtUsuario(nickUser);
                String mensajeExito="Imagen subida correctamente";

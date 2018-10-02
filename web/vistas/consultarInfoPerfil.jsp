@@ -202,12 +202,11 @@
                     <a href=Consulta_de_propuesta_Servlet?T=<%=Tup%>>
                         <%= propa.getPropuesta().getTitulo() %> 
                     </a>
-                    </td>
+               </td>
                       <%
-          
-            if(userop.getNick().equals(colab.getNick())){%>
+            if(userop != null && userop.getNick().equals(colab.getNick())){%>
              <td>  <%= propa.getMonto()   %>  </td> 
-             <td> <%= propa.getFecha()%>  </td> 
+                 <td> <%= propa.getFecha()%> </td> 
             <%
                 }
             }
@@ -253,31 +252,28 @@
               </div>
         </form>  
       
-        
-            <%  DtUsuario userLogueado= inicSesion.getUsuarioLogueado(request);  
+            <% 
+                if(userop != null){
             List<DtUsuario> seguidoresPrueb= (List<DtUsuario>) request.getAttribute("seguidore");
-            if(userLogueado.getNick().equals(colab.getNick())==false){
+            if(userop.getNick().equals(colab.getNick())==false){
                 boolean yaSigue=false;
-for(int i=0; i < seguidoresPrueb.size(); i++){
-    DtUsuario seguidor= seguidoresPrueb.get(i);
+            for(int i=0; i < seguidoresPrueb.size(); i++){
+              DtUsuario seguidor= seguidoresPrueb.get(i);
     
-    if(seguidor.getNick().equals(userLogueado.getNick())){
-        yaSigue=true;
-    }
+              if(seguidor.getNick().equals(userop.getNick())){
+                     yaSigue=true;
+               }
     
-}
-       if(yaSigue==true){
-           
-      
-           
-            %>
+            }
+              if(yaSigue==true){
+             %>
           <form method="post" action="dejarDeSeguir">
               <%
                     String link2= "/consultarPerfil?T="+colab.getNick();
  %>
             <input type="hidden" name="link" value="<%=link2%>"/>
      
-             <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
+             <input type="hidden" name="nickLogueado" value="<%=userop.getNick()%>"/>
     <input type="hidden" name="nickASeguir" value="<%=colab.getNick()%>" />
            <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Dejar de seguir" />
         </form>
@@ -293,20 +289,13 @@ for(int i=0; i < seguidoresPrueb.size(); i++){
  %>
             <input type="hidden" name="link" value="<%=link%>"/>
      
-             <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
+             <input type="hidden" name="nickLogueado" value="<%=userop.getNick()%>"/>
     <input type="hidden" name="nickASeguir" value="<%=colab.getNick()%>" />
            <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Seguir" />
         </form>
             
-           <%} }%> 
+           <%}} }%> 
        
-
-
-        
-        
-        <% } else {%>
-         <legend id="legendPerf">Información del usuario</legend><br>
-             
         <% } %>
     </body>
 </html>
