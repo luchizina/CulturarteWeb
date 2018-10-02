@@ -221,10 +221,10 @@
                 </div>
 
                 <div class="container" align='center'>
-                    <textarea name="comentario" id="comentario" placeholder="Comentario" rows="15" cols="40"></textarea> <br><br>
+                    <textarea name="comentario" id="comentario" placeholder="Comentario" rows="15" cols="40" required="required"></textarea> <br><br>
                     <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
                     <input type="hidden" name="colab" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
-                    <button type="submit" class="comentario" onClick="alert('Comentario agregado')">Comentar</button>
+                    <button type="submit" class="comentario" onSubmit="alert('Comentario agregado')">Comentar</button>
                 </div>
 
             </form>
