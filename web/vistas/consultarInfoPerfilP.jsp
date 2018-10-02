@@ -74,7 +74,7 @@
             %>
             <tr>
                 <td>
-                    <a href=consultarPerfil?T=<%=Mu%>>
+                    <a href=Consulta_de_propuesta_Servlet?T=<%=Mu%>>
                         <%= MiP.getTitulo()%> (<%= MiP.getEstActual().getEstado().toString() %>)
                     </a>
                 </td>
@@ -275,7 +275,7 @@
             %>
             <tr>
                 <td>
-                    <a href=consultarPerfil?T=<%=Mu%>>
+                    <a href=Consulta_de_propuesta_Servlet?T=<%=Mu%>>
                         <%= MiP.getTitulo()%> (<%= MiP.getEstActual().getEstado().toString() %>)
                     </a>
                 </td>
