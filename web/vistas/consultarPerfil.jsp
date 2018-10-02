@@ -4,6 +4,7 @@
     Author     : nambr
 --%>
 
+<%@page import="java.util.Collections"%>
 <%@page import="Logica.DtUsuario"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -32,7 +33,8 @@
      <nav>
      <ul class="demo-list-icon mdl-list">
         <%  List<DtUsuario> usuariosU = (List<DtUsuario>) request.getAttribute("usuarios");
-                for (DtUsuario user : usuariosU) {
+        
+        for (DtUsuario user : usuariosU) {
                     
                 
                 String Titu = user.getNick().replace(" ", "-");
