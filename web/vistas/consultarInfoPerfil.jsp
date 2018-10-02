@@ -162,6 +162,8 @@
         </table>
          </right>
               </div>  <%-- Usuarios seguidos --%>
+              
+              
         <form style="float: both">
             <div id="divTablas" class="datagrid">
             <legend id="legendPerf">Colaboraciones</legend><br>
@@ -173,8 +175,8 @@
                 </th> 
                 <%
            DtUsuario userop=inicSesion.getUsuarioLogueado(request);
-           if(userop != null){
-        String nicko=userop.getNick();
+            if(userop != null){
+            String nicko=userop.getNick();
             if(nicko.equals(colab.getNick())){%>
              <th>
                     Monto:
@@ -184,9 +186,9 @@
                 </th> 
             <%
                 }
+            }
             %>
             </tr>
-            
               <%
                 List<DtColaboracion> props= (List<DtColaboracion>) request.getAttribute("propuCol");
                  String Tup ="";
@@ -202,22 +204,16 @@
                     </a>
                     </td>
                       <%
-            if(nicko.equals(colab.getNick())){%>
-             <td>
-                   <a href=Consulta_de_propuesta_Servlet?T=<%=Tup%>>
-                        <%= propa.getMonto()   %> 
-                    </a>
-                </td> 
-                 <td>
-                   <a href=Consulta_de_propuesta_Servlet?T=<%=Tup%>>
-                        <%= propa.getFecha()%> 
-                    </a>
-                </td> 
+          
+            if(userop.getNick().equals(colab.getNick())){%>
+             <td>  <%= propa.getMonto()   %>  </td> 
+             <td> <%= propa.getFecha()%>  </td> 
             <%
-                }}
+                }
+            }
             %>
             </tr>
-            <%}}  else{ %>
+            <%}  else{ %>
              <td> no tiene colaboraciones</td>
             <%} %>
         </table>
