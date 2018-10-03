@@ -4,6 +4,8 @@
    Author     : matheo
 --%>
 
+<%@page import="Logica.DtUsuario"%>
+<%@page import="Logica.Testado"%>
 <%@page import="Logica.DtColaborador"%>
 <%@page import="java.util.Collection"%>
 <%@page import="Logica.DtPropuesta"%>
@@ -280,24 +282,32 @@
                 <i class="material-icons">update</i>
             </button>
             <button  class="mdl-button mdl-js-button mdl-button--accent">
-                Extender propuesta
+                Extender propuesta 
             </button>
     </form>
         </div>
     <br>
     <br>
     <br>
+    <%        if(propu.getEstActual().getEstado().compareTo(Testado.Financiada)==0){%>
     <div style="position:absolute; top: 300px; right: 40px">
-    <form method="get" id="ls" class="msformProp" action="<%=request.getContextPath()%>/borrar_prop">
+    <form method="post" id="ls" class="msformProp" action="borrar_prop">
+          <%
+                    String link= "/consultarPerfil?T="+propu.getTitulo();
+ %>
+            <input type="hidden" name="link" value="<%=link%>"/>
+         <input type="hidden" name="prop" value="<%=propu.getTitulo()%>"/>
         <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
                 <i class="material-icons">delete</i>
             </button>
             <button  class="mdl-button mdl-js-button mdl-button--accent">
                 Cancelar propuesta
             </button>
+         
+
     </form>
         </div>
-    <%}%>   
+    <%} }%>   
 </body>
 </html>
 

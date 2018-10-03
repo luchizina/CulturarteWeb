@@ -27,7 +27,8 @@
         DtUsuario user=(DtUsuario) request.getAttribute("usuario");
         DtProponente prop=null;
         if(user instanceof DtProponente){
-            prop= (DtProponente) user;           
+            prop= (DtProponente) user;    
+           
         }  
         %>
     </head>
@@ -73,7 +74,7 @@
             %>
             <tr>
                 <td>
-                    <a href=consultarPerfil?T=<%=Mu%>>
+                    <a href=Consulta_de_propuesta_Servlet?T=<%=Mu%>>
                         <%= MiP.getTitulo()%> (<%= MiP.getEstActual().getEstado().toString() %>)
                     </a>
                 </td>
@@ -100,7 +101,8 @@
               </div>
 		<div id="perfil_izquierda">
                     
-                    <% if(prop.getImg()!=null){
+                    <% if(prop.getImg()!=null && !prop.getImg().equals("")){
+                        
                         
                    
                         %>
@@ -159,12 +161,12 @@
  
              <form style="float: left">
             <div id="divTablas" class="datagrid">
-            <!--  <legend id="legendPerf">Usuarios seguidos</legend><br>-->
+             <legend id="legendPerf">Usuarios seguidos</legend><br>
                         <right>
            <table class="datagrid">
             <tr> 
                 <th>
-                    Usuarios seguidos
+                    Nombre:
                 </th> 
             </tr>
             <%
@@ -179,9 +181,8 @@
             %>
             <tr>
                 <td>
-                    <a href=consultarPerfil?T=<%=Titu%>>
-                        <%= usea.getNick()%> 
-                    </a>
+                   <%= usea.getNombre() %>  <%= usea.getApellido() %> (<a href=consultarPerfil?T=<%=Titu%>> <%= usea.getNick()%> </a>)
+                    
                 </td>
             </tr>
             <%}} else{ %>
@@ -198,7 +199,7 @@
            <table class="datagrid">
             <tr> 
                 <th>
-                   Seguidores
+                   Nombre:
                 </th> 
             </tr>
             <%
@@ -212,9 +213,7 @@
             %>
             <tr>
                 <td>
-                    <a href=consultarPerfil?T=<%=Tu%>>
-                        <%= usea.getNick()%> 
-                    </a>
+                       <%= usea.getNombre() %>  <%= usea.getApellido() %> (<a href=consultarPerfil?T=<%=Titu%>> <%= usea.getNick()%> </a>)
                 </td>
             </tr>
             <%}} else{ %>
@@ -257,12 +256,12 @@
               </div>
          <form id="msform" style="clear: both">
             <div id="divTablas" class="datagrid">
-           <!--   <legend id="legendPerf">Seguidores</legend><br>-->
+        <legend id="legendPerf">Propuestas realizadas</legend><br>
                <right>
            <table class="datagrid">
             <tr> 
                 <th>
-                  Mis Propuestas
+                 Nombre:
                 </th> 
             </tr>
             <%
@@ -276,7 +275,7 @@
             %>
             <tr>
                 <td>
-                    <a href=consultarPerfil?T=<%=Mu%>>
+                    <a href=Consulta_de_propuesta_Servlet?T=<%=Mu%>>
                         <%= MiP.getTitulo()%> (<%= MiP.getEstActual().getEstado().toString() %>)
                     </a>
                 </td>
@@ -291,14 +290,14 @@
               </div>
            
         </form>  
-      <%  DtUsuario userLogueado= inicSesion.getUsuarioLogueado(request);  
+      <%  if(userop != null ){
             List<DtUsuario> seguidoresPrueb= (List<DtUsuario>) request.getAttribute("seguidore");
-            if(userLogueado.getNick().equals(prop.getNick())==false){
+            if(userop.getNick().equals(prop.getNick())==false){
                 boolean yaSigue=false;
 for(int i=0; i < seguidoresPrueb.size(); i++){
     DtUsuario seguidor= seguidoresPrueb.get(i);
     
-    if(seguidor.getNick().equals(userLogueado.getNick())){
+    if(seguidor.getNick().equals(userop.getNick())){
         yaSigue=true;
     }
     
@@ -314,7 +313,7 @@ for(int i=0; i < seguidoresPrueb.size(); i++){
  %>
             <input type="hidden" name="link" value="<%=link2%>"/>
      
-             <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
+             <input type="hidden" name="nickLogueado" value="<%=userop.getNick()%>"/>
     <input type="hidden" name="nickASeguir" value="<%=prop.getNick()%>" />
            <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Dejar de seguir" />
         </form>
@@ -329,12 +328,12 @@ for(int i=0; i < seguidoresPrueb.size(); i++){
                     String link= "/consultarPerfil?T="+prop.getNick();
  %>
             <input type="hidden" name="link" value="<%=link%>"/>
- <input type="hidden" name="nickLogueado" value="<%=userLogueado.getNick()%>"/>
+ <input type="hidden" name="nickLogueado" value="<%=userop.getNick()%>"/>
     <input type="hidden" name="nickASeguir" value="<%=prop.getNick()%>" />
            <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Seguir" />
         </form>
             
-           <%} }%>     
+           <%} }}%>     
         
         
         
