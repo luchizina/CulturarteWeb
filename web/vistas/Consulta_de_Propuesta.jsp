@@ -21,42 +21,42 @@
         <jsp:include page="/template/head.jsp" />
         <title>Consultar Propuesta</title>
         <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     </head>
     <body>
         <jsp:include page="/template/header.jsp" />
     <center>
         <% if(Usuario_Logeado) {%>
         <h1>Consulta Propuesta</h1>     
-        <table>
-            <tr> 
-                <th>
-                    <b>
-                        Título 
-                    </b>
-                </th> 
-                <th>
-                    <b>
-                        Consultar 
-                    </b>
-                </th> 
-            </tr>
+        <form id="msform">
+        <fieldset>    
+    <legend id="legendErr">Consulta de propuestas</legend>
+    <form id="msform">    
+    <nav>
+        <ul class="demo-list-icon mdl-list">
             <%
                 List<DtPropuesta> x = (List<DtPropuesta>) request.getAttribute("propuestas");
                 for (DtPropuesta cx : x) {
             %>
-            <tr>
-                <td>
-                    <%=cx.getTitulo()%>
-                </td>
-                <td>
-                    <form action="Consulta_de_propuesta_Servlet" method="post">
+                
+            <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                    <i class="material-icons">
+                        event
+                    </i>
+                    <p><%=cx.getTitulo()%></p>
+                <form action="Consulta_de_propuesta_Servlet" method="post">
                     <input type="hidden" name="T" value="<%=cx.getTitulo()%>">
-                    <input type="submit" value="Ver"> 
+                    <input type="submit" value="Consultar" style='width:100px; height:25px'> 
                     </form>
-                </td>
-            </tr>
-            <%}%>
-        </table>
+                    <%}%>
+                </span>
+            <li/>
+        </fieldset>         
+        </ul>
+    </nav>
+    </form>
         <%}else {%>
         <h1>Debe de iniciar sesión para continuar</h1>
             <form action="index.html">
