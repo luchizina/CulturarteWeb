@@ -249,7 +249,7 @@
                     </td>
             </tr>
             <%} } else{ %>
-             <td> no tiene colaboraciones    </td>
+             <td> no tiene ninguna  </td>
             <%} %>
         </table>
          </right>
