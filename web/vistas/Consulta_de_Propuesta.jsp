@@ -48,7 +48,7 @@
                     <p><%=cx.getTitulo()%></p>
                 <form action="Consulta_de_propuesta_Servlet" method="post">
                     <input type="hidden" name="T" value="<%=cx.getTitulo()%>">
-                    <input type="submit" value="Consultar" style='width:100px; height:25px'> 
+                    <input type="submit" value="Consultar" style='width:100px; height:10px'> 
                     </form>
                     <%}%>
                 </span>
