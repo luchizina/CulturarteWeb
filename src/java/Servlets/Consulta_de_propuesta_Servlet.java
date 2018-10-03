@@ -52,8 +52,8 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
             } else {
             // CONSULTA A UNA PROPUESTA 
                 String t = request.getParameter("T");
-                //String titulo = t.replace("+"," ");
-                DtPropuesta p_consulta = IP.SeleccionarProp(t);
+                String titulo = t.replace("+"," ");
+                DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
                 List<String> colaborador = IP.ColaborantesDePro();
                 request.setAttribute("propu", p_consulta);
                 request.setAttribute("titulito", p_consulta.getTitulo());

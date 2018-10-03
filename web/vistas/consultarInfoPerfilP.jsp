@@ -213,7 +213,7 @@
             %>
             <tr>
                 <td>
-                       <%= usea.getNombre() %>  <%= usea.getApellido() %> (<a href=consultarPerfil?T=<%=Titu%>> <%= usea.getNick()%> </a>)
+                       <%= usea.getNombre() %>  <%= usea.getApellido() %> (<a href=consultarPerfil?T=<%=Tu%>> <%= usea.getNick()%> </a>)
                 </td>
             </tr>
             <%}} else{ %>
