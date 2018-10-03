@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Logica.*;
 import static java.lang.System.out;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 
@@ -90,40 +91,6 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-//        try (PrintWriter out = response.getWriter()) {
-//            request.setCharacterEncoding("UTF-8");
-//                // LISTAR PROPUESTAS 
-//            if (request.getParameter("T") == null) {
-//                List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
-//                request.setAttribute("propuestas", x);
-//                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
-//                //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
-//            } else {
-//                // CONSULTA A UNA PROPUESTA 
-//                String t = request.getParameter("T");
-//                String titulo = t.replace("+"," ");
-//                DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
-//                List<String> colaborador = IP.ColaborantesDePro();
-//                request.setAttribute("propu", p_consulta);
-//                String nick = (String) request.getSession().getAttribute("sesionAct");
-//                boolean fav = IP.yaFavoriteo(IU.traerUsuario(nick), titulo);
-//                if(fav){
-//                   request.setAttribute("fav","true"); 
-//                } else {
-//                    request.setAttribute("fav","false");
-//                }
-//                boolean com = IP.Ya_Comento_Propuesta(nick, titulo);
-//                if(com){
-//                request.setAttribute("comentario","true");
-//                }
-//                else{
-//                request.setAttribute("comentario","false");
-//                }
-//                if(!colaborador.isEmpty()){
-//                request.setAttribute("col", colaborador);
-//                }
-//                this.getServletContext().getRequestDispatcher("/vistas/Consulta_Info_Propuesta.jsp").forward(request, response);
-//            }
         
     }
 
@@ -139,42 +106,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        processRequest(request, response);
-//        // LISTAR PROPUESTAS 
-//            if (request.getParameter("T") == null) {
-//                List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
-//                request.setAttribute("propuestas", x);
-//                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
-//                //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
-//            } else {
-//                // CONSULTA A UNA PROPUESTA 
-//                String t = request.getParameter("T");
-//                String titulo = t.replace("+"," ");
-//                DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
-//                List<String> colaborador = IP.ColaborantesDePro();
-//                request.setAttribute("propu", p_consulta);
-//                request.setAttribute("titulito", p_consulta.getTitulo());
-//                String nick = (String) request.getSession().getAttribute("sesionAct");
-//                boolean com = IP.Ya_Comento_Propuesta(nick, titulo);
-//                 boolean fav = IP.yaFavoriteo(IU.traerUsuario(nick), titulo);
-//                if(fav){
-//                   request.setAttribute("fav","true"); 
-//                } else {
-//                    request.setAttribute("fav","false");
-//                }
-//                if(com){
-//                request.setAttribute("comentario","true");
-//                }
-//                else{
-//                request.setAttribute("comentario","false");
-//                }
-//                if(!colaborador.isEmpty()){
-//                request.setAttribute("col", colaborador);
-//                }
-//                this.getServletContext().getRequestDispatcher("/vistas/Consulta_Info_Propuesta.jsp").forward(request, response);
-//            }
-        
-        
+        processRequest(request, response);      
     }
 
     /**

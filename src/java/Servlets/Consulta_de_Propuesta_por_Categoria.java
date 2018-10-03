@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import Logica.*;
 import static java.lang.System.out;
 import static java.net.URLEncoder.encode;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 /**
@@ -46,6 +47,7 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             if (request.getParameter("C") == null) {
                 List<DtCategoria> x = IC.listarCategorias();
+                
                 request.setAttribute("categorias", x);
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
             } else {
@@ -73,22 +75,6 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-  
-//        try (PrintWriter out = response.getWriter()) {
-//                // LISTAR CATEGORIA 
-//            if (request.getParameter("C") == null) {
-//                List<DtCategoria> x = IC.listarCategorias();
-//                request.setAttribute("categorias", x);
-//                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
-//            } else {
-//                // LISTAR PROPUESTAS DE "X" CATEGORIA
-//                String C = request.getParameter("C");
-//                String Cposta = C.replace("+"," ");
-//                List<DtPropuesta> x = IP.WEB_listarPropuestas_X_Categoria(Cposta);
-//                request.setAttribute("propuestas", x);
-//                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
-//            }
-//        }
         processRequest(request, response);
         
     }
@@ -106,18 +92,6 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         processRequest(request, response);
-//        if (request.getParameter("C") == null) {
-//                List<DtCategoria> x = IC.listarCategorias();
-//                request.setAttribute("categorias", x);
-//                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
-//            } else {
-//                // LISTAR PROPUESTAS DE "X" CATEGORIA
-//                String C = request.getParameter("C");
-//                String Cposta = C.replace("+"," ");
-//                List<DtPropuesta> x = IP.WEB_listarPropuestas_X_Categoria(Cposta);
-//                request.setAttribute("propuestas", x);
-//                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
-//            }
        
     }
 
