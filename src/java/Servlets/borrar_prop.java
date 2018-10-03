@@ -41,7 +41,8 @@ public class borrar_prop extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
- 
+        
+           
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,22 +57,7 @@ public class borrar_prop extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               try (PrintWriter out = response.getWriter()) {
-
-                // LISTAR PROPUESTAS 
-            if (request.getParameter("T") == null) {
-                  String nick= request.getParameter("nickLogueado");
-                List<DtPropuesta> propF = IU.TraerMisPropuestasF(nick);
-                request.setAttribute("propuestas", propF);
-                this.getServletContext().getRequestDispatcher("/vistas/CancelarPropu.jsp").forward(request, response);
-            } else {
-                
-                 request.setAttribute("propuesta", request.getParameter("T"));
-         this.getServletContext().getRequestDispatcher("/vistas/CancelarPropu2.jsp").forward(request, response);
-                  
-    }
-        
-    }
+             
     }
 
     /**
@@ -85,7 +71,7 @@ public class borrar_prop extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    String   p = request.getParameter("T");
+    String   p = request.getParameter("prop");
         if( p == null)
         {}
         else{
