@@ -43,8 +43,10 @@ private final Fabrica fabrica = Fabrica.getInstance();
         String nick = request.getParameter(Colaborador);
         String prop = request.getParameter(propuesta);
         String com = request.getParameter(comentario);
+        if(!com.isEmpty()){
         ip.agregarComentario(usuario.traerColaborador(nick), ip.getPropPorNick(prop), com);
         request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
