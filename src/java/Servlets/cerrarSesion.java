@@ -35,14 +35,20 @@ public class cerrarSesion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
    PrintWriter out = response.getWriter();
         HttpSession sesion = request.getSession(true);
+        if(sesion.getAttribute("sesionAct")!=null){
+            
         
         //Cerrar sesion
         sesion.setAttribute("sesionAct", null);
         sesion.invalidate();
+        this.getServletContext().getRequestDispatcher("/home").forward(request,response);
+        }else{
+            this.getServletContext().getRequestDispatcher("/vistas/cerrSesErr.jsp").forward(request,response);
+        }
        
         
         //Redirecciono a index.jsp
-        this.getServletContext().getRequestDispatcher("/home").forward(request,response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

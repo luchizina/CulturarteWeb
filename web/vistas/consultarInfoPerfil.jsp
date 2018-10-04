@@ -14,11 +14,11 @@
 <%@page import="Logica.DtPropuesta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<html>  
+<head>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <head>
         <jsp:include page="/template/head.jsp" />
          <script  src="../js/progress.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -43,12 +43,13 @@
         <jsp:include page="/template/header.jsp" />
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
         <% if(colab != null ) {%>
-        <form id="msformPerfil" style="float: left">
+        
+         <form id="msformPerfil">
         <div id="perfil" class ="main">
             <div id="divLeg">
-              <legend id="legendPerf">Información del usuario</legend><br>
+              <legend id="legendPerf"> Información de:<%= colab.getNombre() %> <%= colab.getApellido() %> (<%= colab.getNick() %>) </legend><br>
               </div>
-		<div id="perfil_izquierda">
+		<div id="perfil_izquierda" style="float: left">
                     
                     <% if(colab.getImg()!=null && !colab.getImg().equals("")){
                         
@@ -98,7 +99,7 @@
 	</div>
         </form>
  
-             <form style="float: left">
+             <div style="position: absolute; top: 150px; left: 60px; color:green">
             <div id="divTablas" class="datagrid">
            <legend id="legendPerf">Usuarios seguidos</legend><br>
                         <right>
@@ -113,7 +114,7 @@
                  String Titu ="";
                 
                 if(seguidos.size()>0){
-                for ( DtUsuario usea : seguidos) {
+                for ( DtUsuario usea : seguidos ) {
                  Titu = usea.getNick();
                 
             %>
@@ -129,7 +130,6 @@
         </table>
          </right>
               </div> <%-- Usuarios seguidos --%>
- <form id="msform" style="clear: both">
             <div id="divTablas" class="datagrid">
           <legend id="legendPerf">Seguidores</legend><br>
                <right>
@@ -160,9 +160,9 @@
         </table>
          </right>
               </div>  <%-- Usuarios seguidos --%>
+ </div> 
               
-              
-        <form style="float: both">
+        <div style="position: absolute; top: 150px; right: 40px; color:green">
             <div id="divTablas" class="datagrid">
             <legend id="legendPerf">Colaboraciones</legend><br>
                         <right>
@@ -248,7 +248,7 @@
         </table>
          </right>
               </div>
-        </form>  
+        </div>  
       
             <% 
                 if(userop != null){

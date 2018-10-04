@@ -5,7 +5,8 @@
 * {margin: 0; padding: 0;}
 
 html{
-	height: 100%;
+	height: auto;
+        min-height: 100%;
 	/*Image only BG fallback*/
 	
 	/*background = gradient + image pattern combo*/
@@ -14,6 +15,7 @@ html{
 }
 
 body {
+   min-height: 100%;
 	font-family: montserrat, arial, verdana, tahoma, sans-serif, "lucida grande";
           
 }
@@ -32,11 +34,11 @@ body {
 }
 /*Perfil de usuario css */
 #msformPerfil {
-    width:500px;
-    margin: 50px auto;
+    width:800px;
+    margin: 45px auto;
     text-align: left;
-    position:relative;
-    
+    position: fixed;
+    left: 260px;
     
     
 }
@@ -67,8 +69,6 @@ body {
 #perfil_izquierda
 {
 /*    float: top;*/
- 
-  
     padding: 25px;
     margin: 25px;
 }
