@@ -5,19 +5,6 @@
 --%>
 <%@page import="Servlets.inicSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% if (inicSesion.getUsuarioLogueado(request) != null) { %>
-       <form id="msform" action="<%= request.getContextPath() %>/home" method="post">      
-  <!-- fieldsets -->
-  <fieldset>
-    <legend id="legendErr">¡UPSS! Esto es incómodo.. :( </legend>      
-    <h3 class="fs-subtitle">Página no encontrada, o no tienes acceso a ella</h3>
-    <input type="submit" name="volver atrás" class="btn action-button" value="¡Lo entiendo!">
-  </fieldset>
-</form>   
-  <%
- 
- }else{
- %>
 
 
 <!DOCTYPE html>
@@ -31,6 +18,19 @@
     </head>
     <body>
         <jsp:include page="/template/header.jsp" />
+        <% if (inicSesion.getUsuarioLogueado(request) != null) {%>
+        <form id="msform" action="<%= request.getContextPath()%>/home" method="post">      
+            <!-- fieldsets -->
+            <fieldset>
+                <legend id="legendErr">¡UPSS! Esto es incómodo.. :( </legend>      
+                <h3 class="fs-subtitle">Página no encontrada, o no tienes acceso a ella</h3>
+                <input type="submit" name="volver atrás" class="btn action-button" value="¡Lo entiendo!">
+            </fieldset>
+        </form>   
+        <%
+
+        } else {
+        %>
         <h1>Registrarse</h1>
 
         <form action="/CulturarteWeb/Registrarse" method="POST" enctype="multipart/form-data" id="msform" onsubmit="return vacios()">
@@ -141,7 +141,7 @@
             <script src="<%= request.getContextPath()%>/js/index.js"></script>
         </form> 
         <%
- }
- %>
+            }
+        %>
     </body>
 </html>
