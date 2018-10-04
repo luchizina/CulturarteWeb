@@ -96,10 +96,10 @@
             </tr>    
         </table>
         <br>
-        <% if(propu.getImg()!=null && !propu.getImg().equals("")){              %>
-            <img src="/CulturarteWeb/Retornar_imag_propuesta_Servlet?T=${propu.getTitulo()}" width="250" height="250">  
-        <%}else{%>                              
-            <img id="imagenot" src="/CulturarteWeb/img/pro.jpeg" width="250" height="250">                
+        <% if (propu.getImg() != null && !propu.getImg().equals("")) {              %>
+        <img src="/CulturarteWeb/Retornar_imag_propuesta_Servlet?T=${propu.getTitulo()}" width="250" height="250">  
+        <%} else {%>                              
+        <img id="imagenot" src="/CulturarteWeb/img/pro.jpeg" width="250" height="250">                
         <%}%>
         <br>
         <table border=10><tr><th><b> Colaboradores </b></th></tr>
@@ -111,108 +111,126 @@
         </tr>
     </table>  
 
-    <% if (Puede_colaborar_a_propu && !Nombre_Usuario.equals("")) {%>
-    <div style="position: absolute; top: 60px; right: 100px">
-        <form method="post" action="Colaboracion">
-            <input type="hidden" name="T" value="<%=request.getAttribute("titulito")%>">
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                <i class="material-icons">monetization_on</i>
-            </button>
-            <button  class="mdl-button mdl-js-button mdl-button--accent">
-                Colaborar
-            </button>
-        </form>
-    </div>
-            <% } else if (!Puede_colaborar_a_propu && session.getAttribute("tipo").equals("colaborador")) { %>
-    <div style="position: absolute; top: 100px; right: 70px; color:green">
-        <i class="material-icons">
-            attach_money
-        </i>
-        <b> Usted ya ha colaborado en esta propuesta </b>
-    </div>
-    <% }%>
-    <% if (Colaboro_a_propu && !Nombre_Usuario.equals("") && !Ya_comento) {%>
-    <style>
-        .comentario {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            margin: 8px 26px;
-            border: none;
-            cursor: pointer;
-            width: 250px;
-            font-size:10px;
-        }
-        .comentario:hover {
-            opacity: 0.8;
-        }
 
-        /* Center the image and position the close button */
-        .imgcontainer {
-            text-align: center;
-            margin: 24px 0 12px 0;
-            position: relative;
-        }
-        .avatar {
-            width: 200px;
-            height:200px;
-            border-radius: 50%;
-        }
+    <table style="position:absolute;top:50px;right:45px; width: 20%" border=10><tr><th><b> Acciones </b></th></tr>
 
-        /* The Modal (background) */
-        .modal {
-            display:none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
+        <% if (Puede_colaborar_a_propu && !Nombre_Usuario.equals("") && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
+        <tr>
+            <td>
+                <form method="post" action="Colaboracion">
+                    <input type="hidden" name="T" value="<%=request.getAttribute("titulito")%>">
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                        <i class="material-icons">monetization_on</i>
+                    </button>
+                    <button  class="mdl-button mdl-js-button mdl-button--accent">
+                        Colaborar
+                    </button>
+                </form>
+            </td>
+            <% } else if (!Puede_colaborar_a_propu && session.getAttribute("tipo").equals("colaborador") && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) { %>
+            <td>
+                <div style="color:green">
+                    <i class="material-icons">
+                        attach_money
+                    </i>
+                    <b> Usted ya ha colaborado en esta propuesta </b>
+                </div>
+            </td>
+            <% } else { %>
+            <td>
+                <div style="color:green">
+                    <i class="material-icons">
+                        highlight_off
+                    </i>
+                    <b> Accion no disponible </b>
+                </div>
+            </td>
+            <% } %>
+        </tr>
+        <% if (Colaboro_a_propu && !Nombre_Usuario.equals("") && !Ya_comento && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
+        <style>
+            .comentario {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 15px;
+                margin: 8px 26px;
+                border: none;
+                cursor: pointer;
+                width: 250px;
+                font-size:10px;
+            }
+            .comentario:hover {
+                opacity: 0.8;
+            }
 
-        /* Modal Content Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 4% auto 15% auto;
-            border: 1px solid #888;
-            width: 40%; 
-            padding-bottom: 30px;
-        }
+            /* Center the image and position the close button */
+            .imgcontainer {
+                text-align: center;
+                margin: 24px 0 12px 0;
+                position: relative;
+            }
+            .avatar {
+                width: 200px;
+                height:200px;
+                border-radius: 50%;
+            }
 
-        /* The Close Button (x) */
-        .close {
-            position: absolute;
-            right: 25px;
-            top: 0;
-            color: #000;
-            font-size: 35px;
-            font-weight: bold;
-        }
-        .close:hover,.close:focus {
-            color: red;
-            cursor: pointer;
-        }
+            /* The Modal (background) */
+            .modal {
+                display:none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.4);
+            }
 
-        /* Add Zoom Animation */
-        .animate {
-            animation: zoom 0.6s
-        }
-        @keyframes zoom {
-            from {transform: scale(0)} 
-            to {transform: scale(1)}
-        }
-    </style>
-    <div style="position: absolute; top: 150px; right: 100px">
-        <fieldset>
-            <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                <i class="material-icons">add</i>
-            </button>  
-            <button  class="mdl-button mdl-js-button mdl-button--accent">
-                Agregar comentario
-            </button>  
-        </fieldset>
+            /* Modal Content Box */
+            .modal-content {
+                background-color: #fefefe;
+                margin: 4% auto 15% auto;
+                border: 1px solid #888;
+                width: 40%; 
+                padding-bottom: 30px;
+            }
+
+            /* The Close Button (x) */
+            .close {
+                position: absolute;
+                right: 25px;
+                top: 0;
+                color: #000;
+                font-size: 35px;
+                font-weight: bold;
+            }
+            .close:hover,.close:focus {
+                color: red;
+                cursor: pointer;
+            }
+
+            /* Add Zoom Animation */
+            .animate {
+                animation: zoom 0.6s
+            }
+            @keyframes zoom {
+                from {transform: scale(0)} 
+                to {transform: scale(1)}
+            }
+        </style>
+        <tr>
+            <td>
+                <fieldset>
+                    <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                        <i class="material-icons">add</i>
+                    </button>  
+                    <button  class="mdl-button mdl-js-button mdl-button--accent">
+                        Agregar comentario
+                    </button>  
+                </fieldset>
+            </td>
 
         <div id="modal-wrapper" class="modal">
 
@@ -242,72 +260,115 @@
                 }
             };
         </script>
-    </div>
-    <%} else if (Ya_comento) {%>
-    <br>
-    <div style="position: absolute; top: 150px; right: 70px; color:green">
-        <i class="material-icons">
-            comment
-        </i>
-        <b> Usted ya ha comentado en esta propuesta </b>
-    </div>
-    <% } %>
-
-    <% if (!Nombre_Usuario.equals("") && !yaFav) {%>
-    <div style="position: absolute; top: 200px; right: 100px">
-        <form 	action="/CulturarteWeb/favorita" method="post">
-            <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
-            <input type="hidden" name="usu" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                <i class="material-icons">grade</i>
-            </button>
-            <button  class="mdl-button mdl-js-button mdl-button--accent">
-                Marcar como Favorita
-            </button>
-        </form>
-        <%} else if (yaFav) { %>
+        <%} else if (Ya_comento && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
         <br>
-        <div style="position: absolute; top: 200px; right: 70px; color:green" >
+        <td>
+            <div style="color:green">
+                <i class="material-icons">
+                    comment
+                </i>
+                <b> Usted ya ha comentado en esta propuesta </b>
+            </div>
+        </td>
+        <% } else { %>
+        <td>
+            <div style="color:green">
+                <i class="material-icons">
+                    highlight_off
+                </i>
+                <b> Accion no disponible </b>
+            </div>
+        </td>
+        <% } %>
+    </tr>
+    <% if (!Nombre_Usuario.equals("") && !yaFav && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
+    <tr>
+        <td>
+            <form action="/CulturarteWeb/favorita" method="post">
+                <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
+                <input type="hidden" name="usu" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                    <i class="material-icons">grade</i>
+                </button>
+                <button  class="mdl-button mdl-js-button mdl-button--accent">
+                    Marcar como Favorita
+                </button>
+            </form>
+        </td>
+        <%} else if (yaFav && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) { %>
+    <br>
+    <td>
+        <div style="color:green" >
             <i class="material-icons">
                 star
             </i>
             <b> Tiene esta propuesta como favorita </b>
         </div>
-    </div>
-    <%}%>
-    <% if (Propuso_a_propu && !Nombre_Usuario.equals("")) {%>
-    <div style="position:absolute; top: 250px; right: 100px">
-    <form 	action="#" method="get">
-       <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+    </td>
+    <% } else { %>
+    <td>
+        <div style="color:green">
+            <i class="material-icons">
+                highlight_off
+            </i>
+            <b> Accion no disponible </b>
+        </div>
+    </td>
+    <% } %>
+</tr>
+<% if (Propuso_a_propu && !Nombre_Usuario.equals("") && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
+<tr>
+    <td>
+        <form action="#" method="get">
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
                 <i class="material-icons">update</i>
             </button>
             <button  class="mdl-button mdl-js-button mdl-button--accent">
                 Extender propuesta 
             </button>
-    </form>
+        </form>
+    </td>
+    <% } else { %>
+    <td>
+        <div style="color:green">
+            <i class="material-icons">
+                highlight_off
+            </i>
+            <b> Accion no disponible </b>
         </div>
-    <br>
-    <br>
-    <br>
-    <%        if(propu.getEstActual().getEstado().compareTo(Testado.Financiada)==0){%>
-    <div style="position:absolute; top: 300px; right: 40px">
-    <form method="post" id="ls" class="msformProp" action="borrar_prop">
-          <%
-                    String link= "/consultarPerfil?T="+propu.getTitulo();
- %>
+    </td>
+    <% } %>
+</tr>
+
+<%  if (Propuso_a_propu && !Nombre_Usuario.equals("") && propu.getEstActual().getEstado().compareTo(Testado.Financiada) == 0) {%>
+<tr>
+    <td>
+        <form method="post" id="ls" class="msformProp" action="borrar_prop">
+            <%
+                String link = "/consultarPerfil?T=" + propu.getTitulo();
+            %>
             <input type="hidden" name="link" value="<%=link%>"/>
-         <input type="hidden" name="prop" value="<%=propu.getTitulo()%>"/>
-        <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+            <input type="hidden" name="prop" value="<%=propu.getTitulo()%>"/>
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
                 <i class="material-icons">delete</i>
             </button>
             <button  class="mdl-button mdl-js-button mdl-button--accent">
                 Cancelar propuesta
             </button>
-         
-
-    </form>
+        </form>
+    </td>
+    <% } else { %>
+    <td>
+        <div style="color:green">
+            <i class="material-icons">
+                highlight_off
+            </i>
+            <b> Accion no disponible </b>
         </div>
-    <%} }%>   
+    </td>
+    <% }%> 
+</tr>
+</table>
 </body>
 </html>
 

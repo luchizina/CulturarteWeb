@@ -102,7 +102,7 @@ public class Registrar extends HttpServlet {
         String nick = request.getParameter(NICK);
         DtUsuario usu = inicSesion.getUsuarioLogueado(request);
         if (usu != null) {
-            this.getServletContext().getRequestDispatcher("/home").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
         } else {
             if (nick == null) {
                 this.getServletContext().getRequestDispatcher("/vistas/registrar.jsp").forward(request, response);
