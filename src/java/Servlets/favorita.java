@@ -39,7 +39,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String nick = request.getParameter(usuarioF);
         String prop = request.getParameter(propuesta);
         ip.agregarFavorito(usuario.traerUsuario(nick), ip.getPropPorNick(prop));
