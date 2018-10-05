@@ -47,13 +47,12 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             if (request.getParameter("C") == null) {
                 List<DtCategoria> x = IC.listarCategorias();
-                
                 request.setAttribute("categorias", x);
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
             } else {
                 // LISTAR PROPUESTAS DE "X" CATEGORIA
                 String C = request.getParameter("C");
-                //String Cposta = C.replace("+"," ");
+                String Cposta = C.replace("+"," ");
                 List<DtPropuesta> x = IP.WEB_listarPropuestas_X_Categoria(C);
                 request.setAttribute("propuestas", x);
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);

@@ -41,8 +41,8 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-             request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("UTF-8");
              
             // LISTAR PROPUESTAS 
             if (request.getParameter("T") == null) {
@@ -52,8 +52,8 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
             } else {
             // CONSULTA A UNA PROPUESTA 
                 String t = request.getParameter("T");
-                //String titulo = t.replace("+"," ");
-                DtPropuesta p_consulta = IP.SeleccionarProp(t);
+                String titulo = t.replace("+"," ");
+                DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
                 List<String> colaborador = IP.ColaborantesDePro();
                 request.setAttribute("propu", p_consulta);
                 request.setAttribute("titulito", p_consulta.getTitulo());
@@ -90,6 +90,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         processRequest(request, response);
         
     }

@@ -49,14 +49,17 @@
                 <form action="Consulta_de_propuesta_Servlet" method="post">
                     <input type="hidden" name="T" value="<%=cx.getTitulo()%>">
                     <input type="submit" value="Consultar" style='width:100px; height:10px'> 
-                    </form>
+                </form>
                     <%}%>
                 </span>
-            <li/>
+            </li>
+            </ul>
+            </nav>
+            </form>
         </fieldset>         
-        </ul>
-    </nav>
-    </form>
+        
+    
+    
         <%}else {%>
         <h1>Debe de iniciar sesión para continuar</h1>
             <form action="index.html">
