@@ -39,7 +39,11 @@ public class inicSesion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
  PrintWriter out = response.getWriter();
         this.usuario.cargarUsuarios2();
+        
       HttpSession respuesta = request.getSession(true);
+     if(respuesta.getAttribute("sesionAct")==null){
+         
+    
       String nick = request.getParameter("nick");
       if(nick!=null){
            
@@ -63,6 +67,11 @@ public class inicSesion extends HttpServlet {
       else{
            this.getServletContext().getRequestDispatcher("/vistas/inicSesion.jsp").forward(request, response);
       }
+      
+       }else{
+        this.getServletContext().getRequestDispatcher("/vistas/inicSesErr.jsp").forward(request, response);  
+     }
+      
     }
     
     static public DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException{
