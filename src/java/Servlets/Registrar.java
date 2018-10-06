@@ -156,12 +156,12 @@ public class Registrar extends HttpServlet {
                         usuario.altaColaborador(nick, correo, nombre, apellido, fecha, path, "Colaborador", pass);
                         respuesta.setAttribute("sesionAct", nick);
                         respuesta.setAttribute("tipo", "colaborador");
-                        request.getRequestDispatcher("/home").forward(request, response);
+                        request.getRequestDispatcher("/index.html").forward(request, response);
                     } else {
                         usuario.altaColaborador(nick, correo, nombre, apellido, fecha, "", "Colaborador", pass);
                         respuesta.setAttribute("sesionAct", nick);
                         respuesta.setAttribute("tipo", "colaborador");
-                        request.getRequestDispatcher("/home").forward(request, response);
+                        request.getRequestDispatcher("/index.html").forward(request, response);
                     }
                 }
                 String dir = request.getParameter(DIRECCION);
@@ -185,12 +185,12 @@ public class Registrar extends HttpServlet {
                         usuario.altaProponente(nick, correo, nombre, apellido, fecha, pathP, dir, bio, web, "Proponente", pass);
                         respuesta.setAttribute("sesionAct", nick);
                         respuesta.setAttribute("tipo", "proponente");
-                        request.getRequestDispatcher("/home").forward(request, response);
+                        request.getRequestDispatcher("/index.html").forward(request, response);
                     } else {
                         usuario.altaProponente(nick, correo, nombre, apellido, fecha, "", dir, bio, web, "Proponente", pass);
                         respuesta.setAttribute("sesionAct", nick);
                         respuesta.setAttribute("tipo", "proponente");
-                        request.getRequestDispatcher("/home").forward(request, response);
+                        request.getRequestDispatcher("/index.html").forward(request, response);
                     }
                 }
 

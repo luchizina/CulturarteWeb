@@ -39,10 +39,7 @@ public class buscador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String C = request.getParameter("busca");
-        List<DtPropuesta> x = IP.listaTDL(C);
-        request.setAttribute("propuestas", x);
-        this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,6 +55,7 @@ public class buscador extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
     }
 
     /**
@@ -72,6 +70,10 @@ public class buscador extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        String C = request.getParameter("busca");
+        List<DtPropuesta> x = IP.listaTDL(C);
+        request.setAttribute("propuestas", x);
+        this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
     }
 
     /**

@@ -60,7 +60,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
 							¡Bienvenido <%out.print(nueva1);%>!</a></li>
                             <%}%>
                                          <form style="float: right" role="search" class ="msform" action="/CulturarteWeb/buscador" method="POST">
-                                             <input type="text"  placeholder="Search.." id="busca" name="busca">
+                                             <input type="text"  placeholder="Titulo, lugar, descripcion" id="busca" name="busca">
 							<button class="btn action-button" type="submit"  >Buscar</button>
 					
                                         
