@@ -12,10 +12,10 @@
 <!DOCTYPE html>
 <html>
     <%
-    boolean Usuario_Logeado = false;
-    if (request.getSession().getAttribute("sesionAct") != null) {
-        Usuario_Logeado = true;
-    }
+        boolean Usuario_Logeado = false;
+        if (request.getSession().getAttribute("sesionAct") != null) {
+            Usuario_Logeado = true;
+        }
     %>
     <head>
         <jsp:include page="/template/head.jsp" />
@@ -27,41 +27,40 @@
     <body>
         <jsp:include page="/template/header.jsp" />
     <center>
-        <% if(Usuario_Logeado) {%>
+        <% if (Usuario_Logeado) {%>
         <h1>Consulta Propuesta</h1>     
         <form id="msform">
-        <fieldset>    
-    <legend id="legendErr">Consulta de propuestas</legend>
-    <form id="msform">    
-    <nav>
-        <ul class="demo-list-icon mdl-list">
-            <%
-                List<DtPropuesta> x = (List<DtPropuesta>) request.getAttribute("propuestas");
-                for (DtPropuesta cx : x) {
-            %>
-                
-            <li class="mdl-list__item">
-                <span class="mdl-list__item-primary-content">
-                    <i class="material-icons">
-                        event
-                    </i>
-                    <p><%=cx.getTitulo()%></p>
-                <form action="Consulta_de_propuesta_Servlet" method="post">
-                    <input type="hidden" name="T" value="<%=cx.getTitulo()%>">
-                    <input type="submit" value="Consultar" style='width:100px; height:25px'> 
-                    </form>
-                    <%}%>
-                </span>
-            <li/>
-        </fieldset>         
-        </ul>
-    </nav>
-    </form>
-        <%}else {%>
+            <fieldset>    
+                <legend id="legendErr">Consulta de propuestas</legend>   
+                    <nav>
+                        <ul class="demo-list-icon mdl-list">
+                            <%
+                                List<DtPropuesta> x = (List<DtPropuesta>) request.getAttribute("propuestas");
+                                for (DtPropuesta cx : x) {
+                            %>
+
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons">
+                                        event
+                                    </i>
+                                    <p><%=cx.getTitulo()%></p>
+                                    <form action="/CulturarteWeb/Consulta_de_propuesta_Servlet" method="post">
+                                        <input type="hidden" name="T" value="<%=cx.getTitulo()%>">
+                                        <input type="submit" value="Consultar" style='width:100px; height:25px'> 
+                                    </form>
+                                    <%}%>
+                                </span>
+                            </li>
+                        </ul>
+                    </nav>
+            </fieldset>
+        </form>
+        <%} else {%>
         <h1>Debe de iniciar sesión para continuar</h1>
-            <form action="index.html">
+        <form action="index.html">
             <button type="submit">Cancelar</button>
-            </form>
+        </form>
         <%}%>
     </center>
 </body>

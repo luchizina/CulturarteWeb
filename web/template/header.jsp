@@ -59,9 +59,9 @@ String sesionAct=(String) session.getAttribute("sesionAct");
 					<li  style="float: right"><a href="#"><span class="glyphicon "></span>
 							¡Bienvenido <%out.print(nueva1);%>!</a></li>
                             <%}%>
-                                         <form style="float: right" role="search" class ="msform">
-						<input type="text"  placeholder="Search..">
-							<button class="btn action-button" type="button"  >Buscar</button>
+                                         <form style="float: right" role="search" class ="msform" action="/CulturarteWeb/buscador" method="POST">
+                                             <input type="text"  placeholder="Search.." id="busca" name="busca">
+							<button class="btn action-button" type="submit"  >Buscar</button>
 					
                                         
                                          </form>
