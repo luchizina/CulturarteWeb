@@ -316,10 +316,11 @@
     </td>
     <% } %>
 </tr>
-<% if (Propuso_a_propu && !Nombre_Usuario.equals("") && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
+<% if (Propuso_a_propu && !Nombre_Usuario.equals("") && propu.getEstActual().getEstado().equals(Testado.Publicada) || propu.getEstActual().getEstado().equals(Testado.En_Financiacion)) {%>
 <tr>
     <td>
-        <form action="#" method="get">
+        <form action="/CulturarteWeb/extender" method="post">
+            <input type="hidden" name="prop" id="prop" value="<%=propu.getTitulo()%>">
             <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
                 <i class="material-icons">update</i>
             </button>
