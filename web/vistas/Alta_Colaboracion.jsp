@@ -4,6 +4,12 @@
     Author     : Aeliner
 --%>
 
+<%@page import="Logica.Fabrica"%>
+<%@page import="Logica.IPropuesta"%>
+<%@page import="Logica.DtProponente"%>
+<%@page import="Logica.DtColaborador"%>
+<%@page import="Servlets.inicSesion"%>
+<%@page import="Logica.DtUsuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,6 +21,24 @@
          <link href="<%= request.getContextPath()%>/css/style.css" rel="stylesheet" media="screen">
     </head>
     <body>
+        <%
+ DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+ String sesionAct=(String) session.getAttribute("sesionAct");
+ IPropuesta ip = Fabrica.getInstance().getICtrlPropuesta();
+ String titulo = request.getParameter("T");
+if(sesionAct==null || userop instanceof DtProponente || titulo == null || ip.existeColaboracion(userop.getNick(), request.getParameter("T")) ) { %>
+ <form id="msform" action="<%= request.getContextPath() %>/vistas/subIndex.jsp" method="post">      
+  <!-- fieldsets -->
+  <fieldset>
+    <legend id="legendErr">¡UPSS! Esto es incómodo.. :( </legend>      
+    <h3 class="fs-subtitle">Página no encontrada, o no tienes acceso a ella</h3>
+    <input type="submit" name="volver atrás" class="btn action-button" value="¡Lo entiendo!">
+  </fieldset>
+</form>   
+  <%
+ 
+ }else{
+ %>
         <link href="../css/style.css" rel="stylesheet" media="screen">
         <br><br><br><br><br><br><br>
         <%if( ((String) request.getAttribute("tipoR")).equalsIgnoreCase("porcentaje")) { %>
@@ -73,5 +97,6 @@
   </fieldset>
 </form>
 <% } %>
+<% }%>
     </body>
 </html>
