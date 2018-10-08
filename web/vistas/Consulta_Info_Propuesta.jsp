@@ -28,8 +28,10 @@
         boolean Puede_colaborar_a_propu = false;
         boolean Ya_comento = false;
         boolean yaFav = false;
+        boolean Esta_logeado = false;
         String Nombre_Usuario = "";
         String tipo = "";
+        if (request.getSession().getAttribute("sesionAct") != null) {
         String Favo = (String) request.getAttribute("fav");
         String String_Ya_Comento = (String) request.getAttribute("comentario");
         if (String_Ya_Comento.equals("true")) {
@@ -38,7 +40,8 @@
         if (Favo.equals("true")) {
             yaFav = true;
         }
-        if (request.getSession().getAttribute("sesionAct") != null) {
+        if (request.getSession().getAttribute("sesionAct") != null) {   
+            Esta_logeado = true;
             Nombre_Usuario = (String) request.getSession().getAttribute("sesionAct");
             tipo = (String) session.getAttribute("tipo");
             if (Nombre_Usuario.equals(propu.getPropo())) {
@@ -51,6 +54,7 @@
                     Puede_colaborar_a_propu = true;
                 }
             }
+        }  
         }                                                                        %> 
     <head>
         <jsp:include page="/template/head.jsp" />
@@ -114,7 +118,7 @@
 
 
     <table style="position:absolute;top:50px;right:45px; width: 20%" border=10><tr><th><b> Acciones </b></th></tr>
-
+        <% if (Esta_logeado) { %>
         <% if (Puede_colaborar_a_propu && !Nombre_Usuario.equals("") && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
         <tr>
             <td>
@@ -297,6 +301,7 @@
         </div>
     </td>
     <% }%> 
+    <%  }%>
 </tr>
 </table>
 </body>
