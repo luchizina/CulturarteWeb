@@ -31,7 +31,7 @@
         <h1>Consulta Propuesta</h1>     
         <form id="msform">
             <fieldset>    
-                <legend id="legendErr">Consulta de propuestas</legend>   
+                <legend id="legendErr">Consulta de propuestas</legend>
                     <nav>
                         <ul class="demo-list-icon mdl-list">
                             <%
