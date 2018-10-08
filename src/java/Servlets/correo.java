@@ -38,18 +38,7 @@ public class correo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        usuario.cargarUsuarios2();
-        String correo = request.getParameter(CORREO);
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            if (usuario.existeCorreo(correo) && usuario.escorreo(correo)) {
-                out.print("Email disponible");
-            } else if(!usuario.existeCorreo(correo) && usuario.escorreo(correo)){
-                out.print("El email ya se encuentra en uso");
-            } else if(!usuario.escorreo(correo)){
-                out.print("Formato de email invalido");
-            }
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,11 +58,14 @@ public class correo extends HttpServlet {
         String correo = request.getParameter(CORREO);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            if (usuario.existeCorreo(correo)) {
+            if (usuario.existeCorreo(correo) && usuario.escorreo(correo)) {
                 out.print("Email disponible");
-            } else {
-                out.print("El mail ya se encuentra en uso");
+            } else if (!usuario.existeCorreo(correo) && usuario.escorreo(correo)) {
+                out.print("El email ya se encuentra en uso");
+            } else if (!usuario.escorreo(correo)) {
+                out.print("Formato de email invalido");
             }
+
         }
     }
 
