@@ -245,7 +245,7 @@
 </td>
 <% } %>
 </tr>
-<% if (Propuso_a_propu && !Nombre_Usuario.equals("") && propu.getEstActual().getEstado().equals(Testado.Publicada) || propu.getEstActual().getEstado().equals(Testado.En_Financiacion)) {%>
+<% if (Propuso_a_propu && !Nombre_Usuario.equals("") && (propu.getEstActual().getEstado().equals(Testado.Publicada) || propu.getEstActual().getEstado().equals(Testado.En_Financiacion))) {%>
 <tr>
     <td>
         <form action="/CulturarteWeb/extender" method="post">
