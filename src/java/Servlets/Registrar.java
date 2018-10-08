@@ -53,23 +53,12 @@ public class Registrar extends HttpServlet {
     public static final String BIOGRAFIA = "biografia";
     public static final String DIRECCION = "direccion";
     public static final String LINK = "web";
-    public static final String IMG_FOLDER = "img";
+    public static final String IMG_FOLDER = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\web\\";
     public static final String IMAGEN = "imagen";
     private static Logger LOG;
 
     public Registrar() {
         LOG = Logger.getLogger(this.getClass().getPackage().getName());
-    }
-
-    @Override
-    public void init() throws ServletException {
-        String imgPath = getServletContext().getRealPath("/") + IMG_FOLDER;
-        File imgFile = new File(imgPath);
-        if (!imgFile.isDirectory()) {
-            imgFile.mkdirs();
-            LOG.info("Creo directorio: " + imgPath);
-        }
-        usuario.configurarParametros(imgPath);
     }
 
     /**
@@ -140,6 +129,7 @@ public class Registrar extends HttpServlet {
                 String[] args = request.getParameterValues("usuario");
                 if (args[0].equals("colaborador")) {
                     if (partImagen.getSize() != 0) {
+                        usuario.configurarParametros(IMG_FOLDER);
                         InputStream data = partImagen.getInputStream();
                         final String fileName = Utils.getFileName(partImagen);
                         String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
@@ -169,6 +159,7 @@ public class Registrar extends HttpServlet {
                 String web = request.getParameter(LINK);
                 if (args[0].equals("proponente")) {
                     if (partImagen.getSize() != 0) {
+                        usuario.configurarParametros(IMG_FOLDER);
                         InputStream data = partImagen.getInputStream();
                         final String fileName = Utils.getFileName(partImagen);
                         String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
