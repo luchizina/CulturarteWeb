@@ -67,23 +67,14 @@ public class alta_prop extends HttpServlet {
     public static final String LUGAR = "lugar";
     public static final String FEcha2 = "fecha";
     public static final String IMAGEN = "imagen";
-    public static final String IMG_FOLDER = "img";
+    public static final String IMG_FOLDER = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\web\\";
      public String imgPath ;
     private static Logger LOG;
     public alta_prop() {
         LOG = Logger.getLogger(this.getClass().getPackage().getName());
     }
 
-    @Override
-    public void init() throws ServletException {
-       imgPath = getServletContext().getRealPath("/") + IMG_FOLDER;
-        File imgFile = new File(imgPath);
-        if (!imgFile.isDirectory()) {
-            imgFile.mkdirs();
-            LOG.info("Creo directorio: " + imgPath);
-        }
-        ip.configurarParametros(imgPath);
-    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -132,6 +123,7 @@ public class alta_prop extends HttpServlet {
             String nick = getUsuarioLogueado(request).getNick();
             Estado estA = new Estado(Testado.Ingresada);
             if (partImagen.getSize() != 0) {
+                ip.configurarParametros(IMG_FOLDER);
                 InputStream data = partImagen.getInputStream();
                 final String fileName = Utils.getFileName(partImagen);
                 String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
