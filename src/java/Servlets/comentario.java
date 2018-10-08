@@ -79,6 +79,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
             throws ServletException, IOException {
         processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String nick = request.getParameter(Colaborador);
         String prop = request.getParameter(propuesta);
         String com = request.getParameter(comentario);

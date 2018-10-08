@@ -148,6 +148,7 @@
             <% } %>
         </tr>
         <% if (Colaboro_a_propu && !Nombre_Usuario.equals("") && !Ya_comento && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
+        <tr>
         <style>
             .comentario {
                 background-color: #4CAF50;
@@ -220,89 +221,54 @@
                 to {transform: scale(1)}
             }
         </style>
-        <tr>
-            <td>
-                <fieldset>
-                    <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                        <i class="material-icons">add</i>
-                    </button>  
-                    <button  class="mdl-button mdl-js-button mdl-button--accent">
-                        Agregar comentario
-                    </button>  
-                </fieldset>
-            </td>
 
-        <div id="modal-wrapper" class="modal">
-
-            <form class="modal-content animate" action="/CulturarteWeb/comentario" method="post">
-
-                <div class="imgcontainer">
-                    <span onclick="document.getElementById('modal-wrapper').style.display = 'none'" class="close" title="Cerrar">&times;</span>
-                </div>
-
-                <div class="container" align='center'>
-                    <textarea name="comentario" id="comentario" placeholder="Comentario" rows="15" cols="40" required="required"></textarea> <br><br>
-                    <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
-                    <input type="hidden" name="colab" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
-                    <button type="submit" class="comentario" onSubmit="alert('Comentario agregado')">Comentar</button>
-                </div>
-
-            </form>
-
-        </div>
-        <script>
-            // If user clicks anywhere outside of the modal, Modal will close
-
-            var modal = document.getElementById('modal-wrapper');
-            window.onclick = function (event) {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
-            };
-        </script>
-        <%} else if (Ya_comento && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
-        <br>
         <td>
-            <div style="color:green">
-                <i class="material-icons">
-                    comment
-                </i>
-                <b> Usted ya ha comentado en esta propuesta </b>
-            </div>
-        </td>
-        <% } else { %>
-        <td>
-            <div style="color:green">
-                <i class="material-icons">
-                    highlight_off
-                </i>
-                <b> Accion no disponible </b>
-            </div>
-        </td>
-        <% } %>
-    </tr>
-    <% if (!Nombre_Usuario.equals("") && !yaFav && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
-    <tr>
-        <td>
-            <form action="/CulturarteWeb/favorita" method="post">
-                <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
-                <input type="hidden" name="usu" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
-                <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-                    <i class="material-icons">grade</i>
-                </button>
+            <fieldset>
+                <button onclick="document.getElementById('modal-wrapper').style.display = 'block'" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                    <i class="material-icons">add</i>
+                </button>  
                 <button  class="mdl-button mdl-js-button mdl-button--accent">
-                    Marcar como Favorita
-                </button>
-            </form>
+                    Agregar comentario
+                </button>  
+            </fieldset>
+
+
+            <div id="modal-wrapper" class="modal">
+
+                <form class="modal-content animate" action="/CulturarteWeb/comentario" method="post">
+
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('modal-wrapper').style.display = 'none'" class="close" title="Cerrar">&times;</span>
+                    </div>
+
+                    <div class="container" align='center'>
+                        <textarea name="comentario" id="comentario" placeholder="Comentario" rows="15" cols="40" required="required"></textarea> <br><br>
+                        <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
+                        <input type="hidden" name="colab" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
+                        <button type="submit" class="comentario" onSubmit="alert('Comentario agregado')">Comentar</button>
+                    </div>
+
+                </form>
         </td>
-        <%} else if (yaFav && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) { %>
+    </div>
+    <script>
+        // If user clicks anywhere outside of the modal, Modal will close
+
+        var modal = document.getElementById('modal-wrapper');
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+    <%} else if (Ya_comento && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
     <br>
     <td>
-        <div style="color:green" >
+        <div style="color:green">
             <i class="material-icons">
-                star
+                comment
             </i>
-            <b> Tiene esta propuesta como favorita </b>
+            <b> Usted ya ha comentado en esta propuesta </b>
         </div>
     </td>
     <% } else { %>
@@ -315,6 +281,41 @@
         </div>
     </td>
     <% } %>
+</tr>
+<% if (!Nombre_Usuario.equals("") && !yaFav && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
+<tr>
+    <td>
+        <form action="/CulturarteWeb/favorita" method="post">
+            <input type="hidden" name="prop" value="<%=propu.getTitulo()%>">
+            <input type="hidden" name="usu" value="<%=(String) request.getSession().getAttribute("sesionAct")%>">
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">grade</i>
+            </button>
+            <button  class="mdl-button mdl-js-button mdl-button--accent">
+                Marcar como Favorita
+            </button>
+        </form>
+    </td>
+    <%} else if (yaFav && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) { %>
+<br>
+<td>
+    <div style="color:green" >
+        <i class="material-icons">
+            star
+        </i>
+        <b> Tiene esta propuesta como favorita </b>
+    </div>
+</td>
+<% } else { %>
+<td>
+    <div style="color:green">
+        <i class="material-icons">
+            highlight_off
+        </i>
+        <b> Accion no disponible </b>
+    </div>
+</td>
+<% } %>
 </tr>
 <% if (Propuso_a_propu && !Nombre_Usuario.equals("") && propu.getEstActual().getEstado().equals(Testado.Publicada) || propu.getEstActual().getEstado().equals(Testado.En_Financiacion)) {%>
 <tr>
