@@ -53,6 +53,8 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
             // CONSULTA A UNA PROPUESTA 
                 String t = request.getParameter("T");
                 String titulo = t.replace("+"," ");
+                boolean existe = IP.existeTitulo(titulo);
+                if(existe){
                 DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
                 List<String> colaborador = IP.ColaborantesDePro();
                 request.setAttribute("propu", p_consulta);
@@ -76,6 +78,11 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
                 }
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_Info_Propuesta.jsp").forward(request, response);
             }
+            }
+            List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
+            request.setAttribute("propuestas", x);
+            this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
