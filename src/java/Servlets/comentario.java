@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Servlets.inicSesion;
 import Logica.DtProponente;
 import Logica.Fabrica;
 import Logica.IPropuesta;
@@ -40,18 +41,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        if(inicSesion.getUsuarioLogueado(request) == null || inicSesion.getUsuarioLogueado(request) instanceof DtProponente){
-            this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
-        } else {
-        String nick = request.getParameter(Colaborador);
-        String prop = request.getParameter(propuesta);
-        String com = request.getParameter(comentario);
-        if(!com.isEmpty()){
-        ip.agregarComentario(usuario.traerColaborador(nick), ip.getPropPorNick(prop), com);
-        request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
-        }
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,6 +57,11 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        if(inicSesion.getUsuarioLogueado(request) == null || inicSesion.getUsuarioLogueado(request) instanceof DtProponente){
+            this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
+        } else {
+        this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+        }
     }
 
     /**
@@ -83,6 +78,16 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String nick = request.getParameter(Colaborador);
+        String prop = request.getParameter(propuesta);
+        String com = request.getParameter(comentario);
+        if(!com.isEmpty()){
+        ip.agregarComentario(usuario.traerColaborador(nick), ip.getPropPorNick(prop), com);
+        request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
+        }
+        
         
 }
 

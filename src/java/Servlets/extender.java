@@ -5,11 +5,16 @@
  */
 package Servlets;
 
+import Logica.DtColaborador;
+import Logica.DtProponente;
+import Logica.DtUsuario;
 import Logica.Fabrica;
 import Logica.IPropuesta;
-import Logica.IUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,13 +26,12 @@ import Servlets.inicSesion;
  *
  * @author Nuevo
  */
-@WebServlet(name = "favorita", urlPatterns = {"/favorita"})
-public class favorita extends HttpServlet {
-private final Fabrica fabrica = Fabrica.getInstance();
+@WebServlet(name = "extender", urlPatterns = {"/extender"})
+public class extender extends HttpServlet {
+
+    private final Fabrica fabrica = Fabrica.getInstance();
     private final IPropuesta ip = fabrica.getICtrlPropuesta();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
-    String usuarioF = "usu";
-    String propuesta = "prop";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,7 +43,6 @@ private final Fabrica fabrica = Fabrica.getInstance();
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,10 +58,11 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        if(inicSesion.getUsuarioLogueado(request) == null){
+        DtUsuario usu = inicSesion.getUsuarioLogueado(request);
+        if (usu == null || usu instanceof DtColaborador) {
             this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
-        } else {
-        this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+        } else if (usu instanceof DtProponente){
+            this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
         }
     }
 
@@ -74,13 +78,13 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        String nick = request.getParameter(usuarioF);
-        String prop = request.getParameter(propuesta);
-        ip.agregarFavorito(usuario.traerUsuario(nick), ip.getPropPorNick(prop));
-        request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
-        
+        String C = request.getParameter("prop");
+        try {
+            ip.extender(C);
+            request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T=" + C).forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(extender.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

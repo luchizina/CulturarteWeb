@@ -5,29 +5,28 @@
  */
 package Servlets;
 
+import Logica.DtPropuesta;
 import Logica.Fabrica;
 import Logica.IPropuesta;
-import Logica.IUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Servlets.inicSesion;
 
 /**
  *
  * @author Nuevo
  */
-@WebServlet(name = "favorita", urlPatterns = {"/favorita"})
-public class favorita extends HttpServlet {
-private final Fabrica fabrica = Fabrica.getInstance();
-    private final IPropuesta ip = fabrica.getICtrlPropuesta();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
-    String usuarioF = "usu";
-    String propuesta = "prop";
+@WebServlet(name = "buscador", urlPatterns = {"/buscador"})
+public class buscador extends HttpServlet {
+
+    private Fabrica fabrica = Fabrica.getInstance();
+    private IPropuesta IP = fabrica.getICtrlPropuesta();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,7 +38,8 @@ private final Fabrica fabrica = Fabrica.getInstance();
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        response.setContentType("text/html;charset=UTF-8");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,11 +55,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        if(inicSesion.getUsuarioLogueado(request) == null){
-            this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
-        } else {
         this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
-        }
     }
 
     /**
@@ -74,13 +70,10 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        String nick = request.getParameter(usuarioF);
-        String prop = request.getParameter(propuesta);
-        ip.agregarFavorito(usuario.traerUsuario(nick), ip.getPropPorNick(prop));
-        request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
-        
+        String C = request.getParameter("busca");
+        List<DtPropuesta> x = IP.listaTDL(C);
+        request.setAttribute("propuestas", x);
+        this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
     }
 
     /**

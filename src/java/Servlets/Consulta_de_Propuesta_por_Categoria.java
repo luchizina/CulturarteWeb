@@ -53,11 +53,16 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
                 // LISTAR PROPUESTAS DE "X" CATEGORIA
                 String C = request.getParameter("C");
                 String Cposta = C.replace("+"," ");
+                boolean existe = IC.existecat(Cposta);
+                if(existe){
                 List<DtPropuesta> x = IP.WEB_listarPropuestas_X_Categoria(C);
                 request.setAttribute("propuestas", x);
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
             }
-           
+                List<DtCategoria> x = IC.listarCategorias();
+                request.setAttribute("categorias", x);
+                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
+            }
         }
     }
 
