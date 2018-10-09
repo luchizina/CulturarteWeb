@@ -21,7 +21,7 @@
         <jsp:include page="/template/head.jsp" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <title>Información de usuario</title>
+       
 
         <%
             DtUsuario user = (DtUsuario) request.getAttribute("usuario");
@@ -31,7 +31,7 @@
 
             }
         %>
-
+         <title>Información de : <%= prop.getNick()%></title>
     </head>
     <body>
 
@@ -44,7 +44,7 @@
                 String nicko = userop.getNick();
                 if (nicko.equals(prop.getNick())) {%>
         <div style="float: right">                                
-            <form id="pa" class="msformProp" action="<%=request.getContextPath()%>/alta_prop" method="post">
+            <form id="pa" class="msformProp2" action="<%=request.getContextPath()%>/alta_prop" method="post">
                 <fieldset>
                     <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
                         <i class="material-icons">add</i>
@@ -166,40 +166,40 @@
                     </right>
                 </div> 
             </form >
-            
-            
+
+
             <form style="position: absolute; top: 200px; right: 40px; color:green" >
                 <div id="divTablas" class="datagrid" >
                     <legend id="legendPerf">Propuestas favoritas</legend><br>
-                  
-                        <table class="datagrid">
-                            <tr> 
-                                <th>
-                                    Nombre:
-                                </th> 
-                            </tr>
 
-                            <%
-                                List<DtPropuesta> propFavo = (List<DtPropuesta>) request.getAttribute("propuFav");
-                                String pa = "";
+                    <table class="datagrid">
+                        <tr> 
+                            <th>
+                                Nombre:
+                            </th> 
+                        </tr>
 
-                                if (propFavo.size() > 0) {
-                                    for (DtPropuesta propu1 : propFavo) {
-                                        pa = propu1.getTitulo().replace(" ", "+");
-                            %>
-                            <tr>
-                                <td>
-                                    <a href=Consulta_de_propuesta_Servlet?T=<%=pa%>>
-                                        <%= propu1.getTitulo()%> 
-                                    </a>
-                                </td>
-                            </tr>
-                            <%}
-                                } else { %>
-                            <td> no tiene ninguna  </td>
-                            <%} %>
-                        </table>
-                  
+                        <%
+                            List<DtPropuesta> propFavo = (List<DtPropuesta>) request.getAttribute("propuFav");
+                            String pa = "";
+
+                            if (propFavo.size() > 0) {
+                                for (DtPropuesta propu1 : propFavo) {
+                                    pa = propu1.getTitulo().replace(" ", "+");
+                        %>
+                        <tr>
+                            <td>
+                                <a href=Consulta_de_propuesta_Servlet?T=<%=pa%>>
+                                    <%= propu1.getTitulo()%> 
+                                </a>
+                            </td>
+                        </tr>
+                        <%}
+                            } else { %>
+                        <td> no tiene ninguna  </td>
+                        <%} %>
+                    </table>
+
                 </div>
                 <form id="msform" style="float: right">
                     <div id="divTablas" class="datagrid">
@@ -230,7 +230,7 @@
                                 </tr>
 
                                 <%}
-                                    } else { %>
+                                } else { %>
                                 <td> No tiene ninguna propuesta</td>
                                 <%} %>
                             </table>
@@ -239,71 +239,78 @@
 
                 </form>  
 
-                <form id="msform"  enctype="multipart/form-data">
-
+                <form class="msformProp"  enctype="multipart/form-data">
+                    
                     <ul id="progressbar">
-                        <li class="active">Datos generales</li>
-                        <li>Datos opcionales</li>
-                        <% if (userop != null && userop.getNick().equals(prop.getNick())) {%>
-                        <li>Mis propuestas</li>
+                        <li class="active"></li>
+                        <li></li>
+                            <% if (userop != null && userop.getNick().equals(prop.getNick())) {%>
+                        <li></li>
                             <% }%>
                     </ul>
                     <fieldset>
-                        <div id="divLeg">
-                            <legend id="legendPerf">Información del usuario</legend><br>
-                        </div>
+                          <legend id="legendErr">Datos generales: </legend>   
+                            <div id="perfil_izquierda" style="float: left" >
 
-                        <div id="perfil_derecha">
-
-                            <h2 class="fs-title">Información básica</h2>
-                            <label class="rotulo">Nombre:</label>
-                            <label class="valor"> <br/><%= prop.getNombre()%> <%= prop.getApellido()%> </label>
-                            <br/>
-                            <label class="rotulo"> Nickname:</label>
-                            <label class="valor"> <br/><%= prop.getNick()%> </label><br/>
-                            <label class="rotulo"> Tipo:</label>
-                            <label class="valor"> <br/>Proponente</label><br/>
-                            <label class="rotulo">Fecha de nacimiento:</label>
-                            <label class="valor"> <br/>
-                                <%=new SimpleDateFormat("dd/MM/yyyy").format(prop.getFecha())%>
-                            </label><br/>
-                            <label class="rotulo">Correo electrónico:   </label>
-                            <label class="valor"><a href="mailto:<%= prop.getCorreo()%>" ><br/><%= prop.getCorreo()%></a>
+                            <% if (prop.getImg() != null && !prop.getImg().equals("")) {%>
+                            <img id="imagenot" src="/CulturarteWeb/retornarimagen?T=${T}" width="200" height="200">  
+                            <%   } else {%>
+                            <img id="imagenot" src="<%= request.getContextPath()%>/img/user-4.png" width="200" height="200">
+                            <%}%>
+                        </div>
+                        <div id="perfil_derecha" >
+                            
+                            <label class="rotulo" style="text-align: left">Nombre completo:</label><br>
+                            <label class="valor" style="text-align: left"><%= prop.getNombre()%> <%= prop.getApellido()%> </label><br/>
+                            <label class="rotulo" style="text-align: left"> Nickname:</label><br>
+                            <label class="valor" style="text-align: left"> <%= prop.getNick()%> </label><br/>
+                            
+                            <label class="rotulo" style="text-align: left"> Tipo:</label><br/>
+                            <label class="valor" style="text-align: left"> Proponente</label><br/>
+                            <label class="rotulo" style="text-align: left">Fecha de nacimiento:</label><br/>
+                            <label class="valor" style="text-align: left"> <%=new SimpleDateFormat("dd/MM/yyyy").format(prop.getFecha())%>                       </label><br/>
+                            <label class="rotulo"style="text-align: left">Correo electrónico:   </label><br/>
+                            <label class="valor"style="text-align: left"><a href="mailto:<%= prop.getCorreo()%>" ><%= prop.getCorreo()%></a>
                             </label><br/>
                         </div>
+                        
                         <input type="button" name="next" class="next action-button" value="Siguiente" />
                     </fieldset>
                     <fieldset>
-                        <div id="perfil_izquierda">
-
-                            <% if (prop.getImg() != null && !prop.getImg().equals("")) {%>
-                            <img id="imagenot" src="/CulturarteWeb/retornarimagen?T=${T}" width="250" height="250">  
-                            <%   } else {%>
-                            <img id="imagenot" src="<%= request.getContextPath()%>/img/user-4.png" width="250" height="250">
-                            <%}%>
-                        </div>
-                        <% if (!prop.getLinkWeb().equals("")) {%>
-                        <label class="rotulo"><br/>Pagina Web:</label><br/>
-                        <label class="valor"> <a href="<%= prop.getLinkWeb()%>">
-                                <%= prop.getLinkWeb()%>
-                            </a></label><br/>
-                            <% }%>
-                            <% if (!prop.getDireccion().equals("")) {%>
-                        <label class="rotulo">Dirección:</label><br/>
-                        <label class="valor"><%= prop.getDireccion()%></label><br/>
-                        <% } %>
+                          <legend id="legendErr">Datos opcionales: </legend>     
+                      
+                        <label class="rotulo" style="text-align: left" ><br/>Página Web:</label> <br/>
+                            <% if (!prop.getLinkWeb().equals("")) {%>
+                        <br/>
+                        <label class="valor" style="text-align: left"> <a href="<%= prop.getLinkWeb()%>"><%= prop.getLinkWeb()%></a></label>
+                        <% } else {%>
+                        <br/>
+                        <label class="valor" style="text-align: left"> No tiene página web</label><br/>
+                        <%}%>
+                        <br/>
+                        <label class="rotulo" style="text-align: left">Dirección:</label>
+                        <% if (!prop.getDireccion().equals("")) {%>
+                        <br/>
+                        <label class="valor" style="text-align: left"><%= prop.getDireccion()%></label><br/>
+                          <% } else {%>
+                        <label class="valor" style="text-align: left"> No tiene dirección</label><br/>
+                        <%}%>
+                         <label class="rotulo" style="text-align: left">Biografia:</label><br/>
                         <% if (!prop.getBiografia().equals("")) {%>
-                        <label class="rotulo"><br/>Biografia:</label><br/>
-                        <label class="valor"> <br/> <%= prop.getBiografia()%></label>
-                            <% }%>
+                        <label class="valor" style="text-align: left"> <%= prop.getBiografia()%></label><br/>
+                       <% } else {%>
+                        <label class="valor" style="text-align: left"> No tiene biografía</label><br/>
+                        <%}%>
+                        <br/><br/>
                         <input type="button" name="previous" class="previous action-button" value="Anterior" />
-                        <% if ( userop != null && userop.getNick().equals(prop.getNick())) {%>
+                        <% if (userop != null && userop.getNick().equals(prop.getNick())) {%>
                         <input type="button" name="next" class="next action-button" value="Siguiente" />
                         <%}%>
                     </fieldset>
-                    <% if (userop != null &&  userop.getNick().equals(prop.getNick())) {%>
+                    <% if (userop != null && userop.getNick().equals(prop.getNick())) {%>
                     <fieldset>
-                        <legend id="legendErr">Mis propuestas</legend>
+                          <legend id="legendErr">Mis propuestas </legend>     
+                       
                         <div id="divTablas" class="datagrid">
                             <!--   <legend id="legendPerf">Seguidores</legend><br>-->
                             <right>
@@ -332,7 +339,7 @@
                                     </tr>
 
                                     <%}
-                            } else { %>
+                                    } else { %>
                                     <td> No tiene ninguna propuesta</td>
                                     <%} %>
                                 </table>

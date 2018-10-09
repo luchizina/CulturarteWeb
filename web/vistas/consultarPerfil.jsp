@@ -24,10 +24,9 @@
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
        <jsp:include page="/template/header.jsp" />
         
-    <form style="float: right" role="search" class ="msform" action="/CulturarteWeb/buscador" method="POST">
-                                             <input type="text"  placeholder="nick, correo" id="busca" name="buscaU">
-							<button class="btn action-button" type="submit"  >Buscar</button>
-					
+    <form style="float: left" role="search"  action="/CulturarteWeb/buscador" method="POST">
+                                             <input type="text"  placeholder="nick, correo" id="Buscador" name="buscaU">
+						
                                          </form>
     
     <form id="msform">

@@ -22,8 +22,7 @@
         <jsp:include page="/template/head.jsp" />
          <script  src="../js/progress.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         
-        <title>Información de usuario</title>
+      
     
         <% 
         DtUsuario user=(DtUsuario) request.getAttribute("usuario");
@@ -38,65 +37,105 @@
         }
         
         %>
+           
+        <title>Información de: <%= colab.getNick()%> </title>
     </head>
     <body>
         <jsp:include page="/template/header.jsp" />
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
         <% if(colab != null ) {%>
-        
-         <form id="msformPerfil">
-        <div id="perfil" class ="main">
-            <div id="divLeg">
-              <legend id="legendPerf"> Información de:<%= colab.getNombre() %> <%= colab.getApellido() %> (<%= colab.getNick() %>) </legend><br>
-              </div>
+                  
+            <% 
+              DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+                if(userop != null){
+            List<DtUsuario> seguidoresPrueb= (List<DtUsuario>) request.getAttribute("seguidore");
+            if(userop.getNick().equals(colab.getNick())==false){
+                boolean yaSigue=false;
+            for(int i=0; i < seguidoresPrueb.size(); i++){
+              DtUsuario seguidor= seguidoresPrueb.get(i);
+    
+              if(seguidor.getNick().equals(userop.getNick())){
+                     yaSigue=true;
+               }
+    
+            }
+              if(yaSigue==true){
+             %>
+          <form method="post" action="dejarDeSeguir">
+              <%
+                    String link2= "/consultarPerfil?T="+colab.getNick();
+ %>
+            <input type="hidden" name="link" value="<%=link2%>"/>
+     
+             <input type="hidden" name="nickLogueado" value="<%=userop.getNick()%>"/>
+    <input type="hidden" name="nickASeguir" value="<%=colab.getNick()%>" />
+           <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Dejar de seguir" />
+        </form>
+       <% } else{%> 
+           
+           
+     
+
+            <form method="post" action="seguirUsuario">
+            
+                <%
+                    String link= "/consultarPerfil?T="+colab.getNick();
+ %>
+            <input type="hidden" name="link" value="<%=link%>"/>
+     
+             <input type="hidden" name="nickLogueado" value="<%=userop.getNick()%>"/>
+    <input type="hidden" name="nickASeguir" value="<%=colab.getNick()%>" />
+           <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Seguir" />
+        </form>
+            
+           <%}} }%> 
+
+         <form class="msformProp" enctype="multipart/form-data">
+              <fieldset>
+         <legend id="legendErr">Información básica: </legend>   
 		<div id="perfil_izquierda" style="float: left">
-                    
                     <% if(colab.getImg()!=null && !colab.getImg().equals("")){
                         
                    
                         %>
-                  
-                      <img id="imagenot" src="/CulturarteWeb/retornarimagen?T=${T}" width="250" height="250">  
-                      
-                      <%   }else{%>
-                              
-                      <img id="imagenot" src="/CulturarteWeb/img/user-4.png" width="250" height="250">
-                             
+                      <img id="imagenot" src="/CulturarteWeb/retornarimagen?T=${T}" width="200" height="200">  
+                      <%   }else{%>          
+                      <img id="imagenot" src="/CulturarteWeb/img/user-4.png" width="200" height="200">   
                           <%    } %>
 		</div>
                 
 		<div id="perfil_derecha">
                     
 			<div class="contenedor">
-				<h2 class="fs-title">Información básica</h2>
-				<label class="rotulo">Nombre:</label>
-				<label class="valor"><%= colab.getNombre() %></label>
+				
+				<label class="rotulo" style="text-align: left">Nombre:</label>
+				<label class="valor" style="text-align: left"><%= colab.getNombre() %></label>
 				<br/>
-                                <label class="rotulo"> Apellido:</label>
-                                <label class="valor"><%= colab.getApellido() %> </label><br/>
-                                 <label class="rotulo"> Nickname:</label>
-                                <label class="valor"><%= colab.getNick() %> </label><br/>
-                                <label class="rotulo"> Tipo:</label>
-                                <label class="valor">Colaborador</label><br/>
-				<label class="rotulo">Fecha de nacimiento:</label>
-				<label class="valor">
+                                <label class="rotulo" style="text-align: left"> Apellido:</label>
+                                <label class="valor" style="text-align: left"><%= colab.getApellido() %> </label><br/>
+                                 <label class="rotulo" style="text-align: left"> Nickname:</label>
+                                <label class="valor" style="text-align: left"><%= colab.getNick() %> </label><br/>
+                                <label class="rotulo" style="text-align: left"> Tipo:</label>
+                                <label class="valor" style="text-align: left">Colaborador</label><br/>
+				<label class="rotulo" style="text-align: left">Fecha de nacimiento:</label>
+				<label class="valor" style="text-align: left">
                                   
 					<%= 
 						new SimpleDateFormat("dd/MM/yyyy").format(colab.getFecha())
 					%>
 				</label>
 			</div>
-
 			<div class="contenedor">
-				<label class="rotulo">Correo electrónico:</label>
-				<label class="valor">
+				<label class="rotulo" style="text-align: left">Correo electrónico:</label>
+				<label class="valor" style="text-align: left">
 					<a href="mailto:<%= colab.getCorreo() %>">
 						<%= colab.getCorreo() %>
 					</a>
 				</label>
 			</div>
 		</div>
-	</div>
+	
+           </fieldset>
         </form>
  
              <div style="position: absolute; top: 150px; left: 60px; color:green">
@@ -172,7 +211,7 @@
                    Titulo:
                 </th> 
                 <%
-           DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+          
             if(userop != null){
             String nicko=userop.getNick();
             if(nicko.equals(colab.getNick())){%>
@@ -251,51 +290,7 @@
               </div>
         </form>
         </div>  
-            
-            <% 
-                if(userop != null){
-            List<DtUsuario> seguidoresPrueb= (List<DtUsuario>) request.getAttribute("seguidore");
-            if(userop.getNick().equals(colab.getNick())==false){
-                boolean yaSigue=false;
-            for(int i=0; i < seguidoresPrueb.size(); i++){
-              DtUsuario seguidor= seguidoresPrueb.get(i);
-    
-              if(seguidor.getNick().equals(userop.getNick())){
-                     yaSigue=true;
-               }
-    
-            }
-              if(yaSigue==true){
-             %>
-          <form method="post" action="dejarDeSeguir">
-              <%
-                    String link2= "/consultarPerfil?T="+colab.getNick();
- %>
-            <input type="hidden" name="link" value="<%=link2%>"/>
-     
-             <input type="hidden" name="nickLogueado" value="<%=userop.getNick()%>"/>
-    <input type="hidden" name="nickASeguir" value="<%=colab.getNick()%>" />
-           <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Dejar de seguir" />
-        </form>
-       <% } else{%> 
-           
-           
-     
-
-            <form method="post" action="seguirUsuario">
-            
-                <%
-                    String link= "/consultarPerfil?T="+colab.getNick();
- %>
-            <input type="hidden" name="link" value="<%=link%>"/>
-     
-             <input type="hidden" name="nickLogueado" value="<%=userop.getNick()%>"/>
-    <input type="hidden" name="nickASeguir" value="<%=colab.getNick()%>" />
-           <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Seguir" />
-        </form>
-            
-           <%}} }%> 
-       
+         
         <% } %>
     </body>
 </html>
