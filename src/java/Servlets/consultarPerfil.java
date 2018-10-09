@@ -54,8 +54,15 @@ IP.EstadosPropuestas();
                 this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
                 //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
             } else {
-         
+        
+            this.IU.existeNick("hola");
+            
+            
               String nickUser= request.getParameter("T");
+             boolean existe= this.IU.existeNick(nickUser);
+             if(!existe){
+                 
+           
               DtUsuario user= IU.traerDtUsuario(nickUser);
                String mensajeExito="Imagen subida correctamente";
                request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
@@ -101,7 +108,12 @@ IP.EstadosPropuestas();
                   
               }
               
-               
+                }else{
+                  List<DtUsuario> usuarios = IU.listarUsuarios();
+                request.setAttribute("usuarios", usuarios);
+                 this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request,response);
+                 
+             } 
             }
     }
 
@@ -142,6 +154,6 @@ IP.EstadosPropuestas();
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }
+

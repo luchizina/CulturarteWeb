@@ -216,7 +216,8 @@
         </table>
          </right>
               </div>
-          <form style="float: both">
+        <form style="float: both">
+              
             <div id="divTablas" class="datagrid">
               <legend id="legendPerf">Propuestas favoritas</legend><br>
                         <right>
@@ -248,8 +249,9 @@
         </table>
          </right>
               </div>
+        </form>
         </div>  
-      
+            
             <% 
                 if(userop != null){
             List<DtUsuario> seguidoresPrueb= (List<DtUsuario>) request.getAttribute("seguidore");
