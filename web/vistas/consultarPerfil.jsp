@@ -24,7 +24,11 @@
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
        <jsp:include page="/template/header.jsp" />
         
-    
+    <form style="float: right" role="search" class ="msform" action="/CulturarteWeb/buscador" method="POST">
+                                             <input type="text"  placeholder="nick, correo" id="busca" name="buscaU">
+							<button class="btn action-button" type="submit"  >Buscar</button>
+					
+                                         </form>
     
     <form id="msform">
         
@@ -35,8 +39,6 @@
         <%  List<DtUsuario> usuariosU = (List<DtUsuario>) request.getAttribute("usuarios");
         
         for (DtUsuario user : usuariosU) {
-                    
-                
                 String Titu = user.getNick().replace(" ", "-");
                 String completo= user.getNombre()+" "+user.getApellido()+" ("+user.getNick()+")";
         
