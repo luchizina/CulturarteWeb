@@ -35,7 +35,7 @@ public class Colaboracion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-            if(request.getParameter("monto") == null)
+            if(request.getParameter("monto") == null && request.getParameter("T") != null)
             {
                 
             
@@ -46,7 +46,7 @@ public class Colaboracion extends HttpServlet {
                 this.getServletContext().getRequestDispatcher("/vistas/Alta_Colaboracion.jsp").forward(request, response);
             
             }
-            else
+            else if(request.getParameter("monto") != null)
             {
                 String titulo = (String) request.getParameter("Titulo");
                 String monto = (String) request.getParameter("monto");
@@ -54,6 +54,10 @@ public class Colaboracion extends HttpServlet {
                 String nick = (String) request.getSession().getAttribute("sesionAct");
                 ctrlPropuesta.getInstance().altaColaboracion(titulo, nick, monto, tipoR);
                 this.getServletContext().getRequestDispatcher("/home").forward(request, response);
+            }
+            else
+            {
+                this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
             }
     }
 
