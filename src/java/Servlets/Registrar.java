@@ -110,7 +110,7 @@ public class Registrar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+            request.setCharacterEncoding("UTF-8");
         try {
             processRequest(request, response);
             PrintWriter out = response.getWriter();

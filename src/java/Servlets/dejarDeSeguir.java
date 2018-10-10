@@ -38,6 +38,15 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        
+           if(request.getParameter("nickLogueado")==null){
+        this.getServletContext().getRequestDispatcher("/errorPages/404.jsp").forward(request,response);
+    
+   
+    }else{
+               
+        
       String nickLogueado= request.getParameter("nickLogueado");
     String nickASeguir= request.getParameter("nickASeguir");
     DtUsuario usuarioAseguir= this.usuario.traerDtUsuario(nickASeguir);
@@ -59,6 +68,7 @@ String link= (String) request.getParameter("link");
 this.getServletContext().getRequestDispatcher(link).forward(request,response);
 } 
 }
+   }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
