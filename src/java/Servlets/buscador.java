@@ -29,6 +29,7 @@ public class buscador extends HttpServlet {
     private Fabrica fabrica = Fabrica.getInstance();
     private IPropuesta IP = fabrica.getICtrlPropuesta();
     private IUsuario IU = fabrica.getICtrlUsuario();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,7 +42,7 @@ public class buscador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -76,15 +77,14 @@ public class buscador extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String C = request.getParameter("busca");
         String U = request.getParameter("buscaU");
-        if(C != null){
-        List<DtPropuesta> x = IP.listaTDL(C);
-        request.setAttribute("propuestas", x);
-        this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
-        }
-        else{
-        List<DtUsuario> x = IU.listaNC(U);
-        request.setAttribute("usuarios", x);
-        this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
+        if (C != null) {
+            List<DtPropuesta> x = IP.listaTDL(C);
+            request.setAttribute("propuestas", x);
+            this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
+        } else {
+            List<DtUsuario> x = IU.listaNC(U);
+            request.setAttribute("usuarios", x);
+            this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
         }
     }
 

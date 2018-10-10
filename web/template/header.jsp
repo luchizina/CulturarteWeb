@@ -1,7 +1,7 @@
 <%@page import="Logica.DtProponente"%>
 <%@page import="Logica.DtUsuario"%>
 <%@page import="Servlets.inicSesion"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <script type="text/javascript" src="../js/Datos.js"></script>
  <div id='cssmenu'>
 <ul>
@@ -25,7 +25,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
  
  <li style="float: right"><a href="<%= request.getContextPath() %>/Registrarse">Registrar</a></li>
  <li style="float: right"><a href="<%= request.getContextPath() %>/iniciarS">Iniciar sesión</a></li>
- <li><a href="<%= request.getContextPath() %>Consulta_de_propuesta_Servlet">Quiero ver una propuesta</a></li>
+ <li><a href="<%= request.getContextPath() %>/Consulta_de_propuesta_Servlet">Quiero ver una propuesta</a></li>
  
     <% 
         }else{
