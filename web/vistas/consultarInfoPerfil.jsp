@@ -90,7 +90,7 @@
             
            <%}} }%> 
 
-         <form class="msformProp" enctype="multipart/form-data">
+         <form class="msformProp" enctype="multipart/form-data" style="position: absolute; top: 50px; left: 245px; color:green">
               <fieldset>
          <legend id="legendErr">Información básica: </legend>   
 		<div id="perfil_izquierda" style="float: left">

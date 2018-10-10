@@ -50,13 +50,11 @@ body {
     
     
 }
-.msformProp {
+.msformProp{
     width:800px;
     margin: 50px auto;
     text-align: center;
-    position: relative;
-    
-    
+    position: relative;    
 }
 
 .rotulo
@@ -155,10 +153,15 @@ body {
   background: url(https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-19-32.png) no-repeat 0px 5px;
   background-size: 24px;
   width: 200px;
+  height: 5px;
   border: transparent;
   border-bottom: solid 1px #ccc;
   padding: 10px 10px 10px 30px;
   outline: none;
+  font-size: 12px;
+  color:#DDDDDD;
+  
+  
 }
 .msformProp fieldset:not(:first-of-type) {
 	display: none;
@@ -514,6 +517,8 @@ div.dhtmlx_window_active, div.dhx_modal_cover_dv {
   width: 300px;
 }
 
-nav ul{height:400px; width:18%;}
+nav ul{
+    max-height: 400px;
+    height:auto; width:18%;}
 nav ul{overflow:hidden; overflow-y:scroll;}
 

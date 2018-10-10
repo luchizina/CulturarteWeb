@@ -89,7 +89,7 @@
 }
 #cssmenu > ul li a {
   display: inline-block;
-  padding: 10px 22px;
+  padding: 10px 10px;
 }
 #cssmenu > ul > li.active,
 #cssmenu > ul > li.active:hover {

@@ -311,10 +311,10 @@
                     <fieldset>
                           <legend id="legendErr">Mis propuestas </legend>     
                        
-                        <div id="divTablas" class="datagrid">
+                      
                             <!--   <legend id="legendPerf">Seguidores</legend><br>-->
-                            <right>
-                                <table class="datagrid">
+                            <center>
+                                <table>
                                     <tr> 
                                         <th>
                                             Título:
@@ -343,8 +343,7 @@
                                     <td> No tiene ninguna propuesta</td>
                                     <%} %>
                                 </table>
-                            </right>
-                        </div>
+                            </center>
                         <input type="button" name="previous" class="previous action-button" value="Anterior" />
                     </fieldset>
                     <%}%>

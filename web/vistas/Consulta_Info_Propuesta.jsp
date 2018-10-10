@@ -64,6 +64,7 @@
     </head>
     <body>
         <jsp:include page="/template/header.jsp" />
+        <form >
         <table border=10 >
             <tr>
                 <th><b> Titulo </b></th>
@@ -92,6 +93,7 @@
         </table>
         <br>
         <br>
+        </form>
         <table border=10>
             <tr>
                 <th><b> Descripcion </b></th>

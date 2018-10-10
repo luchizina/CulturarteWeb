@@ -16,7 +16,7 @@
         <jsp:include page="/template/header.jsp" />
          <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
         <br><br><br><br><br><br><br>
-        <form id="msform" action="<%= request.getContextPath() %>/vistas/subIndex.jsp" method="post">      
+        <form id="msform" action="<%= request.getContextPath() %>/index.html" method="post">      
   <!-- fieldsets -->
   <fieldset>
     <legend id="legendErr">¡UPSS! Esto es incómodo.. :( </legend>      
