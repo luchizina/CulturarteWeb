@@ -14,13 +14,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <jsp:include page="/template/head.jsp" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+          
         <title>Registrar Colaboración a Propuesta</title>
          <script type="text/javascript" src="../js/limpiar.js"></script>
          <link href="<%= request.getContextPath()%>/css/style.css" rel="stylesheet" media="screen">
     </head>
     <body>
+         <jsp:include page="/template/header.jsp" />
         <%
  DtUsuario userop=inicSesion.getUsuarioLogueado(request);
  String sesionAct=(String) session.getAttribute("sesionAct");

@@ -27,6 +27,7 @@
     <nav>
     <ul class="demo-list-icon mdl-list">
         <%   List<DtPropuesta> x = (List<DtPropuesta>) request.getAttribute("propuestas");
+        if(x.size()>0){
                 for (DtPropuesta cx : x) {
                     String h = cx.getTitulo().replace(" ", "+");
         %>
@@ -37,8 +38,17 @@
     <%=cx.getTitulo()%> </a>
     </span>
     </li>
+    <% }
+        } else{ %>
+        <li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+    <i class="material-icons">error_outline </i>
+    <label> No se encontró propuestas </label>
     <% } %>
+    </span>
+    </li>
     </ul>
+    
     </nav>
     </fieldset>
  </form>
