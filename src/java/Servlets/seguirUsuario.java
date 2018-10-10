@@ -34,7 +34,14 @@ private final Fabrica fabrica = Fabrica.getInstance();
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         this.usuario.cargarUsuarios2();
-    String nickLogueado= request.getParameter("nickLogueado");
+         if(request.getParameter("nickLogueado")==null){
+        this.getServletContext().getRequestDispatcher("/errorPages/404.jsp").forward(request,response);
+    
+   
+    }
+   else{
+        
+     String nickLogueado= request.getParameter("nickLogueado");
     String nickASeguir= request.getParameter("nickASeguir");
 this.usuario.seleccionarUsuario(nickLogueado);
 this.usuario.seleccionarUsuSeg(nickASeguir);
@@ -55,7 +62,7 @@ String link= (String) request.getParameter("link");
 this.getServletContext().getRequestDispatcher(link).forward(request,response);
 } 
 }
-
+}
 
     }
 
