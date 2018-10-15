@@ -82,3 +82,21 @@ function showContent() {
         element.style.display = 'none';
     }
 }
+
+function extender(){
+    var mensaje = confirm("¿Desea extender la propuesta?");
+        if (mensaje) {
+            return true;
+        } else {
+            return false;
+        }
+}
+
+function cancelar(){
+    var mensaje = confirm("¿Desea cancelar la propuesta?");
+        if (mensaje) {
+            return true;
+        } else {
+            return false;
+        }
+}

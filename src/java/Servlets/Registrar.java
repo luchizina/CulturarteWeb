@@ -119,6 +119,7 @@ public class Registrar extends HttpServlet {
             Part partImagen = request.getPart(IMAGEN);
             String nick = request.getParameter(NICK);
             String nombre = request.getParameter(NOMBRE);
+ //           String nombre = "pepe";
             String apellido = request.getParameter(APELLIDO);
             String correo = request.getParameter(EMAIL);
             String pass = request.getParameter(PWD);
