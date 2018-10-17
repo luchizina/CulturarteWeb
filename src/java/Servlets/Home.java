@@ -43,7 +43,7 @@ public class Home extends HttpServlet {
                 icat.cargarCategorias();
                 IP.cargarPropuestas();
                 IP.Cargar_Favoritos_Memoria();
-                IP.Cargar_Comentarios_Memoria();
+//                IP.Cargar_Comentarios_Memoria();
                 IP.cargarColaboraciones();
                 IP.actualizarMontos();
                 IP.EstadosPropuestas();

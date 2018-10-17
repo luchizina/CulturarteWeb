@@ -15,7 +15,7 @@ and open the template in the editor.
                 border: none;
                 cursor: pointer;
                 width: 250px;
-                font-size:10px;
+                font-size:10pt;
             }
             .comentario:hover {
                 opacity: 0.8;
@@ -44,6 +44,7 @@ and open the template in the editor.
                 height: 100%;
                 overflow: auto;
                 background-color: rgba(0,0,0,0.4);
+                
             }
 
             /* Modal Content Box */

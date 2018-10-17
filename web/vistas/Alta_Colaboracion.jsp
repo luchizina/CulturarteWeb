@@ -44,7 +44,7 @@ if(sesionAct==null || userop instanceof DtProponente || titulo == null || ip.exi
         <link href="../css/style.css" rel="stylesheet" media="screen">
         <br><br><br><br><br><br><br>
         <%if( ((String) request.getAttribute("tipoR")).equalsIgnoreCase("porcentaje")) { %>
-        <form id="msform" action="Colaboracion" method="post">
+        <form id="msform" action="Colaboracion" method="post" onSubmit="alert('Colaboracion agregada');">
             
   <!-- fieldsets -->
   <fieldset>
@@ -63,7 +63,7 @@ if(sesionAct==null || userop instanceof DtProponente || titulo == null || ip.exi
         <% } %>
         
         <%if( ((String) request.getAttribute("tipoR")).equalsIgnoreCase("entrada")) { %>
-        <form  id="msform" action="Colaboracion" method="post">
+        <form  id="msform" action="Colaboracion" method="post" onSubmit="alert('Colaboracion agregada');">
             
   <!-- fieldsets -->
   <fieldset>
@@ -82,7 +82,7 @@ if(sesionAct==null || userop instanceof DtProponente || titulo == null || ip.exi
         <% } %>
         
 <%if( ((String) request.getAttribute("tipoR")).equalsIgnoreCase("entrada, porcentaje")) { %>
-        <form class="modal-content animate" id="msform" action="Colaboracion" method="post">
+        <form class="modal-content animate" id="msform" action="Colaboracion" method="post" onSubmit="alert('Colaboracion agregada');">
             
   <!-- fieldsets -->
   <fieldset>
