@@ -100,3 +100,12 @@ function cancelar(){
             return false;
         }
 }
+
+function desactivar(){
+    var mensaje = confirm("¿Desea desactivar la cuenta?");
+        if (mensaje) {
+            return true;
+        } else {
+            return false;
+        }
+}

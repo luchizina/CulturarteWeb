@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+      <script  src="<%= request.getContextPath()%>/js/validar.js"></script>
     <head>
         <script  src="../js/progress.js"></script>
         <jsp:include page="/template/head.jsp" />
@@ -43,6 +44,21 @@
             if (userop != null) {
                 String nicko = userop.getNick();
                 if (nicko.equals(prop.getNick())) {%>
+                
+                <form method="post" action="<%=request.getContextPath()%>/desactProp" onsubmit="return desactivar()">
+                <input type="hidden" name="nickLogueado" value="<%=userop.getNick()%>"/>
+                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" value="Desactivar cuenta"/>
+                
+                
+                </form>
+                
+                
+                
+                
+                
+                
+                
+                
         <div style="float: right">                                
             <form id="pa" class="msformProp2" action="<%=request.getContextPath()%>/alta_prop" method="post">
                 <fieldset>
