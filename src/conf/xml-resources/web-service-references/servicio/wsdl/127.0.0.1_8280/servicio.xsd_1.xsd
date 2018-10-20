@@ -7,11 +7,23 @@
 <xs:element name="estLogin" type="xs:boolean"></xs:element>
 <xs:element name="mensaje" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="nick" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="tipoUser" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dataListUsuarios">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="listita" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtUsuario">
+<xs:sequence>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nick" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="seguido" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="bufferedImage">
@@ -31,7 +43,24 @@
 </xs:complexType>
 
 <xs:complexType name="dataListProponentes">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="listita" type="tns:dtProponente" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtProponente">
+<xs:complexContent>
+<xs:extension base="tns:dtUsuario">
+<xs:sequence>
+<xs:element name="biografia" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="img" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="linkWeb" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
 </xs:complexType>
 
 <xs:complexType name="proponente">
@@ -201,27 +230,24 @@
 </xs:complexType>
 
 <xs:complexType name="dataListStrings">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="listita" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dataListPropuestas">
+<xs:sequence>
+<xs:element name="listita" type="tns:dtPropuesta" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtPropuesta">
 <xs:sequence></xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dataListColaboraciones">
-<xs:sequence></xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dataListColaboradores">
-<xs:sequence></xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtUsuario">
 <xs:sequence>
-<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nick" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="seguido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="listita" type="tns:dtColaboracion" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -247,12 +273,14 @@
 </xs:complexContent>
 </xs:complexType>
 
-<xs:complexType name="dtPropuesta">
+<xs:complexType name="tretorno">
 <xs:sequence></xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="tretorno">
-<xs:sequence></xs:sequence>
+<xs:complexType name="dataListColaboradores">
+<xs:sequence>
+<xs:element name="listita" type="tns:dtColaborador" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:simpleType name="testado">

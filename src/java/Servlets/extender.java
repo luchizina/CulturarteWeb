@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Servlets.inicSesion;
+import servicios.IOException_Exception;
+import servicios.SQLException_Exception;
 
 /**
  *
@@ -30,8 +32,9 @@ import Servlets.inicSesion;
 public class extender extends HttpServlet {
 
     private final Fabrica fabrica = Fabrica.getInstance();
-    private final IPropuesta ip = fabrica.getICtrlPropuesta();
-
+//    private final IPropuesta ip = fabrica.getICtrlPropuesta();
+ servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -77,14 +80,17 @@ public class extender extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        String C = request.getParameter("prop");
         try {
-            ip.extender(C);
+            processRequest(request, response);
+            String C = request.getParameter("prop");
+            port3.extender(C);
             request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T=" + C).forward(request, response);
-        } catch (SQLException ex) {
+        } catch (SQLException_Exception ex) {
+            Logger.getLogger(extender.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException_Exception ex) {
             Logger.getLogger(extender.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**

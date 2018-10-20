@@ -25,7 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "dejarDeSeguir", urlPatterns = {"/dejarDeSeguir"})
 public class dejarDeSeguir extends HttpServlet {
 private final Fabrica fabrica = Fabrica.getInstance();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
+//    private final IUsuario usuario = fabrica.getICtrlUsuario();
+servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,21 +51,21 @@ private final Fabrica fabrica = Fabrica.getInstance();
         
       String nickLogueado= request.getParameter("nickLogueado");
     String nickASeguir= request.getParameter("nickASeguir");
-    DtUsuario usuarioAseguir= this.usuario.traerDtUsuario(nickASeguir);
-this.usuario.seleccionarUsuario(nickLogueado);
-this.usuario.seleccionarUsuSeg(nickASeguir);
+            servicios.DtUsuario usuarioAseguir= this.port.traerDtUsuario(nickASeguir);
+this.port.seleccionarUsuario(nickLogueado);
+this.port.seleccionarUsuSeg(nickASeguir);
 
-if(usuarioAseguir instanceof DtColaborador){
-    if(this.usuario.yaSigue()==true){
-this.usuario.dejarDeSeguir();
+if(usuarioAseguir instanceof servicios.DtColaborador){
+    if(this.port.yaSigue()==true){
+this.port.dejarDeSeguir();
 String link= request.getParameter("link");
 this.getServletContext().getRequestDispatcher(link).forward(request,response);
 }
     
 }
-else if(usuarioAseguir instanceof DtProponente){
-      if(this.usuario.yaSigue()==true){
-this.usuario.dejarDeSeguir();
+else if(usuarioAseguir instanceof servicios.DtProponente){
+      if(this.port.yaSigue()==true){
+this.port.dejarDeSeguir();
 String link= (String) request.getParameter("link");
 this.getServletContext().getRequestDispatcher(link).forward(request,response);
 } 

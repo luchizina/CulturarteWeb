@@ -88,7 +88,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
-        port3.agregarComentario(port.traerColaborador(nick), port3.getPropPorNick(prop), com);
+        port3.agregarComentario(port.traerColaborador(nick).getNick(), port3.getPropPorNick(prop).getTitulo(), com);
         request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
         }
         

@@ -25,7 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "desactProp", urlPatterns = {"/desactProp"})
 public class desactProp extends HttpServlet {
 private final Fabrica fabrica = Fabrica.getInstance();
-private final IUsuario usuario = fabrica.getICtrlUsuario();
+//private final IUsuario usuario = fabrica.getICtrlUsuario();
+servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,7 +41,7 @@ private final IUsuario usuario = fabrica.getICtrlUsuario();
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String nick= request.getParameter("nickLogueado");
-        this.usuario.desactivarProp(nick);
+        this.port.desactivarProp(nick);
         this.getServletContext().getRequestDispatcher("/cerrarSesion").forward(request,response);
      
     }

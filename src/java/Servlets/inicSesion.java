@@ -23,8 +23,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "inicSesion", urlPatterns = {"/iniciarS"})
 public class inicSesion extends HttpServlet {
  private final Fabrica fabrica = Fabrica.getInstance();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
-
+//    private final IUsuario usuario = fabrica.getICtrlUsuario();
+servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,7 +39,7 @@ public class inicSesion extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
  PrintWriter out = response.getWriter();
-        this.usuario.cargarUsuarios2();
+        this.port.cargarUsuarios2();
         
       HttpSession respuesta = request.getSession(true);
      if(respuesta.getAttribute("sesionAct")==null){
@@ -49,16 +50,16 @@ public class inicSesion extends HttpServlet {
            
       String pass = request.getParameter("pass");
      
- DtInfo resultado= this.usuario.resolverLogin(nick, pass);
- 
- if(resultado.getEstLogin()){
+          servicios.DtInfo resultado= this.port.resolverLogin(nick, pass);
+          
+ if(resultado.isEstLogin()){
       respuesta.setAttribute("sesionAct", resultado.getNick());
       respuesta.setAttribute("tipo", resultado.getTipoUser());
       respuesta.setAttribute("mensaje", resultado.getMensaje());
       
        this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
  }
- else if(!resultado.getEstLogin()){
+ else if(!resultado.isEstLogin()){
      respuesta.setAttribute("error", resultado.getMensaje());
      this.getServletContext().getRequestDispatcher("/vistas/inicSesErr.jsp").forward(request, response);
     

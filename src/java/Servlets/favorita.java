@@ -24,8 +24,12 @@ import Servlets.inicSesion;
 @WebServlet(name = "favorita", urlPatterns = {"/favorita"})
 public class favorita extends HttpServlet {
 private final Fabrica fabrica = Fabrica.getInstance();
-    private final IPropuesta ip = fabrica.getICtrlPropuesta();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
+//    private final IPropuesta ip = fabrica.getICtrlPropuesta();
+//    private final IUsuario usuario = fabrica.getICtrlUsuario();
+    servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
     String usuarioF = "usu";
     String propuesta = "prop";
     /**
@@ -78,7 +82,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
         request.setCharacterEncoding("UTF-8");
         String nick = request.getParameter(usuarioF);
         String prop = request.getParameter(propuesta);
-        ip.agregarFavorito(usuario.traerUsuario(nick), ip.getPropPorNick(prop));
+        port3.agregarFavorito(port.traerUsuario(nick).getNick(), port3.getPropPorNick(prop).getTitulo());
         request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
         
     }

@@ -13,7 +13,7 @@ import Logica.DtUsuario;
 import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
-import Logica.dataListUsuarios;
+import Logica.DataListUsuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,7 +22,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import servicios.DataListUsuarios;
 
 /**
  *
@@ -57,31 +56,31 @@ public class consultarPerfil extends HttpServlet {
         this.port3.cargarColaboraciones();
         port3.estadosPropuestas();
         if (request.getParameter("T") == null) {
-            DataListUsuarios usuarios2 = port.listarUsuarios();
+            List<servicios.DtUsuario> usuarios = port.listarUsuarios().getListita();
             request.setAttribute("usuarios", usuarios);
             this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
             //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
         } else {
-            this.IU.existeNick("hola");
+            this.port.existeNick("hola");
             String nickUser = request.getParameter("T");
-            boolean existe = this.IU.existeNick(nickUser);
+            boolean existe = this.port.existeNick(nickUser);
             if (!existe) {
 
-                DtUsuario user = IU.traerDtUsuario(nickUser);
+                servicios.DtUsuario user = port.traerDtUsuario(nickUser);
                 String mensajeExito = "Imagen subida correctamente";
                 request.getSession().setAttribute(MENSAJE_EXITO, mensajeExito);
                 request.getSession().setAttribute("T", nickUser);
-                if (user instanceof DtProponente) {
-                    DtUsuario use = IU.traerDtUsuario(nickUser);
+                if (user instanceof servicios.DtProponente) {
+                    servicios.DtUsuario use = port.traerDtUsuario(nickUser);
                     String mensajeExitoE = "Imagen subida correctamente";
                     request.getSession().setAttribute(MENSAJE_EXITO, mensajeExitoE);
                     request.getSession().setAttribute("T", nickUser);
-                    DtProponente prop = (DtProponente) use;
-                    List<DtUsuario> usuSeguidos = IU.traerSeguidos(prop.getNick());
-                    List<DtUsuario> usuSeguidores = IU.traerSeguidores(prop.getNick());
-                    List<DtPropuesta> propuFav = IU.traerPropFav(prop.getNick());
-                    List<DtPropuesta> Mispropus = IU.TraerTodasPropuestasIng(nickUser);
-                    List<DtPropuesta> propus = IU.TraerTodasPropuestas(nickUser);
+                    servicios.DtProponente prop = (servicios.DtProponente) use;
+                    List<servicios.DtUsuario> usuSeguidos = port.traerSeguidos(prop.getNick()).getListita();
+                    List<servicios.DtUsuario> usuSeguidores = port.traerSeguidores(prop.getNick()).getListita();
+                    List<servicios.DtPropuesta> propuFav = port.traerPropFav(prop.getNick()).getListita();
+                    List<servicios.DtPropuesta> Mispropus = port.traerTodasPropuestasIng(nickUser).getListita();
+                    List<servicios.DtPropuesta> propus = port.traerTodasPropuestas(nickUser).getListita();
                     // List<DtPropuesta> propuColaboradas= IU.traerPropuestasColaboradas(prop.getNick());   
                     request.setAttribute("seguido", usuSeguidos);
                     request.setAttribute("seguidore", usuSeguidores);
@@ -93,15 +92,15 @@ public class consultarPerfil extends HttpServlet {
                     this.getServletContext().getRequestDispatcher("/vistas/consultarInfoPerfilP.jsp").forward(request, response);
 
                 } else {
-                    DtUsuario use = IU.traerDtUsuario(nickUser);
+                    servicios.DtUsuario use = port.traerDtUsuario(nickUser);
                     String mensajeExitoE = "Imagen subida correctamente";
                     request.getSession().setAttribute(MENSAJE_EXITO, mensajeExitoE);
                     request.getSession().setAttribute("T", nickUser);
-                    DtColaborador colab = (DtColaborador) use;
-                    List<DtUsuario> usuSeguidos = IU.traerSeguidos(colab.getNick());
-                    List<DtUsuario> usuSeguidores = IU.traerSeguidores(colab.getNick());
-                    List<DtPropuesta> propuFav = IU.traerPropFav(colab.getNick());
-                    List<DtColaboracion> propuColaboradas = IU.traerPropuestasColaboradas(colab.getNick());
+                    servicios.DtColaborador colab = (servicios.DtColaborador) use;
+                    List<servicios.DtUsuario> usuSeguidos = port.traerSeguidos(colab.getNick()).getListita();
+                    List<servicios.DtUsuario> usuSeguidores = port.traerSeguidores(colab.getNick()).getListita();
+                    List<servicios.DtPropuesta> propuFav = port.traerPropFav(colab.getNick()).getListita();
+                    List<servicios.DtColaboracion> propuColaboradas = port.traerPropuestasColaboradas(colab.getNick()).getListita();
                     request.setAttribute("seguido", usuSeguidos);
                     request.setAttribute("seguidore", usuSeguidores);
                     request.setAttribute("propuFav", propuFav);
@@ -112,7 +111,7 @@ public class consultarPerfil extends HttpServlet {
                 }
 
             } else {
-                List<DtUsuario> usuarios = IU.listarUsuarios();
+                List<servicios.DtUsuario> usuarios = port.listarUsuarios().getListita();
                 request.setAttribute("usuarios", usuarios);
                 this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
 

@@ -24,7 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 public class correo extends HttpServlet {
 
     private final Fabrica fabrica = Fabrica.getInstance();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
+//    private final IUsuario usuario = fabrica.getICtrlUsuario();
+    servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     public static final String CORREO = "email";
 
     /**
@@ -54,15 +56,15 @@ public class correo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        usuario.cargarUsuarios2();
+        port.cargarUsuarios2();
         String correo = request.getParameter(CORREO);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            if (usuario.existeCorreo(correo) && usuario.escorreo(correo)) {
+            if (port.existeCorreo(correo) && port.escorreo(correo)) {
                 out.print("Email disponible");
-            } else if (!usuario.existeCorreo(correo) && usuario.escorreo(correo)) {
+            } else if (!port.existeCorreo(correo) && port.escorreo(correo)) {
                 out.print("El email ya se encuentra en uso");
-            } else if (!usuario.escorreo(correo)) {
+            } else if (!port.escorreo(correo)) {
                 out.print("Formato de email invalido");
             }
 
