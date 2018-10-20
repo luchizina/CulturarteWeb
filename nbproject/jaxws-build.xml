@@ -42,5 +42,37 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
         <delete dir="${build.generated.dir}/jax-wsCache/servicio"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-servicio"/>
+    <target name="wsimport-client-servicio2" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/servicio2"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicio2" destdir="${build.generated.dir}/jax-wsCache/servicio2" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicio2/wsdl/127.0.0.1_8280/servicio2.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicio2?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicio2/wsdl/127.0.0.1_8280/servicio2.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/servicio2"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/servicio2">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-servicio2" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/servicio2"/>
+    </target>
+    <target name="wsimport-client-servicio3" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/servicio3"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/servicio3" destdir="${build.generated.dir}/jax-wsCache/servicio3" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/servicio3/wsdl/127.0.0.1_8280/servicio3.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://127.0.0.1:8280/servicio3?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/servicio3/wsdl/127.0.0.1_8280/servicio3.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/servicio3"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/servicio3">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-servicio3" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/servicios"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/servicio3"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-servicio, wsimport-client-servicio2, wsimport-client-servicio3"/>
 </project>

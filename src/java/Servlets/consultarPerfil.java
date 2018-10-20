@@ -13,6 +13,7 @@ import Logica.DtUsuario;
 import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
+import Logica.dataListUsuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -21,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import servicios.DataListUsuarios;
 
 /**
  *
@@ -29,9 +31,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "consultarPerfil", urlPatterns = {"/consultarPerfil"})
 public class consultarPerfil extends HttpServlet {
 
-    private Fabrica fabrica = Fabrica.getInstance();
-    private IPropuesta IP = fabrica.getICtrlPropuesta();
-    private IUsuario IU = fabrica.getICtrlUsuario();
+//    private Fabrica fabrica = Fabrica.getInstance();
+//    private IPropuesta IP = fabrica.getICtrlPropuesta();
+//    private IUsuario IU = fabrica.getICtrlUsuario();
+    servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
     public static final String MENSAJE_EXITO = "mensaje_exito";
 
     /**
@@ -46,12 +52,12 @@ public class consultarPerfil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        this.IU.cargarUsuarios2();
-        this.IP.cargarPropuestas();
-        this.IP.cargarColaboraciones();
-        IP.EstadosPropuestas();
+        this.port.cargarUsuarios2();
+        this.port3.cargarPropuestas();
+        this.port3.cargarColaboraciones();
+        port3.estadosPropuestas();
         if (request.getParameter("T") == null) {
-            List<DtUsuario> usuarios = IU.listarUsuarios();
+            DataListUsuarios usuarios2 = port.listarUsuarios();
             request.setAttribute("usuarios", usuarios);
             this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
             //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");

@@ -40,6 +40,7 @@
 <xs:sequence>
 <xs:element name="biografia" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fecha_des" type="xs:dateTime" minOccurs="0"></xs:element>
 <xs:element name="linkWeb" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="propuestas">
 <xs:complexType>
