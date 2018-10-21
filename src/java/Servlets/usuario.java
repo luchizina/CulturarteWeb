@@ -25,7 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 public class usuario extends HttpServlet {
 
     private final Fabrica fabrica = Fabrica.getInstance();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
+    servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     public static final String NICK = "nick";
     public static final String CORREO = "email";
 
@@ -41,10 +42,10 @@ public class usuario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        usuario.cargarUsuarios2();
+        port.cargarUsuarios2();
         try (PrintWriter out = response.getWriter()) {
             String nick = request.getParameter(NICK);
-            if (usuario.existeNick(nick)) {
+            if (port.existeNick(nick)) {
                 out.print("Nick disponible");
             } else {
                 out.print("El nick ya se encuentra en uso");
@@ -67,7 +68,7 @@ public class usuario extends HttpServlet {
         processRequest(request, response);
         PrintWriter writer = response.getWriter();
         String nick = request.getParameter(NICK);
-        if (usuario.existeNick(nick)) {
+        if (port.existeNick(nick)) {
             writer.print("Nick disponible");
         } else {
             writer.print("El nick ya se encuentra en uso");
@@ -88,7 +89,7 @@ public class usuario extends HttpServlet {
         processRequest(request, response);
         PrintWriter writer = response.getWriter();
         String nick = request.getParameter(NICK);
-        if (usuario.existeNick(nick)) {
+        if (port.existeNick(nick)) {
             writer.print("Nick disponible");
         } else {
             writer.print("El nick ya se encuentra en uso");

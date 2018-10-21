@@ -84,8 +84,8 @@ public class alta_prop extends HttpServlet {
              List<DtCategoria> categoList= this.iC.listarCategorias();
        request.setAttribute("categorias", categoList);
           String titulo = request.getParameter(TIT);
-            DtUsuario userop=inicSesion.getUsuarioLogueado(request);
-            if(userop instanceof DtProponente) {
+            servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+            if(userop instanceof servicios.DtProponente) {
 
         if (titulo != null) {            
             String desc = request.getParameter(DESC);

@@ -89,7 +89,7 @@ public class Registrar extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nick = request.getParameter(NICK);
-        DtUsuario usu = inicSesion.getUsuarioLogueado(request);
+        servicios.DtUsuario usu = inicSesion.getUsuarioLogueado(request);
         if (usu != null) {
             this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
         } else {

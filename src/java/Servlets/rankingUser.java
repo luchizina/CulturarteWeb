@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import servicios.DataListUsuarios;
 
 /**
  *
@@ -24,8 +25,8 @@ import java.util.List;
 @WebServlet(name = "rankingUser", urlPatterns = {"/rankingUser"})
 public class rankingUser extends HttpServlet {
 private Fabrica fabrica = Fabrica.getInstance();
-      
-      private IUsuario IU = fabrica.getICtrlUsuario();
+      servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,7 +39,7 @@ private Fabrica fabrica = Fabrica.getInstance();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      List<DtUsuario> users=this.IU.rankingUser();
+      DataListUsuarios users=this.port.rankingUser();
       request.setAttribute("ranking", users);
                       this.getServletContext().getRequestDispatcher("/vistas/rankingUser.jsp").forward(request, response);
         

@@ -61,10 +61,10 @@ public class extender extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        DtUsuario usu = inicSesion.getUsuarioLogueado(request);
-        if (usu == null || usu instanceof DtColaborador) {
+        servicios.DtUsuario usu = inicSesion.getUsuarioLogueado(request);
+        if (usu == null || usu instanceof servicios.DtColaborador) {
             this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
-        } else if (usu instanceof DtProponente){
+        } else if (usu instanceof servicios.DtProponente){
             this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
         }
     }

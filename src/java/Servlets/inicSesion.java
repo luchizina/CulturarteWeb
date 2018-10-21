@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 public class inicSesion extends HttpServlet {
  private final Fabrica fabrica = Fabrica.getInstance();
 //    private final IUsuario usuario = fabrica.getICtrlUsuario();
-servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+       servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -75,13 +75,18 @@ servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorU
       
     }
     
-    static public DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException{
+    static public servicios.DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException{
         
         String nick;
      nick = (String) request.getSession().getAttribute("sesionAct");
-     DtUsuario usr=Fabrica.getInstance().getICtrlUsuario().traerDtUsuario(nick);
-       // DtUsuario user=usuario.traerDtUsuario(nick);
+     servicios.PublicadorUsuariosService servicioUsuarios2 = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port32 = servicioUsuarios2.getPublicadorUsuariosPort();
+        if(nick != null)
+        {
+            servicios.DtUsuario usr= port32.traerDtUsuario(nick);
         return usr;
+        }
+     return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

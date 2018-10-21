@@ -57,7 +57,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        if(inicSesion.getUsuarioLogueado(request) == null || inicSesion.getUsuarioLogueado(request) instanceof DtProponente){
+        if(inicSesion.getUsuarioLogueado(request) == null || inicSesion.getUsuarioLogueado(request) instanceof servicios.DtProponente){
             this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
         } else {
         this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);

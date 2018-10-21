@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "seguirUsuario", urlPatterns = {"/seguirUsuario"})
 public class seguirUsuario extends HttpServlet {
 private final Fabrica fabrica = Fabrica.getInstance();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
+   servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,7 +34,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        this.usuario.cargarUsuarios2();
+        this.port.cargarUsuarios2();
          if(request.getParameter("nickLogueado")==null){
         this.getServletContext().getRequestDispatcher("/errorPages/404.jsp").forward(request,response);
     
@@ -43,21 +44,21 @@ private final Fabrica fabrica = Fabrica.getInstance();
         
      String nickLogueado= request.getParameter("nickLogueado");
     String nickASeguir= request.getParameter("nickASeguir");
-this.usuario.seleccionarUsuario(nickLogueado);
-this.usuario.seleccionarUsuSeg(nickASeguir);
-DtUsuario usuarioAseguir= this.usuario.traerDtUsuario(nickASeguir);
-List<DtUsuario> seguidores= this.usuario.traerSeguidores(nickASeguir);
-if(usuarioAseguir instanceof DtColaborador){
-    if(this.usuario.yaSigue()==false){
-this.usuario.seguirUsuario();
+this.port.seleccionarUsuario(nickLogueado);
+this.port.seleccionarUsuSeg(nickASeguir);
+            servicios.DtUsuario usuarioAseguir= this.port.traerDtUsuario(nickASeguir);
+            servicios.DataListUsuarios seguidores= this.port.traerSeguidores(nickASeguir);
+if(usuarioAseguir instanceof servicios.DtColaborador){
+    if(this.port.yaSigue()==false){
+this.port.seguirUsuario();
 String link= request.getParameter("link");
 this.getServletContext().getRequestDispatcher(link).forward(request,response);
 }
     
 }
-else if(usuarioAseguir instanceof DtProponente){
-      if(this.usuario.yaSigue()==false){
-this.usuario.seguirUsuario();
+else if(usuarioAseguir instanceof servicios.DtProponente){
+      if(this.port.yaSigue()==false){
+this.port.seguirUsuario();
 String link= (String) request.getParameter("link");
 this.getServletContext().getRequestDispatcher(link).forward(request,response);
 } 

@@ -28,7 +28,7 @@
         <jsp:include page="/template/header.jsp" />
           <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
   <%
- DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+ servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request);
  String sesionAct=(String) session.getAttribute("sesionAct");
  if(sesionAct!=null) { %>
      

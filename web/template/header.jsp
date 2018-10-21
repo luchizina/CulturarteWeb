@@ -30,7 +30,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
     <% 
         }else{
 
-                               DtUsuario user=inicSesion.getUsuarioLogueado(request);
+                               servicios.DtUsuario user=inicSesion.getUsuarioLogueado(request);
                                String nombre=user.getNombre();
                                String ape= user.getApellido();
                                

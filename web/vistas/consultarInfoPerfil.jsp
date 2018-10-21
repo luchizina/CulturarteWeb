@@ -25,14 +25,14 @@
       
     
         <% 
-        DtUsuario user=(DtUsuario) request.getAttribute("usuario");
-        DtColaborador colab=null;
-        DtProponente prop=null;
-        if(user instanceof DtProponente){
-            prop= (DtProponente) user;
+        servicios.DtUsuario user=(servicios.DtUsuario) request.getAttribute("usuario");
+        servicios.DtColaborador colab=null;
+        servicios.DtProponente prop=null;
+        if(user instanceof servicios.DtProponente){
+            prop= (servicios.DtProponente) user;
         }
         else{
-             colab=(DtColaborador) user;
+             colab=(servicios.DtColaborador) user;
             
         }
         
@@ -46,7 +46,7 @@
         <% if(colab != null ) {%>
                   
             <% 
-              DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+              servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request);
                 if(userop != null){
             List<DtUsuario> seguidoresPrueb= (List<DtUsuario>) request.getAttribute("seguidore");
             if(userop.getNick().equals(colab.getNick())==false){
@@ -121,7 +121,7 @@
 				<label class="valor" style="text-align: left">
                                   
 					<%= 
-						new SimpleDateFormat("dd/MM/yyyy").format(colab.getFecha())
+						new SimpleDateFormat("dd/MM/yyyy").format(colab.getFecha().toGregorianCalendar().getTime())
 					%>
 				</label>
 			</div>
