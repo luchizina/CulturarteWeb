@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
-  <services/>
+  <services>
+  </services>
   <clients>
     <client name="servicio">
       <wsdl-url>http://127.0.0.1:8280/servicio?wsdl</wsdl-url>
@@ -99,4 +100,5 @@
       </wsimport-options>
     </client>
   </clients>
+  <jsr109>false</jsr109>
 </jax-ws>

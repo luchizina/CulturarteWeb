@@ -2,15 +2,6 @@
 
 <xs:element name="IOException" type="tns:IOException"></xs:element>
 
-<xs:complexType name="dtInfo">
-<xs:sequence>
-<xs:element name="estLogin" type="xs:boolean"></xs:element>
-<xs:element name="mensaje" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nick" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="tipoUser" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="dataListUsuarios">
 <xs:sequence>
 <xs:element name="listita" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
@@ -23,6 +14,15 @@
 <xs:element name="nick" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="seguido" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtInfo">
+<xs:sequence>
+<xs:element name="estLogin" type="xs:boolean"></xs:element>
+<xs:element name="mensaje" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nick" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="tipoUser" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
