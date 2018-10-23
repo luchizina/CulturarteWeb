@@ -40,7 +40,46 @@
 </xs:complexType>
 
 <xs:complexType name="dtCategoria">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="padre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="hijos">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
+<xs:element name="value" minOccurs="0" type="tns:categoria"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="profundidad" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="categoria">
+<xs:sequence>
+<xs:element name="hijos">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
+<xs:element name="value" minOccurs="0" type="tns:categoria"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="padre" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dataListCategoria">

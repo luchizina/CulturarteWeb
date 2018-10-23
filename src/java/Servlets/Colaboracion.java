@@ -35,12 +35,22 @@ public class Colaboracion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
+        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+        
             if(request.getParameter("monto") == null && request.getParameter("T") != null)
             {
                 
             
                 String titulo = request.getParameter("T");
-                DtPropuesta propuestita = ctrlPropuesta.getInstance().traerPropuesta(titulo);
+                //DtPropuesta propuestita = ctrlPropuesta.getInstance().traerPropuesta(titulo);
+                servicios.DtPropuesta propuestita = port3.traerPropuesta(titulo);
+                //request.setAttribute("tipoR", propuestita.getTRetornos());
                 request.setAttribute("tipoR", propuestita.getTRetornos());
                 request.setAttribute("Titulo", titulo);
                 this.getServletContext().getRequestDispatcher("/vistas/Alta_Colaboracion.jsp").forward(request, response);
@@ -52,7 +62,8 @@ public class Colaboracion extends HttpServlet {
                 String monto = (String) request.getParameter("monto");
                 String tipoR = (String) request.getParameter("tipoRetorno");
                 String nick = (String) request.getSession().getAttribute("sesionAct");
-                ctrlPropuesta.getInstance().altaColaboracion(titulo, nick, monto, tipoR);
+                //ctrlPropuesta.getInstance().altaColaboracion(titulo, nick, monto, tipoR);
+                port3.altaColaboracion(titulo, nick, monto, tipoR);
                 this.getServletContext().getRequestDispatcher("/home").forward(request, response);
             }
             else

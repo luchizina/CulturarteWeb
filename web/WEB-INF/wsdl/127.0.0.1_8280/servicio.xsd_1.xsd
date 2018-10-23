@@ -2,15 +2,6 @@
 
 <xs:element name="IOException" type="tns:IOException"></xs:element>
 
-<xs:complexType name="dtInfo">
-<xs:sequence>
-<xs:element name="estLogin" type="xs:boolean"></xs:element>
-<xs:element name="mensaje" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nick" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="tipoUser" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="dataListUsuarios">
 <xs:sequence>
 <xs:element name="listita" type="tns:dtUsuario" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
@@ -19,10 +10,32 @@
 
 <xs:complexType name="dtUsuario">
 <xs:sequence>
-<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="nick" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="seguido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pass" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="link" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="tns:dataImagen" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataImagen">
+<xs:sequence>
+<xs:element name="extensionArchivo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombreArchivo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="stream" type="xs:base64Binary" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtInfo">
+<xs:sequence>
+<xs:element name="estLogin" type="xs:boolean"></xs:element>
+<xs:element name="mensaje" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nick" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="tipoUser" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -53,11 +66,8 @@
 <xs:extension base="tns:dtUsuario">
 <xs:sequence>
 <xs:element name="biografia" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="fecha" type="xs:dateTime" minOccurs="0"></xs:element>
-<xs:element name="img" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="linkWeb" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:extension>
 </xs:complexContent>
@@ -203,14 +213,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="dataImagen">
-<xs:sequence>
-<xs:element name="extensionArchivo" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nombreArchivo" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="stream" type="xs:base64Binary" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="estado">
 <xs:sequence>
 <xs:element name="estado" type="tns:testado" minOccurs="0"></xs:element>
@@ -242,7 +244,54 @@
 </xs:complexType>
 
 <xs:complexType name="dtPropuesta">
-<xs:sequence></xs:sequence>
+<xs:sequence>
+<xs:element name="titulo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="desc" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="img" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="lugar" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="precio" type="xs:int"></xs:element>
+<xs:element name="montoActual" type="xs:int"></xs:element>
+<xs:element name="montoTotal" type="xs:int"></xs:element>
+<xs:element name="fechaPub" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="tRetornos" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="colaboradores">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
+<xs:element name="value" minOccurs="0" type="tns:dtColaborador"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="propoACargo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="estActual" type="tns:estado" minOccurs="0"></xs:element>
+<xs:element name="categoria" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="tns:dataImagen" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtColaborador">
+<xs:complexContent>
+<xs:extension base="tns:dtUsuario">
+<xs:sequence>
+<xs:element name="nick" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="img" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="colaboraciones" type="tns:colaboracion" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="pass" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="tns:dataImagen" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
 </xs:complexType>
 
 <xs:complexType name="dataListColaboraciones">
@@ -253,24 +302,13 @@
 
 <xs:complexType name="dtColaboracion">
 <xs:sequence>
-<xs:element name="colaborador" type="tns:dtColaborador" minOccurs="0"></xs:element>
-<xs:element name="monto" type="xs:int"></xs:element>
-<xs:element name="propuesta" type="tns:dtPropuesta" minOccurs="0"></xs:element>
-<xs:element name="retorno" type="tns:tretorno" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtColaborador">
-<xs:complexContent>
-<xs:extension base="tns:dtUsuario">
-<xs:sequence>
-<xs:element name="colaboraciones" type="tns:colaboracion" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-<xs:element name="correo" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="fecha" type="xs:dateTime" minOccurs="0"></xs:element>
-<xs:element name="img" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="monto" type="xs:int"></xs:element>
+<xs:element name="retorno" type="tns:tretorno" minOccurs="0"></xs:element>
+<xs:element name="colaborador" type="tns:dtColaborador" minOccurs="0"></xs:element>
+<xs:element name="propuesta" type="tns:dtPropuesta" minOccurs="0"></xs:element>
+<xs:element name="Hora" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
-</xs:extension>
-</xs:complexContent>
 </xs:complexType>
 
 <xs:complexType name="tretorno">

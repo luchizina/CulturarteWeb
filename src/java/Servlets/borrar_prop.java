@@ -26,9 +26,9 @@ import javax.servlet.http.HttpSession;
 public class borrar_prop extends HttpServlet {
 
       
-      private Fabrica fabrica = Fabrica.getInstance();
-      private IPropuesta IP=fabrica.getICtrlPropuesta();
-      private IUsuario IU = fabrica.getICtrlUsuario();
+      //private Fabrica fabrica = Fabrica.getInstance();
+      //private IPropuesta IP=fabrica.getICtrlPropuesta();
+      //private IUsuario IU = fabrica.getICtrlUsuario();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -71,11 +71,18 @@ public class borrar_prop extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
+        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();    
     String   p = request.getParameter("prop");
         if( p == null)
         {}
         else{
-   IP.cambiarEstadito(p, "Cancelada");
+   //IP.cambiarEstadito(p, "Cancelada");
+   port3.cambiarEstado(p, "Cancelada");
    this.getServletContext().getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
         
         }
