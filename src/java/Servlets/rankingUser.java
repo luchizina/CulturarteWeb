@@ -39,7 +39,7 @@ private Fabrica fabrica = Fabrica.getInstance();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      DataListUsuarios users=this.port.rankingUser2();
+      List<servicios.DtUsuario> users=this.port.rankingUser2().getListita();
       request.setAttribute("ranking", users);
                       this.getServletContext().getRequestDispatcher("/vistas/rankingUser.jsp").forward(request, response);
         
