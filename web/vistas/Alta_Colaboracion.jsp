@@ -24,11 +24,10 @@
     <body>
          <jsp:include page="/template/header.jsp" />
         <%
- DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+ servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request);
  String sesionAct=(String) session.getAttribute("sesionAct");
- IPropuesta ip = Fabrica.getInstance().getICtrlPropuesta();
  String titulo = request.getParameter("T");
-if(sesionAct==null || userop instanceof DtProponente || titulo == null || ip.existeColaboracion(userop.getNick(), request.getParameter("T")) ) { %>
+if(sesionAct==null || userop instanceof servicios.DtProponente || titulo == null )  { %>
  <form id="msform" action="<%= request.getContextPath() %>/vistas/subIndex.jsp" method="post">      
   <!-- fieldsets -->
   <fieldset>

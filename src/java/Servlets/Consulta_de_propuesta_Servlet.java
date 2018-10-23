@@ -41,16 +41,16 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException_Exception {
-        
-        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+     */servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
         servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException_Exception {
+        
+        
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
              

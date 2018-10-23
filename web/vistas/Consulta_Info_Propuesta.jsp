@@ -4,6 +4,7 @@
    Author     : matheo
 --%>
 
+<%@page import="java.lang.String"%>
 <%@page import="Logica.DtComentarios"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="Logica.DtUsuario"%>
@@ -52,15 +53,20 @@
                 }
                 
                 if (tipo.equals("colaborador")) {
-                  
-                    if (propu.getColaboradores().containsKey(Nombre_Usuario)) {
+                   List<servicios.DtPropuesta.Colaboradores.Entry> lista = propu.getColaboradores().getEntry();
+                   for(servicios.DtPropuesta.Colaboradores.Entry p : lista)
+                   {
+                    if (p.getKey().equals(Nombre_Usuario)) {
                         Colaboro_a_propu = true;
-                     else {
+                    }
+                   }
+                    if(!Colaboro_a_propu) {
                         Puede_colaborar_a_propu = true;
                     }
-                }
+                
             }
-        }                                                                        %> 
+        }     
+    }                                                                   %> 
     <head>
         <jsp:include page="/template/head.jsp" />
         <title>Consultar Propuesta: <%propu.getTitulo();%> </title>
@@ -75,7 +81,7 @@
                 <div id="perfil_izquierda" style="float: left">
                     <% if (propu.getImg() != null && !propu.getImg().equals("")) {
 
-propu.
+
                     %>
                     <img id="imagenot" src="/CulturarteWeb/Retornar_imag_propuesta_Servlet?T=${propu.getTitulo()}" width="200" height="200">  
                     <%   } else {%>          
@@ -104,7 +110,7 @@ propu.
                         <label class="rotulo" style="text-align: left">Fecha de realizacion:</label>
                         <label class="valor" style="text-align: left">
 
-                            <%=new SimpleDateFormat("dd/MM/yyyy").format(propu.getFecha())%>
+                            <%=new SimpleDateFormat("dd/MM/yyyy").format(propu.getFecha().toGregorianCalendar().getTime())%>
                         </label><br/>
                         <label class="rotulo" style="text-align: left"> Estado actual:</label>
                         <% if (propu.getEstActual().getEstado().equals(Testado.En_Financiacion)) { %>
@@ -159,11 +165,11 @@ propu.
                 <right>
                     <table class="datagrid">
                         <%
-                            List<DtComentarios> props = (List<DtComentarios>) request.getAttribute("coment");
+                            List<servicios.DtComentarios> props = (List<servicios.DtComentarios>) request.getAttribute("coment");
                             String com = "";
                             String col = "";
                             if (props.size() > 0) {
-                                for (DtComentarios prop : props) {
+                                for (servicios.DtComentarios prop : props) {
                                     com = prop.getComentario();
                                     col = prop.getNick();
                         %>
@@ -297,7 +303,7 @@ propu.
 
                                 </tr>
 
-                                <%  if (Propuso_a_propu && !Nombre_Usuario.equals("") && propu.getEstActual().getEstado().compareTo(Testado.Financiada) == 0) {%>
+                                <%  if (Propuso_a_propu && !Nombre_Usuario.equals("") && propu.getEstActual().getEstado().compareTo(servicios.Testado.FINANCIADA) == 0) {%>
                                 <tr>
                                     <td>
                                         <form method="post" id="ls" action="borrar_prop" onsubmit="return cancelar()">

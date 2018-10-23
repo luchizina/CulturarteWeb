@@ -28,8 +28,8 @@
     <nav>
     <ul class="demo-list-icon mdl-list">
         <%
-                Collection<DtCategoria> x = (Collection<DtCategoria>) request.getAttribute("categorias");
-                for (DtCategoria cx : x) {
+                Collection<servicios.DtCategoria> x = (Collection<servicios.DtCategoria>) request.getAttribute("categorias");
+                for (servicios.DtCategoria cx : x) {
                     String h = cx.getNombre().replace(" ", "+");
             %>
     <li class="mdl-list__item">
