@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import servicios.DataListUsuarios;
 
 /**
  *
@@ -52,11 +53,12 @@ public class consultarPerfil extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         this.port.cargarUsuarios2();
-        this.port3.cargarPropuestas();
-        this.port3.cargarColaboraciones();
+//        this.port3.cargarPropuestas();
+//        this.port3.cargarColaboraciones();
         port3.estadosPropuestas();
         if (request.getParameter("T") == null) {
-            List<servicios.DtUsuario> usuarios = port.listarUsuarios().getListita();
+            DataListUsuarios usuarios43 = port.listarUsuarios();
+            List<servicios.DtUsuario> usuarios = usuarios43.getListita();
             request.setAttribute("usuarios", usuarios);
             this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
             //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
