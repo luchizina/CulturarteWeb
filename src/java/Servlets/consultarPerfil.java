@@ -13,7 +13,7 @@ import Logica.DtUsuario;
 import Logica.Fabrica;
 import Logica.IPropuesta;
 import Logica.IUsuario;
-import Logica.DataListUsuarios;
+import Logica.dataListUsuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

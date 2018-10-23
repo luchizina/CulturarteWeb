@@ -18,7 +18,10 @@ import static java.lang.System.out;
 import static java.net.URLEncoder.encode;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
+import servicios.SQLException_Exception;
 /**
  *
  * @author matheo
@@ -27,9 +30,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Consulta_de_Propuesta_por_Categoria", urlPatterns = {"/Consulta_de_Propuesta_por_Categoria"})
 public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     private Fabrica fabrica = Fabrica.getInstance();
-    private IPropuesta IP=fabrica.getICtrlPropuesta();
-    private IUsuario IU = fabrica.getICtrlUsuario();
-    private ICategoria IC = fabrica.getICtrlCategoria();
+//    private IPropuesta IP=fabrica.getICtrlPropuesta();
+//    private IUsuario IU = fabrica.getICtrlUsuario();
+//    private ICategoria IC = fabrica.getICtrlCategoria();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,26 +43,37 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException_Exception {
+        
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
+        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             if (request.getParameter("C") == null) {
-                List<DtCategoria> x = IC.listarCategorias();
+                //List<DtCategoria> x = IC.listarCategorias();
+                List<servicios.DtCategoria> x = port2.listarCategoriasWeb().getListita();
                 request.setAttribute("categorias", x);
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
             } else {
                 // LISTAR PROPUESTAS DE "X" CATEGORIA
                 String C = request.getParameter("C");
                 String Cposta = C.replace("+"," ");
-                boolean existe = IC.existecat(Cposta);
+                //boolean existe = IC.existecat(Cposta);
+                boolean existe = port2.existeCategoria(Cposta);
                 if(existe){
-                List<DtPropuesta> x = IP.WEB_listarPropuestas_X_Categoria(C);
+                //List<DtPropuesta> x = IP.WEB_listarPropuestas_X_Categoria(C);
+                List<servicios.DtPropuesta> x = port3.listarPropuestasXCategoriaWeb(C).getListita();
                 request.setAttribute("propuestas", x);
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
             }
-                List<DtCategoria> x = IC.listarCategorias();
+                //List<DtCategoria> x = IC.listarCategorias();
+                List<servicios.DtCategoria> x = port2.listarCategoriasWeb().getListita();
                 request.setAttribute("categorias", x);
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
             }
@@ -79,7 +93,11 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException_Exception ex) {
+            Logger.getLogger(Consulta_de_Propuesta_por_Categoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
@@ -95,7 +113,11 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException_Exception ex) {
+            Logger.getLogger(Consulta_de_Propuesta_por_Categoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
     }
 

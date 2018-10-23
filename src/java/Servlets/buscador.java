@@ -26,9 +26,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "buscador", urlPatterns = {"/buscador"})
 public class buscador extends HttpServlet {
 
-    private Fabrica fabrica = Fabrica.getInstance();
-    private IPropuesta IP = fabrica.getICtrlPropuesta();
-    private IUsuario IU = fabrica.getICtrlUsuario();
+    //private Fabrica fabrica = Fabrica.getInstance();
+    //private IPropuesta IP = fabrica.getICtrlPropuesta();
+    //private IUsuario IU = fabrica.getICtrlUsuario();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -72,17 +72,27 @@ public class buscador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
+        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+        
         processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String C = request.getParameter("busca");
         String U = request.getParameter("buscaU");
         if (C != null) {
-            List<DtPropuesta> x = IP.listaTDL(C);
+            //List<DtPropuesta> x = IP.listaTDL(C);
+            List<servicios.DtPropuesta> x = port3.buscardorWebListaTDL(C).getListita();
             request.setAttribute("propuestas", x);
             this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
         } else {
-            List<DtUsuario> x = IU.listaNC(U);
+            //List<DtUsuario> x = IU.listaNC(U);
+            List<servicios.DtUsuario> x = port.listaNC(U).getListita();
             request.setAttribute("usuarios", x);
             this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
         }

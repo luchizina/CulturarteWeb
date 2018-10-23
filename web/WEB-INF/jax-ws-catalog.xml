@@ -6,4 +6,5 @@
     <system systemId="http://127.0.0.1:8280/servicio2?xsd=1" uri="wsdl/127.0.0.1_8280/servicio2.xsd_1.xsd"/>
     <system systemId="http://127.0.0.1:8280/servicio3?wsdl" uri="wsdl/127.0.0.1_8280/servicio3.wsdl"/>
     <system systemId="http://127.0.0.1:8280/servicio3?xsd=1" uri="wsdl/127.0.0.1_8280/servicio3.xsd_1.xsd"/>
+    <system systemId="http://127.0.0.1:8280/servicio1?wsdl" uri="wsdl/127.0.0.1_8280/servicio1.wsdl"/>
 </catalog>

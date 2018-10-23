@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +38,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import servicios.SQLException_Exception;
 
 /**
  *
@@ -55,9 +60,9 @@ public class alta_prop extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final Fabrica fabrica = Fabrica.getInstance();
-    private final IPropuesta ip = fabrica.getICtrlPropuesta();
-    private final ICategoria iC = fabrica.getICtrlCategoria();
+    //private final Fabrica fabrica = Fabrica.getInstance();
+    //private final IPropuesta ip = fabrica.getICtrlPropuesta();
+    //private final ICategoria iC = fabrica.getICtrlCategoria();
     public static final String TIT = "titulo";
     public static final String DESC = "descripcion";
     public static final String MOntoT = "monto_tot";
@@ -68,7 +73,7 @@ public class alta_prop extends HttpServlet {
     public static final String FEcha2 = "fecha";
     public static final String IMAGEN = "imagen";
     public static final String IMG_FOLDER = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\web\\";
-     public String imgPath ;
+    public String imgPath ;
     private static Logger LOG;
     public alta_prop() {
         LOG = Logger.getLogger(this.getClass().getPackage().getName());
@@ -76,14 +81,23 @@ public class alta_prop extends HttpServlet {
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException_Exception, DatatypeConfigurationException {
+        
+         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
+         servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
                 response.setContentType("text/html;charset=UTF-8");
                  request.setCharacterEncoding("UTF-8");
      
-          this.iC.cargarCategorias();
-             List<DtCategoria> categoList= this.iC.listarCategorias();
-       request.setAttribute("categorias", categoList);
-          String titulo = request.getParameter(TIT);
+          //this.iC.cargarCategorias();
+          port2.cargarCategorias();
+          //List<DtCategoria> categoList= this.iC.listarCategorias();
+          List<servicios.DtCategoria> categoList = port2.listarCategoriasWeb().getListita();
+          request.setAttribute("categorias", categoList);
+            String titulo = request.getParameter(TIT);
             servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request);
             if(userop instanceof servicios.DtProponente) {
 
@@ -104,6 +118,18 @@ public class alta_prop extends HttpServlet {
             }
             Date fecha = new Date();
             Date ahora = new Date();
+            
+            GregorianCalendar primera_fechaa = new GregorianCalendar();                              //agregado 
+            primera_fechaa.setTime(fechaa);                                                          //
+            XMLGregorianCalendar parametro_fechaa;                                                   // 
+            parametro_fechaa = DatatypeFactory.newInstance().newXMLGregorianCalendar(primera_fechaa);//
+            GregorianCalendar segunda_fecha = new GregorianCalendar();                              //agregado 
+            segunda_fecha.setTime(fechaa);                                                          //
+            XMLGregorianCalendar parametro_fecha;                                               // 
+            parametro_fecha = DatatypeFactory.newInstance().newXMLGregorianCalendar(segunda_fecha); //
+            
+            
+            
             SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
             String hora = formateador.format(ahora);
           String retor= request.getParameter(RET1);
@@ -123,9 +149,12 @@ public class alta_prop extends HttpServlet {
 
 
             String nick = getUsuarioLogueado(request).getNick();
-            Estado estA = new Estado(Testado.Ingresada);
+            
+            //Estado estA = new Estado(Testado.Ingresada); // lo tengo que pasar, preguntar ?
+            servicios.Estado estA = port3.crearEstado();
             if (partImagen.getSize() != 0) {
-                ip.configurarParametros(IMG_FOLDER);
+                //ip.configurarParametros(IMG_FOLDER);
+                port3.configurarParametros(IMG_FOLDER);
                 InputStream data = partImagen.getInputStream();
                 final String fileName = Utils.getFileName(partImagen);
                 String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
@@ -137,18 +166,21 @@ public class alta_prop extends HttpServlet {
                     reads = data.read();
                 } // while
                 byte[] bytes = baos.toByteArray();
-                DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+                //DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo); // capas tengo que pasar
+                servicios.DataImagen imagen = port3.crearDataImagenPublicador(bytes, nombreArchivo, extensionArchivo);
                 String path = subirImagenCol(titulo, imagen);
-                boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, retorn, Integer.parseInt(montoT), catego, estA, path, nick, hora, lugar);
-
+                //boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, retorn, Integer.parseInt(montoT), catego, estA, path, nick, hora, lugar);
+                // estA paso a ser servicios.estA
+                boolean ok = port3.agregarPropuesta(titulo, desc, parametro_fechaa, Integer.parseInt(precioE), 0, parametro_fecha, retorn, Integer.parseInt(montoT), catego, estA, path, nick, hora, lugar);
                 if (ok) {
                   request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response); 
                 } else {
                     request.getRequestDispatcher("/vistas/AltaPropu2_1.jsp").forward(request, response);
                 }
             } else {
-                boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, retorn, Integer.parseInt(montoT), catego, estA, "", nick, hora, lugar);
-
+                //boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, retorn, Integer.parseInt(montoT), catego, estA, "", nick, hora, lugar);
+                // estA paso a ser servicios.estA
+                boolean ok = port3.agregarPropuesta(titulo, desc, parametro_fechaa, Integer.parseInt(precioE), 0, parametro_fecha, retorn, Integer.parseInt(montoT), catego, estA, "", nick, hora, lugar);
                 if (ok) {
                     request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response); 
                 } else {
@@ -170,7 +202,13 @@ public class alta_prop extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);        
+        try {        
+            processRequest(request, response);
+        } catch (SQLException_Exception ex) {
+            Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DatatypeConfigurationException ex) {
+            Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
+        }
                
        }
     static public DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException {
@@ -181,7 +219,13 @@ public class alta_prop extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException_Exception ex) {
+            Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DatatypeConfigurationException ex) {
+            Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
       
     }
@@ -196,10 +240,13 @@ public class alta_prop extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    protected String subirImagenCol(String titulo, DataImagen imagen) {
-        final DtPropuesta prop = new DtPropuesta(titulo, imagen);
-        Path path = this.ip.agregarImagen(prop);
-
-        return path.toString();
+    protected String subirImagenCol(String titulo, servicios.DataImagen imagen) {
+        // parametro cambiado de "DataImagen" -> servicios.DataImagen
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+        //final DtPropuesta prop = new DtPropuesta(titulo, imagen);
+        //Path path = this.ip.agregarImagen(prop);
+        return port3.agregarImagenPropuesta(titulo, imagen);
+        //return path.toString();
     }
 }

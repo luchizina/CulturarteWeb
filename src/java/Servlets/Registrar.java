@@ -31,7 +31,11 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import Utilidades.Utils;
 import java.nio.file.Path;
+import java.util.GregorianCalendar;
 import javax.servlet.annotation.MultipartConfig;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  *
@@ -41,8 +45,8 @@ import javax.servlet.annotation.MultipartConfig;
 @MultipartConfig
 public class Registrar extends HttpServlet {
 
-    private final Fabrica fabrica = Fabrica.getInstance();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
+    //private final Fabrica fabrica = Fabrica.getInstance();
+    //private final IUsuario usuario = fabrica.getICtrlUsuario();
     public static final String NICK = "nick";
     public static final String NOMBRE = "nombre";
     public static final String EMAIL = "email";
@@ -111,11 +115,20 @@ public class Registrar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             request.setCharacterEncoding("UTF-8");
+            
+            servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+            servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+            servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
+            servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+            servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+            servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+        
         try {
             processRequest(request, response);
             PrintWriter out = response.getWriter();
             HttpSession respuesta = request.getSession(true);
-            usuario.cargarUsuarios2();
+            //usuario.cargarUsuarios2();
+            port.cargarUsuarios2(); // verificar
             Part partImagen = request.getPart(IMAGEN);
             String nick = request.getParameter(NICK);
             String nombre = request.getParameter(NOMBRE);
@@ -126,11 +139,18 @@ public class Registrar extends HttpServlet {
             SimpleDateFormat formatoDeFecha = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 Date fecha = formatoDeFecha.parse(request.getParameter(FECHA));
+                GregorianCalendar parametro = new GregorianCalendar();
+                parametro.setTime(fecha);
+                XMLGregorianCalendar parametro_fecha;
+                
+                parametro_fecha = DatatypeFactory.newInstance().newXMLGregorianCalendar(parametro);
+               
                 String conf = request.getParameter(PWD2);
                 String[] args = request.getParameterValues("usuario");
                 if (args[0].equals("colaborador")) {
                     if (partImagen.getSize() != 0) {
-                        usuario.configurarParametros(IMG_FOLDER);
+                        //usuario.configurarParametros(IMG_FOLDER);
+                        port.configurarParametros(IMG_FOLDER);
                         InputStream data = partImagen.getInputStream();
                         final String fileName = Utils.getFileName(partImagen);
                         String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
@@ -142,14 +162,17 @@ public class Registrar extends HttpServlet {
                             reads = data.read();
                         } // while
                         byte[] bytes = baos.toByteArray();
-                        DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+                        //DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+                        servicios.DataImagen imagen = port.crearDataImagenPublicador(bytes, nombreArchivo, extensionArchivo);
                         String path = subirImagenCol(nick, pass, imagen, correo, nombre, apellido, fecha);
-                        usuario.altaColaborador(nick, correo, nombre, apellido, fecha, path, "Colaborador", pass);
+                        //usuario.altaColaborador(nick, correo, nombre, apellido, fecha, path, "Colaborador", pass);
+                        port.altaColaborador(nick, correo, nombre, apellido, parametro_fecha, path, "Colaborador", pass);
                         respuesta.setAttribute("sesionAct", nick);
                         respuesta.setAttribute("tipo", "colaborador");
                         request.getRequestDispatcher("/index.html").forward(request, response);
                     } else {
-                        usuario.altaColaborador(nick, correo, nombre, apellido, fecha, "", "Colaborador", pass);
+                        //usuario.altaColaborador(nick, correo, nombre, apellido, fecha, "", "Colaborador", pass);
+                        port.altaColaborador(nick, correo, nombre, apellido, parametro_fecha, "", "Colaborador", pass);
                         respuesta.setAttribute("sesionAct", nick);
                         respuesta.setAttribute("tipo", "colaborador");
                         request.getRequestDispatcher("/index.html").forward(request, response);
@@ -160,7 +183,8 @@ public class Registrar extends HttpServlet {
                 String web = request.getParameter(LINK);
                 if (args[0].equals("proponente")) {
                     if (partImagen.getSize() != 0) {
-                        usuario.configurarParametros(IMG_FOLDER);
+                        //usuario.configurarParametros(IMG_FOLDER);
+                        port.configurarParametros(IMG_FOLDER);
                         InputStream data = partImagen.getInputStream();
                         final String fileName = Utils.getFileName(partImagen);
                         String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
@@ -172,14 +196,17 @@ public class Registrar extends HttpServlet {
                             reads = data.read();
                         } // while
                         byte[] bytes = baos.toByteArray();
-                        DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+                        //DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo);
+                        servicios.DataImagen imagen = port.crearDataImagenPublicador(bytes, nombreArchivo, extensionArchivo);
                         String pathP = subirImagenProp(nick, pass, imagen);
-                        usuario.altaProponente(nick, correo, nombre, apellido, fecha, pathP, dir, bio, web, "Proponente", pass);
+                        //usuario.altaProponente(nick, correo, nombre, apellido, fecha, pathP, dir, bio, web, "Proponente", pass);
+                        port.altaProponente(nick, correo, nombre, apellido, parametro_fecha, pathP, dir, bio, web, "Proponente", pass);
                         respuesta.setAttribute("sesionAct", nick);
                         respuesta.setAttribute("tipo", "proponente");
                         request.getRequestDispatcher("/index.html").forward(request, response);
                     } else {
-                        usuario.altaProponente(nick, correo, nombre, apellido, fecha, "", dir, bio, web, "Proponente", pass);
+                        //usuario.altaProponente(nick, correo, nombre, apellido, fecha, "", dir, bio, web, "Proponente", pass);
+                        port.altaProponente(nick, correo, nombre, apellido, parametro_fecha, "", dir, bio, web, "Proponente", pass);
                         respuesta.setAttribute("sesionAct", nick);
                         respuesta.setAttribute("tipo", "proponente");
                         request.getRequestDispatcher("/index.html").forward(request, response);
@@ -188,7 +215,9 @@ public class Registrar extends HttpServlet {
 
             } catch (ParseException ex) {
                 Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }   catch (DatatypeConfigurationException ex) {    // AGREGADO
+                    Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
         } catch (ParseException ex) {
             Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -205,17 +234,23 @@ public class Registrar extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    protected String subirImagenCol(String nick, String pass, DataImagen imagen, String correo, String nombre, String apellido, Date fecha) {
-        final DtColaborador col = new DtColaborador(nick, correo, pass, nombre, fecha, apellido, imagen);
-        Path path = this.usuario.agregarImagen(col);
-
-        return path.toString();
+    protected String subirImagenCol(String nick, String pass, servicios.DataImagen imagen, String correo, String nombre, String apellido, Date fecha) {
+        // parametro cambiado de "DataImagen" -> servicios.DataImagen
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        //Path path = this.usuario.agregarImagen(col);
+        return port.agregarImagen(nick, imagen, pass);
+        //return path.toString();
     }
 
-    protected String subirImagenProp(String nick, String pwd, DataImagen img) {
-        final DtProponente prop = new DtProponente(nick, img, pwd);
-        Path path = this.usuario.agregarImagen(prop);
-        return path.toString();
+    protected String subirImagenProp(String nick, String pwd, servicios.DataImagen img) {
+        // parametro cambiado de "DataImagen" -> servicios.DataImagen
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        //final DtProponente prop = new DtProponente(nick, img, pwd);
+        //Path path = this.usuario.agregarImagen(nick,img,pwd);
+        return port.agregarImagen(nick,img,pwd);
+        //return path.toString();
     }
 
 }
