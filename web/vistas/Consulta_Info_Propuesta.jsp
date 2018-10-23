@@ -75,7 +75,7 @@
                 <div id="perfil_izquierda" style="float: left">
                     <% if (propu.getImg() != null && !propu.getImg().equals("")) {
 
-
+propu.
                     %>
                     <img id="imagenot" src="/CulturarteWeb/Retornar_imag_propuesta_Servlet?T=${propu.getTitulo()}" width="200" height="200">  
                     <%   } else {%>          
@@ -92,13 +92,13 @@
                         <label class="rotulo" style="text-align: left"> Lugar:</label>
                         <label class="valor" style="text-align: left"><%= propu.getLugar()%> </label><br/>
                         <label class="rotulo" style="text-align: left"> Categoria:</label>
-                        <label class="valor" style="text-align: left"><%= propu.getNombreCate()%> </label><br/>
+                        <label class="valor" style="text-align: left"><%= propu.getCategoria()%> </label><br/>
                         <label class="rotulo" style="text-align: left"> Tipo de retorno:</label>
                         <label class="valor" style="text-align: left"><%= propu.getTRetornos()%> </label><br/>
                         <label class="rotulo" style="text-align: left"> Precio de entrada:</label>
                         <label class="valor" style="text-align: left"><%= propu.getPrecio()%> </label><br/>
                         <label class="rotulo" style="text-align: left"> Monto necesario:</label>
-                        <label class="valor" style="text-align: left"><%= propu.getMontototal()%> </label><br/>
+                        <label class="valor" style="text-align: left"><%= propu.getMontoTotal()%> </label><br/>
                         <label class="rotulo" style="text-align: left"> Monto recaudado:</label>
                         <label class="valor" style="text-align: left"><%= propu.getMontoActual()%></label><br/>
                         <label class="rotulo" style="text-align: left">Fecha de realizacion:</label>
@@ -117,14 +117,14 @@
                         <div style="text-align: left">
                             <label class="rotulo" style="text-align: left">Propuesto por:</label>
                             <label class="valor" style="text-align: left">
-                                <a href="consultarPerfil?T=<%= propu.getPropo()%>">
-                                    <%= propu.getPropo()%>
+                                <a href="consultarPerfil?T=<%= propu.getPropoACargo()%>">
+                                    <%= propu.getPropoACargo()%>
                                 </a>
                             </label>
                         </div>
                         <div style="float: left">
                             <label class="rotulo" style="text-align: left"> Descripcion:</label>
-                            <label class="valor" style="text-align: left"><%= propu.getDescripcion()%></label><br/>
+                            <label class="valor" style="text-align: left"><%= propu.getDesc()%></label><br/>
                         </div>
                     </div>
                     <br>
