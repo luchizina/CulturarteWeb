@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script  src="<%= request.getContextPath()%>/js/validar.js"></script>
-    <% DtPropuesta propu = (DtPropuesta) request.getAttribute("propu");
+    <% servicios.DtPropuesta propu = (servicios.DtPropuesta) request.getAttribute("propu");
         boolean colaboradores = false;
         List<String> x = (List<String>) request.getAttribute("col");
         if (x != null) {
@@ -47,13 +47,15 @@
                 Esta_logeado = true;
                 Nombre_Usuario = (String) request.getSession().getAttribute("sesionAct");
                 tipo = (String) session.getAttribute("tipo");
-                if (Nombre_Usuario.equals(propu.getPropo())) {
+                if (Nombre_Usuario.equals(propu.getPropoACargo())) {
                     Propuso_a_propu = true;
                 }
+                
                 if (tipo.equals("colaborador")) {
-                    if (propu.getColabs().containsKey(Nombre_Usuario)) {
+                  
+                    if (propu.getColaboradores().containsKey(Nombre_Usuario)) {
                         Colaboro_a_propu = true;
-                    } else {
+                     else {
                         Puede_colaborar_a_propu = true;
                     }
                 }
