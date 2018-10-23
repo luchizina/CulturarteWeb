@@ -47,7 +47,7 @@ public class retornarImagenServlet extends HttpServlet {
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
             servicios.BufferedImage bi = port.retornarImagen(T);
         try (OutputStream out = response.getOutputStream()) {
-            ImageIO.write( bi, "png", out);
+            ImageIO.write((RenderedImage) bi, "png", out);
         }
     }
 

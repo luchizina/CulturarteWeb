@@ -25,10 +25,10 @@
        
 
         <%
-            DtUsuario user = (DtUsuario) request.getAttribute("usuario");
-            DtProponente prop = null;
-            if (user instanceof DtProponente) {
-                prop = (DtProponente) user;
+            servicios.DtUsuario user = (servicios.DtUsuario) request.getAttribute("usuario");
+            servicios.DtProponente prop = null;
+            if (user instanceof servicios.DtProponente) {
+                prop = (servicios.DtProponente) user;
 
             }
         %>
@@ -80,11 +80,11 @@
             }%>
         <% if (prop != null) {%>
         <%  if (userop != null) {
-                List<DtUsuario> seguidoresPrueb = (List<DtUsuario>) request.getAttribute("seguidore");
+                List<servicios.DtUsuario> seguidoresPrueb = (List<servicios.DtUsuario>) request.getAttribute("seguidore");
                 if (userop.getNick().equals(prop.getNick()) == false) {
                     boolean yaSigue = false;
                     for (int i = 0; i < seguidoresPrueb.size(); i++) {
-                        DtUsuario seguidor = seguidoresPrueb.get(i);
+                        servicios.DtUsuario seguidor = seguidoresPrueb.get(i);
 
                         if (seguidor.getNick().equals(userop.getNick())) {
                             yaSigue = true;
@@ -128,11 +128,11 @@
                         </tr>
                         <%
 
-                            List<DtUsuario> seguidos = (List<DtUsuario>) request.getAttribute("seguido");
+                            List<servicios.DtUsuario> seguidos = (List<servicios.DtUsuario>) request.getAttribute("seguido");
                             String Titu = "";
 
                             if (seguidos.size() > 0) {
-                                for (DtUsuario usea : seguidos) {
+                                for (servicios.DtUsuario usea : seguidos) {
                                     Titu = usea.getNick().replace(" ", "+");
 
                         %>
@@ -161,11 +161,11 @@
                                 </th> 
                             </tr>
                             <%
-                                List<DtUsuario> seguidores = (List<DtUsuario>) request.getAttribute("seguidore");
+                                List<servicios.DtUsuario> seguidores = (List<servicios.DtUsuario>) request.getAttribute("seguidore");
                                 String Tu = "";
 
                                 if (seguidores.size() > 0) {
-                                    for (DtUsuario usea : seguidores) {
+                                    for (servicios.DtUsuario usea : seguidores) {
                                         Tu = usea.getNick().replace(" ", "+");
 
                             %>
@@ -196,11 +196,11 @@
                         </tr>
 
                         <%
-                            List<DtPropuesta> propFavo = (List<DtPropuesta>) request.getAttribute("propuFav");
+                            List<servicios.DtPropuesta> propFavo = (List<servicios.DtPropuesta>) request.getAttribute("propuFav");
                             String pa = "";
 
                             if (propFavo.size() > 0) {
-                                for (DtPropuesta propu1 : propFavo) {
+                                for (servicios.DtPropuesta propu1 : propFavo) {
                                     pa = propu1.getTitulo().replace(" ", "+");
                         %>
                         <tr>
@@ -228,11 +228,11 @@
                                     </th> 
                                 </tr>
                                 <%
-                                    List<DtPropuesta> MisProps = (List<DtPropuesta>) request.getAttribute("propus");
+                                    List<servicios.DtPropuesta> MisProps = (List<servicios.DtPropuesta>) request.getAttribute("propus");
                                     String Mu = "";
 
                                     if (MisProps.size() > 0) {
-                                        for (DtPropuesta MiP : MisProps) {
+                                        for (servicios.DtPropuesta MiP : MisProps) {
                                             Mu = MiP.getTitulo().replace(" ", "+");
 
                                 %>
@@ -268,7 +268,7 @@
                           <legend id="legendErr">Datos generales: </legend>   
                             <div id="perfil_izquierda" style="float: left" >
 
-                            <% if (prop.getImg() != null && !prop.getImg().equals("")) {%>
+                            <% if (prop.getImagen() != null && !prop.getImagen().equals("")) {%>
                             <img id="imagenot" src="/CulturarteWeb/retornarimagen?T=${T}" width="200" height="200">  
                             <%   } else {%>
                             <img id="imagenot" src="<%= request.getContextPath()%>/img/user-4.png" width="200" height="200">
@@ -337,11 +337,11 @@
                                         </th> 
                                     </tr>
                                     <%
-                                        List<DtPropuesta> MisPropas = (List<DtPropuesta>) request.getAttribute("propusMias");
+                                        List<servicios.DtPropuesta> MisPropas = (List<servicios.DtPropuesta>) request.getAttribute("propusMias");
                                         String MuA = "";
 
                                         if (MisPropas.size() > 0) {
-                                            for (DtPropuesta MiP : MisPropas) {
+                                            for (servicios.DtPropuesta MiP : MisPropas) {
                                                 MuA = MiP.getTitulo().replace(" ", "+");
 
                                     %>

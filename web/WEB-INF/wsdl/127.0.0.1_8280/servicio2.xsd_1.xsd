@@ -4,6 +4,12 @@
 
 <xs:element name="SQLException" type="tns:SQLException"></xs:element>
 
+<xs:complexType name="estado">
+<xs:sequence>
+<xs:element name="estado" type="tns:testado" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="dtPropuesta">
 <xs:sequence>
 <xs:element name="titulo" type="xs:string" minOccurs="0"></xs:element>
@@ -171,12 +177,6 @@
 </xs:element>
 <xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="padre" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="estado">
-<xs:sequence>
-<xs:element name="estado" type="tns:testado" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

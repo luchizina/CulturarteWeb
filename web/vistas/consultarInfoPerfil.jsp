@@ -4,6 +4,7 @@
     Author     : nambr
 --%>
 
+<%@page import="javax.xml.datatype.DatatypeConstants"%>
 <%@page import="Logica.DtColaboracion"%>
 <%@page import="Servlets.inicSesion"%>
 <%@page import="java.util.List"%>
@@ -94,7 +95,7 @@
               <fieldset>
          <legend id="legendErr">Información básica: </legend>   
 		<div id="perfil_izquierda" style="float: left">
-                    <% if(colab.getImg()!=null && !colab.getImg().equals("")){
+                    <% if(colab.getImagen()!=null && !colab.getImagen().equals("")){
                         
                    
                         %>
@@ -149,11 +150,11 @@
                 </th> 
             </tr>
             <%
-                List<DtUsuario> seguidos= (List<DtUsuario>) request.getAttribute("seguido");
+                List<servicios.DtUsuario> seguidos= (List<servicios.DtUsuario>) request.getAttribute("seguido");
                  String Titu ="";
                 
                 if(seguidos.size()>0){
-                for ( DtUsuario usea : seguidos ) {
+                for ( servicios.DtUsuario usea : seguidos ) {
                  Titu = usea.getNick();
                 
             %>
@@ -179,11 +180,11 @@
                 </th> 
             </tr>
             <%
-                List<DtUsuario> seguidores= (List<DtUsuario>) request.getAttribute("seguidore");
+                List<servicios.DtUsuario> seguidores= (List<servicios.DtUsuario>) request.getAttribute("seguidore");
                  String Tu ="";
                 
                 if(seguidores.size()>0){
-                for ( DtUsuario usea : seguidores) {
+                for ( servicios.DtUsuario usea : seguidores) {
                  Tu = usea.getNick().replace(" ", "-");
                 
             %>
@@ -227,11 +228,11 @@
             %>
             </tr>
               <%
-                List<DtColaboracion> props= (List<DtColaboracion>) request.getAttribute("propuCol");
+                List<servicios.DtColaboracion> props= (List<servicios.DtColaboracion>) request.getAttribute("propuCol");
                  String Tup ="";
                 
                 if(props.size()>0){
-                for ( DtColaboracion propa : props) {
+                for ( servicios.DtColaboracion propa : props) {
                  Tup = propa.getPropuesta().getTitulo().replace(" ", "+");
             %>
             <tr>
@@ -243,7 +244,7 @@
                       <%
             if(userop != null && userop.getNick().equals(colab.getNick())){%>
              <td>  <%= propa.getMonto()   %>  </td> 
-                 <td> <%= propa.getFecha()%> </td> 
+             <td> <%= propa.getFecha().toGregorianCalendar().getTime().toLocaleString() %> </td> 
             <%
                 }
             }
@@ -268,11 +269,11 @@
             </tr>
             
               <%
-                List<DtPropuesta> propFavo= (List<DtPropuesta>) request.getAttribute("propuFav");
+                List<servicios.DtPropuesta> propFavo= (List<servicios.DtPropuesta>) request.getAttribute("propuFav");
                  String pa ="";
                 
                 if(propFavo.size()>0){
-                for ( DtPropuesta propu1 : propFavo) {
+                for (servicios.DtPropuesta propu1 : propFavo) {
                  pa = propu1.getTitulo().replace(" ", "+");
             %>
             <tr>
