@@ -4,24 +4,22 @@
 <xsd:import namespace="http://Servicios/" schemaLocation="http://127.0.0.1:8280/servicio2?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
-<message name="Cargar_Favoritos_Memoria"></message>
-<message name="Cargar_Favoritos_MemoriaResponse"></message>
+<message name="cargarPropuestas"></message>
+<message name="cargarPropuestasResponse"></message>
+<message name="actualizarMontos"></message>
+<message name="actualizarMontosResponse"></message>
+<message name="publicar"></message>
+<message name="publicarResponse"></message>
+<message name="cargarColaboraciones"></message>
+<message name="cargarColaboracionesResponse"></message>
+<message name="EstadosPropuestas"></message>
+<message name="EstadosPropuestasResponse"></message>
 <message name="getPropPorNick">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="getPropPorNickResponse">
 <part name="return" type="tns:propuesta"></part>
 </message>
-<message name="cargarColaboraciones"></message>
-<message name="cargarColaboracionesResponse"></message>
-<message name="EstadosPropuestas"></message>
-<message name="EstadosPropuestasResponse"></message>
-<message name="actualizarMontos"></message>
-<message name="actualizarMontosResponse"></message>
-<message name="cargarPropuestas"></message>
-<message name="cargarPropuestasResponse"></message>
-<message name="publicar"></message>
-<message name="publicarResponse"></message>
 <message name="extender">
 <part name="arg0" type="xsd:string"></part>
 </message>
@@ -32,18 +30,14 @@
 <message name="SQLException">
 <part name="fault" element="tns:SQLException"></part>
 </message>
+<message name="Cargar_Favoritos_Memoria"></message>
+<message name="Cargar_Favoritos_MemoriaResponse"></message>
 <message name="Agregar_Comentario">
 <part name="arg0" type="xsd:string"></part>
 <part name="arg1" type="xsd:string"></part>
 <part name="arg2" type="xsd:string"></part>
 </message>
 <message name="Agregar_ComentarioResponse"></message>
-<message name="Listar_Propuestas_X_Categoria_Web">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="Listar_Propuestas_X_Categoria_WebResponse">
-<part name="return" type="tns:dataListPropuestas"></part>
-</message>
 <message name="Crear_DataImagen_Publicador">
 <part name="arg0" type="xsd:base64Binary"></part>
 <part name="arg1" type="xsd:string"></part>
@@ -52,10 +46,17 @@
 <message name="Crear_DataImagen_PublicadorResponse">
 <part name="return" type="tns:dataImagen"></part>
 </message>
-<message name="Existe_Propuesta">
+<message name="Listar_Propuestas_X_Categoria_Web">
 <part name="arg0" type="xsd:string"></part>
 </message>
-<message name="Existe_PropuestaResponse">
+<message name="Listar_Propuestas_X_Categoria_WebResponse">
+<part name="return" type="tns:dataListPropuestas"></part>
+</message>
+<message name="Ya_Favoritio">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="Ya_FavoritioResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
 <message name="Agregar_Favorito">
@@ -63,6 +64,23 @@
 <part name="arg1" type="xsd:string"></part>
 </message>
 <message name="Agregar_FavoritoResponse"></message>
+<message name="Cambiar_Estado">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="Cambiar_EstadoResponse"></message>
+<message name="Existe_Propuesta">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="Existe_PropuestaResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="Traer_Propuesta">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="Traer_PropuestaResponse">
+<part name="return" type="tns:dtPropuesta"></part>
+</message>
 <message name="Crear_Estado"></message>
 <message name="Crear_EstadoResponse">
 <part name="return" type="tns:estado"></part>
@@ -74,74 +92,6 @@
 <message name="Ya_ComentoResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
-<message name="Ya_Favoritio">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="Ya_FavoritioResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
-<message name="Traer_Propuesta">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="Traer_PropuestaResponse">
-<part name="return" type="tns:dtPropuesta"></part>
-</message>
-<message name="Cambiar_Estado">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="Cambiar_EstadoResponse"></message>
-<message name="Selccionar_Propuesta">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="Selccionar_PropuestaResponse">
-<part name="return" type="tns:dtPropuesta"></part>
-</message>
-<message name="Traer_Comentarios">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="Traer_ComentariosResponse">
-<part name="return" type="tns:dataListComentario"></part>
-</message>
-<message name="Buscardor_Web_ListaTDL">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="Buscardor_Web_ListaTDLResponse">
-<part name="return" type="tns:dataListPropuestas"></part>
-</message>
-<message name="AgregarImagen_Propuesta">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="tns:dataImagen"></part>
-</message>
-<message name="AgregarImagen_PropuestaResponse">
-<part name="return" type="xsd:string"></part>
-</message>
-<message name="Listar_Propuestas_Web"></message>
-<message name="Listar_Propuestas_WebResponse">
-<part name="return" type="tns:dataListPropuestas"></part>
-</message>
-<message name="Colaboradores_De_Propuesta"></message>
-<message name="Colaboradores_De_PropuestaResponse">
-<part name="return" type="tns:dataListStrings"></part>
-</message>
-<message name="Retornar_Imagen_Propuesta">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="Retornar_Imagen_PropuestaResponse">
-<part name="return" type="tns:bufferedImage"></part>
-</message>
-<message name="Alta_Colaboracion">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-<part name="arg2" type="xsd:string"></part>
-<part name="arg3" type="xsd:string"></part>
-</message>
-<message name="Alta_ColaboracionResponse"></message>
-<message name="Configurar_Parametros">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="Configurar_ParametrosResponse"></message>
 <message name="Agregar_Propuesta">
 <part name="arg0" type="xsd:string"></part>
 <part name="arg1" type="xsd:string"></part>
@@ -163,14 +113,68 @@
 </message>
 <message name="Cargar_Pro_Col_Est"></message>
 <message name="Cargar_Pro_Col_EstResponse"></message>
+<message name="Traer_Comentarios">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="Traer_ComentariosResponse">
+<part name="return" type="tns:dataListComentario"></part>
+</message>
+<message name="Configurar_Parametros">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="Configurar_ParametrosResponse"></message>
+<message name="AgregarImagen_Propuesta">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="tns:dataImagen"></part>
+</message>
+<message name="AgregarImagen_PropuestaResponse">
+<part name="return" type="xsd:string"></part>
+</message>
+<message name="Listar_Propuestas_Web"></message>
+<message name="Listar_Propuestas_WebResponse">
+<part name="return" type="tns:dataListPropuestas"></part>
+</message>
+<message name="Selccionar_Propuesta">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="Selccionar_PropuestaResponse">
+<part name="return" type="tns:dtPropuesta"></part>
+</message>
+<message name="Retornar_Imagen_Propuesta">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="Retornar_Imagen_PropuestaResponse">
+<part name="return" type="tns:bufferedImage"></part>
+</message>
+<message name="Colaboradores_De_Propuesta"></message>
+<message name="Colaboradores_De_PropuestaResponse">
+<part name="return" type="tns:dataListStrings"></part>
+</message>
+<message name="Buscardor_Web_ListaTDL">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="Buscardor_Web_ListaTDLResponse">
+<part name="return" type="tns:dataListPropuestas"></part>
+</message>
+<message name="Alta_Colaboracion">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:string"></part>
+<part name="arg3" type="xsd:string"></part>
+</message>
+<message name="Alta_ColaboracionResponse"></message>
 <portType name="Publicador_Propuesta">
-<operation name="Cargar_Favoritos_Memoria">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Cargar_Favoritos_MemoriaRequest" message="tns:Cargar_Favoritos_Memoria"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Cargar_Favoritos_MemoriaResponse" message="tns:Cargar_Favoritos_MemoriaResponse"></output>
+<operation name="cargarPropuestas">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/cargarPropuestasRequest" message="tns:cargarPropuestas"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/cargarPropuestasResponse" message="tns:cargarPropuestasResponse"></output>
 </operation>
-<operation name="getPropPorNick">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/getPropPorNickRequest" message="tns:getPropPorNick"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/getPropPorNickResponse" message="tns:getPropPorNickResponse"></output>
+<operation name="actualizarMontos">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/actualizarMontosRequest" message="tns:actualizarMontos"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/actualizarMontosResponse" message="tns:actualizarMontosResponse"></output>
+</operation>
+<operation name="publicar">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/publicarRequest" message="tns:publicar"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/publicarResponse" message="tns:publicarResponse"></output>
 </operation>
 <operation name="cargarColaboraciones">
 <input wsam:Action="http://Servicios/Publicador_Propuesta/cargarColaboracionesRequest" message="tns:cargarColaboraciones"></input>
@@ -180,17 +184,9 @@
 <input wsam:Action="http://Servicios/Publicador_Propuesta/EstadosPropuestasRequest" message="tns:EstadosPropuestas"></input>
 <output wsam:Action="http://Servicios/Publicador_Propuesta/EstadosPropuestasResponse" message="tns:EstadosPropuestasResponse"></output>
 </operation>
-<operation name="actualizarMontos">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/actualizarMontosRequest" message="tns:actualizarMontos"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/actualizarMontosResponse" message="tns:actualizarMontosResponse"></output>
-</operation>
-<operation name="cargarPropuestas">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/cargarPropuestasRequest" message="tns:cargarPropuestas"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/cargarPropuestasResponse" message="tns:cargarPropuestasResponse"></output>
-</operation>
-<operation name="publicar">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/publicarRequest" message="tns:publicar"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/publicarResponse" message="tns:publicarResponse"></output>
+<operation name="getPropPorNick">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/getPropPorNickRequest" message="tns:getPropPorNick"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/getPropPorNickResponse" message="tns:getPropPorNickResponse"></output>
 </operation>
 <operation name="extender">
 <input wsam:Action="http://Servicios/Publicador_Propuesta/extenderRequest" message="tns:extender"></input>
@@ -198,26 +194,42 @@
 <fault message="tns:IOException" name="IOException" wsam:Action="http://Servicios/Publicador_Propuesta/extender/Fault/IOException"></fault>
 <fault message="tns:SQLException" name="SQLException" wsam:Action="http://Servicios/Publicador_Propuesta/extender/Fault/SQLException"></fault>
 </operation>
+<operation name="Cargar_Favoritos_Memoria">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Cargar_Favoritos_MemoriaRequest" message="tns:Cargar_Favoritos_Memoria"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Cargar_Favoritos_MemoriaResponse" message="tns:Cargar_Favoritos_MemoriaResponse"></output>
+</operation>
 <operation name="Agregar_Comentario" parameterOrder="arg0 arg1 arg2">
 <input wsam:Action="http://Servicios/Publicador_Propuesta/Agregar_ComentarioRequest" message="tns:Agregar_Comentario"></input>
 <output wsam:Action="http://Servicios/Publicador_Propuesta/Agregar_ComentarioResponse" message="tns:Agregar_ComentarioResponse"></output>
+</operation>
+<operation name="Crear_DataImagen_Publicador" parameterOrder="arg0 arg1 arg2">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Crear_DataImagen_PublicadorRequest" message="tns:Crear_DataImagen_Publicador"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Crear_DataImagen_PublicadorResponse" message="tns:Crear_DataImagen_PublicadorResponse"></output>
 </operation>
 <operation name="Listar_Propuestas_X_Categoria_Web">
 <input wsam:Action="http://Servicios/Publicador_Propuesta/Listar_Propuestas_X_Categoria_WebRequest" message="tns:Listar_Propuestas_X_Categoria_Web"></input>
 <output wsam:Action="http://Servicios/Publicador_Propuesta/Listar_Propuestas_X_Categoria_WebResponse" message="tns:Listar_Propuestas_X_Categoria_WebResponse"></output>
 <fault message="tns:SQLException" name="SQLException" wsam:Action="http://Servicios/Publicador_Propuesta/Listar_Propuestas_X_Categoria_Web/Fault/SQLException"></fault>
 </operation>
-<operation name="Crear_DataImagen_Publicador" parameterOrder="arg0 arg1 arg2">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Crear_DataImagen_PublicadorRequest" message="tns:Crear_DataImagen_Publicador"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Crear_DataImagen_PublicadorResponse" message="tns:Crear_DataImagen_PublicadorResponse"></output>
+<operation name="Ya_Favoritio" parameterOrder="arg0 arg1">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Ya_FavoritioRequest" message="tns:Ya_Favoritio"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Ya_FavoritioResponse" message="tns:Ya_FavoritioResponse"></output>
+</operation>
+<operation name="Agregar_Favorito" parameterOrder="arg0 arg1">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Agregar_FavoritoRequest" message="tns:Agregar_Favorito"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Agregar_FavoritoResponse" message="tns:Agregar_FavoritoResponse"></output>
+</operation>
+<operation name="Cambiar_Estado" parameterOrder="arg0 arg1">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Cambiar_EstadoRequest" message="tns:Cambiar_Estado"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Cambiar_EstadoResponse" message="tns:Cambiar_EstadoResponse"></output>
 </operation>
 <operation name="Existe_Propuesta">
 <input wsam:Action="http://Servicios/Publicador_Propuesta/Existe_PropuestaRequest" message="tns:Existe_Propuesta"></input>
 <output wsam:Action="http://Servicios/Publicador_Propuesta/Existe_PropuestaResponse" message="tns:Existe_PropuestaResponse"></output>
 </operation>
-<operation name="Agregar_Favorito" parameterOrder="arg0 arg1">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Agregar_FavoritoRequest" message="tns:Agregar_Favorito"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Agregar_FavoritoResponse" message="tns:Agregar_FavoritoResponse"></output>
+<operation name="Traer_Propuesta">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Traer_PropuestaRequest" message="tns:Traer_Propuesta"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Traer_PropuestaResponse" message="tns:Traer_PropuestaResponse"></output>
 </operation>
 <operation name="Crear_Estado">
 <input wsam:Action="http://Servicios/Publicador_Propuesta/Crear_EstadoRequest" message="tns:Crear_Estado"></input>
@@ -227,29 +239,21 @@
 <input wsam:Action="http://Servicios/Publicador_Propuesta/Ya_ComentoRequest" message="tns:Ya_Comento"></input>
 <output wsam:Action="http://Servicios/Publicador_Propuesta/Ya_ComentoResponse" message="tns:Ya_ComentoResponse"></output>
 </operation>
-<operation name="Ya_Favoritio" parameterOrder="arg0 arg1">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Ya_FavoritioRequest" message="tns:Ya_Favoritio"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Ya_FavoritioResponse" message="tns:Ya_FavoritioResponse"></output>
+<operation name="Agregar_Propuesta" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10 arg11 arg12 arg13">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Agregar_PropuestaRequest" message="tns:Agregar_Propuesta"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Agregar_PropuestaResponse" message="tns:Agregar_PropuestaResponse"></output>
 </operation>
-<operation name="Traer_Propuesta">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Traer_PropuestaRequest" message="tns:Traer_Propuesta"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Traer_PropuestaResponse" message="tns:Traer_PropuestaResponse"></output>
-</operation>
-<operation name="Cambiar_Estado" parameterOrder="arg0 arg1">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Cambiar_EstadoRequest" message="tns:Cambiar_Estado"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Cambiar_EstadoResponse" message="tns:Cambiar_EstadoResponse"></output>
-</operation>
-<operation name="Selccionar_Propuesta">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Selccionar_PropuestaRequest" message="tns:Selccionar_Propuesta"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Selccionar_PropuestaResponse" message="tns:Selccionar_PropuestaResponse"></output>
+<operation name="Cargar_Pro_Col_Est">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Cargar_Pro_Col_EstRequest" message="tns:Cargar_Pro_Col_Est"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Cargar_Pro_Col_EstResponse" message="tns:Cargar_Pro_Col_EstResponse"></output>
 </operation>
 <operation name="Traer_Comentarios">
 <input wsam:Action="http://Servicios/Publicador_Propuesta/Traer_ComentariosRequest" message="tns:Traer_Comentarios"></input>
 <output wsam:Action="http://Servicios/Publicador_Propuesta/Traer_ComentariosResponse" message="tns:Traer_ComentariosResponse"></output>
 </operation>
-<operation name="Buscardor_Web_ListaTDL">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Buscardor_Web_ListaTDLRequest" message="tns:Buscardor_Web_ListaTDL"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Buscardor_Web_ListaTDLResponse" message="tns:Buscardor_Web_ListaTDLResponse"></output>
+<operation name="Configurar_Parametros">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Configurar_ParametrosRequest" message="tns:Configurar_Parametros"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Configurar_ParametrosResponse" message="tns:Configurar_ParametrosResponse"></output>
 </operation>
 <operation name="AgregarImagen_Propuesta" parameterOrder="arg0 arg1">
 <input wsam:Action="http://Servicios/Publicador_Propuesta/AgregarImagen_PropuestaRequest" message="tns:AgregarImagen_Propuesta"></input>
@@ -260,36 +264,32 @@
 <output wsam:Action="http://Servicios/Publicador_Propuesta/Listar_Propuestas_WebResponse" message="tns:Listar_Propuestas_WebResponse"></output>
 <fault message="tns:SQLException" name="SQLException" wsam:Action="http://Servicios/Publicador_Propuesta/Listar_Propuestas_Web/Fault/SQLException"></fault>
 </operation>
-<operation name="Colaboradores_De_Propuesta">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Colaboradores_De_PropuestaRequest" message="tns:Colaboradores_De_Propuesta"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Colaboradores_De_PropuestaResponse" message="tns:Colaboradores_De_PropuestaResponse"></output>
-<fault message="tns:SQLException" name="SQLException" wsam:Action="http://Servicios/Publicador_Propuesta/Colaboradores_De_Propuesta/Fault/SQLException"></fault>
+<operation name="Selccionar_Propuesta">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Selccionar_PropuestaRequest" message="tns:Selccionar_Propuesta"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Selccionar_PropuestaResponse" message="tns:Selccionar_PropuestaResponse"></output>
 </operation>
 <operation name="Retornar_Imagen_Propuesta">
 <input wsam:Action="http://Servicios/Publicador_Propuesta/Retornar_Imagen_PropuestaRequest" message="tns:Retornar_Imagen_Propuesta"></input>
 <output wsam:Action="http://Servicios/Publicador_Propuesta/Retornar_Imagen_PropuestaResponse" message="tns:Retornar_Imagen_PropuestaResponse"></output>
 <fault message="tns:IOException" name="IOException" wsam:Action="http://Servicios/Publicador_Propuesta/Retornar_Imagen_Propuesta/Fault/IOException"></fault>
 </operation>
+<operation name="Colaboradores_De_Propuesta">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Colaboradores_De_PropuestaRequest" message="tns:Colaboradores_De_Propuesta"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Colaboradores_De_PropuestaResponse" message="tns:Colaboradores_De_PropuestaResponse"></output>
+<fault message="tns:SQLException" name="SQLException" wsam:Action="http://Servicios/Publicador_Propuesta/Colaboradores_De_Propuesta/Fault/SQLException"></fault>
+</operation>
+<operation name="Buscardor_Web_ListaTDL">
+<input wsam:Action="http://Servicios/Publicador_Propuesta/Buscardor_Web_ListaTDLRequest" message="tns:Buscardor_Web_ListaTDL"></input>
+<output wsam:Action="http://Servicios/Publicador_Propuesta/Buscardor_Web_ListaTDLResponse" message="tns:Buscardor_Web_ListaTDLResponse"></output>
+</operation>
 <operation name="Alta_Colaboracion" parameterOrder="arg0 arg1 arg2 arg3">
 <input wsam:Action="http://Servicios/Publicador_Propuesta/Alta_ColaboracionRequest" message="tns:Alta_Colaboracion"></input>
 <output wsam:Action="http://Servicios/Publicador_Propuesta/Alta_ColaboracionResponse" message="tns:Alta_ColaboracionResponse"></output>
 </operation>
-<operation name="Configurar_Parametros">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Configurar_ParametrosRequest" message="tns:Configurar_Parametros"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Configurar_ParametrosResponse" message="tns:Configurar_ParametrosResponse"></output>
-</operation>
-<operation name="Agregar_Propuesta" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10 arg11 arg12 arg13">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Agregar_PropuestaRequest" message="tns:Agregar_Propuesta"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Agregar_PropuestaResponse" message="tns:Agregar_PropuestaResponse"></output>
-</operation>
-<operation name="Cargar_Pro_Col_Est">
-<input wsam:Action="http://Servicios/Publicador_Propuesta/Cargar_Pro_Col_EstRequest" message="tns:Cargar_Pro_Col_Est"></input>
-<output wsam:Action="http://Servicios/Publicador_Propuesta/Cargar_Pro_Col_EstResponse" message="tns:Cargar_Pro_Col_EstResponse"></output>
-</operation>
 </portType>
 <binding name="Publicador_PropuestaPortBinding" type="tns:Publicador_Propuesta">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
-<operation name="Cargar_Favoritos_Memoria">
+<operation name="cargarPropuestas">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -298,7 +298,16 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="getPropPorNick">
+<operation name="actualizarMontos">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="publicar">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -325,25 +334,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="actualizarMontos">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="cargarPropuestas">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="publicar">
+<operation name="getPropPorNick">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -367,7 +358,25 @@
 <soap:fault name="SQLException" use="literal"></soap:fault>
 </fault>
 </operation>
+<operation name="Cargar_Favoritos_Memoria">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
 <operation name="Agregar_Comentario">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="Crear_DataImagen_Publicador">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -388,7 +397,25 @@
 <soap:fault name="SQLException" use="literal"></soap:fault>
 </fault>
 </operation>
-<operation name="Crear_DataImagen_Publicador">
+<operation name="Ya_Favoritio">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="Agregar_Favorito">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="Cambiar_Estado">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -406,7 +433,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="Agregar_Favorito">
+<operation name="Traer_Propuesta">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -433,7 +460,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="Ya_Favoritio">
+<operation name="Agregar_Propuesta">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -442,25 +469,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="Traer_Propuesta">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="Cambiar_Estado">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="Selccionar_Propuesta">
+<operation name="Cargar_Pro_Col_Est">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -478,7 +487,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="Buscardor_Web_ListaTDL">
+<operation name="Configurar_Parametros">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -508,7 +517,7 @@
 <soap:fault name="SQLException" use="literal"></soap:fault>
 </fault>
 </operation>
-<operation name="Colaboradores_De_Propuesta">
+<operation name="Selccionar_Propuesta">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -516,9 +525,6 @@
 <output>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
-<fault name="SQLException">
-<soap:fault name="SQLException" use="literal"></soap:fault>
-</fault>
 </operation>
 <operation name="Retornar_Imagen_Propuesta">
 <soap:operation soapAction=""></soap:operation>
@@ -532,34 +538,28 @@
 <soap:fault name="IOException" use="literal"></soap:fault>
 </fault>
 </operation>
+<operation name="Colaboradores_De_Propuesta">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+<fault name="SQLException">
+<soap:fault name="SQLException" use="literal"></soap:fault>
+</fault>
+</operation>
+<operation name="Buscardor_Web_ListaTDL">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
 <operation name="Alta_Colaboracion">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="Configurar_Parametros">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="Agregar_Propuesta">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="Cargar_Pro_Col_Est">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
