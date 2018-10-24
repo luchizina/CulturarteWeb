@@ -26,9 +26,9 @@
     <legend id="legendErr">Consulta de Propuestas</legend><br>
     <nav>
     <ul class="demo-list-icon mdl-list">
-        <%   List<DtPropuesta> x = (List<DtPropuesta>) request.getAttribute("propuestas");
+        <%   List<servicios.DtPropuesta> x = (List<servicios.DtPropuesta>) request.getAttribute("propuestas");
         if(x.size()>0){
-                for (DtPropuesta cx : x) {
+                for (servicios.DtPropuesta cx : x) {
                     String h = cx.getTitulo().replace(" ", "+");
         %>
     <li class="mdl-list__item">

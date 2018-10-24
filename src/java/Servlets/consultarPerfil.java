@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import servicios.DataListUsuarios;
 
 /**
  *
@@ -50,10 +51,10 @@ public class consultarPerfil extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");     
         this.port.cargarUsuarios2();
-        this.port3.cargarPropuestas();
-        this.port3.cargarColaboraciones();
+//        this.port3.cargarPropuestas();
+//        this.port3.cargarColaboraciones();
         port3.estadosPropuestas();
         if (request.getParameter("T") == null) {
             List<servicios.DtUsuario> usuarios = port.listarUsuarios().getListita();

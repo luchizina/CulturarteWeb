@@ -49,11 +49,11 @@
             <% 
               servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request);
                 if(userop != null){
-            List<DtUsuario> seguidoresPrueb= (List<DtUsuario>) request.getAttribute("seguidore");
+            List<servicios.DtUsuario> seguidoresPrueb= (List<servicios.DtUsuario>) request.getAttribute("seguidore");
             if(userop.getNick().equals(colab.getNick())==false){
                 boolean yaSigue=false;
             for(int i=0; i < seguidoresPrueb.size(); i++){
-              DtUsuario seguidor= seguidoresPrueb.get(i);
+              servicios.DtUsuario seguidor= seguidoresPrueb.get(i);
     
               if(seguidor.getNick().equals(userop.getNick())){
                      yaSigue=true;

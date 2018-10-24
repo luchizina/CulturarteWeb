@@ -30,9 +30,9 @@
                 <nav>
                     
                     <ul class="demo-list-icon mdl-list">
-                        <%  List<DtUsuario> usuariosU = (List<DtUsuario>) request.getAttribute("usuarios");
+                        <%  List<servicios.DtUsuario> usuariosU = (List<servicios.DtUsuario>) request.getAttribute("usuarios");
                           if(usuariosU.size()>0){
-                            for (DtUsuario user : usuariosU) {
+                            for (servicios.DtUsuario user : usuariosU) {
                                 String Titu = user.getNick().replace(" ", "-");
                                 String completo = user.getNombre() + " " + user.getApellido() + " (" + user.getNick() + ")";
 

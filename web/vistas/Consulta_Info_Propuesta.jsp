@@ -4,6 +4,7 @@
    Author     : matheo
 --%>
 
+<%@page import="java.lang.String"%>
 <%@page import="Logica.DtComentarios"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="Logica.DtUsuario"%>
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script  src="<%= request.getContextPath()%>/js/validar.js"></script>
-    <% DtPropuesta propu = (DtPropuesta) request.getAttribute("propu");
+    <% servicios.DtPropuesta propu = (servicios.DtPropuesta) request.getAttribute("propu");
         boolean colaboradores = false;
         List<String> x = (List<String>) request.getAttribute("col");
         if (x != null) {
@@ -47,18 +48,25 @@
                 Esta_logeado = true;
                 Nombre_Usuario = (String) request.getSession().getAttribute("sesionAct");
                 tipo = (String) session.getAttribute("tipo");
-                if (Nombre_Usuario.equals(propu.getPropo())) {
+                if (Nombre_Usuario.equals(propu.getPropoACargo())) {
                     Propuso_a_propu = true;
                 }
+                
                 if (tipo.equals("colaborador")) {
-                    if (propu.getColabs().containsKey(Nombre_Usuario)) {
+                   List<servicios.DtPropuesta.Colaboradores.Entry> lista = propu.getColaboradores().getEntry();
+                   for(servicios.DtPropuesta.Colaboradores.Entry p : lista)
+                   {
+                    if (p.getKey().equals(Nombre_Usuario)) {
                         Colaboro_a_propu = true;
-                    } else {
+                    }
+                   }
+                    if(!Colaboro_a_propu) {
                         Puede_colaborar_a_propu = true;
                     }
-                }
+                
             }
-        }                                                                        %> 
+        }     
+    }                                                                   %> 
     <head>
         <jsp:include page="/template/head.jsp" />
         <title>Consultar Propuesta: <%propu.getTitulo();%> </title>
@@ -71,10 +79,7 @@
             <fieldset>
                 <legend id="legendErr">Información básica: </legend> 
                 <div id="perfil_izquierda" style="float: left">
-                    <% if (propu.getImg() != null && !propu.getImg().equals("")) {
-
-
-                    %>
+                    <% if (propu.getImg() != null && !propu.getImg().equals("")) {%>
                     <img id="imagenot" src="/CulturarteWeb/Retornar_imag_propuesta_Servlet?T=${propu.getTitulo()}" width="200" height="200">  
                     <%   } else {%>          
                     <img id="imagenot" src="/CulturarteWeb/img/pro.jpeg" width="200" height="200">   
@@ -90,19 +95,19 @@
                         <label class="rotulo" style="text-align: left"> Lugar:</label>
                         <label class="valor" style="text-align: left"><%= propu.getLugar()%> </label><br/>
                         <label class="rotulo" style="text-align: left"> Categoria:</label>
-                        <label class="valor" style="text-align: left"><%= propu.getNombreCate()%> </label><br/>
+                        <label class="valor" style="text-align: left"><%= propu.getCategoria()%> </label><br/>
                         <label class="rotulo" style="text-align: left"> Tipo de retorno:</label>
                         <label class="valor" style="text-align: left"><%= propu.getTRetornos()%> </label><br/>
                         <label class="rotulo" style="text-align: left"> Precio de entrada:</label>
                         <label class="valor" style="text-align: left"><%= propu.getPrecio()%> </label><br/>
                         <label class="rotulo" style="text-align: left"> Monto necesario:</label>
-                        <label class="valor" style="text-align: left"><%= propu.getMontototal()%> </label><br/>
+                        <label class="valor" style="text-align: left"><%= propu.getMontoTotal()%> </label><br/>
                         <label class="rotulo" style="text-align: left"> Monto recaudado:</label>
                         <label class="valor" style="text-align: left"><%= propu.getMontoActual()%></label><br/>
                         <label class="rotulo" style="text-align: left">Fecha de realizacion:</label>
                         <label class="valor" style="text-align: left">
 
-                            <%=new SimpleDateFormat("dd/MM/yyyy").format(propu.getFecha())%>
+                            <%=new SimpleDateFormat("dd/MM/yyyy").format(propu.getFecha().toGregorianCalendar().getTime())%>
                         </label><br/>
                         <label class="rotulo" style="text-align: left"> Estado actual:</label>
                         <% if (propu.getEstActual().getEstado().equals(Testado.En_Financiacion)) { %>
@@ -115,14 +120,14 @@
                         <div style="text-align: left">
                             <label class="rotulo" style="text-align: left">Propuesto por:</label>
                             <label class="valor" style="text-align: left">
-                                <a href="consultarPerfil?T=<%= propu.getPropo()%>">
-                                    <%= propu.getPropo()%>
+                                <a href="consultarPerfil?T=<%= propu.getPropoACargo()%>">
+                                    <%= propu.getPropoACargo()%>
                                 </a>
                             </label>
                         </div>
                         <div style="float: left">
                             <label class="rotulo" style="text-align: left"> Descripcion:</label>
-                            <label class="valor" style="text-align: left"><%= propu.getDescripcion()%></label><br/>
+                            <label class="valor" style="text-align: left"><%= propu.getDesc()%></label><br/>
                         </div>
                     </div>
                     <br>
@@ -157,11 +162,11 @@
                 <right>
                     <table class="datagrid">
                         <%
-                            List<DtComentarios> props = (List<DtComentarios>) request.getAttribute("coment");
+                            List<servicios.DtComentarios> props = (List<servicios.DtComentarios>) request.getAttribute("coment");
                             String com = "";
                             String col = "";
                             if (props.size() > 0) {
-                                for (DtComentarios prop : props) {
+                                for (servicios.DtComentarios prop : props) {
                                     com = prop.getComentario();
                                     col = prop.getNick();
                         %>
@@ -295,7 +300,7 @@
 
                                 </tr>
 
-                                <%  if (Propuso_a_propu && !Nombre_Usuario.equals("") && propu.getEstActual().getEstado().compareTo(Testado.Financiada) == 0) {%>
+                                <%  if (Propuso_a_propu && !Nombre_Usuario.equals("") && propu.getEstActual().getEstado().compareTo(servicios.Testado.FINANCIADA) == 0) {%>
                                 <tr>
                                     <td>
                                         <form method="post" id="ls" action="borrar_prop" onsubmit="return cancelar()">

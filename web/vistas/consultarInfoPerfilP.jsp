@@ -239,7 +239,7 @@
                                 <tr>
                                     <td>
                                         <a href=Consulta_de_propuesta_Servlet?T=<%=Mu%>>
-                                            <%= MiP.getTitulo()%> (<%= MiP.getEstActual().getEstado().toString()%>)
+                                                <%= MiP.getTitulo()%> (<%= MiP.getEstActual().getEstado().toString()%>)
                                         </a>
                                     </td>
 
@@ -284,7 +284,7 @@
                             <label class="rotulo" style="text-align: left"> Tipo:</label><br/>
                             <label class="valor" style="text-align: left"> Proponente</label><br/>
                             <label class="rotulo" style="text-align: left">Fecha de nacimiento:</label><br/>
-                            <label class="valor" style="text-align: left"> <%=new SimpleDateFormat("dd/MM/yyyy").format(prop.getFecha())%>                       </label><br/>
+                            <label class="valor" style="text-align: left"> <%=new SimpleDateFormat("dd/MM/yyyy").format(prop.getFecha().toGregorianCalendar().getTime())%>                       </label><br/>
                             <label class="rotulo"style="text-align: left">Correo electrónico:   </label><br/>
                             <label class="valor"style="text-align: left"><a href="mailto:<%= prop.getCorreo()%>" ><%= prop.getCorreo()%></a>
                             </label><br/>

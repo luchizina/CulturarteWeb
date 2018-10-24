@@ -48,12 +48,12 @@ public class Retornar_imag_propuesta_Servlet extends HttpServlet {
             
             //BufferedImage bi = ip.retornarImagen_Propuesta(T);
             servicios.BufferedImage bi = port3.retornarImagenPropuesta(T);
-        //try (OutputStream out = response.getOutputStream()) {
-        //    ImageIO.write(bi, "png", out);
-        //} 
         try (OutputStream out = response.getOutputStream()) {
             ImageIO.write((RenderedImage) bi, "png", out);
-        }
+        } 
+//        try (OutputStream out = response.getOutputStream()) {
+//            ImageIO.write((RenderedImage) bi, "png", out);
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
