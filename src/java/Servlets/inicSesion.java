@@ -26,6 +26,8 @@ public class inicSesion extends HttpServlet {
 //    private final IUsuario usuario = fabrica.getICtrlUsuario();
        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,7 +42,7 @@ public class inicSesion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
  PrintWriter out = response.getWriter();
         this.port.cargarUsuarios2();
-        
+
       HttpSession respuesta = request.getSession(true);
      if(respuesta.getAttribute("sesionAct")==null){
          

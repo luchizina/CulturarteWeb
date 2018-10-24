@@ -82,7 +82,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
         request.setCharacterEncoding("UTF-8");
         String nick = request.getParameter(usuarioF);
         String prop = request.getParameter(propuesta);
-        port3.agregarFavorito(port.traerUsuario(nick).getNick(), port3.getPropPorNick(prop).getTitulo());
+        port3.agregarFavorito(nick, prop);
         request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
         
     }
