@@ -4,12 +4,6 @@
 
 <xs:element name="SQLException" type="tns:SQLException"></xs:element>
 
-<xs:complexType name="estado">
-<xs:sequence>
-<xs:element name="estado" type="tns:testado" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="dtPropuesta">
 <xs:sequence>
 <xs:element name="titulo" type="xs:string" minOccurs="0"></xs:element>
@@ -180,6 +174,12 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="estado">
+<xs:sequence>
+<xs:element name="estado" type="tns:testado" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="listEstado">
 <xs:sequence>
 <xs:element name="est" type="xs:string" minOccurs="0"></xs:element>
@@ -249,12 +249,6 @@
 <xs:sequence></xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="IOException">
-<xs:sequence>
-<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="dataListComentario">
 <xs:sequence>
 <xs:element name="comentario" type="tns:dtComentarios" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
@@ -266,6 +260,12 @@
 <xs:element name="nick" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="propu" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="comentario" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="IOException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

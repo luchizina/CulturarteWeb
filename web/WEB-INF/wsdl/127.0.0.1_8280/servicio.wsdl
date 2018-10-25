@@ -4,22 +4,14 @@
 <xsd:import namespace="http://Servicios/" schemaLocation="http://127.0.0.1:8280/servicio?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
-<message name="limpiarUsuarios"></message>
-<message name="limpiarUsuariosResponse"></message>
-<message name="publicar"></message>
-<message name="publicarResponse"></message>
 <message name="cargarUsuarios2"></message>
 <message name="cargarUsuarios2Response"></message>
+<message name="limpiarUsuarios"></message>
+<message name="limpiarUsuariosResponse"></message>
 <message name="cargarPropPrueba"></message>
 <message name="cargarPropPruebaResponse"></message>
-<message name="listarProponentes"></message>
-<message name="listarProponentesResponse">
-<part name="return" type="tns:dataListProponentes"></part>
-</message>
-<message name="listarColaboradores"></message>
-<message name="listarColaboradoresResponse">
-<part name="return" type="tns:dataListColaboradores"></part>
-</message>
+<message name="publicar"></message>
+<message name="publicarResponse"></message>
 <message name="altaProponente">
 <part name="arg0" type="xsd:string"></part>
 <part name="arg1" type="xsd:string"></part>
@@ -55,16 +47,16 @@
 <message name="altaColaboradorResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
-<message name="existeNick">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="existeNickResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
 <message name="validaWeb">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="validaWebResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="existeNick">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="existeNickResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
 <message name="existeCorreo">
@@ -73,14 +65,14 @@
 <message name="existeCorreoResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
-<message name="yaSigue"></message>
-<message name="yaSigueResponse">
-<part name="return" type="xsd:boolean"></part>
+<message name="seleccionarUsuSeg">
+<part name="arg0" type="xsd:string"></part>
 </message>
-<message name="seguirUsuario"></message>
-<message name="seguirUsuarioResponse">
-<part name="return" type="xsd:boolean"></part>
+<message name="seleccionarUsuSegResponse"></message>
+<message name="seleccionarUsuario">
+<part name="arg0" type="xsd:string"></part>
 </message>
+<message name="seleccionarUsuarioResponse"></message>
 <message name="datosCol">
 <part name="arg0" type="tns:colaborador"></part>
 </message>
@@ -93,14 +85,14 @@
 <message name="SeleccionarColaboracionResponse">
 <part name="return" type="tns:dtColaboracion"></part>
 </message>
-<message name="seleccionarUsuario">
-<part name="arg0" type="xsd:string"></part>
+<message name="listarProponentes"></message>
+<message name="listarProponentesResponse">
+<part name="return" type="tns:dataListProponentes"></part>
 </message>
-<message name="seleccionarUsuarioResponse"></message>
-<message name="seleccionarUsuSeg">
-<part name="arg0" type="xsd:string"></part>
+<message name="listarColaboradores"></message>
+<message name="listarColaboradoresResponse">
+<part name="return" type="tns:dataListColaboradores"></part>
 </message>
-<message name="seleccionarUsuSegResponse"></message>
 <message name="traerColaborador">
 <part name="arg0" type="xsd:string"></part>
 </message>
@@ -113,9 +105,23 @@
 <message name="traerProponenteResponse">
 <part name="return" type="tns:proponente"></part>
 </message>
+<message name="seguirUsuario"></message>
+<message name="seguirUsuarioResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="yaSigue"></message>
+<message name="yaSigueResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
 <message name="dejarDeSeguir"></message>
 <message name="dejarDeSeguirResponse">
 <part name="return" type="xsd:boolean"></part>
+</message>
+<message name="traerPropuestasColaboradas">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="traerPropuestasColaboradasResponse">
+<part name="return" type="tns:dataListColaboraciones"></part>
 </message>
 <message name="traerDtProponente">
 <part name="arg0" type="xsd:string"></part>
@@ -123,6 +129,8 @@
 <message name="traerDtProponenteResponse">
 <part name="return" type="tns:dtProponente"></part>
 </message>
+<message name="cargarProponentes"></message>
+<message name="cargarProponentesResponse"></message>
 <message name="TraerTodasPropuestas">
 <part name="arg0" type="xsd:string"></part>
 </message>
@@ -139,72 +147,10 @@
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="configurarParametrosResponse"></message>
-<message name="traerPropuestasColaboradas">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="traerPropuestasColaboradasResponse">
-<part name="return" type="tns:dataListColaboraciones"></part>
-</message>
-<message name="cargarProponentes"></message>
-<message name="cargarProponentesResponse"></message>
-<message name="existe">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="existeResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
-<message name="retornarImagen">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="retornarImagenResponse">
-<part name="return" type="tns:bufferedImage"></part>
-</message>
-<message name="IOException">
-<part name="fault" element="tns:IOException"></part>
-</message>
-<message name="listarUsuario"></message>
-<message name="listarUsuarioResponse">
-<part name="return" type="tns:dataListProponentes"></part>
-</message>
-<message name="traerUsuario">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="traerUsuarioResponse">
-<part name="return" type="tns:usuario"></part>
-</message>
-<message name="traerDtUsuario">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="traerDtUsuarioResponse">
-<part name="return" type="tns:dtUsuario"></part>
-</message>
-<message name="resolverLogin">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="resolverLoginResponse">
-<part name="return" type="tns:dtInfo"></part>
-</message>
-<message name="copia">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="copiaResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
 <message name="sha1">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="sha1Response">
-<part name="return" type="xsd:string"></part>
-</message>
-<message name="agregarImagen">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="tns:dataImagen"></part>
-<part name="arg2" type="xsd:string"></part>
-</message>
-<message name="agregarImagenResponse">
 <part name="return" type="xsd:string"></part>
 </message>
 <message name="encripta">
@@ -220,15 +166,32 @@
 <message name="traerSeguidosResponse">
 <part name="return" type="tns:dataListUsuarios"></part>
 </message>
-<message name="traerSeguidores">
+<message name="retornarImagen">
 <part name="arg0" type="xsd:string"></part>
 </message>
-<message name="traerSeguidoresResponse">
+<message name="retornarImagenResponse">
+<part name="return" type="tns:bufferedImage"></part>
+</message>
+<message name="IOException">
+<part name="fault" element="tns:IOException"></part>
+</message>
+<message name="rankingUser2"></message>
+<message name="rankingUser2Response">
 <part name="return" type="tns:dataListUsuarios"></part>
 </message>
-<message name="listarUsuarios"></message>
-<message name="listarUsuariosResponse">
-<part name="return" type="tns:dataListUsuarios"></part>
+<message name="traerDtUsuario">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="traerDtUsuarioResponse">
+<part name="return" type="tns:dtUsuario"></part>
+</message>
+<message name="agregarImagen">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="tns:dataImagen"></part>
+<part name="arg2" type="xsd:string"></part>
+</message>
+<message name="agregarImagenResponse">
+<part name="return" type="xsd:string"></part>
 </message>
 <message name="traerPropFav">
 <part name="arg0" type="xsd:string"></part>
@@ -236,8 +199,8 @@
 <message name="traerPropFavResponse">
 <part name="return" type="tns:dataListPropuestas"></part>
 </message>
-<message name="rankingUser2"></message>
-<message name="rankingUser2Response">
+<message name="listarUsuarios"></message>
+<message name="listarUsuariosResponse">
 <part name="return" type="tns:dataListUsuarios"></part>
 </message>
 <message name="listaNC">
@@ -246,21 +209,58 @@
 <message name="listaNCResponse">
 <part name="return" type="tns:dataListUsuarios"></part>
 </message>
+<message name="traerSeguidores">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="traerSeguidoresResponse">
+<part name="return" type="tns:dataListUsuarios"></part>
+</message>
+<message name="existe">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="existeResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="traerUsuario">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="traerUsuarioResponse">
+<part name="return" type="tns:usuario"></part>
+</message>
+<message name="resolverLogin">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="resolverLoginResponse">
+<part name="return" type="tns:dtInfo"></part>
+</message>
+<message name="copia">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="copiaResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
 <message name="desactivarProp">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="desactivarPropResponse"></message>
-<message name="seleccionarColaborante">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="seleccionarColaboranteResponse">
-<part name="return" type="tns:dataListStrings"></part>
+<message name="listarUsuario"></message>
+<message name="listarUsuarioResponse">
+<part name="return" type="tns:dataListProponentes"></part>
 </message>
 <message name="traerMisPropuestasF">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="traerMisPropuestasFResponse">
 <part name="return" type="tns:dataListPropuestas"></part>
+</message>
+<message name="seleccionarColaborante">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="seleccionarColaboranteResponse">
+<part name="return" type="tns:dataListStrings"></part>
 </message>
 <message name="Crear_DataImagen_Publicador">
 <part name="arg0" type="xsd:base64Binary"></part>
@@ -271,29 +271,21 @@
 <part name="return" type="tns:dataImagen"></part>
 </message>
 <portType name="publicador_Usuarios">
-<operation name="limpiarUsuarios">
-<input wsam:Action="http://Servicios/publicador_Usuarios/limpiarUsuariosRequest" message="tns:limpiarUsuarios"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/limpiarUsuariosResponse" message="tns:limpiarUsuariosResponse"></output>
-</operation>
-<operation name="publicar">
-<input wsam:Action="http://Servicios/publicador_Usuarios/publicarRequest" message="tns:publicar"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/publicarResponse" message="tns:publicarResponse"></output>
-</operation>
 <operation name="cargarUsuarios2">
 <input wsam:Action="http://Servicios/publicador_Usuarios/cargarUsuarios2Request" message="tns:cargarUsuarios2"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/cargarUsuarios2Response" message="tns:cargarUsuarios2Response"></output>
+</operation>
+<operation name="limpiarUsuarios">
+<input wsam:Action="http://Servicios/publicador_Usuarios/limpiarUsuariosRequest" message="tns:limpiarUsuarios"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/limpiarUsuariosResponse" message="tns:limpiarUsuariosResponse"></output>
 </operation>
 <operation name="cargarPropPrueba">
 <input wsam:Action="http://Servicios/publicador_Usuarios/cargarPropPruebaRequest" message="tns:cargarPropPrueba"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/cargarPropPruebaResponse" message="tns:cargarPropPruebaResponse"></output>
 </operation>
-<operation name="listarProponentes">
-<input wsam:Action="http://Servicios/publicador_Usuarios/listarProponentesRequest" message="tns:listarProponentes"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/listarProponentesResponse" message="tns:listarProponentesResponse"></output>
-</operation>
-<operation name="listarColaboradores">
-<input wsam:Action="http://Servicios/publicador_Usuarios/listarColaboradoresRequest" message="tns:listarColaboradores"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/listarColaboradoresResponse" message="tns:listarColaboradoresResponse"></output>
+<operation name="publicar">
+<input wsam:Action="http://Servicios/publicador_Usuarios/publicarRequest" message="tns:publicar"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/publicarResponse" message="tns:publicarResponse"></output>
 </operation>
 <operation name="altaProponente" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10">
 <input wsam:Action="http://Servicios/publicador_Usuarios/altaProponenteRequest" message="tns:altaProponente"></input>
@@ -307,25 +299,25 @@
 <input wsam:Action="http://Servicios/publicador_Usuarios/altaColaboradorRequest" message="tns:altaColaborador"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/altaColaboradorResponse" message="tns:altaColaboradorResponse"></output>
 </operation>
-<operation name="existeNick">
-<input wsam:Action="http://Servicios/publicador_Usuarios/existeNickRequest" message="tns:existeNick"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/existeNickResponse" message="tns:existeNickResponse"></output>
-</operation>
 <operation name="validaWeb">
 <input wsam:Action="http://Servicios/publicador_Usuarios/validaWebRequest" message="tns:validaWeb"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/validaWebResponse" message="tns:validaWebResponse"></output>
+</operation>
+<operation name="existeNick">
+<input wsam:Action="http://Servicios/publicador_Usuarios/existeNickRequest" message="tns:existeNick"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/existeNickResponse" message="tns:existeNickResponse"></output>
 </operation>
 <operation name="existeCorreo">
 <input wsam:Action="http://Servicios/publicador_Usuarios/existeCorreoRequest" message="tns:existeCorreo"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/existeCorreoResponse" message="tns:existeCorreoResponse"></output>
 </operation>
-<operation name="yaSigue">
-<input wsam:Action="http://Servicios/publicador_Usuarios/yaSigueRequest" message="tns:yaSigue"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/yaSigueResponse" message="tns:yaSigueResponse"></output>
+<operation name="seleccionarUsuSeg">
+<input wsam:Action="http://Servicios/publicador_Usuarios/seleccionarUsuSegRequest" message="tns:seleccionarUsuSeg"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/seleccionarUsuSegResponse" message="tns:seleccionarUsuSegResponse"></output>
 </operation>
-<operation name="seguirUsuario">
-<input wsam:Action="http://Servicios/publicador_Usuarios/seguirUsuarioRequest" message="tns:seguirUsuario"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/seguirUsuarioResponse" message="tns:seguirUsuarioResponse"></output>
+<operation name="seleccionarUsuario">
+<input wsam:Action="http://Servicios/publicador_Usuarios/seleccionarUsuarioRequest" message="tns:seleccionarUsuario"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/seleccionarUsuarioResponse" message="tns:seleccionarUsuarioResponse"></output>
 </operation>
 <operation name="datosCol">
 <input wsam:Action="http://Servicios/publicador_Usuarios/datosColRequest" message="tns:datosCol"></input>
@@ -335,13 +327,13 @@
 <input wsam:Action="http://Servicios/publicador_Usuarios/SeleccionarColaboracionRequest" message="tns:SeleccionarColaboracion"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/SeleccionarColaboracionResponse" message="tns:SeleccionarColaboracionResponse"></output>
 </operation>
-<operation name="seleccionarUsuario">
-<input wsam:Action="http://Servicios/publicador_Usuarios/seleccionarUsuarioRequest" message="tns:seleccionarUsuario"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/seleccionarUsuarioResponse" message="tns:seleccionarUsuarioResponse"></output>
+<operation name="listarProponentes">
+<input wsam:Action="http://Servicios/publicador_Usuarios/listarProponentesRequest" message="tns:listarProponentes"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/listarProponentesResponse" message="tns:listarProponentesResponse"></output>
 </operation>
-<operation name="seleccionarUsuSeg">
-<input wsam:Action="http://Servicios/publicador_Usuarios/seleccionarUsuSegRequest" message="tns:seleccionarUsuSeg"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/seleccionarUsuSegResponse" message="tns:seleccionarUsuSegResponse"></output>
+<operation name="listarColaboradores">
+<input wsam:Action="http://Servicios/publicador_Usuarios/listarColaboradoresRequest" message="tns:listarColaboradores"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/listarColaboradoresResponse" message="tns:listarColaboradoresResponse"></output>
 </operation>
 <operation name="traerColaborador">
 <input wsam:Action="http://Servicios/publicador_Usuarios/traerColaboradorRequest" message="tns:traerColaborador"></input>
@@ -351,13 +343,29 @@
 <input wsam:Action="http://Servicios/publicador_Usuarios/traerProponenteRequest" message="tns:traerProponente"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/traerProponenteResponse" message="tns:traerProponenteResponse"></output>
 </operation>
+<operation name="seguirUsuario">
+<input wsam:Action="http://Servicios/publicador_Usuarios/seguirUsuarioRequest" message="tns:seguirUsuario"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/seguirUsuarioResponse" message="tns:seguirUsuarioResponse"></output>
+</operation>
+<operation name="yaSigue">
+<input wsam:Action="http://Servicios/publicador_Usuarios/yaSigueRequest" message="tns:yaSigue"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/yaSigueResponse" message="tns:yaSigueResponse"></output>
+</operation>
 <operation name="dejarDeSeguir">
 <input wsam:Action="http://Servicios/publicador_Usuarios/dejarDeSeguirRequest" message="tns:dejarDeSeguir"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/dejarDeSeguirResponse" message="tns:dejarDeSeguirResponse"></output>
 </operation>
+<operation name="traerPropuestasColaboradas">
+<input wsam:Action="http://Servicios/publicador_Usuarios/traerPropuestasColaboradasRequest" message="tns:traerPropuestasColaboradas"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/traerPropuestasColaboradasResponse" message="tns:traerPropuestasColaboradasResponse"></output>
+</operation>
 <operation name="traerDtProponente">
 <input wsam:Action="http://Servicios/publicador_Usuarios/traerDtProponenteRequest" message="tns:traerDtProponente"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/traerDtProponenteResponse" message="tns:traerDtProponenteResponse"></output>
+</operation>
+<operation name="cargarProponentes">
+<input wsam:Action="http://Servicios/publicador_Usuarios/cargarProponentesRequest" message="tns:cargarProponentes"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/cargarProponentesResponse" message="tns:cargarProponentesResponse"></output>
 </operation>
 <operation name="TraerTodasPropuestas">
 <input wsam:Action="http://Servicios/publicador_Usuarios/TraerTodasPropuestasRequest" message="tns:TraerTodasPropuestas"></input>
@@ -371,50 +379,9 @@
 <input wsam:Action="http://Servicios/publicador_Usuarios/configurarParametrosRequest" message="tns:configurarParametros"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/configurarParametrosResponse" message="tns:configurarParametrosResponse"></output>
 </operation>
-<operation name="traerPropuestasColaboradas">
-<input wsam:Action="http://Servicios/publicador_Usuarios/traerPropuestasColaboradasRequest" message="tns:traerPropuestasColaboradas"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/traerPropuestasColaboradasResponse" message="tns:traerPropuestasColaboradasResponse"></output>
-</operation>
-<operation name="cargarProponentes">
-<input wsam:Action="http://Servicios/publicador_Usuarios/cargarProponentesRequest" message="tns:cargarProponentes"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/cargarProponentesResponse" message="tns:cargarProponentesResponse"></output>
-</operation>
-<operation name="existe" parameterOrder="arg0 arg1">
-<input wsam:Action="http://Servicios/publicador_Usuarios/existeRequest" message="tns:existe"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/existeResponse" message="tns:existeResponse"></output>
-</operation>
-<operation name="retornarImagen">
-<input wsam:Action="http://Servicios/publicador_Usuarios/retornarImagenRequest" message="tns:retornarImagen"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/retornarImagenResponse" message="tns:retornarImagenResponse"></output>
-<fault message="tns:IOException" name="IOException" wsam:Action="http://Servicios/publicador_Usuarios/retornarImagen/Fault/IOException"></fault>
-</operation>
-<operation name="listarUsuario">
-<input wsam:Action="http://Servicios/publicador_Usuarios/listarUsuarioRequest" message="tns:listarUsuario"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/listarUsuarioResponse" message="tns:listarUsuarioResponse"></output>
-</operation>
-<operation name="traerUsuario">
-<input wsam:Action="http://Servicios/publicador_Usuarios/traerUsuarioRequest" message="tns:traerUsuario"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/traerUsuarioResponse" message="tns:traerUsuarioResponse"></output>
-</operation>
-<operation name="traerDtUsuario">
-<input wsam:Action="http://Servicios/publicador_Usuarios/traerDtUsuarioRequest" message="tns:traerDtUsuario"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/traerDtUsuarioResponse" message="tns:traerDtUsuarioResponse"></output>
-</operation>
-<operation name="resolverLogin" parameterOrder="arg0 arg1">
-<input wsam:Action="http://Servicios/publicador_Usuarios/resolverLoginRequest" message="tns:resolverLogin"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/resolverLoginResponse" message="tns:resolverLoginResponse"></output>
-</operation>
-<operation name="copia" parameterOrder="arg0 arg1">
-<input wsam:Action="http://Servicios/publicador_Usuarios/copiaRequest" message="tns:copia"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/copiaResponse" message="tns:copiaResponse"></output>
-</operation>
 <operation name="sha1">
 <input wsam:Action="http://Servicios/publicador_Usuarios/sha1Request" message="tns:sha1"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/sha1Response" message="tns:sha1Response"></output>
-</operation>
-<operation name="agregarImagen" parameterOrder="arg0 arg1 arg2">
-<input wsam:Action="http://Servicios/publicador_Usuarios/agregarImagenRequest" message="tns:agregarImagen"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/agregarImagenResponse" message="tns:agregarImagenResponse"></output>
 </operation>
 <operation name="encripta" parameterOrder="arg0 arg1">
 <input wsam:Action="http://Servicios/publicador_Usuarios/encriptaRequest" message="tns:encripta"></input>
@@ -424,37 +391,70 @@
 <input wsam:Action="http://Servicios/publicador_Usuarios/traerSeguidosRequest" message="tns:traerSeguidos"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/traerSeguidosResponse" message="tns:traerSeguidosResponse"></output>
 </operation>
-<operation name="traerSeguidores">
-<input wsam:Action="http://Servicios/publicador_Usuarios/traerSeguidoresRequest" message="tns:traerSeguidores"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/traerSeguidoresResponse" message="tns:traerSeguidoresResponse"></output>
-</operation>
-<operation name="listarUsuarios">
-<input wsam:Action="http://Servicios/publicador_Usuarios/listarUsuariosRequest" message="tns:listarUsuarios"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/listarUsuariosResponse" message="tns:listarUsuariosResponse"></output>
-</operation>
-<operation name="traerPropFav">
-<input wsam:Action="http://Servicios/publicador_Usuarios/traerPropFavRequest" message="tns:traerPropFav"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/traerPropFavResponse" message="tns:traerPropFavResponse"></output>
+<operation name="retornarImagen">
+<input wsam:Action="http://Servicios/publicador_Usuarios/retornarImagenRequest" message="tns:retornarImagen"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/retornarImagenResponse" message="tns:retornarImagenResponse"></output>
+<fault message="tns:IOException" name="IOException" wsam:Action="http://Servicios/publicador_Usuarios/retornarImagen/Fault/IOException"></fault>
 </operation>
 <operation name="rankingUser2">
 <input wsam:Action="http://Servicios/publicador_Usuarios/rankingUser2Request" message="tns:rankingUser2"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/rankingUser2Response" message="tns:rankingUser2Response"></output>
 </operation>
+<operation name="traerDtUsuario">
+<input wsam:Action="http://Servicios/publicador_Usuarios/traerDtUsuarioRequest" message="tns:traerDtUsuario"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/traerDtUsuarioResponse" message="tns:traerDtUsuarioResponse"></output>
+</operation>
+<operation name="agregarImagen" parameterOrder="arg0 arg1 arg2">
+<input wsam:Action="http://Servicios/publicador_Usuarios/agregarImagenRequest" message="tns:agregarImagen"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/agregarImagenResponse" message="tns:agregarImagenResponse"></output>
+</operation>
+<operation name="traerPropFav">
+<input wsam:Action="http://Servicios/publicador_Usuarios/traerPropFavRequest" message="tns:traerPropFav"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/traerPropFavResponse" message="tns:traerPropFavResponse"></output>
+</operation>
+<operation name="listarUsuarios">
+<input wsam:Action="http://Servicios/publicador_Usuarios/listarUsuariosRequest" message="tns:listarUsuarios"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/listarUsuariosResponse" message="tns:listarUsuariosResponse"></output>
+</operation>
 <operation name="listaNC">
 <input wsam:Action="http://Servicios/publicador_Usuarios/listaNCRequest" message="tns:listaNC"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/listaNCResponse" message="tns:listaNCResponse"></output>
+</operation>
+<operation name="traerSeguidores">
+<input wsam:Action="http://Servicios/publicador_Usuarios/traerSeguidoresRequest" message="tns:traerSeguidores"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/traerSeguidoresResponse" message="tns:traerSeguidoresResponse"></output>
+</operation>
+<operation name="existe" parameterOrder="arg0 arg1">
+<input wsam:Action="http://Servicios/publicador_Usuarios/existeRequest" message="tns:existe"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/existeResponse" message="tns:existeResponse"></output>
+</operation>
+<operation name="traerUsuario">
+<input wsam:Action="http://Servicios/publicador_Usuarios/traerUsuarioRequest" message="tns:traerUsuario"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/traerUsuarioResponse" message="tns:traerUsuarioResponse"></output>
+</operation>
+<operation name="resolverLogin" parameterOrder="arg0 arg1">
+<input wsam:Action="http://Servicios/publicador_Usuarios/resolverLoginRequest" message="tns:resolverLogin"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/resolverLoginResponse" message="tns:resolverLoginResponse"></output>
+</operation>
+<operation name="copia" parameterOrder="arg0 arg1">
+<input wsam:Action="http://Servicios/publicador_Usuarios/copiaRequest" message="tns:copia"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/copiaResponse" message="tns:copiaResponse"></output>
 </operation>
 <operation name="desactivarProp">
 <input wsam:Action="http://Servicios/publicador_Usuarios/desactivarPropRequest" message="tns:desactivarProp"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/desactivarPropResponse" message="tns:desactivarPropResponse"></output>
 </operation>
-<operation name="seleccionarColaborante">
-<input wsam:Action="http://Servicios/publicador_Usuarios/seleccionarColaboranteRequest" message="tns:seleccionarColaborante"></input>
-<output wsam:Action="http://Servicios/publicador_Usuarios/seleccionarColaboranteResponse" message="tns:seleccionarColaboranteResponse"></output>
+<operation name="listarUsuario">
+<input wsam:Action="http://Servicios/publicador_Usuarios/listarUsuarioRequest" message="tns:listarUsuario"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/listarUsuarioResponse" message="tns:listarUsuarioResponse"></output>
 </operation>
 <operation name="traerMisPropuestasF">
 <input wsam:Action="http://Servicios/publicador_Usuarios/traerMisPropuestasFRequest" message="tns:traerMisPropuestasF"></input>
 <output wsam:Action="http://Servicios/publicador_Usuarios/traerMisPropuestasFResponse" message="tns:traerMisPropuestasFResponse"></output>
+</operation>
+<operation name="seleccionarColaborante">
+<input wsam:Action="http://Servicios/publicador_Usuarios/seleccionarColaboranteRequest" message="tns:seleccionarColaborante"></input>
+<output wsam:Action="http://Servicios/publicador_Usuarios/seleccionarColaboranteResponse" message="tns:seleccionarColaboranteResponse"></output>
 </operation>
 <operation name="Crear_DataImagen_Publicador" parameterOrder="arg0 arg1 arg2">
 <input wsam:Action="http://Servicios/publicador_Usuarios/Crear_DataImagen_PublicadorRequest" message="tns:Crear_DataImagen_Publicador"></input>
@@ -463,25 +463,16 @@
 </portType>
 <binding name="publicador_UsuariosPortBinding" type="tns:publicador_Usuarios">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
-<operation name="limpiarUsuarios">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="publicar">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
 <operation name="cargarUsuarios2">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="limpiarUsuarios">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -499,16 +490,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="listarProponentes">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="listarColaboradores">
+<operation name="publicar">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -544,7 +526,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="existeNick">
+<operation name="validaWeb">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -553,7 +535,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="validaWeb">
+<operation name="existeNick">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -571,7 +553,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="yaSigue">
+<operation name="seleccionarUsuSeg">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -580,7 +562,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="seguirUsuario">
+<operation name="seleccionarUsuario">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -607,7 +589,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="seleccionarUsuario">
+<operation name="listarProponentes">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -616,7 +598,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="seleccionarUsuSeg">
+<operation name="listarColaboradores">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -643,6 +625,24 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
+<operation name="seguirUsuario">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="yaSigue">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
 <operation name="dejarDeSeguir">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -652,7 +652,25 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
+<operation name="traerPropuestasColaboradas">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
 <operation name="traerDtProponente">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="cargarProponentes">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -688,100 +706,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="traerPropuestasColaboradas">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="cargarProponentes">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="existe">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="retornarImagen">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-<fault name="IOException">
-<soap:fault name="IOException" use="literal"></soap:fault>
-</fault>
-</operation>
-<operation name="listarUsuario">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="traerUsuario">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="traerDtUsuario">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="resolverLogin">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="copia">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
 <operation name="sha1">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
-<operation name="agregarImagen">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -808,7 +733,19 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="traerSeguidores">
+<operation name="retornarImagen">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+<fault name="IOException">
+<soap:fault name="IOException" use="literal"></soap:fault>
+</fault>
+</operation>
+<operation name="rankingUser2">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -817,7 +754,16 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="listarUsuarios">
+<operation name="traerDtUsuario">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="agregarImagen">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -835,7 +781,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="rankingUser2">
+<operation name="listarUsuarios">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -853,6 +799,51 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
+<operation name="traerSeguidores">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="existe">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="traerUsuario">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="resolverLogin">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="copia">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
 <operation name="desactivarProp">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -862,7 +853,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="seleccionarColaborante">
+<operation name="listarUsuario">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -872,6 +863,15 @@
 </output>
 </operation>
 <operation name="traerMisPropuestasF">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="seleccionarColaborante">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>

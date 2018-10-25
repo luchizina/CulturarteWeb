@@ -28,9 +28,9 @@
        
   <!-- multistep form -->
      <%
- DtUsuario userop=inicSesion.getUsuarioLogueado(request);
+ servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request); // agregado servicios
  String sesionAct=(String) session.getAttribute("sesionAct");
- if(sesionAct==null || userop instanceof DtColaborador) { %>
+ if(sesionAct==null || userop instanceof servicios.DtColaborador) { %> // agregado servicios
  <form id="msform" action="<%= request.getContextPath() %>/vistas/subIndex.jsp" method="post">      
   <!-- fieldsets -->
   <fieldset>
@@ -58,8 +58,8 @@
     <select name="cate" required ="required">
     <%
     if(request.getAttribute("categorias")!=null){
-    Collection<DtCategoria> categorias=(Collection<DtCategoria>) request.getAttribute("categorias");
-    for(DtCategoria cat: categorias){   
+    Collection<servicios.DtCategoria> categorias=(Collection<servicios.DtCategoria>) request.getAttribute("categorias"); // agregado servicios
+    for(servicios.DtCategoria cat: categorias){    // agregado servicios
     int i=1;
     %>
     <option value="<%out.print(cat.getNombre());%>"> <%out.print(cat.getNombre());%>  </option>

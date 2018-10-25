@@ -60,8 +60,8 @@ public class alta_prop extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    //private final Fabrica fabrica = Fabrica.getInstance();
-    //private final IPropuesta ip = fabrica.getICtrlPropuesta();
+    private final Fabrica fabrica = Fabrica.getInstance();
+    private final IPropuesta ip = fabrica.getICtrlPropuesta();
     //private final ICategoria iC = fabrica.getICtrlCategoria();
     public static final String TIT = "titulo";
     public static final String DESC = "descripcion";
@@ -148,10 +148,11 @@ public class alta_prop extends HttpServlet {
 
 
 
-            String nick = getUsuarioLogueado(request).getNick();
-            
-            //Estado estA = new Estado(Testado.Ingresada); // lo tengo que pasar, preguntar ?
-            servicios.Estado estA = port3.crearEstado();
+            //String nick = getUsuarioLogueado(request).getNick();
+            String nick = (String) request.getSession().getAttribute("sesionAct");
+            //Estado estA2 = new Estado(Testado.Ingresada); // lo tengo que pasar, preguntar ?
+            //servicios.Estado estA = port3.crearEstado();
+            //servicios.Estado e = new servicios.Estado().setEstado(servicios.Testado.Ingresada);
             if (partImagen.getSize() != 0) {
                 //ip.configurarParametros(IMG_FOLDER);
                 port3.configurarParametros(IMG_FOLDER);
@@ -169,18 +170,19 @@ public class alta_prop extends HttpServlet {
                 //DataImagen imagen = new DataImagen(bytes, nombreArchivo, extensionArchivo); // capas tengo que pasar
                 servicios.DataImagen imagen = port3.crearDataImagenPublicador(bytes, nombreArchivo, extensionArchivo);
                 String path = subirImagenCol(titulo, imagen);
-                //boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, retorn, Integer.parseInt(montoT), catego, estA, path, nick, hora, lugar);
+                //boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, retorn, Integer.parseInt(montoT), catego, estA2, path, nick, hora, lugar);
                 // estA paso a ser servicios.estA
-                boolean ok = port3.agregarPropuesta(titulo, desc, parametro_fechaa, Integer.parseInt(precioE), 0, parametro_fecha, retorn, Integer.parseInt(montoT), catego, estA, path, nick, hora, lugar);
+                //boolean ok2 = port3.agregarPropuesta(titulo, desc, parametro_fechaa, Integer.parseInt(precioE), 0, parametro_fecha, retorn, Integer.parseInt(montoT), catego, estA, path, nick, hora, lugar);
+                boolean ok = port3.agregarPropuestaWeb(titulo, desc, parametro_fechaa, Integer.parseInt(precioE), 0, parametro_fecha, retorn, Integer.parseInt(montoT), catego, path, nick, hora, lugar);
                 if (ok) {
                   request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response); 
                 } else {
                     request.getRequestDispatcher("/vistas/AltaPropu2_1.jsp").forward(request, response);
                 }
             } else {
-                //boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, retorn, Integer.parseInt(montoT), catego, estA, "", nick, hora, lugar);
+                //boolean ok = ip.AgregarPropuesta(titulo, desc, fechaa, Integer.parseInt(precioE), 0, fecha, retorn, Integer.parseInt(montoT), catego, estA2, "", nick, hora, lugar);
                 // estA paso a ser servicios.estA
-                boolean ok = port3.agregarPropuesta(titulo, desc, parametro_fechaa, Integer.parseInt(precioE), 0, parametro_fecha, retorn, Integer.parseInt(montoT), catego, estA, "", nick, hora, lugar);
+                boolean ok = port3.agregarPropuestaWeb(titulo, desc, parametro_fechaa, Integer.parseInt(precioE), 0, parametro_fecha, retorn, Integer.parseInt(montoT), catego, "", nick, hora, lugar);
                 if (ok) {
                     request.getRequestDispatcher("/vistas/AltaPropu2.jsp").forward(request, response); 
                 } else {
@@ -211,9 +213,15 @@ public class alta_prop extends HttpServlet {
         }
                
        }
-    static public DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException {
+    static public servicios.DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException {
+        //agregado cambiado de DtUsuario a servicios.DtUsuario
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        
+        
         String nick = (String) request.getSession().getAttribute("sesionAct");
-        DtUsuario usr = Fabrica.getInstance().getICtrlUsuario().traerDtUsuario(nick);
+        //DtUsuario usr = Fabrica.getInstance().getICtrlUsuario().traerDtUsuario(nick);
+        servicios.DtUsuario usr = port.traerDtUsuario(nick);
         return usr;
     }
     @Override
