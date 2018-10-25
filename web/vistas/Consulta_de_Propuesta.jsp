@@ -5,7 +5,6 @@
 --%>
 
 <%@page import="java.util.Collection"%>
-<%@page import="Logica.DtPropuesta"%>
 <%@page import="java.util.List"%>
 <%@page session="true" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

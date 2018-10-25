@@ -5,9 +5,7 @@
  */
 package Servlets;
 
-import Logica.DtUsuario;
-import Logica.Fabrica;
-import Logica.IUsuario;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -24,7 +22,7 @@ import servicios.DataListUsuarios;
  */
 @WebServlet(name = "rankingUser", urlPatterns = {"/rankingUser"})
 public class rankingUser extends HttpServlet {
-private Fabrica fabrica = Fabrica.getInstance();
+
       servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     /**

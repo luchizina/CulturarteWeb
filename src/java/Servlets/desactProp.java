@@ -12,8 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Logica.Fabrica;
-import Logica.IUsuario;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "desactProp", urlPatterns = {"/desactProp"})
 public class desactProp extends HttpServlet {
-private final Fabrica fabrica = Fabrica.getInstance();
+
 //private final IUsuario usuario = fabrica.getICtrlUsuario();
 servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();

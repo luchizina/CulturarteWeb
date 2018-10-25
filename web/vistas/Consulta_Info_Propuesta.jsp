@@ -5,13 +5,8 @@
 --%>
 
 <%@page import="java.lang.String"%>
-<%@page import="Logica.DtComentarios"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="Logica.DtUsuario"%>
-<%@page import="Logica.Testado"%>
-<%@page import="Logica.DtColaborador"%>
 <%@page import="java.util.Collection"%>
-<%@page import="Logica.DtPropuesta"%>
 <%@page import="java.util.List"%>
 <%@page session="true" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -110,9 +105,9 @@
                             <%=new SimpleDateFormat("dd/MM/yyyy").format(propu.getFecha().toGregorianCalendar().getTime())%>
                         </label><br/>
                         <label class="rotulo" style="text-align: left"> Estado actual:</label>
-                        <% if (propu.getEstActual().getEstado().equals(Testado.En_Financiacion)) { %>
+                        <% if (propu.getEstActual().getEstado().equals(servicios.Testado.EN_FINANCIACION)) { %>
                         <label class="valor" style="text-align: left">En financiacion</label><br/>
-                        <% } else if (propu.getEstActual().getEstado().equals(Testado.No_Financiada)) { %>
+                        <% } else if (propu.getEstActual().getEstado().equals(servicios.Testado.NO_FINANCIADA)) { %>
                         <label class="valor" style="text-align: left">No financiada</label><br/>
                         <% } else {%>
                         <label class="valor" style="text-align: left"><%= propu.getEstActual().getEstado().toString()%></label><br/>
@@ -182,7 +177,7 @@
                             </div>
                         </td>
                         <% }%>
-                        <% if (Colaboro_a_propu && !Nombre_Usuario.equals("") && !Ya_comento && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
+                        <% if (Colaboro_a_propu && !Nombre_Usuario.equals("") && !Ya_comento && !propu.getEstActual().getEstado().equals(servicios.Testado.INGRESADA)) {%>
                         <tr><td> <form action="/CulturarteWeb/comentario" method="post" onSubmit="alert('Comentario agregado');">
 
                                     <div class="container" align='center'>
@@ -193,7 +188,7 @@
                                     </div>
 
                                 </form></td></tr>
-                                <%} else if (Ya_comento && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
+                                <%} else if (Ya_comento && !propu.getEstActual().getEstado().equals(servicios.Testado.INGRESADA)) {%>
                         <br>
                         <td>
                             <div style="color:green">
@@ -230,7 +225,7 @@
                         <legend id="legendPerf">Acciones</legend><br>
                         <right>
                             <table class="datagrid" align='center' style="width: 100%;">
-                                <% if (Puede_colaborar_a_propu && !Nombre_Usuario.equals("") && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
+                                <% if (Puede_colaborar_a_propu && !Nombre_Usuario.equals("") && !propu.getEstActual().getEstado().equals(servicios.Testado.INGRESADA)) {%>
                                 <tr>
                                     <td>
                                         <form method="post" action="Colaboracion" >
@@ -243,7 +238,7 @@
                                             </button>
                                         </form>
                                     </td>
-                                    <% } else if (!Puede_colaborar_a_propu && session.getAttribute("tipo").equals("colaborador") && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) { %>
+                                    <% } else if (!Puede_colaborar_a_propu && session.getAttribute("tipo").equals("colaborador") && !propu.getEstActual().getEstado().equals(servicios.Testado.INGRESADA)) { %>
                                     <td>
                                         <div style="color:green">
                                             <i class="material-icons">
@@ -256,7 +251,7 @@
 
                                 </tr>
 
-                                <% if (!Nombre_Usuario.equals("") && !yaFav && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) {%>
+                                <% if (!Nombre_Usuario.equals("") && !yaFav && !propu.getEstActual().getEstado().equals(servicios.Testado.INGRESADA)) {%>
                                 <tr>
                                     <td>
                                         <form action="/CulturarteWeb/favorita" method="post" onSubmit="alert('Propuesta agregada a favoritos');">
@@ -270,7 +265,7 @@
                                             </button>
                                         </form>
                                     </td>
-                                    <%} else if (yaFav && !propu.getEstActual().getEstado().equals(Testado.Ingresada)) { %>
+                                    <%} else if (yaFav && !propu.getEstActual().getEstado().equals(servicios.Testado.INGRESADA)) { %>
                                 <br>
                                 <td>
                                     <div style="color:green" >
@@ -283,7 +278,7 @@
                                 <% }  %>
 
                                 </tr>
-                                <% if (Propuso_a_propu && !Nombre_Usuario.equals("") && (propu.getEstActual().getEstado().equals(Testado.Publicada) || propu.getEstActual().getEstado().equals(Testado.En_Financiacion))) {%>
+                                <% if (Propuso_a_propu && !Nombre_Usuario.equals("") && (propu.getEstActual().getEstado().equals(servicios.Testado.PUBLICADA) || propu.getEstActual().getEstado().equals(servicios.Testado.EN_FINANCIACION))) {%>
                                 <tr>
                                     <td>
                                         <form action="/CulturarteWeb/extender" method="post" onsubmit="return extender()">

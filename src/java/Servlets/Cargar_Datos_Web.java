@@ -5,10 +5,7 @@
  */
 package Servlets;
 
-import Logica.Fabrica;
-import Logica.ICategoria;
-import Logica.IPropuesta;
-import Logica.IUsuario;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -23,10 +20,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Cargar_Datos_Web", urlPatterns = {"/Cargar_Datos_Web"})
 public class Cargar_Datos_Web extends HttpServlet {
-    private Fabrica fabrica = Fabrica.getInstance();
-    private IPropuesta IP=fabrica.getICtrlPropuesta();
-    private IUsuario IU = fabrica.getICtrlUsuario();
-    private ICategoria IC = fabrica.getICtrlCategoria();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -62,10 +55,6 @@ public class Cargar_Datos_Web extends HttpServlet {
         if (request.getParameter("T") == null) {
                 this.getServletContext().getRequestDispatcher("/vistas/Datos_prueba.jsp").forward(request, response); 
             } else {
-            //IU.limpiarUsuarios();
-            //IU.cargarPropPrueba();
-            //IC.cargar();
-            //IP.cargarProp();
             this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
         }
     }
@@ -92,10 +81,6 @@ public class Cargar_Datos_Web extends HttpServlet {
 //        port.cargarPropPrueba();
 //        port2.cargar();
 //        port3.cargarProp();
-        IU.limpiarUsuarios();
-        IU.cargarPropPrueba();
-        IC.cargar();
-        IP.cargarProp();
          this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
     }
 

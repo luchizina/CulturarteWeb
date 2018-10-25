@@ -5,11 +5,7 @@
  */
 package Servlets;
 
-import Logica.DtColaborador;
-import Logica.DtProponente;
-import Logica.DtUsuario;
-import Logica.Fabrica;
-import Logica.IUsuario;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -24,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "dejarDeSeguir", urlPatterns = {"/dejarDeSeguir"})
 public class dejarDeSeguir extends HttpServlet {
-private final Fabrica fabrica = Fabrica.getInstance();
+
 //    private final IUsuario usuario = fabrica.getICtrlUsuario();
 servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();

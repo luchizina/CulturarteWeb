@@ -5,7 +5,7 @@
  */
 package Servlets;
 
-import Logica.*;
+
 import Servlets.inicSesion;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -128,7 +128,7 @@ public class Registrar extends HttpServlet {
             PrintWriter out = response.getWriter();
             HttpSession respuesta = request.getSession(true);
             //usuario.cargarUsuarios2();
-            port.cargarUsuarios2(); // verificar
+//            port.cargarUsuarios2(); // verificar
             Part partImagen = request.getPart(IMAGEN);
             String nick = request.getParameter(NICK);
             String nombre = request.getParameter(NOMBRE);

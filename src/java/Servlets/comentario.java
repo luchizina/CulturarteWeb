@@ -6,10 +6,7 @@
 package Servlets;
 
 import Servlets.inicSesion;
-import Logica.DtProponente;
-import Logica.Fabrica;
-import Logica.IPropuesta;
-import Logica.IUsuario;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -24,9 +21,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "comentario", urlPatterns = {"/comentario"})
 public class comentario extends HttpServlet {
-private final Fabrica fabrica = Fabrica.getInstance();
-    private final IPropuesta ip = fabrica.getICtrlPropuesta();
-    private final IUsuario usuario = fabrica.getICtrlUsuario();
     String Colaborador = "colab";
     String propuesta = "prop";
     String comentario = "comentario";

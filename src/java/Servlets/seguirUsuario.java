@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Servlets;
-import Logica.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "seguirUsuario", urlPatterns = {"/seguirUsuario"})
 public class seguirUsuario extends HttpServlet {
-private final Fabrica fabrica = Fabrica.getInstance();
+
    servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     /**
@@ -34,7 +34,7 @@ private final Fabrica fabrica = Fabrica.getInstance();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        this.port.cargarUsuarios2();
+//        this.port.cargarUsuarios2();
          if(request.getParameter("nickLogueado")==null){
         this.getServletContext().getRequestDispatcher("/errorPages/404.jsp").forward(request,response);
     

@@ -5,11 +5,7 @@
  */
 package Servlets;
 
-import Logica.DtColaborador;
-import Logica.DtProponente;
-import Logica.DtUsuario;
-import Logica.Fabrica;
-import Logica.IPropuesta;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -31,7 +27,6 @@ import servicios.SQLException_Exception;
 @WebServlet(name = "extender", urlPatterns = {"/extender"})
 public class extender extends HttpServlet {
 
-    private final Fabrica fabrica = Fabrica.getInstance();
 //    private final IPropuesta ip = fabrica.getICtrlPropuesta();
  servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();

@@ -4,11 +4,7 @@
  * and open the template in the editor.
  */
 package Servlets;
-import Logica.Fabrica;
-import Logica.IUsuario;
-import Logica.IPropuesta;
-import Logica.ICategoria;
-import Logica.DtPropuesta;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -45,13 +41,13 @@ servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorU
 //        ICategoria icat =fabrica.getICtrlCategoria();
 //        IPropuesta IP=fabrica.getICtrlPropuesta();
 //        IUsuario iUsu=fabrica.getICtrlUsuario();
-        port.cargarUsuarios2();
-        port2.cargarCategorias();
-        port3.cargarPropuestas();
-        port3.cargarFavoritosMemoria();
-        port3.cargarColaboraciones();
-        port3.actualizarMontos();
-        port3.estadosPropuestas();
+//        port.cargarUsuarios2();
+//        port2.cargarCategorias();
+//        port3.cargarPropuestas();
+//        port3.cargarFavoritosMemoria();
+//        port3.cargarColaboraciones();
+//        port3.actualizarMontos();
+//        port3.estadosPropuestas();
 //                iUsu.cargarUsuarios2();
 //                icat.cargarCategorias();
 //                IP.cargarPropuestas();

@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package Servlets;
-
-import Logica.DtPropuesta;
-import Logica.ctrlPropuesta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

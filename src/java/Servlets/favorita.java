@@ -5,9 +5,6 @@
  */
 package Servlets;
 
-import Logica.Fabrica;
-import Logica.IPropuesta;
-import Logica.IUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -23,7 +20,7 @@ import Servlets.inicSesion;
  */
 @WebServlet(name = "favorita", urlPatterns = {"/favorita"})
 public class favorita extends HttpServlet {
-private final Fabrica fabrica = Fabrica.getInstance();
+
 //    private final IPropuesta ip = fabrica.getICtrlPropuesta();
 //    private final IUsuario usuario = fabrica.getICtrlUsuario();
     servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();

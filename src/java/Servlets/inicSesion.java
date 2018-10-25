@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Logica.*;
+
 import static java.lang.System.out;
 import javax.servlet.http.HttpSession;
 
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "inicSesion", urlPatterns = {"/iniciarS"})
 public class inicSesion extends HttpServlet {
- private final Fabrica fabrica = Fabrica.getInstance();
+
 //    private final IUsuario usuario = fabrica.getICtrlUsuario();
        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
@@ -41,7 +41,7 @@ public class inicSesion extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
  PrintWriter out = response.getWriter();
-        this.port.cargarUsuarios2();
+//        this.port.cargarUsuarios2();
 
       HttpSession respuesta = request.getSession(true);
      if(respuesta.getAttribute("sesionAct")==null){

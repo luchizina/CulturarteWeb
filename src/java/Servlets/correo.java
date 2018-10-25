@@ -5,8 +5,7 @@
  */
 package Servlets;
 
-import Logica.Fabrica;
-import Logica.IUsuario;
+
 import static Servlets.usuario.CORREO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "correo", urlPatterns = {"/correo"})
 public class correo extends HttpServlet {
 
-    private final Fabrica fabrica = Fabrica.getInstance();
+
 //    private final IUsuario usuario = fabrica.getICtrlUsuario();
     servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
@@ -56,7 +55,7 @@ public class correo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        port.cargarUsuarios2();
+//        port.cargarUsuarios2();
         String correo = request.getParameter(CORREO);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */

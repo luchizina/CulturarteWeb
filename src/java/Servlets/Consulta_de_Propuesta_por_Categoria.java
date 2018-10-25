@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Logica.*;
+
 import static java.lang.System.out;
 import static java.net.URLEncoder.encode;
 import java.util.Collections;
@@ -29,7 +29,6 @@ import servicios.SQLException_Exception;
 
 @WebServlet(name = "Consulta_de_Propuesta_por_Categoria", urlPatterns = {"/Consulta_de_Propuesta_por_Categoria"})
 public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
-    private Fabrica fabrica = Fabrica.getInstance();
 //    private IPropuesta IP=fabrica.getICtrlPropuesta();
 //    private IUsuario IU = fabrica.getICtrlUsuario();
 //    private ICategoria IC = fabrica.getICtrlCategoria();

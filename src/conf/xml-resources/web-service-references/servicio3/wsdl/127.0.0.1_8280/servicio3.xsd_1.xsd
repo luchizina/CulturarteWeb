@@ -7,15 +7,15 @@
 <xs:element name="SQLState" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="errorCode" type="xs:int"></xs:element>
 <xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nextException" type="tns:sqlException1" minOccurs="0"></xs:element>
+<xs:element name="nextException" type="tns:sqlException2" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="sqlException1">
+<xs:complexType name="sqlException2">
 <xs:complexContent>
 <xs:extension base="tns:exception">
 <xs:sequence>
-<xs:element name="nextException" type="tns:sqlException1" minOccurs="0"></xs:element>
+<xs:element name="nextException" type="tns:sqlException2" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:extension>
 </xs:complexContent>

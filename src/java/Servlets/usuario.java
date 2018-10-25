@@ -5,8 +5,7 @@
  */
 package Servlets;
 
-import Logica.Fabrica;
-import Logica.IUsuario;
+
 import static Servlets.Registrar.NICK;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "usuario", urlPatterns = {"/usuario"})
 public class usuario extends HttpServlet {
 
-    private final Fabrica fabrica = Fabrica.getInstance();
+
     servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     public static final String NICK = "nick";

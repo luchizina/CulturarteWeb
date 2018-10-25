@@ -5,17 +5,7 @@
  */
 package Servlets;
 
-import Logica.DataImagen;
-import Logica.DtCategoria;
-import Logica.DtColaborador;
-import Logica.DtProponente;
-import Logica.DtPropuesta;
-import Logica.DtUsuario;
-import Logica.Estado;
-import Logica.Fabrica;
-import Logica.ICategoria;
-import Logica.IPropuesta;
-import Logica.Testado;
+
 import Utilidades.Utils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -60,8 +50,7 @@ public class alta_prop extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final Fabrica fabrica = Fabrica.getInstance();
-    private final IPropuesta ip = fabrica.getICtrlPropuesta();
+
     //private final ICategoria iC = fabrica.getICtrlCategoria();
     public static final String TIT = "titulo";
     public static final String DESC = "descripcion";
@@ -93,7 +82,7 @@ public class alta_prop extends HttpServlet {
                  request.setCharacterEncoding("UTF-8");
      
           //this.iC.cargarCategorias();
-          port2.cargarCategorias();
+//          port2.cargarCategorias();
           //List<DtCategoria> categoList= this.iC.listarCategorias();
           List<servicios.DtCategoria> categoList = port2.listarCategoriasWeb().getListita();
           request.setAttribute("categorias", categoList);

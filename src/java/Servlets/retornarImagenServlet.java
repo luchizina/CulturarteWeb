@@ -5,9 +5,7 @@
  */
 package Servlets;
 
-import Logica.Fabrica;
-import Logica.IPropuesta;
-import Logica.IUsuario;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.IOException;

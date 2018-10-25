@@ -5,14 +5,10 @@
 --%>
 
 <%@page import="javax.xml.datatype.DatatypeConstants"%>
-<%@page import="Logica.DtColaboracion"%>
+
 <%@page import="Servlets.inicSesion"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="Logica.DtColaborador"%>
-<%@page import="Logica.DtProponente"%>
-<%@page import="Logica.DtUsuario"%>
-<%@page import="Logica.DtPropuesta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>  

@@ -1,5 +1,4 @@
-<%@page import="Logica.DtProponente"%>
-<%@page import="Logica.DtUsuario"%>
+
 <%@page import="Servlets.inicSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <script type="text/javascript" src="../js/Datos.js"></script>
