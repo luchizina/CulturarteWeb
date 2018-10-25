@@ -4,12 +4,7 @@
     Author     : Aeliner
 --%>
 
-<%@page import="Logica.Fabrica"%>
-<%@page import="Logica.IPropuesta"%>
-<%@page import="Logica.DtProponente"%>
-<%@page import="Logica.DtColaborador"%>
 <%@page import="Servlets.inicSesion"%>
-<%@page import="Logica.DtUsuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -4,10 +4,7 @@
     Author     : Lucia
 --%>
 
-<%@page import="Logica.DtColaborador"%>
 <%@page import="Servlets.inicSesion"%>
-<%@page import="Logica.DtCategoria"%>
-<%@page import="Logica.DtUsuario"%>
 <%@page import="Servlets.alta_prop"%>
 <%@page import="java.util.Collection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -3,9 +3,6 @@
     Created on : 17/09/2018, 07:00:53 PM
     Author     : nambr
 --%>
-
-<%@page import="Logica.DtPropuesta"%>
-<%@page import="Logica.DtUsuario"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

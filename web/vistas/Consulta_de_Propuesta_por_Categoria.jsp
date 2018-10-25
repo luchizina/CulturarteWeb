@@ -5,7 +5,6 @@
 --%>
 
 <%@page import="java.util.Collection"%>
-<%@page import="Logica.DtCategoria"%>
 
 <%@page import="java.util.List"%>
 <%@page session="true" %>

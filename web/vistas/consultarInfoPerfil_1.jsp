@@ -17,14 +17,14 @@
         <title>Información de usuario</title>
     
         <% 
-        DtUsuario user=(DtUsuario) request.getAttribute("usuario");
-        DtColaborador colab=null;
-        DtProponente prop=null;
-        if(user instanceof DtProponente){
-            prop= (DtProponente) user;
+        servicios.DtUsuario user=(servicios.DtUsuario) request.getAttribute("usuario");
+        servicios.DtColaborador colab=null;
+        servicios.DtProponente prop=null;
+        if(user instanceof servicios.DtProponente){
+            prop= (servicios.DtProponente) user;
         }
         else{
-             colab=(DtColaborador) user;
+             colab=(servicios.DtColaborador) user;
             
         }
         
@@ -98,11 +98,11 @@
                 </th> 
             </tr>
             <%
-                List<DtUsuario> seguidores= (List<DtUsuario>) request.getAttribute("seguidore");
+                List<servicios.DtUsuario> seguidores= (List<servicios.DtUsuario>) request.getAttribute("seguidore");
                  String Tu ="";
                 
                 if(seguidores.size()>0){
-                for ( DtUsuario usea : seguidores) {
+                for ( servicios.DtUsuario usea : seguidores) {
                  Tu = usea.getNick().replace(" ", "-");
                 
             %>
