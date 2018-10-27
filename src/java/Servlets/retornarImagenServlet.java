@@ -5,9 +5,10 @@
  */
 package Servlets;
 
-
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -19,7 +20,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import servicios.DtUsuario;
 import servicios.IOException_Exception;
+import servicios.Usuario;
 
 /**
  *
@@ -39,14 +42,15 @@ public class retornarImagenServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, IOException_Exception {
-            String T = request.getParameter("T");
-            response.setContentType("image/jpeg");
-            servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        String T = request.getParameter("T");
+        response.setContentType("image/jpeg");
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-            servicios.BufferedImage bi = port.retornarImagen(T);
-        try (OutputStream out = response.getOutputStream()) {
-            ImageIO.write((RenderedImage) bi, "png", out);
-        }
+        byte[] bi = port.retornarImagen(T);
+        BufferedImage imag=ImageIO.read(new ByteArrayInputStream(bi));
+
+        OutputStream out = response.getOutputStream();
+        ImageIO.write(imag, "jpg", out);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

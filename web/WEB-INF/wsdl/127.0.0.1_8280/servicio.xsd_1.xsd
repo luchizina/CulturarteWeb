@@ -39,16 +39,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="bufferedImage">
-<xs:sequence>
-<xs:element name="data" type="tns:raster" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="raster">
-<xs:sequence></xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="IOException">
 <xs:sequence>
 <xs:element name="message" type="xs:string" minOccurs="0"></xs:element>

@@ -5,7 +5,6 @@
  */
 package Servlets;
 
-
 import Servlets.inicSesion;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -114,15 +113,15 @@ public class Registrar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            request.setCharacterEncoding("UTF-8");
-            
-            servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-            servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-            servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
-            servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
-            servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
-            servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
-        
+        request.setCharacterEncoding("UTF-8");
+
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
+        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+
         try {
             processRequest(request, response);
             PrintWriter out = response.getWriter();
@@ -132,7 +131,7 @@ public class Registrar extends HttpServlet {
             Part partImagen = request.getPart(IMAGEN);
             String nick = request.getParameter(NICK);
             String nombre = request.getParameter(NOMBRE);
- //           String nombre = "pepe";
+            //           String nombre = "pepe";
             String apellido = request.getParameter(APELLIDO);
             String correo = request.getParameter(EMAIL);
             String pass = request.getParameter(PWD);
@@ -142,9 +141,9 @@ public class Registrar extends HttpServlet {
                 GregorianCalendar parametro = new GregorianCalendar();
                 parametro.setTime(fecha);
                 XMLGregorianCalendar parametro_fecha;
-                
+
                 parametro_fecha = DatatypeFactory.newInstance().newXMLGregorianCalendar(parametro);
-               
+
                 String conf = request.getParameter(PWD2);
                 String[] args = request.getParameterValues("usuario");
                 if (args[0].equals("colaborador")) {
@@ -215,15 +214,15 @@ public class Registrar extends HttpServlet {
 
             } catch (ParseException ex) {
                 Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
-            }   catch (DatatypeConfigurationException ex) {    // AGREGADO
-                    Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            } catch (DatatypeConfigurationException ex) {    // AGREGADO
+                Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (ParseException ex) {
             Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *
@@ -238,8 +237,13 @@ public class Registrar extends HttpServlet {
         // parametro cambiado de "DataImagen" -> servicios.DataImagen
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        System.setProperty("com.sun.xml.ws.transport.http.client.HttpTransportPipe.dump", "true");
+        System.setProperty("com.sun.xml.internal.ws.transport.http.client.HttpTransportPipe.dump", "true");
+        System.setProperty("com.sun.xml.ws.transport.http.HttpAdapter.dump", "true");
+        System.setProperty("com.sun.xml.internal.ws.transport.http.HttpAdapter.dump", "true");
         //Path path = this.usuario.agregarImagen(col);
-        return port.agregarImagen(nick, imagen, pass);
+        String xd = port.agregarImagen(nick, imagen, pass);
+        return xd;
         //return path.toString();
     }
 
@@ -249,7 +253,7 @@ public class Registrar extends HttpServlet {
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         //final DtProponente prop = new DtProponente(nick, img, pwd);
         //Path path = this.usuario.agregarImagen(nick,img,pwd);
-        return port.agregarImagen(nick,img,pwd);
+        return port.agregarImagen(nick, img, pwd);
         //return path.toString();
     }
 

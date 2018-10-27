@@ -91,7 +91,7 @@
               <fieldset>
          <legend id="legendErr">Información básica: </legend>   
 		<div id="perfil_izquierda" style="float: left">
-                    <% if(colab.getImagen()!=null && !colab.getImagen().equals("")){
+                    <% if(colab.getLink()!=null && !colab.getLink().equals("")){
                         
                    
                         %>

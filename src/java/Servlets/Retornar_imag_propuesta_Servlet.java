@@ -5,10 +5,12 @@
  */
 package Servlets;
 
-
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -36,23 +38,23 @@ public class Retornar_imag_propuesta_Servlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws servicios.IOException_Exception
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, IOException_Exception {
-            String T = request.getParameter("T");
-            response.setContentType("image/jpeg");
-            //IPropuesta ip = Fabrica.getInstance().getICtrlPropuesta();
-            servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
-            servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
-            
-            //BufferedImage bi = ip.retornarImagen_Propuesta(T);
-            servicios.BufferedImage bi = port3.retornarImagenPropuesta(T);
-        try (OutputStream out = response.getOutputStream()) {
-            ImageIO.write((RenderedImage) bi, "png", out);
-        } 
-//        try (OutputStream out = response.getOutputStream()) {
-//            ImageIO.write((RenderedImage) bi, "png", out);
-//        }
+        String T = request.getParameter("T");
+        response.setContentType("image/jpeg");
+        //IPropuesta ip = Fabrica.getInstance().getICtrlPropuesta();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+
+        //BufferedImage bi = ip.retornarImagen_Propuesta(T);
+       
+        byte[] bi = port3.retornarImagenPropuesta(T);
+        BufferedImage imag=ImageIO.read(new ByteArrayInputStream(bi));
+        OutputStream out = response.getOutputStream();
+        ImageIO.write(imag, "jpg", out);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
