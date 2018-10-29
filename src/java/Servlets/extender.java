@@ -7,8 +7,6 @@ package Servlets;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Servlets.inicSesion;
-import servicios.IOException_Exception;
-import servicios.SQLException_Exception;
 
 /**
  *
@@ -75,16 +71,11 @@ public class extender extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+        
             processRequest(request, response);
             String C = request.getParameter("prop");
             port3.extender(C);
             request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T=" + C).forward(request, response);
-        } catch (SQLException_Exception ex) {
-            Logger.getLogger(extender.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException_Exception ex) {
-            Logger.getLogger(extender.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
     }
 

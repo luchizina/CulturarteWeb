@@ -4,18 +4,12 @@
 <xsd:import namespace="http://Servicios/" schemaLocation="http://127.0.0.1:8280/servicio3?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
-<message name="cargarCategorias"></message>
-<message name="cargarCategoriasResponse"></message>
 <message name="publicar"></message>
 <message name="publicarResponse"></message>
+<message name="cargarCategorias"></message>
+<message name="cargarCategoriasResponse"></message>
 <message name="cargar"></message>
 <message name="cargarResponse"></message>
-<message name="ingresarCat">
-<part name="arg0" type="tns:dtCategoria"></part>
-</message>
-<message name="ingresarCatResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
 <message name="traerProfu">
 <part name="arg0" type="xsd:string"></part>
 </message>
@@ -28,37 +22,36 @@
 <message name="existecatResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
+<message name="ingresarCat">
+<part name="arg0" type="tns:dtCategoria"></part>
+</message>
+<message name="ingresarCatResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
 <message name="cargaCatPrueb"></message>
 <message name="cargaCatPruebResponse"></message>
+<message name="Listar_Categorias_Web"></message>
+<message name="Listar_Categorias_WebResponse">
+<part name="return" type="tns:dataListCategoria"></part>
+</message>
 <message name="Existe_Categoria">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="Existe_CategoriaResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
-<message name="SQLException">
-<part name="fault" element="tns:SQLException"></part>
-</message>
-<message name="Listar_Categorias_Web"></message>
-<message name="Listar_Categorias_WebResponse">
-<part name="return" type="tns:dataListCategoria"></part>
-</message>
 <portType name="Publicador_Categoria">
-<operation name="cargarCategorias">
-<input wsam:Action="http://Servicios/Publicador_Categoria/cargarCategoriasRequest" message="tns:cargarCategorias"></input>
-<output wsam:Action="http://Servicios/Publicador_Categoria/cargarCategoriasResponse" message="tns:cargarCategoriasResponse"></output>
-</operation>
 <operation name="publicar">
 <input wsam:Action="http://Servicios/Publicador_Categoria/publicarRequest" message="tns:publicar"></input>
 <output wsam:Action="http://Servicios/Publicador_Categoria/publicarResponse" message="tns:publicarResponse"></output>
 </operation>
+<operation name="cargarCategorias">
+<input wsam:Action="http://Servicios/Publicador_Categoria/cargarCategoriasRequest" message="tns:cargarCategorias"></input>
+<output wsam:Action="http://Servicios/Publicador_Categoria/cargarCategoriasResponse" message="tns:cargarCategoriasResponse"></output>
+</operation>
 <operation name="cargar">
 <input wsam:Action="http://Servicios/Publicador_Categoria/cargarRequest" message="tns:cargar"></input>
 <output wsam:Action="http://Servicios/Publicador_Categoria/cargarResponse" message="tns:cargarResponse"></output>
-</operation>
-<operation name="ingresarCat">
-<input wsam:Action="http://Servicios/Publicador_Categoria/ingresarCatRequest" message="tns:ingresarCat"></input>
-<output wsam:Action="http://Servicios/Publicador_Categoria/ingresarCatResponse" message="tns:ingresarCatResponse"></output>
 </operation>
 <operation name="traerProfu">
 <input wsam:Action="http://Servicios/Publicador_Categoria/traerProfuRequest" message="tns:traerProfu"></input>
@@ -68,32 +61,25 @@
 <input wsam:Action="http://Servicios/Publicador_Categoria/existecatRequest" message="tns:existecat"></input>
 <output wsam:Action="http://Servicios/Publicador_Categoria/existecatResponse" message="tns:existecatResponse"></output>
 </operation>
+<operation name="ingresarCat">
+<input wsam:Action="http://Servicios/Publicador_Categoria/ingresarCatRequest" message="tns:ingresarCat"></input>
+<output wsam:Action="http://Servicios/Publicador_Categoria/ingresarCatResponse" message="tns:ingresarCatResponse"></output>
+</operation>
 <operation name="cargaCatPrueb">
 <input wsam:Action="http://Servicios/Publicador_Categoria/cargaCatPruebRequest" message="tns:cargaCatPrueb"></input>
 <output wsam:Action="http://Servicios/Publicador_Categoria/cargaCatPruebResponse" message="tns:cargaCatPruebResponse"></output>
 </operation>
-<operation name="Existe_Categoria">
-<input wsam:Action="http://Servicios/Publicador_Categoria/Existe_CategoriaRequest" message="tns:Existe_Categoria"></input>
-<output wsam:Action="http://Servicios/Publicador_Categoria/Existe_CategoriaResponse" message="tns:Existe_CategoriaResponse"></output>
-<fault message="tns:SQLException" name="SQLException" wsam:Action="http://Servicios/Publicador_Categoria/Existe_Categoria/Fault/SQLException"></fault>
-</operation>
 <operation name="Listar_Categorias_Web">
 <input wsam:Action="http://Servicios/Publicador_Categoria/Listar_Categorias_WebRequest" message="tns:Listar_Categorias_Web"></input>
 <output wsam:Action="http://Servicios/Publicador_Categoria/Listar_Categorias_WebResponse" message="tns:Listar_Categorias_WebResponse"></output>
-<fault message="tns:SQLException" name="SQLException" wsam:Action="http://Servicios/Publicador_Categoria/Listar_Categorias_Web/Fault/SQLException"></fault>
+</operation>
+<operation name="Existe_Categoria">
+<input wsam:Action="http://Servicios/Publicador_Categoria/Existe_CategoriaRequest" message="tns:Existe_Categoria"></input>
+<output wsam:Action="http://Servicios/Publicador_Categoria/Existe_CategoriaResponse" message="tns:Existe_CategoriaResponse"></output>
 </operation>
 </portType>
 <binding name="Publicador_CategoriaPortBinding" type="tns:Publicador_Categoria">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
-<operation name="cargarCategorias">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
 <operation name="publicar">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -103,7 +89,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="cargar">
+<operation name="cargarCategorias">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -112,7 +98,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="ingresarCat">
+<operation name="cargar">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -139,7 +125,25 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
+<operation name="ingresarCat">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
 <operation name="cargaCatPrueb">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="Listar_Categorias_Web">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -156,21 +160,6 @@
 <output>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
-<fault name="SQLException">
-<soap:fault name="SQLException" use="literal"></soap:fault>
-</fault>
-</operation>
-<operation name="Listar_Categorias_Web">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-<fault name="SQLException">
-<soap:fault name="SQLException" use="literal"></soap:fault>
-</fault>
 </operation>
 </binding>
 <service name="Publicador_CategoriaService">

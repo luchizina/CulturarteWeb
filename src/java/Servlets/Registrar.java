@@ -57,7 +57,7 @@ public class Registrar extends HttpServlet {
     public static final String BIOGRAFIA = "biografia";
     public static final String DIRECCION = "direccion";
     public static final String LINK = "web";
-    public static final String IMG_FOLDER = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\web\\";
+    public static final String IMG_FOLDER = "C:\\Users\\matheo\\Documents\\ProgApli\\web";
     public static final String IMAGEN = "imagen";
     private static Logger LOG;
 

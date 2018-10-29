@@ -31,7 +31,6 @@ import javax.servlet.http.Part;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import servicios.SQLException_Exception;
 
 /**
  *
@@ -61,7 +60,7 @@ public class alta_prop extends HttpServlet {
     public static final String LUGAR = "lugar";
     public static final String FEcha2 = "fecha";
     public static final String IMAGEN = "imagen";
-    public static final String IMG_FOLDER = "C:\\Users\\Nuevo\\Documents\\NetBeansProjects\\ProgApli1\\LaqueAnda13\\web\\";
+    public static final String IMG_FOLDER = "C:\\Users\\matheo\\Documents\\ProgApli\\web";
     public String imgPath ;
     private static Logger LOG;
     public alta_prop() {
@@ -70,7 +69,7 @@ public class alta_prop extends HttpServlet {
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException_Exception, DatatypeConfigurationException {
+            throws ServletException, IOException, DatatypeConfigurationException {
         
          servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
          servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
@@ -195,8 +194,6 @@ public class alta_prop extends HttpServlet {
             throws ServletException, IOException {
         try {        
             processRequest(request, response);
-        } catch (SQLException_Exception ex) {
-            Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DatatypeConfigurationException ex) {
             Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -218,8 +215,6 @@ public class alta_prop extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException_Exception ex) {
-            Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DatatypeConfigurationException ex) {
             Logger.getLogger(alta_prop.class.getName()).log(Level.SEVERE, null, ex);
         }

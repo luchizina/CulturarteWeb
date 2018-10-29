@@ -14,14 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import static java.lang.System.out;
-import static java.net.URLEncoder.encode;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpSession;
-import servicios.SQLException_Exception;
 /**
  *
  * @author matheo
@@ -42,7 +37,7 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException_Exception {
+            throws ServletException, IOException {
         
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
@@ -92,11 +87,8 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        try {
             processRequest(request, response);
-        } catch (SQLException_Exception ex) {
-            Logger.getLogger(Consulta_de_Propuesta_por_Categoria.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         
     }
 
@@ -109,14 +101,11 @@ public class Consulta_de_Propuesta_por_Categoria extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        try {
             processRequest(request, response);
-        } catch (SQLException_Exception ex) {
-            Logger.getLogger(Consulta_de_Propuesta_por_Categoria.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+            
        
     }
 

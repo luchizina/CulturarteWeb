@@ -264,7 +264,7 @@
                           <legend id="legendErr">Datos generales: </legend>   
                             <div id="perfil_izquierda" style="float: left" >
 
-                            <% if (prop.getImagen() != null && !prop.getImagen().equals("")) {%>
+                            <% if (prop.getLink() != null && !prop.getLink().equals("")) {%>
                             <img id="imagenot" src="/CulturarteWeb/retornarimagen?T=${T}" width="200" height="200">  
                             <%   } else {%>
                             <img id="imagenot" src="<%= request.getContextPath()%>/img/user-4.png" width="200" height="200">

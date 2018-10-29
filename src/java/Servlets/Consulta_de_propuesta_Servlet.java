@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
-import servicios.SQLException_Exception;
 
 /**
  *
@@ -48,7 +47,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException_Exception {
+            throws ServletException, IOException {
         
         
             response.setContentType("text/html;charset=UTF-8");
@@ -120,11 +119,8 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-          try {
               processRequest(request, response);
-          } catch (SQLException_Exception ex) {
-              Logger.getLogger(Consulta_de_propuesta_Servlet.class.getName()).log(Level.SEVERE, null, ex);
-          }
+          
         
     }
 
@@ -139,12 +135,9 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-          try {      
+        request.setCharacterEncoding("UTF-8");    
               processRequest(request, response);
-          } catch (SQLException_Exception ex) {
-              Logger.getLogger(Consulta_de_propuesta_Servlet.class.getName()).log(Level.SEVERE, null, ex);
-          }
+          
     }
 
     /**

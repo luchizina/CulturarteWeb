@@ -7,10 +7,9 @@ package Servlets;
 
 
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -19,7 +18,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import servicios.IOException_Exception;
 
 /**
  *
@@ -38,15 +36,16 @@ public class retornarImagenServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, IOException_Exception {
+            throws ServletException, IOException{
             String T = request.getParameter("T");
             response.setContentType("image/jpeg");
             servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-            servicios.BufferedImage bi = port.retornarImagen(T);
-        try (OutputStream out = response.getOutputStream()) {
-            ImageIO.write((RenderedImage) bi, "png", out);
-        }
+            byte[] bi = port.retornarImagen(T);
+        BufferedImage imag=ImageIO.read(new ByteArrayInputStream(bi));
+
+        OutputStream out = response.getOutputStream();
+        ImageIO.write(imag, "jpg", out);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,7 +62,7 @@ public class retornarImagenServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (IOException_Exception ex) {
+        } catch (IOException ex) {
             Logger.getLogger(retornarImagenServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -79,11 +78,8 @@ public class retornarImagenServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
             processRequest(request, response);
-        } catch (IOException_Exception ex) {
-            Logger.getLogger(retornarImagenServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
 
     /**
