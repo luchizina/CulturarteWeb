@@ -5,9 +5,10 @@
  */
 package Servlets;
 
-
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.logging.Level;

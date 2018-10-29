@@ -5,10 +5,12 @@
  */
 package Servlets;
 
-
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -32,6 +34,7 @@ public class Retornar_imag_propuesta_Servlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws servicios.IOException_Exception
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
