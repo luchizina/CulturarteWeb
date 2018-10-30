@@ -18,8 +18,8 @@
             if(request.getAttribute("usuarios")!=null){
                 
            
-        Collection<DtUsuario> usuarios= (Collection<DtUsuario>) request.getAttribute("usuarios");
-        for(DtUsuario user: usuarios){
+        Collection<servicios.DtUsuario> usuarios= (Collection<servicios.DtUsuario>) request.getAttribute("usuarios");
+        for(servicios.DtUsuario user: usuarios){
             int i=1;
             
        

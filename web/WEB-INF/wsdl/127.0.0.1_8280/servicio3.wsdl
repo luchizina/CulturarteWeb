@@ -6,16 +6,10 @@
 </types>
 <message name="publicar"></message>
 <message name="publicarResponse"></message>
-<message name="cargarCategorias"></message>
-<message name="cargarCategoriasResponse"></message>
 <message name="cargar"></message>
 <message name="cargarResponse"></message>
-<message name="ingresarCat">
-<part name="arg0" type="tns:dtCategoria"></part>
-</message>
-<message name="ingresarCatResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
+<message name="cargarCategorias"></message>
+<message name="cargarCategoriasResponse"></message>
 <message name="existecat">
 <part name="arg0" type="xsd:string"></part>
 </message>
@@ -27,6 +21,12 @@
 </message>
 <message name="traerProfuResponse">
 <part name="return" type="xsd:int"></part>
+</message>
+<message name="ingresarCat">
+<part name="arg0" type="tns:dtCategoria"></part>
+</message>
+<message name="ingresarCatResponse">
+<part name="return" type="xsd:boolean"></part>
 </message>
 <message name="cargaCatPrueb"></message>
 <message name="cargaCatPruebResponse"></message>
@@ -45,17 +45,13 @@
 <input wsam:Action="http://Servicios/Publicador_Categoria/publicarRequest" message="tns:publicar"></input>
 <output wsam:Action="http://Servicios/Publicador_Categoria/publicarResponse" message="tns:publicarResponse"></output>
 </operation>
-<operation name="cargarCategorias">
-<input wsam:Action="http://Servicios/Publicador_Categoria/cargarCategoriasRequest" message="tns:cargarCategorias"></input>
-<output wsam:Action="http://Servicios/Publicador_Categoria/cargarCategoriasResponse" message="tns:cargarCategoriasResponse"></output>
-</operation>
 <operation name="cargar">
 <input wsam:Action="http://Servicios/Publicador_Categoria/cargarRequest" message="tns:cargar"></input>
 <output wsam:Action="http://Servicios/Publicador_Categoria/cargarResponse" message="tns:cargarResponse"></output>
 </operation>
-<operation name="ingresarCat">
-<input wsam:Action="http://Servicios/Publicador_Categoria/ingresarCatRequest" message="tns:ingresarCat"></input>
-<output wsam:Action="http://Servicios/Publicador_Categoria/ingresarCatResponse" message="tns:ingresarCatResponse"></output>
+<operation name="cargarCategorias">
+<input wsam:Action="http://Servicios/Publicador_Categoria/cargarCategoriasRequest" message="tns:cargarCategorias"></input>
+<output wsam:Action="http://Servicios/Publicador_Categoria/cargarCategoriasResponse" message="tns:cargarCategoriasResponse"></output>
 </operation>
 <operation name="existecat">
 <input wsam:Action="http://Servicios/Publicador_Categoria/existecatRequest" message="tns:existecat"></input>
@@ -64,6 +60,10 @@
 <operation name="traerProfu">
 <input wsam:Action="http://Servicios/Publicador_Categoria/traerProfuRequest" message="tns:traerProfu"></input>
 <output wsam:Action="http://Servicios/Publicador_Categoria/traerProfuResponse" message="tns:traerProfuResponse"></output>
+</operation>
+<operation name="ingresarCat">
+<input wsam:Action="http://Servicios/Publicador_Categoria/ingresarCatRequest" message="tns:ingresarCat"></input>
+<output wsam:Action="http://Servicios/Publicador_Categoria/ingresarCatResponse" message="tns:ingresarCatResponse"></output>
 </operation>
 <operation name="cargaCatPrueb">
 <input wsam:Action="http://Servicios/Publicador_Categoria/cargaCatPruebRequest" message="tns:cargaCatPrueb"></input>
@@ -89,15 +89,6 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="cargarCategorias">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://Servicios/"></soap:body>
-</output>
-</operation>
 <operation name="cargar">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -107,7 +98,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="ingresarCat">
+<operation name="cargarCategorias">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -126,6 +117,15 @@
 </output>
 </operation>
 <operation name="traerProfu">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://Servicios/"></soap:body>
+</output>
+</operation>
+<operation name="ingresarCat">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
