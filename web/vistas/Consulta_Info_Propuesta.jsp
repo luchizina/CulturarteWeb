@@ -46,22 +46,21 @@
                 if (Nombre_Usuario.equals(propu.getPropoACargo())) {
                     Propuso_a_propu = true;
                 }
-                
+
                 if (tipo.equals("colaborador")) {
-                   List<servicios.DtPropuesta.Colaboradores.Entry> lista = propu.getColaboradores().getEntry();
-                   for(servicios.DtPropuesta.Colaboradores.Entry p : lista)
-                   {
-                    if (p.getKey().equals(Nombre_Usuario)) {
-                        Colaboro_a_propu = true;
+                    List<servicios.DtPropuesta.Colaboradores.Entry> lista = propu.getColaboradores().getEntry();
+                    for (servicios.DtPropuesta.Colaboradores.Entry p : lista) {
+                        if (p.getKey().equals(Nombre_Usuario)) {
+                            Colaboro_a_propu = true;
+                        }
                     }
-                   }
-                    if(!Colaboro_a_propu) {
+                    if (!Colaboro_a_propu) {
                         Puede_colaborar_a_propu = true;
                     }
-                
+
+                }
             }
-        }     
-    }                                                                   %> 
+        }                                                                   %> 
     <head>
         <jsp:include page="/template/head.jsp" />
         <title>Consultar Propuesta: <%propu.getTitulo();%> </title>
@@ -145,7 +144,10 @@
                         %>
                         <tr><td><a href=consultarPerfil?T=<%=ni%>> <%= cx%>  </a></td></tr>
                         <%}%>
-                        <%}%>
+                        <%} else {%>
+                        <tr><td>
+                                <i class="material-icons" >mood_bad</i>
+                                <label> No tiene colaboradores </label></td></tr><%}%>
                     </table>
                 </right>
             </div>
