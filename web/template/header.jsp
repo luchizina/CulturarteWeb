@@ -19,8 +19,7 @@ String sesionAct=(String) session.getAttribute("sesionAct");
    <li><a href="<%= request.getContextPath() %>/Consulta_de_propuesta_Servlet">Consultar propuestas</a></li>
    <li><a href="<%= request.getContextPath() %>/Consulta_de_Propuesta_por_Categoria">Consultar propuestas por categoria</a></li>
   </ul>
- </li>
- <li><a href="<%= request.getContextPath() %>/Cargar_Datos_Web">Cargar Datos </a></li>  
+ </li>  
  
  <li style="float: right"><a href="<%= request.getContextPath() %>/Registrarse">Registrar</a></li>
  <li style="float: right"><a href="<%= request.getContextPath() %>/iniciarS">Iniciar sesión</a></li>
@@ -48,7 +47,6 @@ String sesionAct=(String) session.getAttribute("sesionAct");
    <li><a href="<%= request.getContextPath() %>/Consulta_de_Propuesta_por_Categoria">Consultar propuestas por categoria</a></li>
   </ul>
  </li>
- <li><a href="<%= request.getContextPath() %>/Cargar_Datos_Web">Cargar Datos </a></li>  
   <li><a href="<%= request.getContextPath() %>/Consulta_de_propuesta_Servlet">Quiero ver una propuesta</a></li> 
  <% if(tipoUsu.equals("proponente")){ %>
  <li><a style="color: #FFFFFF">|</a></li>

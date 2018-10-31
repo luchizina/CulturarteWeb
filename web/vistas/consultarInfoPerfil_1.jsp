@@ -12,7 +12,7 @@
     <head>
          <script  src="../js/progress.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
+          <link rel="stylesheet" href="<%= request.getContextPath()%>/js/reset.min.css">  
    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"> 
         <title>Información de usuario</title>
     
@@ -137,8 +137,8 @@
          <legend id="legendPerf">Información del usuario</legend><br>
              
         <% } %>
-         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+         <script src='<%= request.getContextPath()%>/js/jquery.min.js'></script> 
+<script src='<%= request.getContextPath()%>/js/jquery.easing.min.js'></script>
 <script  src="<%=request.getContextPath()%>/js/index.js"></script>
     </body>
 </html>

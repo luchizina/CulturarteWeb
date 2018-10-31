@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registro de Usuarios</title>
         <jsp:include page="/template/head.jsp" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
+        <link rel="stylesheet" href="<%= request.getContextPath()%>/css/reset.min.css">  
         <link href="<%= request.getContextPath()%>/css/style.css" rel="stylesheet" media="screen">
     </head>
     <body>
@@ -136,8 +136,8 @@
             </fieldset>
             <script  src="<%= request.getContextPath()%>/js/prototype.js"></script>
             <script  src="<%= request.getContextPath()%>/js/validar.js"></script>
-            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+            <script src='<%= request.getContextPath()%>/js/jquery.min.js'></script>
+            <script src='<%= request.getContextPath()%>/js/jquery.easing.min.js'></script>
             <script src="<%= request.getContextPath()%>/js/index.js"></script>
         </form> 
         <%

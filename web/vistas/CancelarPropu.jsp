@@ -9,10 +9,10 @@
 
 <html>
     <head>
-       <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+       <script src="<%= request.getContextPath()%>/js/material.min.js"></script>
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/css/material.indigo-pink.min.css">
     <!-- Material Design icon font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/css/iconos.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Consultar perfil</title>
         <jsp:include page="/template/head.jsp" />
@@ -26,8 +26,8 @@
      <legend id="legendErr">Perfil de propuesta</legend><br>
      <nav>
  <ul class="demo-list-icon mdl-list">
-        <%  List<DtPropuesta> prop = (List<DtPropuesta>) request.getAttribute("propuestas");
-                for (DtPropuesta p : prop) {
+        <%  List<servicios.DtPropuesta> prop = (List<servicios.DtPropuesta>) request.getAttribute("propuestas");
+                for (servicios.DtPropuesta p : prop) {
                 String Titu = p.getTitulo().replace(" ", "+");
         %>
   <li class="mdl-list__item">

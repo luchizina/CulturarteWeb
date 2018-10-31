@@ -15,7 +15,7 @@
    <jsp:include page="/template/head.jsp" />
     <meta charset="UTF-8">
   <title>Alta propuesta</title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">  
+   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.min.css">  
    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"> 
 
 </head>

@@ -14,8 +14,8 @@
         <jsp:include page="/template/head.jsp" />
         <title>Consultar Propuesta</title>
         <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="<%= request.getContextPath()%>/css/iconos.css">
+        <link rel="stylesheet" href="<%= request.getContextPath()%>/css/material.indigo-pink.min.css">
     </head>
     <body>
         <jsp:include page="/template/header.jsp" />
