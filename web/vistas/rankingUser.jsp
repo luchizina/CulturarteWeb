@@ -17,7 +17,7 @@
         <!-- Material Design icon font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>ranking</title>
+        <title>Ranking de usuarios</title>
         <jsp:include page="/template/head.jsp" />
     </head>
     <body>  
