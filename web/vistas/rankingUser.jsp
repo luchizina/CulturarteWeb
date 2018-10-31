@@ -4,6 +4,7 @@
     Author     : nambr
 --%>
 
+<%@page import="servicios.DtUsuario"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,9 +30,9 @@
                 <nav>
                     
                     <ul class="demo-list-icon mdl-list">
-                        <%  List<DtUsuario> usuariosU = (List<DtUsuario>) request.getAttribute("ranking");
+                        <%  List<servicios.DtUsuario> usuariosU = (List<servicios.DtUsuario>) request.getAttribute("ranking");
                           if(usuariosU.size()>0){
-                            for (DtUsuario user : usuariosU) {
+                            for (servicios.DtUsuario user : usuariosU) {
                                 String Titu = user.getNick().replace(" ", "-");
                                 String completo = user.getNombre() + " " + user.getApellido() + " (" + user.getNick() + ")";
 

@@ -240,7 +240,7 @@
                       <%
             if(userop != null && userop.getNick().equals(colab.getNick())){%>
              <td>  <%= propa.getMonto()   %>  </td> 
-             <td> <%= propa.getFecha().toGregorianCalendar().getTime().toLocaleString() %> </td> 
+             <td> <%= new SimpleDateFormat("dd/MM/yyyy").format(propa.getFecha().toGregorianCalendar().getTime()) %> </td> 
             <%
                 }
             }

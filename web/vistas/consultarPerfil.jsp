@@ -22,6 +22,29 @@
     <body>  
         <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css" type="text/css">
         <jsp:include page="/template/header.jsp" />
+        
+         <div style="float:right">                                
+            <form id="pa" class="msform" action="<%=request.getContextPath()%>/rankingUser" method="post">
+                <fieldset>
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                        <i class="material-icons">star</i>
+                    </button>  
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--accent">
+                       Ranking de usuarios
+                    </button>  
+                </fieldset>
+            </form>
+
+            <form id="msform" style="clear: both">
+
+
+            </form>
+        </div>  
+        
+        
+        
+        
+        
         <form id="msform" action="/CulturarteWeb/buscador" method="POST">
             <fieldset>
                 <legend id="legendErr">Perfil de usuarios</legend><br>
@@ -59,5 +82,9 @@
                 </nav>
      </fieldset>                  
    </form>
+                           
+                           
+                           
+                        
     </body>
 </html>

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -60,7 +61,7 @@ public class alta_prop extends HttpServlet {
     public static final String LUGAR = "lugar";
     public static final String FEcha2 = "fecha";
     public static final String IMAGEN = "imagen";
-    public static final String IMG_FOLDER = "C:\\Users\\matheo\\Documents\\ProgApli\\web";
+    public static final String IMG_FOLDER = "C:\\Users\\Aeliner\\Documents\\NetBeansProjects\\ProgApli1025\\web";
     public String imgPath ;
     private static Logger LOG;
     public alta_prop() {
