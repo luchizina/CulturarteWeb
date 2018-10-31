@@ -11,10 +11,10 @@
 
 <html>
     <head>
-        <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <script src="<%= request.getContextPath()%>/js/material.min.js"></script>
+        <link rel="stylesheet" href="<%= request.getContextPath()%>/css/material.indigo-pink.min.css">
         <!-- Material Design icon font -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="<%= request.getContextPath()%>/css/iconos.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ranking</title>
         <jsp:include page="/template/head.jsp" />
@@ -29,9 +29,9 @@
                 <nav>
                     
                     <ul class="demo-list-icon mdl-list">
-                        <%  List<DtUsuario> usuariosU = (List<DtUsuario>) request.getAttribute("ranking");
+                        <%  List<servicios.DtUsuario> usuariosU = (List<servicios.DtUsuario>) request.getAttribute("ranking");
                           if(usuariosU.size()>0){
-                            for (DtUsuario user : usuariosU) {
+                            for (servicios.DtUsuario user : usuariosU) {
                                 String Titu = user.getNick().replace(" ", "-");
                                 String completo = user.getNombre() + " " + user.getApellido() + " (" + user.getNick() + ")";
 
