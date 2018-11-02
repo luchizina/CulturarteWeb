@@ -80,6 +80,7 @@ public class alta_prop extends HttpServlet {
          servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
                 response.setContentType("text/html;charset=UTF-8");
                  request.setCharacterEncoding("UTF-8");
+                 
      
           //this.iC.cargarCategorias();
 //          port2.cargarCategorias();

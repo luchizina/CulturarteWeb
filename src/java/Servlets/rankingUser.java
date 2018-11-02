@@ -8,6 +8,8 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +40,19 @@ public class rankingUser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
       List<servicios.DtUsuario> users=this.port.rankingUser2().getListita();
+      List<Integer> seguidores= new ArrayList<>();
+     
+      for(int i=0; i<users.size();i++){
+          int cant=this.port.contarSeguidores(users.get(i).getNick());
+          seguidores.add(cant);
+     
+          
+          
+          
+      }
+         Collections.sort(seguidores,Collections.reverseOrder());
       request.setAttribute("ranking", users);
+      request.setAttribute("cantSeguidores", seguidores);
                       this.getServletContext().getRequestDispatcher("/vistas/rankingUser.jsp").forward(request, response);
         
     }

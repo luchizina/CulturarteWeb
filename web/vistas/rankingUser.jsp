@@ -31,11 +31,14 @@
                     
                     <ul class="demo-list-icon mdl-list">
                         <%  List<servicios.DtUsuario> usuariosU = (List<servicios.DtUsuario>) request.getAttribute("ranking");
-                          if(usuariosU.size()>0){
-                            for (servicios.DtUsuario user : usuariosU) {
+                        List<Integer> seguidores= (List<Integer>) request.getAttribute("cantSeguidores");
+                        if(usuariosU.size()>0){
+                            for (int i=0; i<usuariosU.size(); i++) {
+                                
+                                servicios.DtUsuario user=usuariosU.get(i);
                                 String Titu = user.getNick().replace(" ", "-");
                                 String completo = user.getNombre() + " " + user.getApellido() + " (" + user.getNick() + ")";
-
+                                
                         %>
 
                         <li class="mdl-list__item">
@@ -44,6 +47,7 @@
                                 <a href=consultarPerfil?T=<%=Titu%>>
                                     <%= completo%> 
                                 </a>
+                              <%=seguidores.get(i)%> seguidores
                             </span>
                         </li>
                         <%  }
