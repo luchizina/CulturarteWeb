@@ -45,10 +45,6 @@ public class rankingUser extends HttpServlet {
       for(int i=0; i<users.size();i++){
           int cant=this.port.contarSeguidores(users.get(i).getNick());
           seguidores.add(cant);
-     
-          
-          
-          
       }
          Collections.sort(seguidores,Collections.reverseOrder());
       request.setAttribute("ranking", users);
