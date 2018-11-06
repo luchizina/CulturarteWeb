@@ -8,6 +8,7 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import servicios.DataListUsuarios;
+import config.Utils;
+import java.util.Properties;
 
 /**
  *
@@ -26,6 +29,9 @@ public class consultarPerfil extends HttpServlet {
 //    private Fabrica fabrica = Fabrica.getInstance();
 //    private IPropuesta IP = fabrica.getICtrlPropuesta();
 //    private IUsuario IU = fabrica.getICtrlUsuario();
+    Properties p= Utils.getPropiedades();
+    
+ 
     servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
@@ -48,6 +54,7 @@ public class consultarPerfil extends HttpServlet {
 //        this.port3.cargarPropuestas();
 //        this.port3.cargarColaboraciones();
 //        port3.estadosPropuestas();
+
         if (request.getParameter("T") == null) {
             List<servicios.DtUsuario> usuarios = port.listarUsuarios().getListita();
             request.setAttribute("usuarios", usuarios);
