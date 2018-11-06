@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -40,7 +41,8 @@ public class retornarImagenServlet extends HttpServlet {
             throws ServletException, IOException{
             String T = request.getParameter("T");
             response.setContentType("image/jpeg");
-            servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+            URL hola = new URL("http://192.168.1.104:8280/servicio");
+            servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
             byte[] bi = port.retornarImagen(T);
         BufferedImage imag=ImageIO.read(new ByteArrayInputStream(bi));

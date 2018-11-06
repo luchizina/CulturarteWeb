@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Servlets.inicSesion;
+import java.net.URL;
 
 /**
  *
@@ -23,10 +24,7 @@ public class favorita extends HttpServlet {
 
 //    private final IPropuesta ip = fabrica.getICtrlPropuesta();
 //    private final IUsuario usuario = fabrica.getICtrlUsuario();
-    servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
-        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+    
     String usuarioF = "usu";
     String propuesta = "prop";
     /**
@@ -74,6 +72,12 @@ public class favorita extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        URL hola = new URL("http://192.168.1.104:8280/servicio");
+        URL hola2 = new URL("http://192.168.1.104:8280/servicio2");
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
         processRequest(request, response);
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");

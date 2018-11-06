@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,15 +39,16 @@ public class Retornar_imag_propuesta_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String T = request.getParameter("T");
-            response.setContentType("image/jpeg");
-            //IPropuesta ip = Fabrica.getInstance().getICtrlPropuesta();
-            servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
-            servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
-            
-            //BufferedImage bi = ip.retornarImagen_Propuesta(T);
-            byte[] bi = port3.retornarImagenPropuesta(T);
-        BufferedImage imag=ImageIO.read(new ByteArrayInputStream(bi));
+        String T = request.getParameter("T");
+        response.setContentType("image/jpeg");
+        //IPropuesta ip = Fabrica.getInstance().getICtrlPropuesta();
+        URL hola2 = new URL("http://192.168.1.104:8280/servicio2");
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+
+        //BufferedImage bi = ip.retornarImagen_Propuesta(T);
+        byte[] bi = port3.retornarImagenPropuesta(T);
+        BufferedImage imag = ImageIO.read(new ByteArrayInputStream(bi));
         OutputStream out = response.getOutputStream();
         ImageIO.write(imag, "jpg", out);
 //        try (OutputStream out = response.getOutputStream()) {
@@ -66,7 +68,7 @@ public class Retornar_imag_propuesta_Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -80,8 +82,8 @@ public class Retornar_imag_propuesta_Servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
-       
+        processRequest(request, response);
+
     }
 
     /**

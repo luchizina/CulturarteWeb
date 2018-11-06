@@ -9,6 +9,7 @@ import Servlets.inicSesion;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -78,9 +79,11 @@ public class comentario extends HttpServlet {
         String prop = request.getParameter(propuesta);
         String com = request.getParameter(comentario);
         if(!com.isEmpty()){
-            servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+            URL hola = new URL("http://192.168.1.104:8280/servicio");
+        URL hola2 = new URL("http://192.168.1.104:8280/servicio2");
+            servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
         
         port3.agregarComentario(nick,prop, com);

@@ -7,6 +7,7 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class desactProp extends HttpServlet {
 
 //private final IUsuario usuario = fabrica.getICtrlUsuario();
-servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,9 +38,12 @@ servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorU
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        URL hola = new URL("http://192.168.1.104:8280/servicio");
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         response.setContentType("text/html;charset=UTF-8");
         String nick= request.getParameter("nickLogueado");
-        this.port.desactivarProp(nick);
+        port.desactivarProp(nick);
         this.getServletContext().getRequestDispatcher("/cerrarSesion").forward(request,response);
      
     }

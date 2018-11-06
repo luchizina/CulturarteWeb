@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import static java.lang.System.out;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,10 +28,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Consulta_de_propuesta_Servlet", urlPatterns = {"/Consulta_de_propuesta_Servlet"})
 public class Consulta_de_propuesta_Servlet extends HttpServlet {
 
-      
-      //private Fabrica fabrica = Fabrica.getInstance();
-      //private IPropuesta IP=fabrica.getICtrlPropuesta();
-      //private IUsuario IU = fabrica.getICtrlUsuario();
+    //private Fabrica fabrica = Fabrica.getInstance();
+    //private IPropuesta IP=fabrica.getICtrlPropuesta();
+    //private IUsuario IU = fabrica.getICtrlUsuario();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,32 +39,34 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
-        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
-        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-            response.setContentType("text/html;charset=UTF-8");
-            request.setCharacterEncoding("UTF-8");
-             
-            // LISTAR PROPUESTAS 
-            if (request.getParameter("T") == null) {
-                //List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
-                List<servicios.DtPropuesta> x = port3.listarPropuestasWeb().getListita();
-                request.setAttribute("propuestas", x);
-                this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
-            } else {
+
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        URL hola = new URL("http://192.168.1.104:8280/servicio");
+        URL hola2 = new URL("http://192.168.1.104:8280/servicio2");
+        URL hola3 = new URL("http://192.168.1.104:8280/servicio3");
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
+        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+        // LISTAR PROPUESTAS 
+        if (request.getParameter("T") == null) {
+            //List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
+            List<servicios.DtPropuesta> x = port3.listarPropuestasWeb().getListita();
+            request.setAttribute("propuestas", x);
+            this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
+        } else {
             // CONSULTA A UNA PROPUESTA 
-                String t = request.getParameter("T");
-                String titulo = t.replace("+"," ");
-                //boolean existe = IP.existeTitulo(titulo);
-                boolean existe = port3.existePropuesta(titulo);
-                if(existe){
+            String t = request.getParameter("T");
+            String titulo = t.replace("+", " ");
+            //boolean existe = IP.existeTitulo(titulo);
+            boolean existe = port3.existePropuesta(titulo);
+            if (existe) {
                 //DtPropuesta p_consulta = IP.SeleccionarProp(titulo);
                 servicios.DtPropuesta p_consulta = port3.selccionarPropuesta(titulo);
                 //List<String> colaborador = IP.ColaborantesDePro();
@@ -77,33 +78,32 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
                 request.setAttribute("coment", comentarios);
                 String nick = (String) request.getSession().getAttribute("sesionAct");
                 //boolean com = IP.Ya_Comento_Propuesta(nick, t);
-                if(nick != null){
-                boolean com = port3.yaComento(nick, t);
-                //boolean fav = IP.yaFavoriteo(IU.traerUsuario(nick), t);
-                boolean fav = port3.yaFavoritio(nick, t);
-                if(fav){
-                   request.setAttribute("fav","true"); 
-                } else {
-                    request.setAttribute("fav","false");
+                if (nick != null) {
+                    boolean com = port3.yaComento(nick, t);
+                    //boolean fav = IP.yaFavoriteo(IU.traerUsuario(nick), t);
+                    boolean fav = port3.yaFavoritio(nick, t);
+                    if (fav) {
+                        request.setAttribute("fav", "true");
+                    } else {
+                        request.setAttribute("fav", "false");
+                    }
+                    if (com) {
+                        request.setAttribute("comentario", "true");
+                    } else {
+                        request.setAttribute("comentario", "false");
+                    }
                 }
-                if(com){
-                request.setAttribute("comentario","true");
-                }
-                else{
-                request.setAttribute("comentario","false");
-                }
-                }
-                if(!colaborador.isEmpty()){
-                request.setAttribute("col", colaborador);
+                if (!colaborador.isEmpty()) {
+                    request.setAttribute("col", colaborador);
                 }
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_Info_Propuesta.jsp").forward(request, response);
             }
-            }
-            //List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
-            List<servicios.DtPropuesta> x = port3.listarPropuestasWeb().getListita();
-            request.setAttribute("propuestas", x);
-            this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
-            
+        }
+        //List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
+        List<servicios.DtPropuesta> x = port3.listarPropuestasWeb().getListita();
+        request.setAttribute("propuestas", x);
+        this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -119,9 +119,8 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-              processRequest(request, response);
-          
-        
+        processRequest(request, response);
+
     }
 
     /**
@@ -135,9 +134,9 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");    
-              processRequest(request, response);
-          
+        request.setCharacterEncoding("UTF-8");
+        processRequest(request, response);
+
     }
 
     /**

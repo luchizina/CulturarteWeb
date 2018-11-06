@@ -8,6 +8,7 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,10 +27,7 @@ public class consultarPerfil extends HttpServlet {
 //    private Fabrica fabrica = Fabrica.getInstance();
 //    private IPropuesta IP = fabrica.getICtrlPropuesta();
 //    private IUsuario IU = fabrica.getICtrlUsuario();
-    servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
-        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+    
     public static final String MENSAJE_EXITO = "mensaje_exito";
 
     /**
@@ -44,6 +42,12 @@ public class consultarPerfil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");     
+        URL hola = new URL("http://192.168.1.104:8280/servicio");
+        URL hola2 = new URL("http://192.168.1.104:8280/servicio2");
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
 //        this.port.cargarUsuarios2();
 //        this.port3.cargarPropuestas();
 //        this.port3.cargarColaboraciones();
@@ -54,9 +58,9 @@ public class consultarPerfil extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
             //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
         } else {
-            this.port.existeNick("hola");
+            port.existeNick("hola");
             String nickUser = request.getParameter("T");
-            boolean existe = this.port.existeNick(nickUser);
+            boolean existe = port.existeNick(nickUser);
             if (!existe) {
 
                 servicios.DtUsuario user = port.traerDtUsuario(nickUser);

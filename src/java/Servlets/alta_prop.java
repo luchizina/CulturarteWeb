@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -71,12 +72,14 @@ public class alta_prop extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DatatypeConfigurationException {
-        
-         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        URL hola = new URL("http://192.168.1.104:8280/servicio");
+        URL hola2 = new URL("http://192.168.1.104:8280/servicio2");
+        URL hola3 = new URL("http://192.168.1.104:8280/servicio3");
+         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
          servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
+         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
          servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
-         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
          servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
                 response.setContentType("text/html;charset=UTF-8");
                  request.setCharacterEncoding("UTF-8");
