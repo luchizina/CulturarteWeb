@@ -29,8 +29,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import Utilidades.Utils;
+import java.net.URL;
 import java.nio.file.Path;
 import java.util.GregorianCalendar;
+import java.util.Properties;
 import javax.servlet.annotation.MultipartConfig;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -114,12 +116,22 @@ public class Registrar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+     Properties p = config.Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+String servicio2=p.getProperty("serv2");
+String servicio3=p.getProperty("serv3");
 
-        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+        URL hola = new URL(http+ip+puerto+servicio1);
+        URL hola2 = new URL(http+ip+puerto+servicio2);
+        URL hola3 = new URL(http+ip+puerto+servicio3);
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
         servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
 
         try {
@@ -149,7 +161,7 @@ public class Registrar extends HttpServlet {
                 if (args[0].equals("colaborador")) {
                     if (partImagen.getSize() != 0) {
                         //usuario.configurarParametros(IMG_FOLDER);
-                        port.configurarParametros(IMG_FOLDER);
+                        port.configurarParametros();
                         InputStream data = partImagen.getInputStream();
                         final String fileName = Utils.getFileName(partImagen);
                         String nombreArchivo = Utils.nombreArchivoSinExt(fileName);
@@ -183,7 +195,7 @@ public class Registrar extends HttpServlet {
                 if (args[0].equals("proponente")) {
                     if (partImagen.getSize() != 0) {
                         //usuario.configurarParametros(IMG_FOLDER);
-                        port.configurarParametros(IMG_FOLDER);
+                        port.configurarParametros();
                         InputStream data = partImagen.getInputStream();
                         final String fileName = Utils.getFileName(partImagen);
                         String nombreArchivo = Utils.nombreArchivoSinExt(fileName);

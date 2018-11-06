@@ -29,13 +29,7 @@ public class consultarPerfil extends HttpServlet {
 //    private Fabrica fabrica = Fabrica.getInstance();
 //    private IPropuesta IP = fabrica.getICtrlPropuesta();
 //    private IUsuario IU = fabrica.getICtrlUsuario();
-    Properties p= Utils.getPropiedades();
     
- 
-    servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
-        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
     public static final String MENSAJE_EXITO = "mensaje_exito";
 
     /**
@@ -50,6 +44,21 @@ public class consultarPerfil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");     
+      Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+String servicio2=p.getProperty("serv2");
+
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+        URL hola2 = new URL(http+ip+puerto+servicio2);
+        
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
 //        this.port.cargarUsuarios2();
 //        this.port3.cargarPropuestas();
 //        this.port3.cargarColaboraciones();
@@ -61,9 +70,9 @@ public class consultarPerfil extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
             //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
         } else {
-            this.port.existeNick("hola");
+            port.existeNick("hola");
             String nickUser = request.getParameter("T");
-            boolean existe = this.port.existeNick(nickUser);
+            boolean existe = port.existeNick(nickUser);
             if (!existe) {
 
                 servicios.DtUsuario user = port.traerDtUsuario(nickUser);

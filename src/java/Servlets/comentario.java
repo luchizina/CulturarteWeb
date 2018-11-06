@@ -6,9 +6,12 @@
 package Servlets;
 
 import Servlets.inicSesion;
+import config.Utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -78,9 +81,20 @@ public class comentario extends HttpServlet {
         String prop = request.getParameter(propuesta);
         String com = request.getParameter(comentario);
         if(!com.isEmpty()){
-            servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+           Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+String servicio2=p.getProperty("serv2");
+
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+        URL hola2 = new URL(http+ip+puerto+servicio2);
+     
+            servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
         
         port3.agregarComentario(nick,prop, com);

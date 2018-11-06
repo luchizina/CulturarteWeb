@@ -5,7 +5,6 @@
  */
 package Servlets;
 
-
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Servlets.inicSesion;
+import config.Utils;
+import java.net.URL;
+import java.util.Properties;
 
 /**
  *
@@ -24,8 +26,6 @@ import Servlets.inicSesion;
 public class extender extends HttpServlet {
 
 //    private final IPropuesta ip = fabrica.getICtrlPropuesta();
- servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
-        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -55,7 +55,7 @@ public class extender extends HttpServlet {
         servicios.DtUsuario usu = inicSesion.getUsuarioLogueado(request);
         if (usu == null || usu instanceof servicios.DtColaborador) {
             this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
-        } else if (usu instanceof servicios.DtProponente){
+        } else if (usu instanceof servicios.DtProponente) {
             this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
         }
     }
@@ -71,12 +71,24 @@ public class extender extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-            processRequest(request, response);
-            String C = request.getParameter("prop");
-            port3.extender(C);
-            request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T=" + C).forward(request, response);
-        
+        Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+
+String servicio2=p.getProperty("serv2");
+
+
+      
+        URL hola2 = new URL(http+ip+puerto+servicio2);
+    
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+        processRequest(request, response);
+        String C = request.getParameter("prop");
+        port3.extender(C);
+        request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T=" + C).forward(request, response);
+
     }
 
     /**

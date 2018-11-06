@@ -5,11 +5,13 @@
  */
 package Servlets;
 
-
 import static Servlets.Registrar.NICK;
+import config.Utils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.net.URL;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,9 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "usuario", urlPatterns = {"/usuario"})
 public class usuario extends HttpServlet {
 
-
-    servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     public static final String NICK = "nick";
     public static final String CORREO = "email";
 
@@ -40,6 +39,17 @@ public class usuario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+        
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         response.setContentType("text/html;charset=UTF-8");
         port.cargarUsuarios2();
         try (PrintWriter out = response.getWriter()) {
@@ -66,6 +76,9 @@ public class usuario extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         PrintWriter writer = response.getWriter();
+        URL hola = new URL("http://192.168.1.126:8280/servicio");
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         String nick = request.getParameter(NICK);
         if (port.existeNick(nick)) {
             writer.print("Nick disponible");
@@ -86,6 +99,9 @@ public class usuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        URL hola = new URL("http://192.168.1.126:8280/servicio");
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         PrintWriter writer = response.getWriter();
         String nick = request.getParameter(NICK);
         if (port.existeNick(nick)) {

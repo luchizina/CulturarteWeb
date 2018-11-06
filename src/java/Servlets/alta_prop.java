@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -71,12 +72,22 @@ public class alta_prop extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DatatypeConfigurationException {
-        
-         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+      Properties p = config.Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+String servicio2=p.getProperty("serv2");
+String servicio3=p.getProperty("serv3");
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+        URL hola2 = new URL(http+ip+puerto+servicio2);
+        URL hola3 = new URL(http+ip+puerto+servicio3);
+         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
          servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
+         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
          servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
-         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
          servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
                 response.setContentType("text/html;charset=UTF-8");
                  request.setCharacterEncoding("UTF-8");
@@ -145,7 +156,7 @@ public class alta_prop extends HttpServlet {
             //servicios.Estado e = new servicios.Estado().setEstado(servicios.Testado.Ingresada);
             if (partImagen.getSize() != 0) {
                 //ip.configurarParametros(IMG_FOLDER);
-                port3.configurarParametros(IMG_FOLDER);
+                port3.configurarParametros();
                 InputStream data = partImagen.getInputStream();
                 final String fileName = Utils.getFileName(partImagen);
                 String nombreArchivo = Utils.nombreArchivoSinExt(fileName);

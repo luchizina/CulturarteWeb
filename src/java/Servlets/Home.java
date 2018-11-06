@@ -7,24 +7,23 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import config.Utils;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Properties;
 /**
  *
  * @author Nuevo
  */
 @WebServlet(name = "home", urlPatterns = {"/home"})
 public class Home extends HttpServlet {
-servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
-        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
-        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,7 +36,7 @@ servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorU
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Fabrica fabrica = Fabrica.getInstance();
-        
+
 //        ICategoria icat =fabrica.getICtrlCategoria();
 //        IPropuesta IP=fabrica.getICtrlPropuesta();
 //        IUsuario iUsu=fabrica.getICtrlUsuario();
@@ -56,7 +55,27 @@ servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorU
 //                IP.cargarColaboraciones();
 //                IP.actualizarMontos();
 //                IP.EstadosPropuestas();
+
+
+Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+String servicio2=p.getProperty("serv2");
+String servicio3=p.getProperty("serv3");
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+        URL hola2 = new URL(http+ip+puerto+servicio2);
+        URL hola3 = new URL(http+ip+puerto+servicio3);
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
+        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
         request.getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

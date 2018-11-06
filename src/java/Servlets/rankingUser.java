@@ -6,8 +6,10 @@
 package Servlets;
 
 
+import config.Utils;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.servlet.ServletException;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Properties;
 import servicios.DataListUsuarios;
 
 /**
@@ -25,8 +28,7 @@ import servicios.DataListUsuarios;
 @WebServlet(name = "rankingUser", urlPatterns = {"/rankingUser"})
 public class rankingUser extends HttpServlet {
 
-      servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+      
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,12 +40,23 @@ public class rankingUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+      Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+      
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         response.setContentType("text/html;charset=UTF-8");
-      List<servicios.DtUsuario> users=this.port.rankingUser2().getListita();
+      List<servicios.DtUsuario> users=port.rankingUser2().getListita();
       List<Integer> seguidores= new ArrayList<>();
      
       for(int i=0; i<users.size();i++){
-          int cant=this.port.contarSeguidores(users.get(i).getNick());
+          int cant=port.contarSeguidores(users.get(i).getNick());
           seguidores.add(cant);
       }
          Collections.sort(seguidores,Collections.reverseOrder());

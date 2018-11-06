@@ -5,9 +5,11 @@
  */
 package Servlets;
 
-
+import config.Utils;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 public class dejarDeSeguir extends HttpServlet {
 
 //    private final IUsuario usuario = fabrica.getICtrlUsuario();
-servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,37 +36,43 @@ servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorU
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
-           if(request.getParameter("nickLogueado")==null){
-        this.getServletContext().getRequestDispatcher("/errorPages/404.jsp").forward(request,response);
-    
-   
-    }else{
-               
-        
-      String nickLogueado= request.getParameter("nickLogueado");
-    String nickASeguir= request.getParameter("nickASeguir");
-            servicios.DtUsuario usuarioAseguir= this.port.traerDtUsuario(nickASeguir);
-this.port.seleccionarUsuario(nickLogueado);
-this.port.seleccionarUsuSeg(nickASeguir);
+       Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
 
-if(usuarioAseguir instanceof servicios.DtColaborador){
-    if(this.port.yaSigue()==true){
-this.port.dejarDeSeguir();
-String link= request.getParameter("link");
-this.getServletContext().getRequestDispatcher(link).forward(request,response);
-}
-    
-}
-else if(usuarioAseguir instanceof servicios.DtProponente){
-      if(this.port.yaSigue()==true){
-this.port.dejarDeSeguir();
-String link= (String) request.getParameter("link");
-this.getServletContext().getRequestDispatcher(link).forward(request,response);
-} 
-}
-   }
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+     
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        if (request.getParameter("nickLogueado") == null) {
+            this.getServletContext().getRequestDispatcher("/errorPages/404.jsp").forward(request, response);
+
+        } else {
+
+            String nickLogueado = request.getParameter("nickLogueado");
+            String nickASeguir = request.getParameter("nickASeguir");
+            servicios.DtUsuario usuarioAseguir = port.traerDtUsuario(nickASeguir);
+            port.seleccionarUsuario(nickLogueado);
+            port.seleccionarUsuSeg(nickASeguir);
+
+            if (usuarioAseguir instanceof servicios.DtColaborador) {
+                if (port.yaSigue() == true) {
+                    port.dejarDeSeguir();
+                    String link = request.getParameter("link");
+                    this.getServletContext().getRequestDispatcher(link).forward(request, response);
+                }
+
+            } else if (usuarioAseguir instanceof servicios.DtProponente) {
+                if (port.yaSigue() == true) {
+                    port.dejarDeSeguir();
+                    String link = (String) request.getParameter("link");
+                    this.getServletContext().getRequestDispatcher(link).forward(request, response);
+                }
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

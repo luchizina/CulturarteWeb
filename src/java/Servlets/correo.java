@@ -7,8 +7,11 @@ package Servlets;
 
 
 import static Servlets.usuario.CORREO;
+import config.Utils;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,8 +27,7 @@ public class correo extends HttpServlet {
 
 
 //    private final IUsuario usuario = fabrica.getICtrlUsuario();
-    servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+    
     public static final String CORREO = "email";
 
     /**
@@ -55,6 +57,17 @@ public class correo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+       Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+     
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
 //        port.cargarUsuarios2();
         String correo = request.getParameter(CORREO);
         try (PrintWriter out = response.getWriter()) {

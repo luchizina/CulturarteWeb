@@ -6,9 +6,12 @@
 package Servlets;
 
 
+import config.Utils;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.List;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -68,12 +71,22 @@ public class buscador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
+       Properties p = Utils.getPropiedades(request);
+String http=p.getProperty("http");
+String ip=p.getProperty("ipServices");
+String puerto =p.getProperty("puertoServ");
+String servicio1=p.getProperty("serv1");
+String servicio2=p.getProperty("serv2");
+String servicio3=p.getProperty("serv3");
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+        URL hola2 = new URL(http+ip+puerto+servicio2);
+        URL hola3 = new URL(http+ip+puerto+servicio3);
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
         servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
         
         processRequest(request, response);
