@@ -30,15 +30,15 @@
 </message>
 <message name="cargaCatPrueb"></message>
 <message name="cargaCatPruebResponse"></message>
+<message name="Listar_Categorias_Web"></message>
+<message name="Listar_Categorias_WebResponse">
+<part name="return" type="tns:dataListCategoria"></part>
+</message>
 <message name="Existe_Categoria">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="Existe_CategoriaResponse">
 <part name="return" type="xsd:boolean"></part>
-</message>
-<message name="Listar_Categorias_Web"></message>
-<message name="Listar_Categorias_WebResponse">
-<part name="return" type="tns:dataListCategoria"></part>
 </message>
 <portType name="Publicador_Categoria">
 <operation name="cargar">
@@ -69,13 +69,13 @@
 <input wsam:Action="http://Servicios/Publicador_Categoria/cargaCatPruebRequest" message="tns:cargaCatPrueb"></input>
 <output wsam:Action="http://Servicios/Publicador_Categoria/cargaCatPruebResponse" message="tns:cargaCatPruebResponse"></output>
 </operation>
-<operation name="Existe_Categoria">
-<input wsam:Action="http://Servicios/Publicador_Categoria/Existe_CategoriaRequest" message="tns:Existe_Categoria"></input>
-<output wsam:Action="http://Servicios/Publicador_Categoria/Existe_CategoriaResponse" message="tns:Existe_CategoriaResponse"></output>
-</operation>
 <operation name="Listar_Categorias_Web">
 <input wsam:Action="http://Servicios/Publicador_Categoria/Listar_Categorias_WebRequest" message="tns:Listar_Categorias_Web"></input>
 <output wsam:Action="http://Servicios/Publicador_Categoria/Listar_Categorias_WebResponse" message="tns:Listar_Categorias_WebResponse"></output>
+</operation>
+<operation name="Existe_Categoria">
+<input wsam:Action="http://Servicios/Publicador_Categoria/Existe_CategoriaRequest" message="tns:Existe_Categoria"></input>
+<output wsam:Action="http://Servicios/Publicador_Categoria/Existe_CategoriaResponse" message="tns:Existe_CategoriaResponse"></output>
 </operation>
 </portType>
 <binding name="Publicador_CategoriaPortBinding" type="tns:Publicador_Categoria">
@@ -143,7 +143,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="Existe_Categoria">
+<operation name="Listar_Categorias_Web">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
@@ -152,7 +152,7 @@
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
 </output>
 </operation>
-<operation name="Listar_Categorias_Web">
+<operation name="Existe_Categoria">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://Servicios/"></soap:body>
