@@ -420,6 +420,7 @@ th {
     font: normal 12px/150% Arial, Helvetica, sans-serif; 
     background: #fff;
     overflow: hidden;
+    min-height:100%;
     border: 2px solid #36752D;
     -webkit-border-radius: 11px;
     -moz-border-radius: 11px;

@@ -23,34 +23,90 @@
             servicios.DataReporte data = (servicios.DataReporte) request.getAttribute("reporte");
 
         %>
-        <div style="position: absolute; top: 150px; left: 550px; color:green">
+        <% if (data != null) {%>
+        <div style="position: absolute; top: 50px; left: 50px; color:green">
             <div id="divTablas" class="datagrid">
-                <legend id="legendPerf">Pago de Colaboracion</legend><br>
                 <right>
                     <table class="datagrid">
-                        <% if (data != null) {%>
-                        <tr><td>Fecha de emision: <%= data.getEmision() %></td></tr>
+                        <th>Pago de la Colaboracion</th>
+                        <tr><td>Fecha de emision: <%= data.getEmision()%></td></tr>
+                    </table>
+                </right>
+            </div>
+        </div>
+        <div style="position: absolute; top: 150px; left: 350px; color:green">
+            <div id="divTablas" class="datagrid">
+                <right>
+                    <table class="datagrid">
                         <th>Datos del usuario:</th> 
-                        <tr><td>Nick del colaborador: <%= data.getNick() %></td></tr>
+                        <tr><td>Nick del colaborador: <%= data.getNick()%></td></tr>
                         <tr><td>Nombre de colaborador: <%= data.getNombre()%></td></tr>
                         <tr><td>Apellido de colaborador: <%= data.getApellido()%></td></tr>
-                        <tr><td>Correo: <%= data.getCorreo() %></td></tr>
-                        <tr><td>Fecha de Nacimiento: <%= data.getFechaNac() %></td></tr>
-                        <tr><td> </td></tr>
-                        <tr><td> </td></tr>
-                        <th>Datos de la colaboracion:</th> 
-                        <tr><td>Hora: <%= data.getHora() %></td></tr>
-                        <tr><td><a href="/CulturarteWeb/descarga?usu=<%= data.getNick() %>&prop=<%= data.getPropuesta() %>" download>
-                            Descargar pdf emision
-                        </a></td></tr>
-                        <%} else {%>
-                        <tr><td>
-                                <i class="material-icons" >mood_bad</i>
-                                <label> Usted no ha pagado esta colaboracion </label></td></tr>
-                                <%}%>
+                        <tr><td>Correo: <%= data.getCorreo()%></td></tr>
+                        <tr><td>Fecha de Nacimiento: <%= data.getFechaNac()%></td></tr>
                     </table>
                 </right>
             </div>
         </div> 
+        <div style="position: absolute; top: 150px; left: 620px; color:green">
+            <div id="divTablas" class="datagrid">
+                <right>
+                    <table class="datagrid">
+                        <th>Datos de la colaboracion:</th> 
+                        <tr><td>Propuesta: <%= data.getPropuesta()%></td></tr>
+                        <tr><td>Fecha: <%= data.getFecha()%></td></tr>
+                        <tr><td>Hora: <%= data.getHora()%></td></tr>
+                        <tr><td>Monto: <%= data.getMonto()%></td></tr>
+                        <tr><td>Retorno elegido: <%= data.getRetorno()%></td></tr>
+                    </table>
+                </right>
+            </div>
+        </div> 
+        <div style="position: absolute; top: 150px; left: 850px; color:green">
+            <div id="divTablas" class="datagrid">
+                <right>
+                    <table class="datagrid">
+                        <th>Datos del pago:</th> 
+                        <tr><td>Numero: <%= data.getNum()%></td></tr>
+                        <% if (data.getBanco() != null) {%>
+                        <tr><td>Banco: <%= data.getBanco()%></td></tr>
+                        <%}%>
+                        <%if (data.getTipoT() != null) {%>
+                        <tr><td>Tarjeta: <%= data.getTipoT()%></td></tr>
+                        <tr><td>CVC: <%= data.getCvc()%></td></tr>
+                        <tr><td>Fecha de vencimiento: <%= data.getVenc()%></td></tr>
+                        <%}%>
+                    </table>
+                </right>
+            </div>
+        </div> 
+
+        <div style="position: absolute; top: 450px; left: 600px; color:green">
+            <div id="divTablas" class="datagrid">
+                <right>
+                    <table class="datagrid">
+                        <th>Link de descarga del documento PDF:</th> 
+                        <tr><td><a href="/CulturarteWeb/descarga?usu=<%= data.getNick()%>&prop=<%= data.getPropuesta()%>" download>
+                                    Descargar pdf emision
+                                </a></td></tr>
+                    </table>
+                </right>
+            </div>
+        </div> 
+        <%} else {%>
+
+        <div style="position: absolute; top: 150px; left: 550px; color:green">
+            <div id="divTablas" class="datagrid">
+                <right>
+                    <table class="datagrid">
+                        <th>Informacion del pago:</th> 
+                        <tr><td>
+                                <i class="material-icons" >mood_bad</i>
+                                <label> Usted no ha pagado esta colaboracion </label></td></tr>
+                    </table>
+                </right>
+            </div>
+        </div> 
+        <%}%>
     </body>
 </html>

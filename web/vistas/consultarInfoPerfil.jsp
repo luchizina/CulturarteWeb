@@ -134,7 +134,7 @@
             </fieldset>
         </form>
 
-        <div style="position: absolute; top: 150px; left: 60px; color:green">
+        <div style="position: absolute; top: 150px; left: 30px; color:green">
             <div id="divTablas" class="datagrid">
                 <legend id="legendPerf">Usuarios seguidos</legend><br>
                 <right>
@@ -198,8 +198,9 @@
                 </right>
             </div>  <%-- Usuarios seguidos --%>
         </div> 
-
-        <div style="position: absolute; top: 150px; right: 40px; color:green">
+        <%
+            if (userop != null && userop.getNick().equals(colab.getNick())) {%>
+        <div style="position: absolute; top: 500px; right: 525px; color:green">
             <div id="divTablas" class="datagrid">
                 <legend id="legendPerf">Colaboraciones</legend><br>
                 <right>
@@ -250,8 +251,108 @@
                                 </form>
                             </td>
                             <%
+
+                                        }
+                                    }
                                 
+                            %>
+                        </tr>
+                        <%} else { %>
+                        <td> no tiene colaboraciones</td>
+                        <%} %>
+                    </table>
+                </right>
+            </div>
+        </div>
+        <div style="position: absolute; top: 150px; right: 150px; color:green">
+
+            <div id="divTablas" class="datagrid">
+                <legend id="legendPerf">Propuestas favoritas</legend><br>
+                <right>
+                    <table class="datagrid">
+                        <tr> 
+                            <th>
+                                Nombre:
+                            </th> 
+                        </tr>
+
+                        <%
+                            List<servicios.DtPropuesta> propFavo = (List<servicios.DtPropuesta>) request.getAttribute("propuFav");
+                            String pa = "";
+
+                            if (propFavo.size() > 0) {
+                                for (servicios.DtPropuesta propu1 : propFavo) {
+                                    pa = propu1.getTitulo().replace(" ", "+");
+                        %>
+                        <tr>
+                            <td>
+                                <a href=Consulta_de_propuesta_Servlet?T=<%=pa%>>
+                                    <%= propu1.getTitulo()%> 
+                                </a>
+                            </td>
+                        </tr>
+                        <%}
+                        } else { %>
+                        <td> no tiene colaboraciones    </td>
+                        <%} %>
+                    </table>
+                </right>
+            </div>
+        </div>
+        <%} else {%>
+        <div style="position: absolute; top: 150px; right: 150px; color:green">
+            <div id="divTablas" class="datagrid">
+                <legend id="legendPerf">Colaboraciones</legend><br>
+                <right>
+                    <table class="datagrid">
+                        <tr> 
+                            <th>
+                                Titulo:
+                            </th> 
+                            <%
+
+                                if (userop != null) {
+                                    String nicko = userop.getNick();
+                                    if (nicko.equals(colab.getNick())) {%>
+                            <th>
+                                Monto:
+                            </th> 
+                            <th>
+                                Fecha:
+                            </th> 
+                            <%
+                                    }
                                 }
+                            %>
+                        </tr>
+                        <%
+                            List<servicios.DtColaboracion> props = (List<servicios.DtColaboracion>) request.getAttribute("propuCol");
+                            String Tup = "";
+
+                            if (props.size() > 0) {
+                                for (servicios.DtColaboracion propa : props) {
+                                    Tup = propa.getPropuesta().getTitulo().replace(" ", "+");
+                        %>
+                        <tr>
+                            <td>
+                                <a href=Consulta_de_propuesta_Servlet?T=<%=Tup%>>
+                                    <%= propa.getPropuesta().getTitulo()%> 
+                                </a>
+                            </td>
+                            <%
+                                if (userop != null && userop.getNick().equals(colab.getNick())) {%>
+                            <td>  <%= propa.getMonto()%>  </td> 
+                            <td> <%= new SimpleDateFormat("dd/MM/yyyy").format(propa.getFecha().toGregorianCalendar().getTime())%> </td> 
+                            <td>
+                                <form action="/CulturarteWeb/ConstanciaPago" method="post">
+                                    <input type="hidden" name="prop" value="<%= propa.getPropuesta().getTitulo()%>">
+                                    <input type="hidden" name="col" value="<%= colab.getNick()%>">
+                                    <button type="submit" class="comentario">Ver pago</button>
+                                </form>
+                            </td>
+                            <%
+
+                                    }
                                 }
                             %>
                         </tr>
@@ -261,7 +362,8 @@
                     </table>
                 </right>
             </div>
-            <form style="float: both">
+
+            <div style="float:both; color:green">
 
                 <div id="divTablas" class="datagrid">
                     <legend id="legendPerf">Propuestas favoritas</legend><br>
@@ -295,9 +397,9 @@
                         </table>
                     </right>
                 </div>
-            </form>
-        </div>  
-
+            </div>
+        </div> 
         <% }%>
+<%}%>
     </body>
 </html>
