@@ -25,9 +25,15 @@
        
   <!-- multistep form -->
      <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                <%
  servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request); // agregado servicios
  String sesionAct=(String) session.getAttribute("sesionAct");
- if(sesionAct==null || userop instanceof servicios.DtColaborador) { %> // agregado servicios
+ if(userop == null || sesionAct==null || userop instanceof servicios.DtColaborador) { %> // agregado servicios
  <form id="msform" action="<%= request.getContextPath() %>/vistas/subIndex.jsp" method="post">      
   <!-- fieldsets -->
   <fieldset>

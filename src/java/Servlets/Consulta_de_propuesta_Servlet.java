@@ -58,6 +58,7 @@ String servicio3=p.getProperty("serv3");
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
         URL hola3 = new URL(http+ip+puerto+servicio3);
+        try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
@@ -69,6 +70,7 @@ String servicio3=p.getProperty("serv3");
             //List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
             List<servicios.DtPropuesta> x = port3.listarPropuestasWeb().getListita();
             request.setAttribute("propuestas", x);
+            request.setAttribute("paso", "si");
             this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
         } else {
             // CONSULTA A UNA PROPUESTA 
@@ -106,14 +108,19 @@ String servicio3=p.getProperty("serv3");
                 if (!colaborador.isEmpty()) {
                     request.setAttribute("col", colaborador);
                 }
+                request.setAttribute("paso", "si");
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_Info_Propuesta.jsp").forward(request, response);
             }
         }
         //List<DtPropuesta> x = IP.WEB_listarPropuestas_No_Ingresada();
         List<servicios.DtPropuesta> x = port3.listarPropuestasWeb().getListita();
         request.setAttribute("propuestas", x);
+        request.setAttribute("paso", "si");
         this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
-
+        }catch(Exception EX)
+        {
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

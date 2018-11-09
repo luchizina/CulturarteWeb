@@ -24,6 +24,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -83,6 +84,7 @@ String servicio3=p.getProperty("serv3");
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
         URL hola3 = new URL(http+ip+puerto+servicio3);
+        try{
          servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
          servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
          servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
@@ -194,13 +196,17 @@ String servicio3=p.getProperty("serv3");
         }
         else 
         {
+            request.setAttribute("paso", "si");
           request.getRequestDispatcher("/vistas/Alta_propu.jsp").forward(request, response); 
         }
         } else 
             {
              request.getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
             }
-
+        }catch(Exception EX)
+        {
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+        }
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -214,6 +220,7 @@ String servicio3=p.getProperty("serv3");
        }
     static public servicios.DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException {
         //agregado cambiado de DtUsuario a servicios.DtUsuario
+        try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         
@@ -222,6 +229,12 @@ String servicio3=p.getProperty("serv3");
         //DtUsuario usr = Fabrica.getInstance().getICtrlUsuario().traerDtUsuario(nick);
         servicios.DtUsuario usr = port.traerDtUsuario(nick);
         return usr;
+        }catch(Exception EX)
+        {
+            ServletResponse response = null;
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+        }
+        return null;
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

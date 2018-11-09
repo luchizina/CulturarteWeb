@@ -53,7 +53,7 @@ String servicio2=p.getProperty("serv2");
 
     
         URL hola2 = new URL(http+ip+puerto+servicio2);
-     
+     try{
         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
 
@@ -65,6 +65,10 @@ String servicio2=p.getProperty("serv2");
 //        try (OutputStream out = response.getOutputStream()) {
 //            ImageIO.write((RenderedImage) bi, "png", out);
 //        }
+     }catch(Exception EX)
+     {
+         request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+     }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

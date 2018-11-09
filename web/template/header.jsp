@@ -26,8 +26,8 @@ String sesionAct=(String) session.getAttribute("sesionAct");
  <li><a href="<%= request.getContextPath() %>/Consulta_de_propuesta_Servlet">Quiero ver una propuesta</a></li>
  
     <% 
-        }else{
-
+            }else{
+            
                                servicios.DtUsuario user=inicSesion.getUsuarioLogueado(request);
                                String nombre=user.getNombre();
                                String ape= user.getApellido();

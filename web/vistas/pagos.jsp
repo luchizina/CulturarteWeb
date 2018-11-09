@@ -19,6 +19,12 @@
         <jsp:include page="/template/header.jsp" />
         <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css" type="text/css">
         <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                <%
             String ruta = (String) request.getAttribute("ruta");
             servicios.DataReporte data = (servicios.DataReporte) request.getAttribute("reporte");
 

@@ -81,14 +81,18 @@ String servicio2=p.getProperty("serv2");
 
       
         URL hola2 = new URL(http+ip+puerto+servicio2);
-    
+    try{
         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
         servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
         processRequest(request, response);
         String C = request.getParameter("prop");
         port3.extender(C);
+        request.setAttribute("paso", "si");
         request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T=" + C).forward(request, response);
-
+    }catch(Exception EX)
+    {
+        request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+    }
     }
 
     /**

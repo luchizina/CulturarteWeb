@@ -30,7 +30,13 @@
                 <nav>
                     
                     <ul class="demo-list-icon mdl-list">
-                        <%  List<servicios.DtUsuario> usuariosU = (List<servicios.DtUsuario>) request.getAttribute("ranking");
+                        <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                <%  List<servicios.DtUsuario> usuariosU = (List<servicios.DtUsuario>) request.getAttribute("ranking");
                         List<Integer> seguidores= (List<Integer>) request.getAttribute("cantSeguidores");
                         if(usuariosU.size()>0){
                             for (int i=0; i<usuariosU.size(); i++) {

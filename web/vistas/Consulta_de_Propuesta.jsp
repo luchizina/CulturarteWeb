@@ -25,8 +25,14 @@
     <legend id="legendErr">Consulta de Propuestas</legend><br>
     <nav>
     <ul class="demo-list-icon mdl-list">
-        <%   List<servicios.DtPropuesta> x = (List<servicios.DtPropuesta>) request.getAttribute("propuestas");
-        if(x.size()>0){
+        <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                <%   List<servicios.DtPropuesta> x = (List<servicios.DtPropuesta>) request.getAttribute("propuestas");
+        if(x != null && x.size()>0){
                 for (servicios.DtPropuesta cx : x) {
                     String h = cx.getTitulo().replace(" ", "+");
         %>

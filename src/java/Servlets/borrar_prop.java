@@ -85,6 +85,7 @@ String servicio3=pr.getProperty("serv3");
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
         URL hola3 = new URL(http+ip+puerto+servicio3);
+        try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
@@ -99,6 +100,10 @@ String servicio3=pr.getProperty("serv3");
    port3.cambiarEstado(p, "Cancelada");
    this.getServletContext().getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
         
+        }
+        }catch(Exception EX)
+        {
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
         }
     }
 

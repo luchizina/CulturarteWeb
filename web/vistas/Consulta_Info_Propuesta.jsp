@@ -16,7 +16,13 @@
     <link rel="stylesheet" href="<%= request.getContextPath()%>/css/material.indigo-pink.min.css">
     <script defer src="<%= request.getContextPath()%>/js/material.min.js"></script>
     <script  src="<%= request.getContextPath()%>/js/validar.js"></script>
-    <% servicios.DtPropuesta propu = (servicios.DtPropuesta) request.getAttribute("propu");
+    <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                <% servicios.DtPropuesta propu = (servicios.DtPropuesta) request.getAttribute("propu");
         boolean colaboradores = false;
         List<String> x = (List<String>) request.getAttribute("col");
         if (x != null) {

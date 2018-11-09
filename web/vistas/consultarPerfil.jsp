@@ -22,7 +22,13 @@
     <body>  
         <link rel="stylesheet" href="<%= request.getContextPath()%>/css/style.css" type="text/css">
         <jsp:include page="/template/header.jsp" />
-        
+        <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                
          <div style="float:right">                                
             <form id="pa" class="msform" action="<%=request.getContextPath()%>/rankingUser" method="post">
                 <fieldset>

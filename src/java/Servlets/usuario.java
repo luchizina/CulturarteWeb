@@ -45,7 +45,7 @@ String ip=p.getProperty("ipServices");
 String puerto =p.getProperty("puertoServ");
 String servicio1=p.getProperty("serv1");
 
-
+try{
         URL hola = new URL(http+ip+puerto+servicio1);
         
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
@@ -60,6 +60,10 @@ String servicio1=p.getProperty("serv1");
                 out.print("El nick ya se encuentra en uso");
             }
         }
+}catch(Exception EX)
+{
+    request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,6 +81,9 @@ String servicio1=p.getProperty("serv1");
         processRequest(request, response);
         PrintWriter writer = response.getWriter();
         URL hola = new URL("http://192.168.1.126:8280/servicio");
+        try{
+            
+        
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         String nick = request.getParameter(NICK);
@@ -84,6 +91,10 @@ String servicio1=p.getProperty("serv1");
             writer.print("Nick disponible");
         } else {
             writer.print("El nick ya se encuentra en uso");
+        }
+        }catch(Exception EX)
+        {
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
         }
     }
 
@@ -100,6 +111,7 @@ String servicio1=p.getProperty("serv1");
             throws ServletException, IOException {
         processRequest(request, response);
         URL hola = new URL("http://192.168.1.126:8280/servicio");
+        try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         PrintWriter writer = response.getWriter();
@@ -108,6 +120,10 @@ String servicio1=p.getProperty("serv1");
             writer.print("Nick disponible");
         } else {
             writer.print("El nick ya se encuentra en uso");
+        }
+        }catch(Exception EX)
+        {
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
         }
     }
 

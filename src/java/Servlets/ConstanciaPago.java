@@ -76,6 +76,7 @@ public class ConstanciaPago extends HttpServlet {
         URL hola = new URL(http + ip + puerto + servicio1);
         URL hola2 = new URL(http + ip + puerto + servicio2);
         URL hola3 = new URL(http + ip + puerto + servicio3);
+        try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
@@ -90,7 +91,12 @@ public class ConstanciaPago extends HttpServlet {
         port3.generarReporte(propuesta, colaborador);
         }
         request.setAttribute("reporte", data);
+        request.setAttribute("paso", "si");
         this.getServletContext().getRequestDispatcher("/vistas/pagos.jsp").forward(request, response);
+        }catch(Exception EX)
+        {
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+        }
     }
 
     /**

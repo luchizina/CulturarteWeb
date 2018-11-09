@@ -35,26 +35,6 @@ public class Home extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Fabrica fabrica = Fabrica.getInstance();
-
-//        ICategoria icat =fabrica.getICtrlCategoria();
-//        IPropuesta IP=fabrica.getICtrlPropuesta();
-//        IUsuario iUsu=fabrica.getICtrlUsuario();
-//        port.cargarUsuarios2();
-//        port2.cargarCategorias();
-//        port3.cargarPropuestas();
-//        port3.cargarFavoritosMemoria();
-//        port3.cargarColaboraciones();
-//        port3.actualizarMontos();
-//        port3.estadosPropuestas();
-//                iUsu.cargarUsuarios2();
-//                icat.cargarCategorias();
-//                IP.cargarPropuestas();
-//                IP.Cargar_Favoritos_Memoria();
-////                IP.Cargar_Comentarios_Memoria();
-//                IP.cargarColaboraciones();
-//                IP.actualizarMontos();
-//                IP.EstadosPropuestas();
 
 
 Properties p = Utils.getPropiedades(request);
@@ -68,12 +48,7 @@ String servicio3=p.getProperty("serv3");
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
         URL hola3 = new URL(http+ip+puerto+servicio3);
-        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
-        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
-        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+request.setAttribute("paso", "si");
         request.getRequestDispatcher("/vistas/subIndex.jsp").forward(request, response);
 
     }

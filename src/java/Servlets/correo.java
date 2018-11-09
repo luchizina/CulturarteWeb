@@ -65,7 +65,7 @@ String servicio1=p.getProperty("serv1");
 
 
         URL hola = new URL(http+ip+puerto+servicio1);
-     
+     try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
 //        port.cargarUsuarios2();
@@ -81,6 +81,10 @@ String servicio1=p.getProperty("serv1");
             }
 
         }
+     }catch(Exception EX)
+     {
+         request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+     }
     }
 
     /**

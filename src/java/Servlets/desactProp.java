@@ -48,14 +48,19 @@ String servicio1=p.getProperty("serv1");
 
 
         URL hola = new URL(http+ip+puerto+servicio1);
-    
+    try{
+        
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         response.setContentType("text/html;charset=UTF-8");
         String nick= request.getParameter("nickLogueado");
         port.desactivarProp(nick);
+        request.setAttribute("paso", "si");
         this.getServletContext().getRequestDispatcher("/cerrarSesion").forward(request,response);
-     
+    }catch(Exception EX)
+    {
+        request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

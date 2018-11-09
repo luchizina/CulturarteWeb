@@ -84,7 +84,7 @@ String servicio2=p.getProperty("serv2");
 
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
-       
+       try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
@@ -95,8 +95,12 @@ String servicio2=p.getProperty("serv2");
         String nick = request.getParameter(usuarioF);
         String prop = request.getParameter(propuesta);
         port3.agregarFavorito(nick, prop);
+        request.setAttribute("paso", "si");
         request.getRequestDispatcher("/Consulta_de_propuesta_Servlet?T="+prop).forward(request, response);
-        
+       }catch(Exception EX)
+       {
+           request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+       }
     }
 
     /**

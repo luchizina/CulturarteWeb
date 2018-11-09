@@ -15,6 +15,12 @@
     <body>
          <select>
         <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                <%
             if(request.getAttribute("usuarios")!=null){
                 
            

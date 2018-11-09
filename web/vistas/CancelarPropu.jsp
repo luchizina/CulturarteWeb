@@ -26,7 +26,15 @@
      <legend id="legendErr">Perfil de propuesta</legend><br>
      <nav>
  <ul class="demo-list-icon mdl-list">
-        <%  List<servicios.DtPropuesta> prop = (List<servicios.DtPropuesta>) request.getAttribute("propuestas");
+        <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                <%  List<servicios.DtPropuesta> prop = (List<servicios.DtPropuesta>) request.getAttribute("propuestas");
+        if(prop != null && prop.size() > 0)
+        {
                 for (servicios.DtPropuesta p : prop) {
                 String Titu = p.getTitulo().replace(" ", "+");
         %>
@@ -36,7 +44,7 @@
   <a href=borrar_prop?T=<%=Titu%>> <%=Titu%>  </a>
 </span>
   </li>
-  <% } %>
+  <% }} %>
      </fieldset>
 </ul>
      </nav>

@@ -93,12 +93,35 @@ public class Registrar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Properties p = config.Utils.getPropiedades(request);
+        String http=p.getProperty("http");
+        String ip=p.getProperty("ipServices");
+            String puerto =p.getProperty("puertoServ");
+    String servicio1=p.getProperty("serv1");
+String servicio2=p.getProperty("serv2");
+String servicio3=p.getProperty("serv3");
+
+        URL hola = new URL(http+ip+puerto+servicio1);
+        URL hola2 = new URL(http+ip+puerto+servicio2);
+        URL hola3 = new URL(http+ip+puerto+servicio3);
+        try{
+        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
+        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+        }catch(Exception EX)
+        {
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+        }
         String nick = request.getParameter(NICK);
         servicios.DtUsuario usu = inicSesion.getUsuarioLogueado(request);
         if (usu != null) {
             this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
         } else {
             if (nick == null) {
+                request.setAttribute("paso", "si");
                 this.getServletContext().getRequestDispatcher("/vistas/registrar.jsp").forward(request, response);
             }
         }
@@ -127,6 +150,7 @@ String servicio3=p.getProperty("serv3");
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
         URL hola3 = new URL(http+ip+puerto+servicio3);
+        try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
@@ -233,6 +257,10 @@ String servicio3=p.getProperty("serv3");
             Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }catch(Exception EX)
+    {
+        request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+    }
     }
 
     /**
@@ -257,6 +285,7 @@ String servicio3=p.getProperty("serv3");
         String xd = port.agregarImagen(nick, imagen, pass);
         return xd;
         //return path.toString();
+        
     }
 
     protected String subirImagenProp(String nick, String pwd, servicios.DataImagen img) {

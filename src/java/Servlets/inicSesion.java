@@ -18,6 +18,7 @@ import java.net.URL;
 import javax.servlet.http.HttpSession;
 import config.Utils;
 import java.util.Properties;
+import javax.servlet.ServletResponse;
 /**
  *
  * @author nambr
@@ -47,7 +48,7 @@ String puerto =p.getProperty("puertoServ");
 String servicio1=p.getProperty("serv1");
 String servicio2=p.getProperty("serv2");
 
-
+try{
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
        
@@ -72,7 +73,7 @@ String servicio2=p.getProperty("serv2");
                     respuesta.setAttribute("sesionAct", resultado.getNick());
                     respuesta.setAttribute("tipo", resultado.getTipoUser());
                     respuesta.setAttribute("mensaje", resultado.getMensaje());
-
+                    request.setAttribute("paso", "si");
                     this.getServletContext().getRequestDispatcher("/index.html").forward(request, response);
                 } else if (!resultado.isEstLogin()) {
                     respuesta.setAttribute("error", resultado.getMensaje());
@@ -80,6 +81,7 @@ String servicio2=p.getProperty("serv2");
 
                 }
             } else {
+                request.setAttribute("paso", "si");
                 this.getServletContext().getRequestDispatcher("/vistas/inicSesion.jsp").forward(request, response);
             }
 
@@ -87,12 +89,16 @@ String servicio2=p.getProperty("serv2");
             this.getServletContext().getRequestDispatcher("/vistas/inicSesErr.jsp").forward(request, response);
         }
 
+    }catch(Exception EX)
+    {
+        request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
     }
-
+    }
     static public servicios.DtUsuario getUsuarioLogueado(HttpServletRequest request) throws ServletException, IOException {
 
         String nick;
         nick = (String) request.getSession().getAttribute("sesionAct");
+        try{
         servicios.PublicadorUsuariosService servicioUsuarios2 = new servicios.PublicadorUsuariosService();
         servicios.PublicadorUsuarios port32 = servicioUsuarios2.getPublicadorUsuariosPort();
         if (nick != null) {
@@ -100,6 +106,13 @@ String servicio2=p.getProperty("serv2");
             return usr;
         }
         return null;
+        }catch(Exception EX)
+        {
+            
+            ServletResponse response = null;
+//            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+            return null;
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -5,7 +5,7 @@
 <head>
 <jsp:include page="/template/head.jsp" />
 <title>Inicio</title>
-</head>
+    </head>
 <body>
 	<jsp:include page="/template/header.jsp" />
          <link href="<%= request.getContextPath()%>/css/style.css" rel="stylesheet" media="screen">

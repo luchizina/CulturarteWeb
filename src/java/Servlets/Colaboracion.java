@@ -46,6 +46,7 @@ String servicio3=p.getProperty("serv3");
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
         URL hola3 = new URL(http+ip+puerto+servicio3);
+        try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
@@ -61,6 +62,7 @@ String servicio3=p.getProperty("serv3");
             //request.setAttribute("tipoR", propuestita.getTRetornos());
             request.setAttribute("tipoR", propuestita.getTRetornos());
             request.setAttribute("Titulo", titulo);
+            request.setAttribute("paso", "si");
             this.getServletContext().getRequestDispatcher("/vistas/Alta_Colaboracion.jsp").forward(request, response);
 
         } else if (request.getParameter("monto") != null) {
@@ -73,6 +75,10 @@ String servicio3=p.getProperty("serv3");
             this.getServletContext().getRequestDispatcher("/home").forward(request, response);
         } else {
             this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
+        }
+        }catch(Exception EX)
+        {
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
         }
     }
 

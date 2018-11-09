@@ -27,7 +27,15 @@
     <nav>
     <ul class="demo-list-icon mdl-list">
         <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                <%
                 Collection<servicios.DtCategoria> x = (Collection<servicios.DtCategoria>) request.getAttribute("categorias");
+                if(x.size() > 0)
+                {
                 for (servicios.DtCategoria cx : x) {
                     String h = cx.getNombre().replace(" ", "+");
             %>
@@ -38,7 +46,8 @@
     <%=cx.getNombre()%> </a>
     </span>
     </li>
-    <% } %>
+    <% }
+       }%>
     </ul>
     </nav>
     </fieldset>

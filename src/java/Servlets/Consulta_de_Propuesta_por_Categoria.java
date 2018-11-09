@@ -52,6 +52,7 @@ String servicio3=p.getProperty("serv3");
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
         URL hola3 = new URL(http+ip+puerto+servicio3);
+        try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
@@ -66,6 +67,7 @@ String servicio3=p.getProperty("serv3");
                 //List<DtCategoria> x = IC.listarCategorias();
                 List<servicios.DtCategoria> x = port2.listarCategoriasWeb().getListita();
                 request.setAttribute("categorias", x);
+                request.setAttribute("paso", "si");
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
             } else {
                 // LISTAR PROPUESTAS DE "X" CATEGORIA
@@ -77,13 +79,19 @@ String servicio3=p.getProperty("serv3");
                 //List<DtPropuesta> x = IP.WEB_listarPropuestas_X_Categoria(C);
                 List<servicios.DtPropuesta> x = port3.listarPropuestasXCategoriaWeb(C).getListita();
                 request.setAttribute("propuestas", x);
+                request.setAttribute("paso", "si");
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta.jsp").forward(request, response);
             }
                 //List<DtCategoria> x = IC.listarCategorias();
                 List<servicios.DtCategoria> x = port2.listarCategoriasWeb().getListita();
                 request.setAttribute("categorias", x);
+                request.setAttribute("paso", "si");
                 this.getServletContext().getRequestDispatcher("/vistas/Consulta_de_Propuesta_por_Categoria.jsp").forward(request, response);
             }
+        }
+        }catch(Exception EX)
+        {
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
         }
     }
 

@@ -22,6 +22,12 @@
 
 
         <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                <%
             servicios.DtUsuario user = (servicios.DtUsuario) request.getAttribute("usuario");
             servicios.DtColaborador colab = null;
             servicios.DtProponente prop = null;

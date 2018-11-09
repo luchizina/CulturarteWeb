@@ -18,7 +18,13 @@
     </head>
     <body>
         <jsp:include page="/template/header.jsp" />
-        <% if (inicSesion.getUsuarioLogueado(request) != null) {%>
+       <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                <% if (inicSesion.getUsuarioLogueado(request) != null) {%>
         <form id="msform" action="<%= request.getContextPath()%>/home" method="post">      
             <!-- fieldsets -->
             <fieldset>

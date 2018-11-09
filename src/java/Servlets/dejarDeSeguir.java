@@ -44,7 +44,7 @@ String servicio1=p.getProperty("serv1");
 
 
         URL hola = new URL(http+ip+puerto+servicio1);
-     
+     try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         if (request.getParameter("nickLogueado") == null) {
@@ -62,6 +62,7 @@ String servicio1=p.getProperty("serv1");
                 if (port.yaSigue() == true) {
                     port.dejarDeSeguir();
                     String link = request.getParameter("link");
+                    request.setAttribute("paso", "si");
                     this.getServletContext().getRequestDispatcher(link).forward(request, response);
                 }
 
@@ -69,10 +70,15 @@ String servicio1=p.getProperty("serv1");
                 if (port.yaSigue() == true) {
                     port.dejarDeSeguir();
                     String link = (String) request.getParameter("link");
+                    request.setAttribute("paso", "si");
                     this.getServletContext().getRequestDispatcher(link).forward(request, response);
                 }
             }
         }
+     }catch(Exception EX)
+     {
+         request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+     }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -54,7 +54,7 @@ String servicio2=p.getProperty("serv2");
 
         URL hola = new URL(http+ip+puerto+servicio1);
         URL hola2 = new URL(http+ip+puerto+servicio2);
-        
+        try{
         servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
         servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
         servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
@@ -67,6 +67,7 @@ String servicio2=p.getProperty("serv2");
         if (request.getParameter("T") == null) {
             List<servicios.DtUsuario> usuarios = port.listarUsuarios().getListita();
             request.setAttribute("usuarios", usuarios);
+            request.setAttribute("paso", "si");
             this.getServletContext().getRequestDispatcher("/vistas/consultarPerfil.jsp").forward(request, response);
             //response.sendRedirect("../vistas/Consulta_de_Propuesta.jsp");
         } else {
@@ -98,6 +99,7 @@ String servicio2=p.getProperty("serv2");
                     request.setAttribute("propus", propus);
                     // request.setAttribute("propuCol", propuColaboradas);
                     request.setAttribute("usuario", prop);
+                    request.setAttribute("paso", "si");
                     this.getServletContext().getRequestDispatcher("/vistas/consultarInfoPerfilP.jsp").forward(request, response);
 
                 } else {
@@ -115,16 +117,21 @@ String servicio2=p.getProperty("serv2");
                     request.setAttribute("propuFav", propuFav);
                     request.setAttribute("propuCol", propuColaboradas);
                     request.setAttribute("usuario", colab);
+                    request.setAttribute("paso", "si");
                     this.getServletContext().getRequestDispatcher("/vistas/consultarInfoPerfil.jsp").forward(request, response);
 
                 }
 
             } else {
                 List<servicios.DtUsuario> usuarios = port.listarUsuarios().getListita();
-                request.setAttribute("usuarios", usuarios);
+                request.setAttribute("paso", "si");
                 this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
 
             }
+        }
+        }catch(Exception EX)
+        {
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
         }
     }
 

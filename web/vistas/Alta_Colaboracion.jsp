@@ -18,11 +18,17 @@
     </head>
     <body>
          <jsp:include page="/template/header.jsp" />
-        <%
+            <%
+                String control = (String) request.getAttribute("paso");
+                if(control == null){
+                    %>
+                    <jsp:forward page="ErrorIP.jsp"/>
+                    <% }%>
+                <%
  servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request);
  String sesionAct=(String) session.getAttribute("sesionAct");
  String titulo = request.getParameter("T");
-if(sesionAct==null || userop instanceof servicios.DtProponente || titulo == null )  { %>
+if(userop == null || sesionAct==null || userop instanceof servicios.DtProponente || titulo == null  )  { %>
  <form id="msform" action="<%= request.getContextPath() %>/vistas/subIndex.jsp" method="post">      
   <!-- fieldsets -->
   <fieldset>
