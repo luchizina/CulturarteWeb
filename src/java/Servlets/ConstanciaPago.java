@@ -86,12 +86,10 @@ public class ConstanciaPago extends HttpServlet {
         String propuesta = request.getParameter("prop");
         String colaborador = request.getParameter("col");
         servicios.DataReporte data = port3.traerReporte(propuesta, colaborador);
+        if(data.getNum() != null){
         port3.generarReporte(propuesta, colaborador);
-        if(data != null){
-        request.setAttribute("reporte", data);
-        } else{
-            request.setAttribute("noreporte", "Usted no ha pagado esta colaboracion");
         }
+        request.setAttribute("reporte", data);
         this.getServletContext().getRequestDispatcher("/vistas/pagos.jsp").forward(request, response);
     }
 

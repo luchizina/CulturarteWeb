@@ -23,7 +23,7 @@
             servicios.DataReporte data = (servicios.DataReporte) request.getAttribute("reporte");
 
         %>
-        <% if (data != null) {%>
+        <% if (data.getNum() != null) {%>
         <div style="position: absolute; top: 50px; left: 50px; color:green">
             <div id="divTablas" class="datagrid">
                 <right>
