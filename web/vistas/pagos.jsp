@@ -4,6 +4,9 @@
     Author     : Nuevo
 --%>
 
+<%@page import="servicios.DtProponente"%>
+<%@page import="servicios.DtColaborador"%>
+<%@page import="Servlets.inicSesion"%>
 <%@page import="servicios.DataReporte"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,6 +29,19 @@
         %>
         <jsp:forward page="ErrorIP.jsp"/>
         <% }%>
+        <% if (inicSesion.getUsuarioLogueado(request) == null || inicSesion.getUsuarioLogueado(request) instanceof DtProponente) {%>
+        <form id="msform" action="<%= request.getContextPath()%>/home" method="post">      
+            <!-- fieldsets -->
+            <fieldset>
+                <legend id="legendErr">¡UPSS! Esto es incómodo.. :( </legend>      
+                <h3 class="fs-subtitle">Página no encontrada, o no tienes acceso a ella</h3>
+                <input type="submit" name="volver atrás" class="btn action-button" value="¡Lo entiendo!">
+            </fieldset>
+        </form>   
+        <%
+
+        } else {
+        %>
         <%
             String ruta = (String) request.getAttribute("ruta");
             servicios.DataReporte data = (servicios.DataReporte) request.getAttribute("reporte");
@@ -127,5 +143,6 @@
         <script src='<%= request.getContextPath()%>/js/jquery.min.js'></script> 
         <script src='<%= request.getContextPath()%>/js/jquery.easing.min.js'></script>
         <script  src="<%=request.getContextPath()%>/js/index.js"></script>
+        <%}%>
     </body>
 </html>
