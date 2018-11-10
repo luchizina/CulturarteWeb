@@ -12,6 +12,8 @@ html{
 	/*background = gradient + image pattern combo*/
 	background: 
 		linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
+        background-attachment: fixed;
+        background-repeat:repeat;
 }
 
 body {
@@ -420,7 +422,7 @@ th {
     font: normal 12px/150% Arial, Helvetica, sans-serif; 
     background: #fff;
     overflow: hidden;
-    min-height:100%;
+   
     border: 2px solid #36752D;
     -webkit-border-radius: 11px;
     -moz-border-radius: 11px;

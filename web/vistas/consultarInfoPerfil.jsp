@@ -207,7 +207,7 @@
         </div> 
         <%
             if (userop != null && userop.getNick().equals(colab.getNick())) {%>
-        <div style="position: absolute; top: 500px; right: 525px; color:green">
+        <div style="position:absolute; top: 500px; right: 525px; color:green">
             <div id="divTablas" class="datagrid">
                 <legend id="legendPerf">Colaboraciones</legend><br>
                 <right>
