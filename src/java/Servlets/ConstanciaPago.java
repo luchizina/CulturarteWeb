@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import servicios.DtProponente;
 
 /**
  *
@@ -35,7 +36,7 @@ public class ConstanciaPago extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -51,6 +52,31 @@ public class ConstanciaPago extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        Properties p = config.Utils.getPropiedades(request);
+        String http = p.getProperty("http");
+        String ip = p.getProperty("ipServices");
+        String puerto = p.getProperty("puertoServ");
+        String servicio1 = p.getProperty("serv1");
+        String servicio2 = p.getProperty("serv2");
+        String servicio3 = p.getProperty("serv3");
+
+        URL hola = new URL(http + ip + puerto + servicio1);
+        URL hola2 = new URL(http + ip + puerto + servicio2);
+        URL hola3 = new URL(http + ip + puerto + servicio3);
+        try {
+            servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+            servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+            servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
+            servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+            servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+            servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+        } catch (Exception EX) {
+            request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
+        }
+        servicios.DtUsuario usu = inicSesion.getUsuarioLogueado(request);
+        if (usu == null || usu instanceof DtProponente) {
+            this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -76,27 +102,31 @@ public class ConstanciaPago extends HttpServlet {
         URL hola = new URL(http + ip + puerto + servicio1);
         URL hola2 = new URL(http + ip + puerto + servicio2);
         URL hola3 = new URL(http + ip + puerto + servicio3);
-        try{
-        servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
-        servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
-        servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
-        servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
-        servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
-        servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
-
-        String propuesta = request.getParameter("prop");
-        String colaborador = request.getParameter("col");
-        servicios.DataReporte data = port3.traerReporte(propuesta, colaborador);
-        if(data.getNum() != null){
-        port3.generarReporte(propuesta, colaborador);
-        }
-        request.setAttribute("reporte", data);
-        request.setAttribute("paso", "si");
-        this.getServletContext().getRequestDispatcher("/vistas/pagos.jsp").forward(request, response);
-        }catch(Exception EX)
-        {
+        try {
+            servicios.PublicadorUsuariosService servicioUsuarios = new servicios.PublicadorUsuariosService(hola);
+            servicios.PublicadorUsuarios port = servicioUsuarios.getPublicadorUsuariosPort();
+            servicios.PublicadorCategoriaService servicioCategoria = new servicios.PublicadorCategoriaService(hola3);
+            servicios.PublicadorCategoria port2 = servicioCategoria.getPublicadorCategoriaPort();
+            servicios.PublicadorPropuestaService servicioPropuesta = new servicios.PublicadorPropuestaService(hola2);
+            servicios.PublicadorPropuesta port3 = servicioPropuesta.getPublicadorPropuestaPort();
+            servicios.DtUsuario usu = inicSesion.getUsuarioLogueado(request);
+            if (usu == null || usu instanceof DtProponente) {
+                this.getServletContext().getRequestDispatcher("/vistas/pag_incorrecta.jsp").forward(request, response);
+            } else {
+                String propuesta = request.getParameter("prop");
+                String colaborador = request.getParameter("col");
+                servicios.DataReporte data = port3.traerReporte(propuesta, colaborador);
+                if (data.getNum() != null) {
+                    port3.generarReporte(propuesta, colaborador);
+                }
+                request.setAttribute("reporte", data);
+                request.setAttribute("paso", "si");
+                this.getServletContext().getRequestDispatcher("/vistas/pagos.jsp").forward(request, response);
+            }
+        } catch (Exception EX) {
             request.getRequestDispatcher("/vistas/ErrorIP.jsp").forward(request, response);
         }
+
     }
 
     /**
