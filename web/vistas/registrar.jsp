@@ -66,12 +66,12 @@
 
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Enter password">
+                        <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Ingrese contraseña">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="Confirmar">
+                        <input type="password" class="form-control" id="pwd2" name="pwd2" placeholder="Confirmar contraseña">
                     </div>
                 </div>
                 <input type="button" name="next" class="next action-button" value="Siguiente" />
