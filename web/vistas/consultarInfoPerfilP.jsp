@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" href="<%= request.getContextPath()%>/css/iconos.css">
-    <link rel="stylesheet" href="<%= request.getContextPath()%>/js/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/css/material.indigo-pink.min.css">
     <script defer src="<%= request.getContextPath()%>/js/material.min.js"></script>
       <script  src="<%= request.getContextPath()%>/js/validar.js"></script>
     <head>
