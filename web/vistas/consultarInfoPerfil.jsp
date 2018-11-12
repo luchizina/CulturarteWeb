@@ -14,6 +14,7 @@
 <html>  
     <head>
         <link rel="stylesheet" href="<%= request.getContextPath()%>/css/iconos.css">
+        <link rel="stylesheet" href="<%= request.getContextPath()%>/css/pop.css">
         <link rel="stylesheet" href="<%= request.getContextPath()%>/css/material.indigo-pink.min.css">
         <script defer src="<%= request.getContextPath()%>/js/material.min.js"></script>
         <jsp:include page="/template/head.jsp" />
@@ -226,6 +227,7 @@
                             <th>
                                 Fecha:
                             </th> 
+                            <th></th>
                             <%
                                     }
                                 }
@@ -253,7 +255,7 @@
                                 <form action="/CulturarteWeb/ConstanciaPago" method="post">
                                     <input type="hidden" name="prop" value="<%= propa.getPropuesta().getTitulo()%>">
                                     <input type="hidden" name="col" value="<%= colab.getNick()%>">
-                                    <button type="submit" class="comentario">Ver pago</button>
+                                    <button type="submit" class="pago">Ver pago</button>
                                 </form>
                             </td>
                             <%
