@@ -98,8 +98,8 @@
   
 </form>
       <%}%>
-     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+     <script src='<%=request.getContextPath()%>/js/jquery.min.js'></script> 
+<script src='<%=request.getContextPath()%>/js/jquery.easing.min.js'></script>
 <script  src="<%=request.getContextPath()%>/js/index.js"></script>
 </body>
 </html>
