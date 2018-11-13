@@ -20,7 +20,7 @@
                 String control = (String) request.getAttribute("paso");
                 if(control == null){
                     %>
-                    <jsp:forward page="ErrorIP.jsp"/>
+                    <jsp:forward page="ErrorJSP.jsp"/>
                     <% }%>
                 <% servicios.DtPropuesta propu = (servicios.DtPropuesta) request.getAttribute("propu");
         boolean colaboradores = false;
