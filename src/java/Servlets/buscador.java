@@ -71,6 +71,7 @@ public class buscador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
        Properties p = Utils.getPropiedades(request);
 String http=p.getProperty("http");
 String ip=p.getProperty("ipServices");

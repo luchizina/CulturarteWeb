@@ -43,7 +43,8 @@ public class consultarPerfil extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");     
+        response.setContentType("text/html;charset=UTF-8");    
+        request.setCharacterEncoding("UTF-8");
       Properties p = Utils.getPropiedades(request);
 String http=p.getProperty("http");
 String ip=p.getProperty("ipServices");

@@ -9,11 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <jsp:include page="/template/head.jsp" />
         <title>Algo salió mal...</title>
     </head>
     <body>
-         <jsp:include page="/template/header.jsp" />
       
          <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
         <form id="msform" action="<%= request.getContextPath() %>/vistas/subIndex.jsp" method="post">

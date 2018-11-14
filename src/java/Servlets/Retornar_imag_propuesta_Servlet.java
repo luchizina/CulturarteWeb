@@ -41,6 +41,7 @@ public class Retornar_imag_propuesta_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String T = request.getParameter("T");
         response.setContentType("image/jpeg");
         //IPropuesta ip = Fabrica.getInstance().getICtrlPropuesta();

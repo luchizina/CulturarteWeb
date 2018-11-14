@@ -39,6 +39,7 @@ public class usuario extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
 Properties p = Utils.getPropiedades(request);
 String http=p.getProperty("http");
 String ip=p.getProperty("ipServices");
@@ -78,6 +79,7 @@ try{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         processRequest(request, response);
         PrintWriter writer = response.getWriter();
         URL hola = new URL("http://192.168.1.126:8280/servicio");
@@ -109,6 +111,7 @@ try{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         processRequest(request, response);
         URL hola = new URL("http://192.168.1.126:8280/servicio");
         try{

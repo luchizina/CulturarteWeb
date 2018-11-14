@@ -400,7 +400,7 @@
                             </tr>
                             <%}
                             } else { %>
-                            <td> no tiene colaboraciones    </td>
+                            <td> No hay propuestas favoritas    </td>
                             <%} %>
                         </table>
                     </right>

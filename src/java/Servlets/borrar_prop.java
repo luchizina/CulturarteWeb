@@ -74,6 +74,7 @@ public class borrar_prop extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
        Properties pr = Utils.getPropiedades(request);
 String http=pr.getProperty("http");
 String ip=pr.getProperty("ipServices");

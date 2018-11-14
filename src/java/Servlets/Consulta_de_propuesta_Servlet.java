@@ -29,6 +29,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "Consulta_de_propuesta_Servlet", urlPatterns = {"/Consulta_de_propuesta_Servlet"})
 public class Consulta_de_propuesta_Servlet extends HttpServlet {
+    
 
     //private Fabrica fabrica = Fabrica.getInstance();
     //private IPropuesta IP=fabrica.getICtrlPropuesta();
@@ -44,7 +45,7 @@ public class Consulta_de_propuesta_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
     Properties p = Utils.getPropiedades(request);

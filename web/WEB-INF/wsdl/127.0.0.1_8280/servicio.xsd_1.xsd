@@ -37,6 +37,12 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="dataListStrings">
+<xs:sequence>
+<xs:element name="listita" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="dataListProponentes">
 <xs:sequence>
 <xs:element name="listita" type="tns:dtProponente" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
@@ -50,33 +56,6 @@
 <xs:element name="biografia" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="linkWeb" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="proponente">
-<xs:complexContent>
-<xs:extension base="tns:usuario">
-<xs:sequence>
-<xs:element name="biografia" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="fecha_des" type="xs:dateTime" minOccurs="0"></xs:element>
-<xs:element name="linkWeb" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="propuestas">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
-<xs:element name="value" minOccurs="0" type="tns:propuesta"></xs:element>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
 </xs:sequence>
 </xs:extension>
 </xs:complexContent>
@@ -213,12 +192,6 @@
 <xs:sequence></xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="dataListStrings">
-<xs:sequence>
-<xs:element name="listita" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="dataListPropuestas">
 <xs:sequence>
 <xs:element name="listita" type="tns:dtPropuesta" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
@@ -268,12 +241,6 @@
 </xs:complexContent>
 </xs:complexType>
 
-<xs:complexType name="dataListColaboraciones">
-<xs:sequence>
-<xs:element name="listita" type="tns:dtColaboracion" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="dtColaboracion">
 <xs:sequence>
 <xs:element name="fecha" type="xs:dateTime" minOccurs="0"></xs:element>
@@ -287,6 +254,39 @@
 
 <xs:complexType name="tretorno">
 <xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="proponente">
+<xs:complexContent>
+<xs:extension base="tns:usuario">
+<xs:sequence>
+<xs:element name="biografia" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fecha_des" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="linkWeb" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="propuestas">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:string"></xs:element>
+<xs:element name="value" minOccurs="0" type="tns:propuesta"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="dataListColaboraciones">
+<xs:sequence>
+<xs:element name="listita" type="tns:dtColaboracion" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dataListColaboradores">

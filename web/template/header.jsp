@@ -1,6 +1,7 @@
 
 <%@page import="Servlets.inicSesion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<meta charset="utf-8">
 <script type="text/javascript" src="../js/Datos.js"></script>
  <div id='cssmenu'>
 <ul>

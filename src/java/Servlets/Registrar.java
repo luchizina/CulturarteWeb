@@ -93,6 +93,7 @@ public class Registrar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         Properties p = config.Utils.getPropiedades(request);
         String http=p.getProperty("http");
         String ip=p.getProperty("ipServices");

@@ -51,6 +51,7 @@ public class extender extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         processRequest(request, response);
         servicios.DtUsuario usu = inicSesion.getUsuarioLogueado(request);
         if (usu == null || usu instanceof servicios.DtColaborador) {
@@ -71,6 +72,7 @@ public class extender extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         Properties p = Utils.getPropiedades(request);
 String http=p.getProperty("http");
 String ip=p.getProperty("ipServices");

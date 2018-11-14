@@ -53,6 +53,7 @@ public class ConstanciaPago extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
            response.setContentType("text/html;charset=UTF-8");
+           request.setCharacterEncoding("UTF-8");
         Properties p = config.Utils.getPropiedades(request);
         String http = p.getProperty("http");
         String ip = p.getProperty("ipServices");
@@ -93,6 +94,7 @@ public class ConstanciaPago extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
           response.setContentType("text/html;charset=UTF-8");
+          request.setCharacterEncoding("UTF-8");
         Properties p = Utils.getPropiedades(request);
         String http = p.getProperty("http");
         String ip = p.getProperty("ipServices");

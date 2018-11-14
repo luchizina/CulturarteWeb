@@ -13,7 +13,6 @@
         <title>Error JSP</title>
     </head>
     <body>
-        <jsp:include page="/template/header.jsp" />
         <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" type="text/css">
         <form id="msform" action="<%= request.getContextPath() %>/vistas/subIndex.jsp" method="post">      
   <!-- fieldsets -->
