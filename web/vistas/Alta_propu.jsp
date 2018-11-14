@@ -28,7 +28,7 @@
                 String control = (String) request.getAttribute("paso");
                 if(control == null){
                     %>
-                    <jsp:forward page="ErrorIP.jsp"/>
+                    <jsp:forward page="ErrorJSP.jsp"/>
                     <% }%>
                 <%
  servicios.DtUsuario userop=inicSesion.getUsuarioLogueado(request); // agregado servicios

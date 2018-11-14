@@ -1,7 +1,7 @@
 <%-- 
-    Document   : ErrorIP
-    Created on : Nov 9, 2018, 2:10:40 PM
-    Author     : Aeliner
+    Document   : ErrorJSP
+    Created on : 13/11/2018, 07:17:37 PM
+    Author     : Nazareno
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="default_style" content=URL=/CulturarteWeb/vistas/ErrorIP.jsp">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Error IP</title>
+        <title>Error JSP</title>
     </head>
     <body>
         <jsp:include page="/template/header.jsp" />
@@ -19,9 +19,10 @@
   <!-- fieldsets -->
   <fieldset>
     <legend id="legendErr">¡UPSS! Esto es incómodo.. :( </legend>      
-    <h3 class="fs-subtitle">Hubo un problema accediendo al servidor central.</h3>
+    <h3 class="fs-subtitle">Hubo un problema accediendo al sitio deseado.</h3>
     <input type="submit" name="volver atrás" class="btn action-button" value="¡Lo entiendo!">
   </fieldset>
 </form>   
     </body>
 </html>
+

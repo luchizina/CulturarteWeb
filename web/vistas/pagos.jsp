@@ -27,7 +27,7 @@
             String control = (String) request.getAttribute("paso");
             if (control == null) {
         %>
-        <jsp:forward page="ErrorIP.jsp"/>
+        <jsp:forward page="ErrorJSP.jsp"/>
         <% }%>
         <% if (inicSesion.getUsuarioLogueado(request) == null || inicSesion.getUsuarioLogueado(request) instanceof DtProponente) {%>
         <form id="msform" action="<%= request.getContextPath()%>/home" method="post">      

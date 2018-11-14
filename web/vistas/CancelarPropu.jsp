@@ -30,7 +30,7 @@
                 String control = (String) request.getAttribute("paso");
                 if(control == null){
                     %>
-                    <jsp:forward page="ErrorIP.jsp"/>
+                    <jsp:forward page="ErrorJSP.jsp"/>
                     <% }%>
                 <%  List<servicios.DtPropuesta> prop = (List<servicios.DtPropuesta>) request.getAttribute("propuestas");
         if(prop != null && prop.size() > 0)

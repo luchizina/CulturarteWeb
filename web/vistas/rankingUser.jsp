@@ -34,7 +34,7 @@
                 String control = (String) request.getAttribute("paso");
                 if(control == null){
                     %>
-                    <jsp:forward page="ErrorIP.jsp"/>
+                    <jsp:forward page="ErrorJSP.jsp"/>
                     <% }%>
                 <%  List<servicios.DtUsuario> usuariosU = (List<servicios.DtUsuario>) request.getAttribute("ranking");
                         List<Integer> seguidores= (List<Integer>) request.getAttribute("cantSeguidores");
