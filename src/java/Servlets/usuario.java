@@ -55,7 +55,7 @@ try{
         port.cargarUsuarios2();
         try (PrintWriter out = response.getWriter()) {
             String nick = request.getParameter(NICK);
-            if (port.existeNick(nick)) {
+            if (port.existeNick2(nick)) {
                 out.print("Nick disponible");
             } else {
                 out.print("El nick ya se encuentra en uso");
